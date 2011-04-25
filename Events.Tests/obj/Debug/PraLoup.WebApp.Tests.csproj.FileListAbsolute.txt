@@ -1,0 +1,10 @@
+C:\hepidev\Dropbox\PraLoup\Events.Tests\obj\Debug\ResolveAssemblyReference.cache
+C:\hepidev\Dropbox\PraLoup\Events.Tests\bin\Debug\PraLoup.WebApp.Tests.dll.config
+C:\hepidev\Dropbox\PraLoup\Events.Tests\bin\Debug\PraLoup.WebApp.Tests.dll
+C:\hepidev\Dropbox\PraLoup\Events.Tests\bin\Debug\PraLoup.WebApp.Tests.pdb
+C:\hepidev\Dropbox\PraLoup\Events.Tests\bin\Debug\PraLoup.WebApp.dll
+C:\hepidev\Dropbox\PraLoup\Events.Tests\bin\Debug\PraLoup.WebApp.pdb
+C:\hepidev\Dropbox\PraLoup\Events.Tests\obj\Debug\PraLoup.WebApp.Tests.dll
+C:\hepidev\Dropbox\PraLoup\Events.Tests\obj\Debug\PraLoup.WebApp.Tests.pdb
+C:\HepiDev\Dropbox\PraLoup\Events.Tests\bin\Debug\PraLoup.DataAccess.dll
+C:\HepiDev\Dropbox\PraLoup\Events.Tests\bin\Debug\PraLoup.DataAccess.pdb

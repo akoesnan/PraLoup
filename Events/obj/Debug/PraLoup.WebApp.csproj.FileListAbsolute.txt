@@ -1,0 +1,7 @@
+C:\hepidev\Dropbox\PraLoup\Events\obj\Debug\ResolveAssemblyReference.cache
+C:\hepidev\Dropbox\PraLoup\Events\bin\PraLoup.WebApp.dll
+C:\hepidev\Dropbox\PraLoup\Events\bin\PraLoup.WebApp.pdb
+C:\hepidev\Dropbox\PraLoup\Events\obj\Debug\PraLoup.WebApp.dll
+C:\hepidev\Dropbox\PraLoup\Events\obj\Debug\PraLoup.WebApp.pdb
+C:\HepiDev\Dropbox\PraLoup\Events\bin\PraLoup.DataAccess.dll
+C:\HepiDev\Dropbox\PraLoup\Events\bin\PraLoup.DataAccess.pdb

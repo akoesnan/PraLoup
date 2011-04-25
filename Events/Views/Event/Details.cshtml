@@ -1,0 +1,31 @@
+﻿@model PraLoup.DataAccess.Entities.Event
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Event</legend>
+
+    <div class="display-label">StartDateTime</div>
+    <div class="display-field">@String.Format("{0:g}", Model.StartDateTime)</div>
+
+    <div class="display-label">EndDateTime</div>
+    <div class="display-field">@String.Format("{0:g}", Model.EndDateTime)</div>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">@Model.Name</div>
+
+    <div class="display-label">Description</div>
+    <div class="display-field">@Model.Description</div>
+
+    <div class="display-label">Price</div>
+    <div class="display-field">@String.Format("{0:F}", Model.Price)</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.EventId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
