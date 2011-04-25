@@ -1,0 +1,5 @@
+c:\users\andrew\documents\visual studio 2010\Projects\oauthtest\oauthtest\bin\oauthtest.dll
+c:\users\andrew\documents\visual studio 2010\Projects\oauthtest\oauthtest\bin\oauthtest.pdb
+c:\users\andrew\documents\visual studio 2010\Projects\oauthtest\oauthtest\obj\Debug\ResolveAssemblyReference.cache
+c:\users\andrew\documents\visual studio 2010\Projects\oauthtest\oauthtest\obj\Debug\oauthtest.dll
+c:\users\andrew\documents\visual studio 2010\Projects\oauthtest\oauthtest\obj\Debug\oauthtest.pdb
