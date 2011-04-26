@@ -1,13 +1,16 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<ProjectSafari.Models.HomeModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Home Page
+    Project Safari Beta Page
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2></h2>
+    <div id="left">
+    Welcome to the Project Safari Home Page!</div>
+    <div id="right">
+    <p>Click Here to sign in with Facebook</p>
     <p>
-        To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-    </p>
-    <input type="button" value="foobar" onclick="window.location='<%=Model.redirecturl %>'" />
+    <input type="image" src="Content/facebook.png"  value="foobar" onclick="window.location='<%=Model.redirecturl %>'" />
+    </p></div>
+    <div class="clear"></div>
 </asp:Content>

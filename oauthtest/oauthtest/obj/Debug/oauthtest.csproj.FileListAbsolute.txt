@@ -3,3 +3,8 @@ c:\users\andrew\documents\visual studio 2010\Projects\oauthtest\oauthtest\bin\oa
 c:\users\andrew\documents\visual studio 2010\Projects\oauthtest\oauthtest\obj\Debug\ResolveAssemblyReference.cache
 c:\users\andrew\documents\visual studio 2010\Projects\oauthtest\oauthtest\obj\Debug\oauthtest.dll
 c:\users\andrew\documents\visual studio 2010\Projects\oauthtest\oauthtest\obj\Debug\oauthtest.pdb
+C:\Users\Andrew\PraLoup\oauthtest\oauthtest\bin\oauthtest.dll
+C:\Users\Andrew\PraLoup\oauthtest\oauthtest\bin\oauthtest.pdb
+C:\Users\Andrew\PraLoup\oauthtest\oauthtest\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Andrew\PraLoup\oauthtest\oauthtest\obj\Debug\oauthtest.dll
+C:\Users\Andrew\PraLoup\oauthtest\oauthtest\obj\Debug\oauthtest.pdb
