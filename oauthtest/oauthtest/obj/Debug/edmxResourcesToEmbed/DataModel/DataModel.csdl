@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+  <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Users" EntityType="Model1.User" />
+    <EntitySet Name="EventListings" EntityType="Model1.EventListing" />
+    <EntitySet Name="UserEventInstances" EntityType="Model1.UserEventInstance" />
+    <EntitySet Name="EventInstances" EntityType="Model1.EventInstance" />
+    <AssociationSet Name="UserUserEventInstance" Association="Model1.UserUserEventInstance">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserEventInstance" EntitySet="UserEventInstances" />
+    </AssociationSet>
+    <AssociationSet Name="EventInstanceUserEventInstance" Association="Model1.EventInstanceUserEventInstance">
+      <End Role="EventInstance" EntitySet="EventInstances" />
+      <End Role="UserEventInstance" EntitySet="UserEventInstances" />
+    </AssociationSet>
+    <AssociationSet Name="EventListingEventInstance" Association="Model1.EventListingEventInstance">
+      <End Role="EventListing" EntitySet="EventListings" />
+      <End Role="EventInstance" EntitySet="EventInstances" />
+    </AssociationSet>
+    <AssociationSet Name="EventListingUserEventInstance" Association="Model1.EventListingUserEventInstance">
+      <End Role="EventListing" EntitySet="EventListings" />
+      <End Role="UserEventInstance" EntitySet="UserEventInstances" />
+    </AssociationSet>
+    <AssociationSet Name="UserEventInstance1" Association="Model1.UserEventInstance1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="EventInstance" EntitySet="EventInstances" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="UserEventInstances" Relationship="Model1.UserUserEventInstance" FromRole="User" ToRole="UserEventInstance" />
+    <NavigationProperty Name="EventInstances" Relationship="Model1.UserEventInstance1" FromRole="User" ToRole="EventInstance" />
+    <Property Type="DateTime" Name="CreationDate" Nullable="false" />
+    <Property Type="DateTime" Name="LastLoginDate" Nullable="false" />
+    <Property Type="String" Name="AllowedToPostToWall" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EventListing">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="EventInstances" Relationship="Model1.EventListingEventInstance" FromRole="EventListing" ToRole="EventInstance" />
+    <NavigationProperty Name="UserEventInstances" Relationship="Model1.EventListingUserEventInstance" FromRole="EventListing" ToRole="UserEventInstance" />
+    <Property Type="String" Name="EventType" Nullable="false" />
+    <Property Type="DateTime" Name="EventStartDate" Nullable="false" />
+    <Property Type="DateTime" Name="EventEndDate" Nullable="false" />
+    <Property Type="DateTime" Name="EventStartTime" Nullable="false" />
+    <Property Type="DateTime" Name="EventEndTime" Nullable="false" />
+    <Property Type="String" Name="EventRecurrence" Nullable="false" />
+    <Property Type="DateTime" Name="CreationDate" Nullable="false" />
+    <Property Type="DateTime" Name="LastUpdate" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserEventInstance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="User" Relationship="Model1.UserUserEventInstance" FromRole="UserEventInstance" ToRole="User" />
+    <NavigationProperty Name="EventInstance" Relationship="Model1.EventInstanceUserEventInstance" FromRole="UserEventInstance" ToRole="EventInstance" />
+    <NavigationProperty Name="EventListing" Relationship="Model1.EventListingUserEventInstance" FromRole="UserEventInstance" ToRole="EventListing" />
+    <Property Type="String" Name="Status" Nullable="false" />
+    <Property Type="DateTime" Name="CreationDate" Nullable="false" />
+    <Property Type="DateTime" Name="LastUpdate" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EventInstance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="UserEventInstances" Relationship="Model1.EventInstanceUserEventInstance" FromRole="EventInstance" ToRole="UserEventInstance" />
+    <NavigationProperty Name="EventListing" Relationship="Model1.EventListingEventInstance" FromRole="EventInstance" ToRole="EventListing" />
+    <NavigationProperty Name="User" Relationship="Model1.UserEventInstance1" FromRole="EventInstance" ToRole="User" />
+    <Property Type="DateTime" Name="CreationDate" Nullable="false" />
+    <Property Type="DateTime" Name="LastUpdate" Nullable="false" />
+  </EntityType>
+  <Association Name="UserUserEventInstance">
+    <End Type="Model1.User" Role="User" Multiplicity="1" />
+    <End Type="Model1.UserEventInstance" Role="UserEventInstance" Multiplicity="*" />
+  </Association>
+  <Association Name="EventInstanceUserEventInstance">
+    <End Type="Model1.EventInstance" Role="EventInstance" Multiplicity="1" />
+    <End Type="Model1.UserEventInstance" Role="UserEventInstance" Multiplicity="*" />
+  </Association>
+  <Association Name="EventListingEventInstance">
+    <End Type="Model1.EventListing" Role="EventListing" Multiplicity="1" />
+    <End Type="Model1.EventInstance" Role="EventInstance" Multiplicity="*" />
+  </Association>
+  <Association Name="EventListingUserEventInstance">
+    <End Type="Model1.EventListing" Role="EventListing" Multiplicity="1" />
+    <End Type="Model1.UserEventInstance" Role="UserEventInstance" Multiplicity="*" />
+  </Association>
+  <Association Name="UserEventInstance1">
+    <End Type="Model1.User" Role="User" Multiplicity="1" />
+    <End Type="Model1.EventInstance" Role="EventInstance" Multiplicity="*" />
+  </Association>
+</Schema>
