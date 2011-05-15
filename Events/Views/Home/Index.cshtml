@@ -1,8 +1,21 @@
-﻿@{
+﻿@model PraLoup.WebApp.Models.HomeModel
+@using PraLoup.WebApp.Resources
+
+@{
     ViewBag.Title = "Home Page";
 }
 
+
 <h2>@ViewBag.Message</h2>
 <p>
-    To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+    <div id="left">
+        Welcome to the Project Safari Home Page!
+    </div>
+    <div id="right">
+        <p>
+            <a href="@Model.redirecturl">@Strings.ClickHere</a> @Strings.ToSignInWith
+            <div class="facebookLogo">
+            </div>
+        </p>
+    </div>
 </p>

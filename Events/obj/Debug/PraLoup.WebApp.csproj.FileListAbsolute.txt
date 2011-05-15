@@ -5,3 +5,10 @@ C:\hepidev\Dropbox\PraLoup\Events\obj\Debug\PraLoup.WebApp.dll
 C:\hepidev\Dropbox\PraLoup\Events\obj\Debug\PraLoup.WebApp.pdb
 C:\HepiDev\Dropbox\PraLoup\Events\bin\PraLoup.DataAccess.dll
 C:\HepiDev\Dropbox\PraLoup\Events\bin\PraLoup.DataAccess.pdb
+C:\HepiDev\Dropbox\PraLoup\Events\bin\EntityFramework.dll
+C:\HepiDev\Dropbox\PraLoup\Events\bin\EntityFramework.xml
+C:\HepiDev\Dropbox\PraLoup\Events\bin\PraLoup.Facebook.dll
+C:\HepiDev\Dropbox\PraLoup\Events\bin\PraLoup.Facebook.pdb
+C:\HepiDev\Dropbox\PraLoup\Events\obj\Debug\PraLoup.WebApp.Resources.PraLoup.resources
+C:\HepiDev\Dropbox\PraLoup\Events\obj\Debug\GenerateResource.read.1.tlog
+C:\HepiDev\Dropbox\PraLoup\Events\obj\Debug\GenerateResource.write.1.tlog

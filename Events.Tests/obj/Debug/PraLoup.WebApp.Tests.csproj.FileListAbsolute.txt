@@ -8,3 +8,7 @@ C:\hepidev\Dropbox\PraLoup\Events.Tests\obj\Debug\PraLoup.WebApp.Tests.dll
 C:\hepidev\Dropbox\PraLoup\Events.Tests\obj\Debug\PraLoup.WebApp.Tests.pdb
 C:\HepiDev\Dropbox\PraLoup\Events.Tests\bin\Debug\PraLoup.DataAccess.dll
 C:\HepiDev\Dropbox\PraLoup\Events.Tests\bin\Debug\PraLoup.DataAccess.pdb
+C:\HepiDev\Dropbox\PraLoup\Events.Tests\bin\Debug\EntityFramework.dll
+C:\HepiDev\Dropbox\PraLoup\Events.Tests\bin\Debug\EntityFramework.xml
+C:\HepiDev\Dropbox\PraLoup\Events.Tests\bin\Debug\PraLoup.Facebook.dll
+C:\HepiDev\Dropbox\PraLoup\Events.Tests\bin\Debug\PraLoup.Facebook.pdb

@@ -44,10 +44,12 @@
   <ItemGroup>
     <Compile Include="OAuthBase.cs" />
     <Compile Include="OAuthHandler.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\JSONObject.cs" />
+    <Compile Include="Utilities\JsonObject.cs" />
     <Compile Include="Utilities\StringExtensions.cs" />
     <Compile Include="Wall.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
