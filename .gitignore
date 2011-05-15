@@ -3,6 +3,8 @@
 *.dll
 *.exe
 *.pdb
+bin/
+obj/
 
 # Packages #
 ############

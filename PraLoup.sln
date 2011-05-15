@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.WebApp", "Events\PraLoup.WebApp.csproj", "{B23CD01A-9405-411E-ABC2-4CDB64194C15}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.WebApp.Tests", "Events.Tests\PraLoup.WebApp.Tests.csproj", "{484C4C44-19F9-4B95-8CB4-A444C1BBD8DA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.DataAccess", "PraLoup.DataAccess\PraLoup.DataAccess.csproj", "{699F3369-A9D5-4825-ACBC-41843104A795}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.Facebook", "PraLoup.Facebook\PraLoup.Facebook.csproj", "{4C9EAD3E-DFC8-42CE-B324-015F3C9BB95C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.WebApp", "PraLoup.WebApp\PraLoup.WebApp.csproj", "{B23CD01A-9405-411E-ABC2-4CDB64194C15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.WebApp.Tests", "PraLoup.WebApp.Test\PraLoup.WebApp.Tests.csproj", "{484C4C44-19F9-4B95-8CB4-A444C1BBD8DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,14 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B23CD01A-9405-411E-ABC2-4CDB64194C15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B23CD01A-9405-411E-ABC2-4CDB64194C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B23CD01A-9405-411E-ABC2-4CDB64194C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B23CD01A-9405-411E-ABC2-4CDB64194C15}.Release|Any CPU.Build.0 = Release|Any CPU
-		{484C4C44-19F9-4B95-8CB4-A444C1BBD8DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{484C4C44-19F9-4B95-8CB4-A444C1BBD8DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{484C4C44-19F9-4B95-8CB4-A444C1BBD8DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{484C4C44-19F9-4B95-8CB4-A444C1BBD8DA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{699F3369-A9D5-4825-ACBC-41843104A795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{699F3369-A9D5-4825-ACBC-41843104A795}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{699F3369-A9D5-4825-ACBC-41843104A795}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -31,6 +23,14 @@ Global
 		{4C9EAD3E-DFC8-42CE-B324-015F3C9BB95C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C9EAD3E-DFC8-42CE-B324-015F3C9BB95C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C9EAD3E-DFC8-42CE-B324-015F3C9BB95C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B23CD01A-9405-411E-ABC2-4CDB64194C15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B23CD01A-9405-411E-ABC2-4CDB64194C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B23CD01A-9405-411E-ABC2-4CDB64194C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B23CD01A-9405-411E-ABC2-4CDB64194C15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{484C4C44-19F9-4B95-8CB4-A444C1BBD8DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{484C4C44-19F9-4B95-8CB4-A444C1BBD8DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{484C4C44-19F9-4B95-8CB4-A444C1BBD8DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{484C4C44-19F9-4B95-8CB4-A444C1BBD8DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
