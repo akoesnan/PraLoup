@@ -12,7 +12,9 @@ body
     padding: 0;
     color: #696969;
 }
-
+#left { width: 500px; border: 1px solid red; float: left}
+#right { width: 300px; border: 1px solid red; float: right}
+.clear { clear: both;}
 a:link
 {
     color: #034af3;
