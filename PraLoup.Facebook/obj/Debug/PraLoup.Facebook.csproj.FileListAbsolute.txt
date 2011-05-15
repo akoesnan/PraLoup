@@ -1,5 +1,0 @@
-C:\HepiDev\Dropbox\PraLoup\PraLoup.Facebook\obj\Debug\ResolveAssemblyReference.cache
-C:\HepiDev\Dropbox\PraLoup\PraLoup.Facebook\bin\Debug\PraLoup.Facebook.dll
-C:\HepiDev\Dropbox\PraLoup\PraLoup.Facebook\bin\Debug\PraLoup.Facebook.pdb
-C:\HepiDev\Dropbox\PraLoup\PraLoup.Facebook\obj\Debug\PraLoup.Facebook.dll
-C:\HepiDev\Dropbox\PraLoup\PraLoup.Facebook\obj\Debug\PraLoup.Facebook.pdb

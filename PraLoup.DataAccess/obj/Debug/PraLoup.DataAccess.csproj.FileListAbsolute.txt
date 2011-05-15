@@ -1,5 +1,0 @@
-C:\hepidev\Dropbox\PraLoup\PraLoup.DataAccess\bin\Debug\PraLoup.DataAccess.dll
-C:\hepidev\Dropbox\PraLoup\PraLoup.DataAccess\bin\Debug\PraLoup.DataAccess.pdb
-C:\hepidev\Dropbox\PraLoup\PraLoup.DataAccess\obj\Debug\ResolveAssemblyReference.cache
-C:\hepidev\Dropbox\PraLoup\PraLoup.DataAccess\obj\Debug\PraLoup.DataAccess.dll
-C:\hepidev\Dropbox\PraLoup\PraLoup.DataAccess\obj\Debug\PraLoup.DataAccess.pdb
