@@ -20,7 +20,7 @@ namespace ProjectSafari.Controllers
                 //Redirect the user back to Facebook for authorization.
                 Response.Redirect(oAuth.AuthorizationLinkGet());
             }
-            else
+            else 
             {
                 //Get the access token and secret.
                 oAuth.AccessTokenGet(Request["code"]);
@@ -39,7 +39,7 @@ namespace ProjectSafari.Controllers
                     rm.middle_name = jsonobject.middle_name;
                     rm.name = jsonobject.name;
                     ViewData.Model = rm;
-                    var ptw = new Wall();
+                   /* var ptw = new Wall();
                     ptw.Message = "blank";
                     ptw.Action = "action";
                     ptw.Caption = "caption";
@@ -49,8 +49,9 @@ namespace ProjectSafari.Controllers
                     ptw.Source = "http://www.google.com/images/logos/ps_logo2.png";
                     ptw.AccessToken = oAuth.Token;
 
-                    ptw.Post();
+                    ptw.Post();*/
                 }
+                
             }
 
             return View();

@@ -11,7 +11,7 @@ namespace PraLoup.Facebook
         public enum Method { GET, POST };
         public const string AUTHORIZE = "https://graph.facebook.com/oauth/authorize";
         public const string ACCESS_TOKEN = "https://graph.facebook.com/oauth/access_token";
-        public const string CALLBACK_URL = "http://projectsafari.com:62789/Account/Register/";
+        public const string CALLBACK_URL = "http://projectsafari.com/PraLoup.WebApp/Account/Register/";
         public const string appkey = "119592781389488";
 
 
