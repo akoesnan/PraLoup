@@ -122,9 +122,6 @@
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Account\ChangePassword.cshtml" />
-    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
-    <Content Include="Views\Account\LogOn.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -198,12 +195,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>30482</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost/PraLoup.WebApp</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

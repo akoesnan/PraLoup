@@ -57,7 +57,7 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Events\PraLoup.WebApp.csproj">
+    <ProjectReference Include="..\PraLoup.WebApp\PraLoup.WebApp.csproj">
       <Project>{B23CD01A-9405-411E-ABC2-4CDB64194C15}</Project>
       <Name>PraLoup.WebApp</Name>
     </ProjectReference>
