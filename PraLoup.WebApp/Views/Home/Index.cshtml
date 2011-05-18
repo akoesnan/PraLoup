@@ -5,17 +5,48 @@
     ViewBag.Title = "Home Page";
 }
 
+<div id="fb-root"></div>
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '119592781389488',
+            status: true, // check login status
+            cookie: true, // enable cookies to allow the server to access the session
+            xfbml: true  // parse XFBML
+        });
 
-<h2>@ViewBag.Message</h2>
-<p>
-    <div id="left">
-        Welcome to the Project Safari Home Page!
+        FB.getLoginStatus(function (response) {
+            if (response.session) {
+                loginp(response.session.uid, response.session.access_token);
+            } else {
+                alert("not logged in");
+            }
+        });
+    };
+    (function () {
+        var e = document.createElement('script'); e.async = true;
+        e.src = document.location.protocol +
+      '//connect.facebook.net/en_US/all.js';
+        document.getElementById('fb-root').appendChild(e);
+    } ());
+</script>
+ <div class="page">
+   
+         <div id="container">
+           <div id="left">
+               <p>Click Here to sign in with Facebook
+               </p>
+            <fb:login-button show-faces="true"
+registration-url="https://projectsafari.com/Praloup.WebApp/Account/Register"
+onlogin="loginp(arguments)" />
+         </div>
+        <div id="right">
+        foo bar
+        </div>
+        
+            <div class="clear"></div>
+        </div>
+        <div id="footer">
+        © 2011 PraLoup | <a href="/Home/About">About</a> | <a href="/Home/Index">Home</a> | <a href="/Home/Contact">Contact</a>
+        </div>
     </div>
-    <div id="right">
-        <p>
-            <a href="@Model.redirecturl">@Strings.ClickHere</a> @Strings.ToSignInWith
-            <div class="facebookLogo">
-            </div>
-        </p>
-    </div>
-</p>

@@ -29,7 +29,7 @@ namespace PraLoup.Facebook.Utilities
     /// mapping strings to other objects, an array of objects, or a single 
     /// object, which represents a scalar.
     /// </summary>
-    internal class DynamicJsonObject : DynamicObject
+    public class DynamicJsonObject : DynamicObject
     {
         private IDictionary<string, object> Dictionary { get; set; }
 

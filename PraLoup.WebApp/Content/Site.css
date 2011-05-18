@@ -12,6 +12,44 @@ body
     padding: 0;
     color: #696969;
 }
+#container {
+   margin: 1%;
+   padding: 0;
+   width: 100%;
+   min-height:300px;
+   text-align:left;
+   margin-left: auto;
+   margin-right : auto;
+
+   
+}
+#left {
+   float: left;
+   width: 46.5%;
+   margin: 1% 0 1% 1%;
+   padding: 1%;
+   background-color: #ffffff;
+   height:100%;
+   color: #000;
+}
+#right {
+   float: right;
+   width: 46.5%;
+   margin: 1% 0 1% 1%;
+   padding: 1%;
+   background-color: #ffffff;
+   color: #000;
+   height:100%;
+}
+.clear {
+   height: 0;
+   font-size: 1px;
+   margin: 0;
+   padding: 0;
+   line-height: 0;
+   clear: both;
+}
+
 
 a:link
 {
@@ -254,7 +292,6 @@ table th
 
 div#title
 {
-    display:block;
     float:left;
     text-align:left;
 }
