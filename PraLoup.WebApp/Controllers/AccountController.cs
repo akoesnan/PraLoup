@@ -32,6 +32,7 @@ namespace ProjectSafari.Controllers
                     fa.Register();
                 }
             }
+            Response.Cookies.Add(new System.Web.HttpCookie("LoggedIn", "true"));
             return null;
         }
     }
