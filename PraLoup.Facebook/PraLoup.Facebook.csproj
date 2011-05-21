@@ -44,12 +44,16 @@
   <ItemGroup>
     <Compile Include="OAuthBase.cs" />
     <Compile Include="OAuthHandler.cs" />
-    <Compile Include="Utilities\JsonObject.cs" />
-    <Compile Include="Utilities\StringExtensions.cs" />
     <Compile Include="Wall.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Praloup.Utility\Praloup.Utilities.csproj">
+      <Project>{CDBDFC6A-C346-4010-B949-306801A5487D}</Project>
+      <Name>Praloup.Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
 using PraLoup.WebApp.Models;
-using PraLoup.Facebook.Utilities;
+using PraLoup.Utilities;
 using PraLoup.Facebook;
 
-namespace ProjectSafari.Controllers
+namespace PraLoup.WebApp.Controllers
 {
 
     [HandleError]
@@ -31,7 +31,7 @@ namespace ProjectSafari.Controllers
                     url = "https://graph.facebook.com/me/?access_token=" + oAuth.Token;
                     //  url = "https://graph.facebook.com/me/name?access_token=" + oAuth.Token;
                     string json = oAuth.WebRequest(OAuthHandler.Method.GET, url, String.Empty);
-                    dynamic jsonobject = json.GetJSON();
+                    dynamic jsonobject = json.GetJson();
                     RegisterModel rm = new RegisterModel();
                     rm.first_name = jsonobject.first_name;
                     rm.id = jsonobject.id;

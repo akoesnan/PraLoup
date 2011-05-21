@@ -38,6 +38,15 @@
       <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.2.1.505.0\lib\NET35\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\packages\Unity.2.1.505.0\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages" />
@@ -151,6 +160,10 @@
     <ProjectReference Include="..\PraLoup.Facebook\PraLoup.Facebook.csproj">
       <Project>{4C9EAD3E-DFC8-42CE-B324-015F3C9BB95C}</Project>
       <Name>PraLoup.Facebook</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Praloup.Utility\Praloup.Utilities.csproj">
+      <Project>{CDBDFC6A-C346-4010-B949-306801A5487D}</Project>
+      <Name>Praloup.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

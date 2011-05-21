@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using PraLoup.Facebook.Utilities;
+using PraLoup.Utilities;
 
 namespace PraLoup.Facebook
 {

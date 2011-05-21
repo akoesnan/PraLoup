@@ -22,47 +22,65 @@ using System.Dynamic;
 using System.Linq;
 using System.Web.Script.Serialization;
 
-namespace PraLoup.Facebook.Utilities
-{    
+namespace PraLoup.Utilities
+{
     /// <summary>
     /// Represents an object encoded in JSON. Can be either a dictionary 
     /// mapping strings to other objects, an array of objects, or a single 
     /// object, which represents a scalar.
     /// </summary>
-    internal class DynamicJsonObject : DynamicObject
+    public class DynamicJsonObject : DynamicObject
     {
         private IDictionary<string, object> Dictionary { get; set; }
+
+        public DynamicJsonObject() { }
 
         public DynamicJsonObject(IDictionary<string, object> dictionary)
         {
             this.Dictionary = dictionary;
         }
 
-        public override bool TryGetMember(GetMemberBinder binder, out object result)
-        {
-            try
+        public dynamic GetMember(string memberName) {
+            if (this.Dictionary.ContainsKey(memberName))
             {
-                result = this.Dictionary[binder.Name];
+                return GetValue(this.Dictionary[memberName]);
             }
-            catch (KeyNotFoundException)
-            {
-                result = null;
-                return true;
-            }
-            if (result is IDictionary<string, object>)
-            {
-                result = new DynamicJsonObject(result as IDictionary<string, object>);
-            }
-            else if (result is ArrayList && (result as ArrayList) is IDictionary<string, object>)
-            {
-                result = new List<DynamicJsonObject>((result as ArrayList).ToArray().Select(x => new DynamicJsonObject(x as IDictionary<string, object>)));
-            }
-            else if (result is ArrayList)
-            {
-                result = new List<object>((result as ArrayList).ToArray());
+            else {
+                return null;
             }
 
-            return this.Dictionary.ContainsKey(binder.Name);
+        }
+
+        public override bool TryGetMember(GetMemberBinder binder, out dynamic item)
+        {
+            if (this.Dictionary.ContainsKey(binder.Name))
+            {
+                item = this.Dictionary[binder.Name];
+                item = GetValue(item);
+                return true;
+            }
+            else
+            {
+                item = null;
+                return true;
+            }
+        }
+
+        public static dynamic GetValue(dynamic item)
+        {
+            if (item is IDictionary<string, dynamic>)
+            {
+                item = new DynamicJsonObject(item as IDictionary<string, dynamic>);
+            }
+            else if (item is ArrayList && (item as ArrayList).Count > 0 && (item as ArrayList)[0] is IDictionary<string, dynamic>)
+            {
+                item = new DynamicJsonArray(item);
+            }
+            else if (item is ArrayList)
+            {
+                item = new List<dynamic>((item as ArrayList).ToArray());
+            }
+            return item;
         }
     }
 

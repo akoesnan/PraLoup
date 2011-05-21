@@ -9,7 +9,7 @@ namespace PraLoup.DataAccess.Entities
 {
     public class Account
     {
-        public int AccountId { get; set; }
+        public int Id { get; set; }
 
         public string FacebookId { get; set; }
 
