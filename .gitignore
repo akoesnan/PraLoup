@@ -3,6 +3,7 @@
 *.dll
 *.exe
 *.pdb
+*.suo
 bin/
 obj/
 TestResults/
