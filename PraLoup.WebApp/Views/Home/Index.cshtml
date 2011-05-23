@@ -1,21 +1,20 @@
 ﻿@model PraLoup.WebApp.Models.HomeModel
 @using PraLoup.WebApp.Resources
-
 @{
     ViewBag.Title = "Home Page";
 }
-
-
-<h2>@ViewBag.Message</h2>
-<p>
-    <div id="left">
-        Welcome to the Project Safari Home Page!
+<div class="page">
+    <div id="container">
+        <div id="left">
+        </div>
+        <div id="right">
+            foo bar
+        </div>
+        <div class="clear">
+        </div>
     </div>
-    <div id="right">
-        <p>
-            <a href="@Model.redirecturl">@LocStrings.ClickHere</a> @LocStrings.ToSignInWith
-            <div class="facebookLogo">
-            </div>
-        </p>
+    <div id="footer">
+        © 2011 PraLoup | <a href="/Home/About">About</a> | <a href="/Home/Index">Home</a>
+        | <a href="/Home/Contact">Contact</a>
     </div>
-</p>
+</div>
