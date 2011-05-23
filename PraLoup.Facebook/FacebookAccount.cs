@@ -1,7 +1,7 @@
 ﻿using System;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
-using PraLoup.Facebook.Utilities;
+using PraLoup.Utilities;
 using System.Linq;
 using System.Web.Security;
 
@@ -15,7 +15,7 @@ namespace PraLoup.Facebook
         {
             string url = "https://graph.facebook.com/me/?access_token=" + oAuth.Token;
             string json = oAuth.WebRequest(OAuthHandler.Method.GET, url, String.Empty);
-            dynamic jsonobject = json.GetJSON();
+            dynamic jsonobject = json.GetJson();
             account = new Account();
             account.FirstName = jsonobject.first_name;
             account.FacebookId = jsonobject.id;

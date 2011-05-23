@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PraLoup.WebApp.Resources {
+namespace PraLoup.WebApp.Areas.Admin.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace PraLoup.WebApp.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Strings {
+    public class LocStrings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public Strings() {
+        internal LocStrings() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace PraLoup.WebApp.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PraLoup.WebApp.Resources.PraLoup", typeof(Strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PraLoup.WebApp.Areas.Admin.Resources.LocStrings", typeof(LocStrings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,29 @@ namespace PraLoup.WebApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click Here.
+        ///   Looks up a localized string similar to Manage Supported Metro Area.
         /// </summary>
-        public static string ClickHere {
+        public static string ManageMetro {
             get {
-                return ResourceManager.GetString("ClickHere", resourceCulture);
+                return ResourceManager.GetString("ManageMetro", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to facebook.
+        ///   Looks up a localized string similar to PraLoup Admin Area.
         /// </summary>
-        public static string Facebook {
+        public static string PageHeader {
             get {
-                return ResourceManager.GetString("Facebook", resourceCulture);
+                return ResourceManager.GetString("PageHeader", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to to sign in with.
+        ///   Looks up a localized string similar to Aministrative Tasks.
         /// </summary>
-        public static string ToSignInWith {
+        public static string Tasks {
             get {
-                return ResourceManager.GetString("ToSignInWith", resourceCulture);
+                return ResourceManager.GetString("Tasks", resourceCulture);
             }
         }
     }

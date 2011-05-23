@@ -31,8 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
@@ -48,6 +51,8 @@
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Image.cs" />
     <Compile Include="Entities\Post.cs" />
+    <Compile Include="Entities\MetroArea.cs" />
+    <Compile Include="Entities\Tag.cs" />
     <Compile Include="Enums\Category.cs" />
     <Compile Include="EntityRepository.cs" />
     <Compile Include="Entities\Event.cs" />
@@ -63,7 +68,9 @@
     <Compile Include="Entities\Venue.cs" />
     <Compile Include="TestSeedDataGenerator.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

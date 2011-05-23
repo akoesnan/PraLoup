@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Web.Mvc;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using PraLoup.Facebook;
-using PraLoup.Facebook.Utilities;
+using PraLoup.Utilities;
 using PraLoup.WebApp.Models;
 
 namespace ProjectSafari.Controllers
@@ -19,7 +19,7 @@ namespace ProjectSafari.Controllers
 
             var oAuth = new OAuthHandler();
 
-            dynamic djo = json.GetJSON();
+            dynamic djo = json.GetJson();
             //Get the access token and secret.
             oAuth.Token = djo.sessionkey;
             if (oAuth.Token.Length > 0)

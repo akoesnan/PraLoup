@@ -117,16 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ClickHere" xml:space="preserve">
-    <value>Click Here</value>
-    <comment>Text for ClickHere</comment>
+  <data name="ManageMetro" xml:space="preserve">
+    <value>Manage Supported Metro Area</value>
+    <comment>Text for Manage Supported Metro Area</comment>
   </data>
-  <data name="Facebook" xml:space="preserve">
-    <value>facebook</value>
-    <comment>Text for facebook </comment>
+  <data name="PageHeader" xml:space="preserve">
+    <value>PraLoup Admin Area</value>
+    <comment>Text for Admin Area Header</comment>
   </data>
-  <data name="ToSignInWith" xml:space="preserve">
-    <value>to sign in with</value>
-    <comment>Text for to sign in with</comment>
+  <data name="Tasks" xml:space="preserve">
+    <value>Aministrative Tasks</value>
+    <comment>Text for Admin Tasks</comment>
   </data>
 </root>

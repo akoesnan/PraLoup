@@ -17,6 +17,7 @@ namespace PraLoup.WebApp.Controllers
         public const string CALLBACK_URL = "http://projectsafari.com/PraLoup.WebApp/Account/Register";
         public const string appkey = "119592781389488";
 
+
         public ActionResult Index()
         {
             ViewData["Message"] = "Welcome to ASP.NET MVC!";

@@ -13,10 +13,18 @@ namespace PraLoup.DataAccess.Entities
 
         public string StreetLine2 { get; set; }
 
+        public string PhoneNumber { get; set; }
+        
+        public string PostalCode { get; set; }
+
         public string City { get; set; }
 
         public string State { get; set; }
 
         public string Country { get; set; }
+
+        public string Lat { get; set; }
+
+        public string Lon { get; set; }
     }
 }

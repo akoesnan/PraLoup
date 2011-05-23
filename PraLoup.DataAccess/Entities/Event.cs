@@ -37,6 +37,14 @@ namespace PraLoup.DataAccess.Entities
 
         public decimal Price { get; set; }
 
+        public decimal Value { get; set; }
+
         public IEnumerable<Offer> Offers { get; set; }
+
+        public string Url { get; set; }
+
+        public string ImageUrl { get; set; }
+
+        public string Source { get; set; }
     }
 }

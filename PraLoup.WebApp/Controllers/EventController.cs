@@ -11,11 +11,11 @@ using PraLoup.DataAccess.Entities;
 namespace PraLoup.WebApp.Controllers
 {
     public class EventController : Controller
-    {
-        //
-        // GET: /Event/        
+    {        
         GenericRepository db = new GenericRepository(new EntityRepository());
 
+        //
+        // GET: /Event/        
         public ActionResult Index()
         {
             var entities = db.GetAll<Event>(); 
@@ -24,7 +24,6 @@ namespace PraLoup.WebApp.Controllers
 
         //
         // GET: /Event/Details/5
-
         public ActionResult Details(int id)
         {
             var o = db.Find<Event>(id);
@@ -33,7 +32,6 @@ namespace PraLoup.WebApp.Controllers
 
         //
         // GET: /Event/Create
-
         public ActionResult Create()
         {
             return View();
@@ -41,7 +39,6 @@ namespace PraLoup.WebApp.Controllers
 
         //
         // POST: /Event/Create
-
         [HttpPost]
         public ActionResult Create(Event e)
         {
@@ -68,7 +65,6 @@ namespace PraLoup.WebApp.Controllers
         
         //
         // GET: /Event/Edit/5
- 
         public ActionResult Edit(int id)
         {
             var e = db.Find<Event>(id);
@@ -85,7 +81,6 @@ namespace PraLoup.WebApp.Controllers
 
         //
         // POST: /Event/Edit/5
-
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
