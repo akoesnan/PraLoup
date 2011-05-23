@@ -2,6 +2,7 @@
 using PraLoup.DataAccess.Entities;
 using PraLoup.Utilities;
 using PraLoup.DataPurveyor.Converter;
+using System;
 
 namespace PraLoup.DataPurveyor.Service
 {
@@ -13,37 +14,51 @@ namespace PraLoup.DataPurveyor.Service
         // TODO: make use of unity
         public IEventConverter EventConverter { get; set; }
 
-        public EventfulService()  {
+        public EventfulService()
+        {
             this.EventConverter = new EventfulConverter();
         }
 
-        public EventfulService(IEventConverter eventConverter) {
+        public EventfulService(IEventConverter eventConverter)
+        {
             this.EventConverter = eventConverter;
         }
 
         public IEnumerable<Event> GetEventData(string city)
         {
+
             // the argument is documented at: http://api.eventful.com/tools/tutorials/search
             var apiUrl = url.AppendQueryString("app_key", ApiKey)
                             .AppendQueryString("l", city)
                             .AppendQueryString("category", city);
-            
+
             // add the keyword?                
             //.AppendQueryString(
-                       
-            var response = HttpRequestHelper.GetJsonResponse(apiUrl);
-            
-            var events = response.events.GetMember("event");
-
-            var l = new List<Event>();
-
-            foreach (var d in events)
+            try
             {
-                l.Add(EventConverter.GetEventObject(d));
+                var response = HttpRequestHelper.GetJsonResponse(apiUrl);
+
+                var events = response.events.GetMember("event");
+
+                var l = new List<Event>();
+
+                foreach (var d in events)
+                {
+                    l.Add(EventConverter.GetEventObject(d));
+                }
+                return l;
             }
-            return l;
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+        
+        public bool IsSelected(Event e)
+        {
+            // TODO: only return true if we want this lets look at the tags
+            return true;
         }
 
-        
     }
 }

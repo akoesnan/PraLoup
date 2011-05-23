@@ -1,0 +1,12 @@
+﻿@using PraLoup.WebApp.Areas.Admin.Resources;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@LocStrings.Tasks</h2>
+
+<ul class="Adm_tasks">
+    <li>@Html.ActionLink(LocStrings.ManageMetro, "Index", "MetroArea")</li>
+    
+</ul>

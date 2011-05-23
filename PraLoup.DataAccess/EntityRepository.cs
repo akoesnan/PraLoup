@@ -11,6 +11,8 @@ namespace PraLoup.DataAccess
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Offer> Offers { get; set; }
+        public DbSet<MetroArea> MetroAreas { get; set; }
+        // NOTE: Enter new entities here        
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

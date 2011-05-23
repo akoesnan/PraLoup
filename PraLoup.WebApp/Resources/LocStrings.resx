@@ -117,13 +117,45 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Activities" xml:space="preserve">
+    <value>Activities</value>
+    <comment>Text for Activities</comment>
+  </data>
+  <data name="Admin_ManageMetro" xml:space="preserve">
+    <value>Manage Supported Metro</value>
+    <comment>Text for Manage Metro</comment>
+  </data>
+  <data name="Admin_Task" xml:space="preserve">
+    <value>Admin Tasks</value>
+    <comment>Text for Tasks</comment>
+  </data>
   <data name="ClickHere" xml:space="preserve">
     <value>Click Here</value>
     <comment>Text for ClickHere</comment>
   </data>
+  <data name="Deals" xml:space="preserve">
+    <value>Deals</value>
+    <comment>Text for Deals</comment>
+  </data>
   <data name="Facebook" xml:space="preserve">
     <value>facebook</value>
     <comment>Text for facebook </comment>
+  </data>
+  <data name="HappyHours" xml:space="preserve">
+    <value>HappyHours</value>
+    <comment>Text for Happy Hours</comment>
+  </data>
+  <data name="Menu_Admin" xml:space="preserve">
+    <value>Administrator</value>
+    <comment>Text for Administrator</comment>
+  </data>
+  <data name="Menu_ThingsToDo" xml:space="preserve">
+    <value>Things To Do</value>
+    <comment>Text for Things to do</comment>
+  </data>
+  <data name="ThingsToDoIn" xml:space="preserve">
+    <value>Stuff Happeing In</value>
+    <comment>Text for Things to Do in city</comment>
   </data>
   <data name="ToSignInWith" xml:space="preserve">
     <value>to sign in with</value>

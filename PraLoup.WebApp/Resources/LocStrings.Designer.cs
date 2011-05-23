@@ -22,14 +22,14 @@ namespace PraLoup.WebApp.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Strings {
+    public class LocStrings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public Strings() {
+        internal LocStrings() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace PraLoup.WebApp.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PraLoup.WebApp.Resources.PraLoup", typeof(Strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PraLoup.WebApp.Resources.LocStrings", typeof(LocStrings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,6 +61,15 @@ namespace PraLoup.WebApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activities.
+        /// </summary>
+        public static string Activities {
+            get {
+                return ResourceManager.GetString("Activities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Click Here.
         /// </summary>
         public static string ClickHere {
@@ -70,11 +79,65 @@ namespace PraLoup.WebApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deals.
+        /// </summary>
+        public static string Deals {
+            get {
+                return ResourceManager.GetString("Deals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to facebook.
         /// </summary>
         public static string Facebook {
             get {
                 return ResourceManager.GetString("Facebook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HappyHours.
+        /// </summary>
+        public static string HappyHours {
+            get {
+                return ResourceManager.GetString("HappyHours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Administrator.
+        /// </summary>
+        public static string Menu_Admin {
+            get {
+                return ResourceManager.GetString("Menu_Admin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Things To Do.
+        /// </summary>
+        public static string Menu_ThingsToDo {
+            get {
+                return ResourceManager.GetString("Menu_ThingsToDo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.
+        /// </summary>
+        public static string Menu_User {
+            get {
+                return ResourceManager.GetString("Menu_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stuff Happeing In.
+        /// </summary>
+        public static string ThingsToDoIn {
+            get {
+                return ResourceManager.GetString("ThingsToDoIn", resourceCulture);
             }
         }
         

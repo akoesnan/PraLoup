@@ -1,0 +1,29 @@
+﻿@using PraLoup.WebApp.Resources
+@model PraLoup.WebApp.Models.ThingsToDoCityModel
+@{
+    ViewBag.Title = "ThingsToDoCity";
+}
+<div class="ttd_city_ttl">
+<h2>Stuff Happening in @Model.City</h2>
+</div>
+
+<div class="ttd_city_lst">
+@if (@Model.Deals != null && @Model.Deals.Count() > 0)
+{ 
+    <div class="ttd_deals">
+        @ThingsToDoUtility.DisplayTable("Deals", @Model.Deals);
+    </div>
+}
+@if (@Model.HappyHours != null && @Model.HappyHours.Count() > 0)
+{ 
+    <div class="ttd_hh">
+        @ThingsToDoUtility.DisplayTable("Happy Hours", @Model.HappyHours);
+    </div>
+}
+@if (@Model.FunEvents != null && @Model.FunEvents.Count() > 0)
+{ 
+    <div class="ttd_hh">
+        @ThingsToDoUtility.DisplayTable("Fun Events", @Model.FunEvents);
+    </div>
+}
+</div>

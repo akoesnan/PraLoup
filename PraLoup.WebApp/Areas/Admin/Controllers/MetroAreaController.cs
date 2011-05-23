@@ -3,31 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using PraLoup.WebApp.Models;
-using System.Data.Entity;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 
-namespace PraLoup.WebApp.Controllers
+namespace PraLoup.WebApp.Areas.Admin.Controllers
 {
-    public class EventController : Controller
-    {        
+    /// <summary>
+    /// This is controller for the Metro Area
+    /// This is used for us to add / remove supported metro area from the system    
+    /// </summary>
+    public class MetroAreaController : Controller
+    {
         GenericRepository db = new GenericRepository(new EntityRepository());
-
-        //
-        // GET: /Event/        
+        
+        // TODO: need to add autorization for admin
+        // GET: /MetroArea/
         public ActionResult Index()
         {
-            var entities = db.GetAll<Event>(); 
+            var entities = db.GetAll<MetroArea>();
             return View(entities);
-        }
-
-        //
-        // GET: /Event/Details/5
-        public ActionResult Details(int id)
-        {
-            var o = db.Find<Event>(id);
-            return View(o);
         }
 
         //
@@ -35,20 +29,20 @@ namespace PraLoup.WebApp.Controllers
         public ActionResult Create()
         {
             return View();
-        } 
+        }
 
         //
         // POST: /Event/Create
         [HttpPost]
-        public ActionResult Create(Event e)
+        public ActionResult Create(MetroArea m)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    db.Add(e);
+                    db.Add(m);
                     db.SaveChanges();
-                    
+
                     // TODO: create a page that says events is added succesfully
                     return RedirectToAction("Index");
                 }
@@ -62,17 +56,17 @@ namespace PraLoup.WebApp.Controllers
                 return View();
             }
         }
-        
+
         //
         // GET: /Event/Edit/5
         public ActionResult Edit(int id)
         {
-            var e = db.Find<Event>(id);
-            if (e != null)
+            var m = db.Find<MetroArea>(id);
+            if (m != null)
             {
-                return View(e);
+                return View(m);
             }
-            else 
+            else
             {
                 // TODO: what to do when there is no such event
                 return RedirectToAction("Index");
@@ -96,7 +90,6 @@ namespace PraLoup.WebApp.Controllers
 
         //
         // GET: /Event/Delete/5
- 
         public ActionResult Delete(int id)
         {
             return View();
@@ -111,7 +104,6 @@ namespace PraLoup.WebApp.Controllers
             try
             {
                 // TODO: Add delete logic here
- 
                 return RedirectToAction("Index");
             }
             catch

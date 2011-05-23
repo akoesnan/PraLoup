@@ -16,24 +16,38 @@ namespace PraLoup.DataPurveyor.Service
         // TODO: make use of unity
         public IEventConverter EventConverter { get; set; }
 
-        public GrouponService() {
+        public GrouponService()
+        {
             this.EventConverter = new GrouponConverter();
         }
 
-        public GrouponService(IEventConverter eventConverter) {
+        public GrouponService(IEventConverter eventConverter)
+        {
             this.EventConverter = eventConverter;
         }
 
-        public IEnumerable<Event> GetEventData (string city) {
+        public IEnumerable<Event> GetEventData(string city)
+        {
+            // TODO: we need to cache this..
+
             var id = GetGrouponDivision(city);
-            return this.GetDataFromDivisionId(id);
+
+            if (!String.IsNullOrEmpty(id))
+            {
+                return this.GetDataFromDivisionId(id);
+            }
+            else
+            {
+                return null;
+            }
+
         }
 
         public IEnumerable<Event> GetDataFromDivisionId(string divisionId)
         {
             var url = String.Format(DealsApiUrl, divisionId, apiKey);
             var response = HttpRequestHelper.GetJsonResponse(url);
-            var l = new List<Event>();            
+            var l = new List<Event>();
             foreach (var d in response.deals)
             {
                 l.Add(EventConverter.GetEventObject(d));
@@ -45,14 +59,24 @@ namespace PraLoup.DataPurveyor.Service
         {
             // TODO: only return true if we want this lets look at the tags
             return true;
-        } 
+        }
 
-        public string GetGrouponDivision(string city) {
-            var response = HttpRequestHelper.GetJsonResponse(DivisionApiUrl);
-            foreach (var d in response.divisions) {
-                if (String.Equals(d.name as string, city, StringComparison.InvariantCultureIgnoreCase)) {
-                    return d.id;
+        public string GetGrouponDivision(string city)
+        {
+            try
+            {
+                var response = HttpRequestHelper.GetJsonResponse(DivisionApiUrl);
+                foreach (var d in response.divisions)
+                {
+                    if (String.Equals(d.name as string, city, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        return d.id;
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                return null;
             }
             return null;
         }

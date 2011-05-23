@@ -6,8 +6,16 @@ using PraLoup.DataAccess.Entities;
 
 namespace PraLoup.DataPurveyor.Service
 {
-    interface IEventService
+    public interface IEventService
     {
+        
         IEnumerable<Event> GetEventData(string city);
+
+        /// <summary>
+        /// The filter method to decide if the Event should be included
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        bool IsSelected(Event e);
     }
 }

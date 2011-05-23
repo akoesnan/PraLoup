@@ -5,6 +5,7 @@
 *.pdb
 bin/
 obj/
+TestResults/
 
 # Packages #
 ############
