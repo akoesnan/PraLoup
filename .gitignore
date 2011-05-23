@@ -4,6 +4,7 @@
 *.exe
 *.pdb
 *.suo
+*.sdf
 bin/
 obj/
 TestResults/
