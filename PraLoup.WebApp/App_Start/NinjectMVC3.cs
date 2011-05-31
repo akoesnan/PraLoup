@@ -3,11 +3,11 @@
 
 namespace PraLoup.WebApp.App_Start
 {
-    using System.Reflection;
+    using System.Web.Mvc;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject;
     using Ninject.Web.Mvc;
-    using PraLoup.WebApp;
+    using Ninject.Web.Mvc.FilterBindingSyntax;
 
     public static class NinjectMVC3 
     {

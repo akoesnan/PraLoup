@@ -1,4 +1,4 @@
-﻿@model PraLoup.WebApp.Models.HomeModel
+﻿ @model PraLoup.WebApp.Models.HomeModel
 @using PraLoup.WebApp.Resources
 @{
     ViewBag.Title = "Home Page";
@@ -8,7 +8,9 @@
         <div id="left">
         </div>
         <div id="right">
-            foo bar
+<p>
+    @Html.ActionLink("Login", "Login", "Account");
+</p>
         </div>
         <div class="clear">
         </div>

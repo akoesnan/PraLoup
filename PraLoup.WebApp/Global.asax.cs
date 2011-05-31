@@ -47,5 +47,6 @@ namespace PraLoup.WebApp
             // TODO: we do not want this in production, for test machine we need to make seed data
             Database.SetInitializer<EntityRepository>(new DropCreateDatabaseIfModelChanges<EntityRepository>());
         }
+
     }    
 }

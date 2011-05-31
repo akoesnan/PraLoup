@@ -19,4 +19,6 @@ namespace PraLoup.WebApp.App_Start
             this.Bind<IEventService>().To<YelpService>().WhenTargetHas<HappyHourAttributes>();            
         }
     }
+
+
 }

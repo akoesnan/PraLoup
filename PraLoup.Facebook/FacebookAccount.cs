@@ -4,6 +4,9 @@ using PraLoup.DataAccess.Entities;
 using PraLoup.Utilities;
 using System.Linq;
 using System.Web.Security;
+using Facebook;
+using Facebook.Web;
+
 
 namespace PraLoup.Facebook
 {
@@ -13,6 +16,7 @@ namespace PraLoup.Facebook
         private Account account = null;
         public FacebookAccount(OAuthHandler oAuth)
         {
+
             string url = "https://graph.facebook.com/me/?access_token=" + oAuth.Token;
             string json = oAuth.WebRequest(OAuthHandler.Method.GET, url, String.Empty);
             dynamic jsonobject = json.GetJson();
@@ -47,7 +51,7 @@ namespace PraLoup.Facebook
             gr.Add<Account>(account);
             gr.SaveChanges();
         }
-
+        
         public static void PostToWall(OAuthHandler oAuth)
         {
             var ptw = new Wall();
