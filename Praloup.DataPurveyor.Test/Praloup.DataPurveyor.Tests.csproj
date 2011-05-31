@@ -48,6 +48,7 @@
     <Compile Include="EventfulTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GrouponTest.cs" />
+    <Compile Include="YelpTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PraLoup.DataAccess\PraLoup.DataAccess.csproj">

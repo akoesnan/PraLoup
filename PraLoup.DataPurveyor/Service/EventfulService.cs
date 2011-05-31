@@ -11,17 +11,11 @@ namespace PraLoup.DataPurveyor.Service
         public string ApiKey = "cpkPQVxfqTb6KF7d";
         public const string url = "http://api.eventful.com/json/events/search?q=fun&app_key=cpkPQVxfqTb6KF7d";
 
-        // TODO: make use of unity
-        public IEventConverter EventConverter { get; set; }
+        private IEventConverter EventConverter { get; set; }
 
         public EventfulService()
         {
             this.EventConverter = new EventfulConverter();
-        }
-
-        public EventfulService(IEventConverter eventConverter)
-        {
-            this.EventConverter = eventConverter;
         }
 
         public IEnumerable<Event> GetEventData(string city)
@@ -38,6 +32,7 @@ namespace PraLoup.DataPurveyor.Service
             {
                 var response = HttpRequestHelper.GetJsonResponse(apiUrl);
 
+                //NOTE: event is a reserved word in c# so we need to call GetMember
                 var events = response.events.GetMember("event");
 
                 var l = new List<Event>();

@@ -27,6 +27,7 @@ namespace PraLoup.DataPurveyor.Converter
             }
             e.Name = deal.title;
             e.Url = deal.dealUrl;
+            e.ImageUrl = deal.mediumImageUrl;
 
             var tags = new List<string>();
 

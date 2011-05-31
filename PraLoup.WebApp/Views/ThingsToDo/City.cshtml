@@ -14,12 +14,14 @@
         @ThingsToDoUtility.DisplayTable("Deals", @Model.Deals);
     </div>
 }
+
 @if (@Model.HappyHours != null && @Model.HappyHours.Count() > 0)
 { 
     <div class="ttd_hh">
         @ThingsToDoUtility.DisplayTable("Happy Hours", @Model.HappyHours);
     </div>
 }
+
 @if (@Model.FunEvents != null && @Model.FunEvents.Count() > 0)
 { 
     <div class="ttd_hh">

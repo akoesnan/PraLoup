@@ -40,12 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\Attributes.cs" />
     <Compile Include="Converter\EventfulConverter.cs" />
     <Compile Include="Converter\GrouponConverter.cs" />
     <Compile Include="Converter\IEventConverter.cs" />
+    <Compile Include="Converter\YelpConverter.cs" />
     <Compile Include="Service\EventfulService.cs" />
     <Compile Include="Service\GrouponService.cs" />
     <Compile Include="Service\IEventService.cs" />
+    <Compile Include="Service\YelpService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PraLoup.DataAccess\PraLoup.DataAccess.csproj">

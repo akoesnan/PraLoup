@@ -16,6 +16,15 @@ namespace PraLoup.DataPurveyor.Converter
             e.Url = ev.url;
             e.StartDateTime = DateTime.Parse(ev.start_time);
             e.EndDateTime = !String.IsNullOrEmpty(ev.stop_time) ? DateTime.Parse(ev.stop_time) : default(DateTime);
+            if (ev.image != null){
+                if (ev.image.medium != null)
+                {
+                    e.ImageUrl = ev.image.medium.url;
+                }
+                else if (ev.image.small != null) {
+                    e.ImageUrl = ev.image.small.url;
+                }
+            }
             e.Venue = new Venue()
             {
                 StreetLine1 = ev.venue_address,

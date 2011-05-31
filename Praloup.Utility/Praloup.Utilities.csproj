@@ -45,6 +45,7 @@
     <Compile Include="HttpRequestHelper.cs" />
     <Compile Include="Json\JsonArray.cs" />
     <Compile Include="Json\JsonObject.cs" />
+    <Compile Include="OAuthBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringExtensions.cs" />
   </ItemGroup>

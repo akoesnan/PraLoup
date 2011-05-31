@@ -13,18 +13,12 @@ namespace PraLoup.DataPurveyor.Service
         private const string DealsApiUrl = "https://api.groupon.com/v2/deals.json?division_id={0}&client_id={1}";
         private static string DivisionApiUrl = String.Format("https://api.groupon.com/v2/divisions.json?client_id={0}", apiKey);
 
-        // TODO: make use of unity
-        public IEventConverter EventConverter { get; set; }
+        private IEventConverter EventConverter { get; set; }
 
         public GrouponService()
         {
             this.EventConverter = new GrouponConverter();
-        }
-
-        public GrouponService(IEventConverter eventConverter)
-        {
-            this.EventConverter = eventConverter;
-        }
+        }        
 
         public IEnumerable<Event> GetEventData(string city)
         {

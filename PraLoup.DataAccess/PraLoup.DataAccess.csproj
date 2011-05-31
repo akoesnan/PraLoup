@@ -52,6 +52,7 @@
     <Compile Include="Entities\Image.cs" />
     <Compile Include="Entities\Post.cs" />
     <Compile Include="Entities\MetroArea.cs" />
+    <Compile Include="Entities\Review.cs" />
     <Compile Include="Entities\Tag.cs" />
     <Compile Include="Enums\Category.cs" />
     <Compile Include="EntityRepository.cs" />

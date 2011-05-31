@@ -26,5 +26,7 @@ namespace PraLoup.DataAccess.Entities
         public string Lat { get; set; }
 
         public string Lon { get; set; }
+
+        public string Neighboorhood { get; set; }
     }
 }

@@ -43,8 +43,16 @@ namespace PraLoup.DataAccess.Entities
 
         public string Url { get; set; }
 
+        public string MobileUrl { get; set; }
+
         public string ImageUrl { get; set; }
 
         public string Source { get; set; }
+
+        public decimal UserRating { get; set; }
+
+        public uint UserReviewsCount { get; set; }
+
+        public IEnumerable<Review> UserReviews { get; set; }
     }
 }

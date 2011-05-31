@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using PraLoup.DataAccess;
 
-
-namespace Events
+namespace PraLoup.WebApp
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
 
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
@@ -39,17 +34,18 @@ namespace Events
             );
         }
 
-        protected void Application_Start()
+        /// <summary>
+        /// Called when the application is started.
+        /// </summary>
+        public void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
-            // Drop the db when there is changes on the model
-            // TODO: we do not want this in production
-            Database.SetInitializer<EntityRepository>(new DropCreateDatabaseIfModelChanges<EntityRepository>());
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
-        }
 
-        
-    }
+            // Drop the db when there is changes on the model
+            // TODO: we do not want this in production, for test machine we need to make seed data
+            Database.SetInitializer<EntityRepository>(new DropCreateDatabaseIfModelChanges<EntityRepository>());
+        }
+    }    
 }

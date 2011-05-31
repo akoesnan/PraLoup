@@ -40,5 +40,42 @@ namespace PraLoup.Utilities
             sb.Append(HttpUtility.UrlEncode(value));
             return sb.ToString();
         }
+
+        public static string AppandQueryParams(this string url, IDictionary<string,string> urlParams) 
+        {
+            string delim;
+            if ((url == null) || !url.Contains("?"))
+            {
+                delim = "?";
+            }
+            else if (url.EndsWith("?") || url.EndsWith("&"))
+            {
+                delim = string.Empty;
+            }
+            else
+            {
+                delim = "&";
+            }
+
+            var sb = new StringBuilder(url);
+
+            foreach (var kv in urlParams){
+                sb.Append(delim);
+                sb.Append(HttpUtility.UrlEncode(kv.Key));
+                sb.Append("=");
+                sb.Append(HttpUtility.UrlEncode(kv.Value));
+                // the delim for the rest should be &
+                delim="&";                
+            }
+            return sb.ToString();
+        }
+
+        public static string UrlEncode(this string url) {
+            return HttpUtility.UrlEncode(url);
+        }
+
+        public static string UrlDecode(this string url) {
+            return HttpUtility.UrlDecode(url);
+        }
     }
 }

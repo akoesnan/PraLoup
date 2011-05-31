@@ -8,30 +8,29 @@ using PraLoup.WebApp.Models;
 namespace PraLoup.WebApp.Controllers
 {
     public class ThingsToDoController : Controller
-    {      
+    {
         MetroAreaModel MetroAreaModel { get; set; }
-        
+        ThingsToDoCityModel ThingsToDoCityModel { get; set; }
+
+        public ThingsToDoController(MetroAreaModel metroAreaModel, ThingsToDoCityModel ttdCityModel)
+        {
+            this.MetroAreaModel = metroAreaModel;
+            this.ThingsToDoCityModel = ttdCityModel;            
+        }
+
         //
         // GET: /ThingsToDo/  
         public ActionResult Index()
-        {
-            this.MetroAreaModel = new MetroAreaModel();
+        {            
             this.MetroAreaModel.Construct();
-
             return View(this.MetroAreaModel);
         }
 
         public ActionResult City(string city)
-        {
-            ViewData["Message"] = "Displaying Things to do in a city";
-            
-            var ttd = new ThingsToDoCityModel(city);
-            ttd.Construct();
-
-            ViewData.Model = ttd;
+        {            
+            this.ThingsToDoCityModel.Construct(city);
+            ViewData.Model = this.ThingsToDoCityModel;
             return View();
         }
-
-
     }
 }
