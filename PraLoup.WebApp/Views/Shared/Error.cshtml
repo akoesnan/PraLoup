@@ -1,9 +1,11 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
+﻿@using PraLoup.WebApp.Resources
+
+@model System.Web.Mvc.HandleErrorInfo
 
 @{
     ViewBag.Title = "Error";
 }
 
 <h2>
-    Sorry, an error occurred while processing your request.
+    @LocStrings.Oops
 </h2>

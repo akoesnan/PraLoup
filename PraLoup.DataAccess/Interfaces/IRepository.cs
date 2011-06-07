@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 using System.Xml.Linq;
+using System.Data.Entity;
 
 namespace PraLoup.DataAccess.Interfaces
 {
     public interface IRepository : IDisposable
     {
+
+        DbContext Context { get; } 
         IQueryable<T> GetQuery <T>() where T : class;
         IEnumerable<T> GetAll<T>() where T : class;
         T Find<T>(params object[] keys) where T : class;

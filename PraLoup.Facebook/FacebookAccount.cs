@@ -4,25 +4,29 @@ using PraLoup.DataAccess.Entities;
 using PraLoup.Utilities;
 using System.Linq;
 using System.Web.Security;
+using PraLoup.DataAccess.Interfaces;
 
 namespace PraLoup.Facebook
 {
 
     public class FacebookAccount : MembershipUser
     {
-        private Account account = null;
+        private IRepository gr { get; set; }
+
+        public Account Account  {get; private set;}
+
         public FacebookAccount(OAuthHandler oAuth)
         {
             string url = "https://graph.facebook.com/me/?access_token=" + oAuth.Token;
             string json = oAuth.WebRequest(OAuthHandler.Method.GET, url, String.Empty);
             dynamic jsonobject = json.GetJson();
-            account = new Account();
+            var account  = new Account();
             account.FirstName = jsonobject.first_name;
             account.FacebookId = jsonobject.id;
             account.LastName = jsonobject.last_name;
-
             account.UserName = jsonobject.name;
-            GenericRepository gr = new GenericRepository(new EntityRepository());
+
+            this.Account = account;
         }
 
         public bool IsCreated()
@@ -31,7 +35,7 @@ namespace PraLoup.Facebook
 
             var result = from a in er.Accounts
                          where
-                             a.FacebookId == account.FacebookId
+                             a.FacebookId == this.Account.FacebookId
                          select a;
 
             if (result.Count<Account>() == 0)
@@ -44,7 +48,7 @@ namespace PraLoup.Facebook
         public void Register()
         {
             GenericRepository gr = new GenericRepository(new EntityRepository());
-            gr.Add<Account>(account);
+            gr.Add<Account>(Account);
             gr.SaveChanges();
         }
 

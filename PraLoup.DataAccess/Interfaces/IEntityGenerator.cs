@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PraLoup.DataAccess.Interfaces
 {
-    interface IDataGenerator
+    public interface IEntityGenerator
     {
         void Execute();
     }

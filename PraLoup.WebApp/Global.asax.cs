@@ -43,9 +43,7 @@ namespace PraLoup.WebApp
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
-            // Drop the db when there is changes on the model
-            // TODO: we do not want this in production, for test machine we need to make seed data
-            Database.SetInitializer<EntityRepository>(new DropCreateDatabaseIfModelChanges<EntityRepository>());
+
         }
     }    
 }

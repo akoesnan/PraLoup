@@ -5,6 +5,7 @@ using PraLoup.DataAccess.Entities;
 using PraLoup.Facebook;
 using PraLoup.Utilities;
 using PraLoup.WebApp.Models;
+using PraLoup.DataAccess.Interfaces;
 
 namespace ProjectSafari.Controllers
 {
@@ -12,6 +13,12 @@ namespace ProjectSafari.Controllers
     [HandleError]
     public class AccountController : Controller
     {
+        IRepository Repository { get; set; }
+
+        public AccountController(IRepository repository) {
+            this.Repository = repository;
+        }
+
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Register(string json) 
@@ -29,6 +36,7 @@ namespace ProjectSafari.Controllers
 
                 if (notregistered)
                 {
+
                     fa.Register();
                 }
             }

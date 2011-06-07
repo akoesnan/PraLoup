@@ -5,18 +5,24 @@ using System.Web;
 using System.Web.Mvc;
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess;
+using PraLoup.DataAccess.Interfaces;
 
 namespace PraLoup.WebApp.Controllers
 {
     public class OfferController : Controller
     {
+        IRepository Repository { get; set; }
+
+        public OfferController(IRepository repository) {
+            this.Repository = repository;
+        } 
         //
         // GET: /Offer/
-        GenericRepository repository = new GenericRepository(new EntityRepository());
+        
 
         public ActionResult Index()
         {
-            var entities = repository.GetAll<Offer>();
+            var entities = Repository.GetAll<Offer>();
             return View(entities);
         }
 
@@ -25,7 +31,7 @@ namespace PraLoup.WebApp.Controllers
 
         public ActionResult Details(int id)
         {
-            var offer = repository.Find<Offer>(id);
+            var offer = Repository.Find<Offer>(id);
             return View(offer);
         }
 
@@ -46,7 +52,6 @@ namespace PraLoup.WebApp.Controllers
             try
             {
                 // TODO: Add insert logic here
-
                 return RedirectToAction("Index");
             }
             catch

@@ -9,6 +9,21 @@ namespace PraLoup.WebApp.Tests.Models
     [TestClass]
     public class ThingsToDoCityModelTest
     {
+
+        [TestMethod]
+        public void ConstructorCreatedCorrectly()
+        {
+            var kernel = new StandardKernel();
+            kernel.Load(new ThingsToDoCityModule());
+
+            var model = kernel.Get<ThingsToDoCityModel>();
+
+            Assert.IsNotNull(model);
+            Assert.IsNotNull(model.DealServices);
+            Assert.IsNotNull(model.EventsServices);
+            Assert.IsNotNull(model.HappyHourServices);
+        }
+
         [TestMethod]
         public void ConstructThingsToDoInCity_Success()
         {

@@ -4,18 +4,41 @@ using System.Linq;
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataPurveyor.Service;
 using PraLoup.DataAccess;
+using PraLoup.DataAccess.Interfaces;
 
 namespace PraLoup.WebApp.Models
 {
     public class MetroAreaModel
     {
-        GenericRepository db = new GenericRepository(new EntityRepository());
+        public IRepository Repository { get; private set; } 
+        IEnumerable<MetroArea> supportedMetros;
 
-        public IEnumerable<MetroArea> SupportedMetros { get; set; }
-
-        public void Construct()
+        public MetroAreaModel(IRepository repository)
         {
-            this.SupportedMetros = db.GetAll<MetroArea>();
+            this.Repository = repository;
+        }
+
+        public IEnumerable<MetroArea> SupportedMetros
+        {
+            get
+            {
+                if (this.supportedMetros == null)
+                {
+                    this.supportedMetros = Repository.GetAll<MetroArea>();
+                }
+                return this.supportedMetros;
+            }
+        }        
+
+        public bool IsSupportedMetro(string city) {
+            if (String.IsNullOrEmpty(city))
+            {
+                return false;
+            }
+            else 
+            {
+                return this.SupportedMetros.Any(m => String.Equals(m.City, city, StringComparison.InvariantCultureIgnoreCase));
+            }
         }
     }
 }

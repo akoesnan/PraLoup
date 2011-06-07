@@ -70,6 +70,24 @@ namespace PraLoup.WebApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manage Supported Metro.
+        /// </summary>
+        public static string Admin_ManageMetro {
+            get {
+                return ResourceManager.GetString("Admin_ManageMetro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Admin Tasks.
+        /// </summary>
+        public static string Admin_Task {
+            get {
+                return ResourceManager.GetString("Admin_Task", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Click Here.
         /// </summary>
         public static string ClickHere {
@@ -124,11 +142,11 @@ namespace PraLoup.WebApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User.
+        ///   Looks up a localized string similar to Oops.. There is something wrong :(.
         /// </summary>
-        public static string Menu_User {
+        public static string Oops {
             get {
-                return ResourceManager.GetString("Menu_User", resourceCulture);
+                return ResourceManager.GetString("Oops", resourceCulture);
             }
         }
         

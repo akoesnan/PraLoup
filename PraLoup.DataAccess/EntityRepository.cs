@@ -12,15 +12,29 @@ namespace PraLoup.DataAccess
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Offer> Offers { get; set; }
         public DbSet<MetroArea> MetroAreas { get; set; }
-        // NOTE: Enter new entities here        
+        // NOTE: Enter new entities here
+
+        public IDatabaseInitializer<EntityRepository> DataGenerator { get; private set; }
+        
+
+        public EntityRepository(IDatabaseInitializer<EntityRepository> dataGenerator, string nameOrConnectionString)
+            : base(nameOrConnectionString) 
+        {
+            this.DataGenerator = dataGenerator;
+        }
+
+        public EntityRepository()
+        {
+            // TODO: Complete member initialization
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // TODO: replace this with DI framework call
-            IDataGenerator generator = new TestSeedDataGenerator();
-            generator.Execute();
+            // Drop the db when there is changes on the model
+            // TODO: we do not want this in production, for test machine we need to make seed data
+            Database.SetInitializer<EntityRepository>(this.DataGenerator);
         }     
     }
 }

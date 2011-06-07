@@ -22,6 +22,8 @@ namespace PraLoup.DataAccess
             this.DbContext = dbContext;
         }
 
+        public DbContext Context { get { return DbContext; } }
+
         public IQueryable<T> GetQuery<T>() where T : class
         {
             return this.DbContext.Set<T>();
@@ -61,7 +63,7 @@ namespace PraLoup.DataAccess
         public void SaveChanges()
         {
             this.DbContext.SaveChanges();
-        }     
+        }
 
         public void Dispose()
         {

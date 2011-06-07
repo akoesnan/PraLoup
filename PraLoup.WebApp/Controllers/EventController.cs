@@ -7,12 +7,18 @@ using PraLoup.WebApp.Models;
 using System.Data.Entity;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
+using PraLoup.DataAccess.Interfaces;
 
 namespace PraLoup.WebApp.Controllers
 {
     public class EventController : Controller
-    {        
-        GenericRepository db = new GenericRepository(new EntityRepository());
+    {               
+        IRepository db { get; set; }        
+
+        public EventController(IRepository repository) 
+        {
+            this.db = repository;
+        }
 
         //
         // GET: /Event/        

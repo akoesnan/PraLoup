@@ -153,6 +153,10 @@
     <value>Things To Do</value>
     <comment>Text for Things to do</comment>
   </data>
+  <data name="Oops" xml:space="preserve">
+    <value>Oops.. There is something wrong :(</value>
+    <comment>Text for Oops There is something wrong</comment>
+  </data>
   <data name="ThingsToDoIn" xml:space="preserve">
     <value>Stuff Happeing In</value>
     <comment>Text for Things to Do in city</comment>
