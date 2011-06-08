@@ -5,7 +5,7 @@ using PraLoup.DataAccess.Entities;
 using PraLoup.Facebook;
 using PraLoup.Utilities;
 using PraLoup.WebApp.Models;
-using PraLoup.DataAccess.Interfaces;
+using Facebook.Web;
 
 namespace ProjectSafari.Controllers
 {
@@ -13,22 +13,31 @@ namespace ProjectSafari.Controllers
     [HandleError]
     public class AccountController : Controller
     {
-        IRepository Repository { get; set; }
+         public ActionResult Login()
+         {
+             
+             if (FacebookWebContext.Current.IsAuthenticated())
+             {
+                 FacebookWebAuthorizer fwa = new FacebookWebAuthorizer(new PraLoupFacebookApplication(), HttpContext);
+                 fwa.Permissions = new string[]{"publish_stream"};
+                 fwa.ReturnUrlPath = HttpContext.Request.Url.ToString();
+                 if (fwa.Authorize())
+                 {
+                     Register();
+                     return RedirectToAction("About", "Home");
+                 }
+             }
 
-        public AccountController(IRepository repository) {
-            this.Repository = repository;
-        }
+             return View();
+         }
 
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Register(string json) 
+        
+        public bool Register() 
         {
-
             var oAuth = new OAuthHandler();
 
-            dynamic djo = json.GetJson();
             //Get the access token and secret.
-            oAuth.Token = djo.sessionkey;
+            oAuth.Token = FacebookWebContext.Current.AccessToken;
             if (oAuth.Token.Length > 0)
             {
                 FacebookAccount fa = new FacebookAccount(oAuth);
@@ -36,12 +45,11 @@ namespace ProjectSafari.Controllers
 
                 if (notregistered)
                 {
-
                     fa.Register();
                 }
             }
-            Response.Cookies.Add(new System.Web.HttpCookie("LoggedIn", "true"));
-            return null;
+            Response.Cookies.Add(new System.Web.HttpCookie("LoggedIn", oAuth.Token));
+            return true;
         }
     }
 }
