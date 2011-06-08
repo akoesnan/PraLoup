@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Linq;
+using System.Web.Security;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using PraLoup.Utilities;
-using System.Linq;
-using System.Web.Security;
+using Facebook;
 using PraLoup.DataAccess.Interfaces;
 
 namespace PraLoup.Facebook
@@ -11,21 +12,34 @@ namespace PraLoup.Facebook
 
     public class FacebookAccount : MembershipUser
     {
-        private IRepository gr { get; set; }
 
-        public Account Account  {get; private set;}
-
+        private Account Account { get; set; }
         public FacebookAccount(OAuthHandler oAuth)
         {
+
             string url = "https://graph.facebook.com/me/?access_token=" + oAuth.Token;
             string json = oAuth.WebRequest(OAuthHandler.Method.GET, url, String.Empty);
             dynamic jsonobject = json.GetJson();
-            var account  = new Account();
+            
+            var account = new Account();
             account.FirstName = jsonobject.first_name;
             account.FacebookId = jsonobject.id;
             account.LastName = jsonobject.last_name;
             account.UserName = jsonobject.name;
+            this.Account = account;
+        }
 
+        public FacebookAccount(OAuthHandler oAuth, string id)
+        {
+            string url = "https://graph.facebook.com/" + id + "/?access_token=" + oAuth.Token;
+            string json = oAuth.WebRequest(OAuthHandler.Method.GET, url, String.Empty);
+            dynamic jsonobject = json.GetJson();
+            
+            var account = new Account();
+            account.FirstName = jsonobject.first_name;
+            account.FacebookId = jsonobject.id;
+            account.LastName = jsonobject.last_name;
+            account.UserName = jsonobject.name;
             this.Account = account;
         }
 
@@ -48,8 +62,13 @@ namespace PraLoup.Facebook
         public void Register()
         {
             GenericRepository gr = new GenericRepository(new EntityRepository());
-            gr.Add<Account>(Account);
+            gr.Add<Account>(this.Account);
             gr.SaveChanges();
+        }
+
+        public Account GetAccount()
+        {
+            return this.Account;
         }
 
         public static void PostToWall(OAuthHandler oAuth)

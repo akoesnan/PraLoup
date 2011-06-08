@@ -92,8 +92,17 @@ namespace PraLoup.DataAccess
             var activities = new List<Activity>() {
                 GetActivity(GetUserName("Johny","Depp"), "Adele", new string[] {GetUserName("Bill", "Finger"), GetUserName("John", "Broome")}),
                 GetActivity(GetUserName("Angela", "Bassett"), "Seattle Sounders FC vs. New England Revolution", new string[] {GetUserName("Peggy", "Justice"), GetUserName("Angela", "Bassett")})                
-            };
-            activities.ForEach(a => Repository.Add<Activity>(a));
+            };            
+
+            activities.ForEach(a =>
+            {
+                foreach (var i in a.Invites)
+                {
+                    Repository.Add<Invitation>(i);
+                }
+                Repository.Add<Activity>(a);              
+            }
+            );
             Repository.SaveChanges();
         }
 
@@ -109,7 +118,8 @@ namespace PraLoup.DataAccess
                     Event = evt,
                     Organizer = organizerAcct,
                 };
-                var invites = inviteAccts.Select(r => new Invitation(organizerAcct, r, activity, String.Format("Lets Go to {0}", evtName)));
+                var invite = new Invitation(organizerAcct, inviteAccts, activity, String.Format("Lets Go to {0}", evtName));
+                activity.Invites.Add(invite);
                 return activity;
             }
             // TODO: what to do when I pass in incorret stuff?

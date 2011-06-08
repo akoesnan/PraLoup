@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FacebookAccount.cs" />
+    <Compile Include="Friend.cs" />
     <Compile Include="OAuthHandler.cs" />
     <Compile Include="PraLoupFacebookApplication.cs" />
     <Compile Include="Wall.cs" />

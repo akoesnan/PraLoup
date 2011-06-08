@@ -10,6 +10,11 @@ namespace PraLoup.DataAccess.Entities
     /// </summary>
     public class Activity
     {
+        public Activity()
+        {
+            Invites = new HashSet<Invitation>();
+        }
+
         public virtual int ActivityId { get; set; }
 
         public virtual Account Organizer { get; set; }

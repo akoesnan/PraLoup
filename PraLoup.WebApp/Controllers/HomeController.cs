@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
-using PraLoup.Facebook;
-using PraLoup.WebApp.Models;
+using Facebook.Web;
 using Facebook.Web.Mvc;
+using PraLoup.Facebook;
 
 namespace PraLoup.WebApp.Controllers
 {
@@ -22,6 +19,20 @@ namespace PraLoup.WebApp.Controllers
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult About()
         {
+            FacebookWebAuthorizer fwa = new FacebookWebAuthorizer(new PraLoupFacebookApplication(), HttpContext);
+            fwa.Permissions = new string[]{"publish_stream"};
+            fwa.ReturnUrlPath = HttpContext.Request.Url.ToString();
+            if (fwa.Authorize())
+            {
+                var oAuth = new OAuthHandler();
+
+                //Get the access token and secret.
+                oAuth.Token = FacebookWebContext.Current.AccessToken;
+                Friends f = new Friends(oAuth);
+                FriendsLists fl = new FriendsLists(oAuth);
+            
+            }
+            
             return View();
         }
     }
