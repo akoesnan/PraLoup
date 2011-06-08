@@ -1,11 +1,9 @@
 ﻿using System;
+using System.Linq;
+using System.Web.Security;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using PraLoup.Utilities;
-using System.Linq;
-using System.Web.Security;
-using Facebook;
-using Facebook.Web;
 
 
 namespace PraLoup.Facebook
@@ -13,6 +11,7 @@ namespace PraLoup.Facebook
 
     public class FacebookAccount : MembershipUser
     {
+
         private Account account = null;
         public FacebookAccount(OAuthHandler oAuth)
         {
@@ -26,7 +25,20 @@ namespace PraLoup.Facebook
             account.LastName = jsonobject.last_name;
 
             account.UserName = jsonobject.name;
-            GenericRepository gr = new GenericRepository(new EntityRepository());
+            
+        }
+
+        public FacebookAccount(OAuthHandler oAuth, string id)
+        {
+            string url = "https://graph.facebook.com/"+id+"/?access_token=" + oAuth.Token;
+            string json = oAuth.WebRequest(OAuthHandler.Method.GET, url, String.Empty);
+            dynamic jsonobject = json.GetJson();
+            account = new Account();
+            account.FirstName = jsonobject.first_name;
+            account.FacebookId = jsonobject.id;
+            account.LastName = jsonobject.last_name;
+
+            account.UserName = jsonobject.name;
         }
 
         public bool IsCreated()
@@ -50,6 +62,11 @@ namespace PraLoup.Facebook
             GenericRepository gr = new GenericRepository(new EntityRepository());
             gr.Add<Account>(account);
             gr.SaveChanges();
+        }
+
+        public Account GetAccount()
+        {
+            return this.account;
         }
         
         public static void PostToWall(OAuthHandler oAuth)

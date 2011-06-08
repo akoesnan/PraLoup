@@ -13,9 +13,10 @@ namespace PraLoup.DataAccess.Entities
 
         public Account Sender { get; set; }
 
-        public IEnumerable<Account> Recipeints { get; set; }
+        public IEnumerable<Account> Recipients { get; set; }
 
         public IEnumerable<InvitationResponse> Responses { get; set; }
 
-        public string Message { get; set; }    }
+        public string Message { get; set; }
+    }
 }

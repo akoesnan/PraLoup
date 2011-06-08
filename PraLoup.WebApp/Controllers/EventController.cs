@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using PraLoup.WebApp.Models;
-using System.Data.Entity;
+﻿using System.Web.Mvc;
+using Facebook.Web.Mvc;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 
@@ -16,6 +11,7 @@ namespace PraLoup.WebApp.Controllers
 
         //
         // GET: /Event/        
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Index()
         {
             var entities = db.GetAll<Event>(); 
@@ -24,6 +20,7 @@ namespace PraLoup.WebApp.Controllers
 
         //
         // GET: /Event/Details/5
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Details(int id)
         {
             var o = db.Find<Event>(id);
@@ -32,6 +29,7 @@ namespace PraLoup.WebApp.Controllers
 
         //
         // GET: /Event/Create
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Create()
         {
             return View();
@@ -40,6 +38,7 @@ namespace PraLoup.WebApp.Controllers
         //
         // POST: /Event/Create
         [HttpPost]
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Create(Event e)
         {
             try
@@ -48,12 +47,12 @@ namespace PraLoup.WebApp.Controllers
                 {
                     db.Add(e);
                     db.SaveChanges();
-                    
-                    // TODO: create a page that says events is added succesfully
+
                     return RedirectToAction("Index");
                 }
                 else
                 {
+                    // TODO: create a page that says events is added succesfully
                     return RedirectToAction("Index");
                 }
             }
@@ -65,6 +64,7 @@ namespace PraLoup.WebApp.Controllers
         
         //
         // GET: /Event/Edit/5
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Edit(int id)
         {
             var e = db.Find<Event>(id);
@@ -82,6 +82,7 @@ namespace PraLoup.WebApp.Controllers
         //
         // POST: /Event/Edit/5
         [HttpPost]
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Edit(int id, FormCollection collection)
         {
             try
@@ -96,7 +97,7 @@ namespace PraLoup.WebApp.Controllers
 
         //
         // GET: /Event/Delete/5
- 
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Delete(int id)
         {
             return View();
@@ -104,8 +105,8 @@ namespace PraLoup.WebApp.Controllers
 
         //
         // POST: /Event/Delete/5
-
         [HttpPost]
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try

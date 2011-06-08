@@ -24,7 +24,7 @@ namespace ProjectSafari.Controllers
                  if (fwa.Authorize())
                  {
                      Register();
-                     return RedirectToAction("About", "Home");
+                     return RedirectToAction("Home", "Home");
                  }
              }
 

@@ -4,9 +4,20 @@
 <script type="text/javascript">
     FB.init({
         appId: '@Facebook.FacebookApplication.Current.AppId', cookie: true,
-        status: true, xfbml: true
+        status: true, xfbml: false
     });
     FB.Event.subscribe('auth.login', function (response) {
         window.location.reload();
     });
+    //retrieving the log in status gets things going
+    
+    FB.getLoginStatus(handleSessionResponse);
+
+function handleSessionResponse(response) {
+
+        FB.XFBML.parse();
+
+    }
+
+
 </script>
