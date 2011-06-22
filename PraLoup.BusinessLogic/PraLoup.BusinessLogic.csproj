@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4C9EAD3E-DFC8-42CE-B324-015F3C9BB95C}</ProjectGuid>
+    <ProjectGuid>{4244F04E-3323-406B-BD22-5D743ACAE631}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PraLoup.Facebook</RootNamespace>
-    <AssemblyName>PraLoup.Facebook</AssemblyName>
+    <RootNamespace>PraLoup.BusinessLogic</RootNamespace>
+    <AssemblyName>PraLoup.BusinessLogic</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,21 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
-    <Reference Include="Facebook">
-      <HintPath>..\packages\Facebook.5.0.26.0\lib\net40-client\Facebook.dll</HintPath>
-    </Reference>
-    <Reference Include="Facebook.Web">
-      <HintPath>..\packages\FacebookWeb.5.0.26.0\lib\net40\Facebook.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="Facebook.Web.Mvc">
-      <HintPath>..\packages\FacebookWebMvc.5.0.26.0\lib\net40\Facebook.Web.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,20 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FacebookAccount.cs" />
-    <Compile Include="Friend.cs" />
-    <Compile Include="OAuthHandler.cs" />
-    <Compile Include="PraLoupFacebookApplication.cs" />
-    <Compile Include="Wall.cs" />
+    <Compile Include="AccountBase.cs" />
+    <Compile Include="Permissions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PraLoup.BusinessLogic\PraLoup.BusinessLogic.csproj">
-      <Project>{4244F04E-3323-406B-BD22-5D743ACAE631}</Project>
-      <Name>PraLoup.BusinessLogic</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PraLoup.DataAccess\PraLoup.DataAccess.csproj">
       <Project>{699F3369-A9D5-4825-ACBC-41843104A795}</Project>
       <Name>PraLoup.DataAccess</Name>
@@ -76,9 +56,6 @@
       <Project>{CDBDFC6A-C346-4010-B949-306801A5487D}</Project>
       <Name>Praloup.Utilities</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

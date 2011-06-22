@@ -28,7 +28,7 @@
     <div class="display-field"></div>
 </fieldset>
 
-@if (Model.Permissions.HasFlag(PraLoup.Facebook.Permissions.Edit)){
+@if (Model.Permissions.HasFlag(PraLoup.BusinessLogic.Permissions.Edit)){
     <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Event.EventId }) |
     

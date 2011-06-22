@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PraLoup.Facebook
+namespace PraLoup.BusinessLogic
 {
     [Flags]
     public enum Permissions

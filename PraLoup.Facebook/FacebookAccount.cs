@@ -1,20 +1,18 @@
 using System;
 using System.Linq;
-using System.Web.Security;
 using Facebook.Web;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using PraLoup.Utilities;
+using PraLoup.BusinessLogic;
 ﻿
 
 namespace PraLoup.Facebook
 {
-    public class FacebookAccount : MembershipUser
+    public class FacebookAccount : AccountBase
     {
-        private Account account = null;
         private static FacebookAccount _cur = null;
-        private static object mutex = new object();
-        public static FacebookAccount Current
+         public static FacebookAccount Current
         {
             get
             {
@@ -44,7 +42,7 @@ namespace PraLoup.Facebook
             dynamic jsonobject = json.GetJson();
             account = new Account();
             account.FirstName = jsonobject.first_name;
-            account.FacebookId = jsonobject.id;
+            account.UserId = jsonobject.id;
             account.LastName = jsonobject.last_name;
 
             account.UserName = jsonobject.name;
@@ -58,40 +56,12 @@ namespace PraLoup.Facebook
             dynamic jsonobject = json.GetJson();
             account = new Account();
             account.FirstName = jsonobject.first_name;
-            account.FacebookId = jsonobject.id;
+            account.UserId = jsonobject.id;
             account.LastName = jsonobject.last_name;
 
             account.UserName = jsonobject.name;
         }
-
-        public bool IsCreated()
-        {
-            EntityRepository er = new EntityRepository();
-
-            var result = from a in er.Accounts
-                         where
-                             a.FacebookId == account.FacebookId
-                         select a;
-
-            if (result.Count<Account>() == 0)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public void Register()
-        {
-            GenericRepository gr = new GenericRepository(new EntityRepository());
-            gr.Add<Account>(account);
-            gr.SaveChanges();
-        }
-
-        public Account GetAccount()
-        {
-            return this.account;
-        }
-
+        
         public static void PostToWall(OAuthHandler oAuth)
         {
             var ptw = new Wall();
@@ -107,134 +77,6 @@ namespace PraLoup.Facebook
             ptw.Post();
         }
 
-        public Permissions GetPermissions(Event e)
-        {
-            Permissions mask = Permissions.EmptyMask;
 
-            bool isOwner = e.Organizers.Any(x => x.Id == this.account.Id);
-
-            if (isOwner)
-            {
-                mask |= Permissions.Copy;
-                mask |= Permissions.Delete;
-                mask |= Permissions.Edit;
-                mask |= Permissions.Modify;
-            }
-
-            bool isFriend = false;
-            bool isFriendOfFriend = false;
-
-            switch (e.Privacy)
-            {
-                case DataAccess.Enums.Privacy.Public:
-                    mask |= Permissions.View;
-                    mask |= Permissions.Share;
-                    mask |= Permissions.Accept;
-                    break;
-                case DataAccess.Enums.Privacy.Friends:
-                    if (isFriend || isOwner)
-                    {
-                        mask |= Permissions.View;
-                        mask |= Permissions.Accept;
-                    }
-                    break;
-                case DataAccess.Enums.Privacy.FriendsOfFriend:
-                    if (isFriendOfFriend || isFriend || isOwner)
-                    {
-                        mask |= Permissions.View;
-                        mask |= Permissions.Accept;
-                    }
-                    break;
-                case DataAccess.Enums.Privacy.Private:
-                    if (isOwner)
-                    {
-                        mask |= Permissions.View;
-                        mask |= Permissions.Accept;
-                    }
-                    break;
-            }
-            return mask;
-        }
-
-        public Permissions GetPermissions(Activity e)
-        {
-            Permissions mask = Permissions.EmptyMask;
-            bool isOwner = e.Organizer.Id == this.account.Id;
-
-            if (isOwner)
-            {
-                mask |= Permissions.Copy;
-                mask |= Permissions.Delete;
-                mask |= Permissions.Edit;
-                mask |= Permissions.Modify;
-                mask |= Permissions.InviteGuests;
-            }
-
-            bool isFriend = false;
-            bool isFriendOfFriend = false;
-            bool isInvited = false;
-
-            if (isInvited)
-            {
-                mask |= Permissions.Accept;
-                mask |= Permissions.View;
-                mask |= Permissions.Copy;
-            }
-
-            // for activities, privacy means who can invite people to the activity.
-            switch (e.Privacy)
-            {
-                case DataAccess.Enums.Privacy.Public:
-                    mask |= Permissions.View;
-                    mask |= Permissions.Share;
-                    mask |= Permissions.Accept;
-                    mask |= Permissions.InviteGuests;
-                    break;
-                case DataAccess.Enums.Privacy.Friends:
-                    if (isFriend && isInvited)
-                    {
-                        mask |= Permissions.InviteGuests;
-                    }
-
-                    break;
-                case DataAccess.Enums.Privacy.FriendsOfFriend:
-                    if ((isFriendOfFriend || isFriend) && isInvited)
-                    {
-                        mask |= Permissions.InviteGuests;
-                    }
-                    break;
-                case DataAccess.Enums.Privacy.Private:
-                    break;
-            }
-
-            return mask;
-        }
-
-        public Permissions GetPermissions(InvitationResponse e)
-        {
-            Permissions mask = Permissions.EmptyMask;
-            bool isOwner = false;
-            bool isActivtyOwner = false;
-
-            if (isOwner || isActivtyOwner)
-            {
-                mask |= Permissions.Delete;
-            }
-
-            return mask;
-        }
-
-        public Permissions GetPermissions(Invitation e)
-        {
-            Permissions mask = Permissions.EmptyMask;
-            bool isOwner = e.Recipients.Any(x => x.Id == this.account.Id);
-            bool isActivtyOwner = e.Activity.Organizer.Id == this.account.Id;
-
-            if (isOwner || isActivtyOwner)
-            {
-                mask |= Permissions.Delete;
-            }
-            return Permissions.EmptyMask;
-        }
     }
 }

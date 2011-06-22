@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{EE2847BF-1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.DataAcess.Tests", "PraLoup.DataAcess.Tests\PraLoup.DataAcess.Tests.csproj", "{BA3C1DBE-61B4-44E5-A1CD-A82CF2DC7A0A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.BusinessLogic", "PraLoup.BusinessLogic\PraLoup.BusinessLogic.csproj", "{4244F04E-3323-406B-BD22-5D743ACAE631}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = PraLoup.vsmdi
@@ -67,6 +69,10 @@ Global
 		{BA3C1DBE-61B4-44E5-A1CD-A82CF2DC7A0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA3C1DBE-61B4-44E5-A1CD-A82CF2DC7A0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA3C1DBE-61B4-44E5-A1CD-A82CF2DC7A0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4244F04E-3323-406B-BD22-5D743ACAE631}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4244F04E-3323-406B-BD22-5D743ACAE631}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4244F04E-3323-406B-BD22-5D743ACAE631}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4244F04E-3323-406B-BD22-5D743ACAE631}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

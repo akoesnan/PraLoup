@@ -13,7 +13,7 @@ namespace PraLoup.DataAccess.Entities
         public int Id { get; set; }
 
         [MaxLength(25)]
-        public string FacebookId { get; set; }
+        public string UserId { get; set; }
 
         [MaxLength(50)]
         [Required]
@@ -34,5 +34,7 @@ namespace PraLoup.DataAccess.Entities
         public string TwitterId { get; set; }
 
         public Address Address { get; set; }
+
+        public string Friends { get; set; }
     }
 }

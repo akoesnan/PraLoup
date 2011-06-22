@@ -4,7 +4,7 @@ using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using PraLoup.Facebook;
 using PraLoup.WebApp.Models;
-
+using PraLoup.BusinessLogic;
 
 namespace PraLoup.WebApp.Controllers
 {
