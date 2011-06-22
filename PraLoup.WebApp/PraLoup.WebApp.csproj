@@ -117,6 +117,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\MetroAreaModel.cs" />
     <Compile Include="Models\ThingsToDoCityModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

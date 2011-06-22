@@ -9,8 +9,8 @@ namespace PraLoup.DataAccess.Entities
 {
     public class InvitationResponse : Post
     {        
-        public InvitationReponseType InvitationResponseType { get; set; }                
-
+        public InvitationReponseType InvitationResponseType { get; set; }
         public string Message { get; set; }
+
     }
 }

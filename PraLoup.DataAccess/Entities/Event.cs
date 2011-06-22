@@ -54,5 +54,8 @@ namespace PraLoup.DataAccess.Entities
         public uint UserReviewsCount { get; set; }
 
         public IEnumerable<Review> UserReviews { get; set; }
+
+        public IEnumerable<Account> Organizers { get; set; }
+
     }
 }

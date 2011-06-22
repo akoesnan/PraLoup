@@ -2,6 +2,9 @@
 using Facebook.Web.Mvc;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
+using PraLoup.Facebook;
+using PraLoup.WebApp.Models;
+
 
 namespace PraLoup.WebApp.Controllers
 {
@@ -24,6 +27,14 @@ namespace PraLoup.WebApp.Controllers
         public ActionResult Details(int id)
         {
             var o = db.Find<Event>(id);
+            EventModel em = new EventModel();
+            em.Event = o;
+            em.Permissions = FacebookAccount.Current.GetPermissions(o);
+            if (!em.Permissions.HasFlag(Permissions.View))
+            {
+                // TODO: what to do when the user doesn't have perms
+                return RedirectToAction("Index");
+            }
             return View(o);
         }
 
@@ -67,16 +78,24 @@ namespace PraLoup.WebApp.Controllers
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Edit(int id)
         {
+            EventModel em = new EventModel();
             var e = db.Find<Event>(id);
-            if (e != null)
-            {
-                return View(e);
-            }
-            else 
+            if (e == null)
             {
                 // TODO: what to do when there is no such event
                 return RedirectToAction("Index");
             }
+
+            em.Event = e;
+            em.Permissions = FacebookAccount.Current.GetPermissions(e);
+
+            if (!em.Permissions.HasFlag(Permissions.Edit))
+            {
+                // TODO: what to do when the user doesn't have perms
+                return RedirectToAction("Index");
+            }
+
+            return View(e);
         }
 
         //
@@ -85,6 +104,7 @@ namespace PraLoup.WebApp.Controllers
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Edit(int id, FormCollection collection)
         {
+            // Todo: perms?
             try
             {
                 return RedirectToAction("Index");
@@ -100,6 +120,7 @@ namespace PraLoup.WebApp.Controllers
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Delete(int id)
         {
+            // TODO: Perms
             return View();
         }
 
@@ -112,7 +133,7 @@ namespace PraLoup.WebApp.Controllers
             try
             {
                 // TODO: Add delete logic here
- 
+                // TODO: Perms
                 return RedirectToAction("Index");
             }
             catch
