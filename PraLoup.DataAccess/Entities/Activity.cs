@@ -8,15 +8,19 @@ namespace PraLoup.DataAccess.Entities
     /// </summary>
     public class Activity
     {
-        public int ActivityId { get; set; }
+        public Activity()
+        {
+            Invites = new HashSet<Invitation>();
+        }
 
-        public Account Organizer { get; set; }
+        public virtual int ActivityId { get; set; }
 
-        public Event Event { get; set; }
-
-        public IEnumerable<Invitation> Invites { get; set; }
+        public virtual Account Organizer { get; set; }
 
         public Privacy Privacy { get; set; }
 
+        public virtual Event Event { get; set; }
+
+        public virtual ICollection<Invitation> Invites { get; set; }
     }
 }

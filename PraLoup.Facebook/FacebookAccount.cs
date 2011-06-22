@@ -1,27 +1,26 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Web.Security;
+using Facebook.Web;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using PraLoup.Utilities;
-using Facebook.Web;
-
+﻿
 
 namespace PraLoup.Facebook
 {
-
     public class FacebookAccount : MembershipUser
     {
         private Account account = null;
         private static FacebookAccount _cur = null;
-        private static object mutex;
+        private static object mutex = new object();
         public static FacebookAccount Current
         {
             get
             {
-                if(_cur == null)
+                if (_cur == null)
                 {
-                    lock(mutex)
+                    lock (mutex)
                     {
                         if (_cur == null)
                         {
@@ -49,12 +48,12 @@ namespace PraLoup.Facebook
             account.LastName = jsonobject.last_name;
 
             account.UserName = jsonobject.name;
-            
+
         }
 
         public FacebookAccount(OAuthHandler oAuth, string id)
         {
-            string url = "https://graph.facebook.com/"+id+"/?access_token=" + oAuth.Token;
+            string url = "https://graph.facebook.com/" + id + "/?access_token=" + oAuth.Token;
             string json = oAuth.WebRequest(OAuthHandler.Method.GET, url, String.Empty);
             dynamic jsonobject = json.GetJson();
             account = new Account();
@@ -92,7 +91,7 @@ namespace PraLoup.Facebook
         {
             return this.account;
         }
-        
+
         public static void PostToWall(OAuthHandler oAuth)
         {
             var ptw = new Wall();
@@ -121,7 +120,7 @@ namespace PraLoup.Facebook
                 mask |= Permissions.Edit;
                 mask |= Permissions.Modify;
             }
-            
+
             bool isFriend = false;
             bool isFriendOfFriend = false;
 
@@ -161,7 +160,7 @@ namespace PraLoup.Facebook
         {
             Permissions mask = Permissions.EmptyMask;
             bool isOwner = e.Organizer.Id == this.account.Id;
-            
+
             if (isOwner)
             {
                 mask |= Permissions.Copy;
@@ -174,8 +173,8 @@ namespace PraLoup.Facebook
             bool isFriend = false;
             bool isFriendOfFriend = false;
             bool isInvited = false;
-            
-            if(isInvited)
+
+            if (isInvited)
             {
                 mask |= Permissions.Accept;
                 mask |= Permissions.View;
@@ -196,7 +195,7 @@ namespace PraLoup.Facebook
                     {
                         mask |= Permissions.InviteGuests;
                     }
-                    
+
                     break;
                 case DataAccess.Enums.Privacy.FriendsOfFriend:
                     if ((isFriendOfFriend || isFriend) && isInvited)
@@ -210,18 +209,18 @@ namespace PraLoup.Facebook
 
             return mask;
         }
-    
+
         public Permissions GetPermissions(InvitationResponse e)
         {
             Permissions mask = Permissions.EmptyMask;
             bool isOwner = false;
-            bool isActivtyOwner  = false;
+            bool isActivtyOwner = false;
 
             if (isOwner || isActivtyOwner)
             {
                 mask |= Permissions.Delete;
             }
-          
+
             return mask;
         }
 
