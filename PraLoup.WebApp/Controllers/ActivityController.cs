@@ -169,7 +169,7 @@ namespace PraLoup.WebApp.Controllers
                 i.Activity = o;
                 i.CreateDateTime = System.DateTime.Now;
 
-                i.Recipients = fas;
+                i.Recipients = new Accounts(fas);
                 found = true;
             }
 

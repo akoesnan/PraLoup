@@ -16,7 +16,7 @@ namespace PraLoup.DataAccess.Entities
         {
             this.Activity = activity;
             this.Message = message;
-            this.Recipients = recipients;
+            this.Recipients = new Accounts(recipients);
             this.Sender = organizer;
             this.CreateDateTime = DateTime.UtcNow;
             // by default response is null
@@ -27,9 +27,9 @@ namespace PraLoup.DataAccess.Entities
 
         public Account Sender { get; set; }
 
-        public IEnumerable<Account> Recipients { get; set; }
+        public Accounts Recipients { get; set; }
 
-        public IEnumerable<InvitationResponse> Responses { get; set; }
+        public InvitationResponses Responses { get; set; }
 
         public string Message { get; set; }
     }

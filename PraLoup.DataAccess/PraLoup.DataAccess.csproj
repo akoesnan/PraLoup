@@ -48,6 +48,7 @@
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Activity.cs" />
     <Compile Include="Entities\Address.cs" />
+    <Compile Include="Entities\CollectionAliases.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Image.cs" />
     <Compile Include="Entities\Post.cs" />

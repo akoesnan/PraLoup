@@ -10,7 +10,7 @@ namespace PraLoup.DataAccess.Entities
     {
         public Activity()
         {
-            Invites = new HashSet<Invitation>();
+            Invites = new Invitations();
         }
 
         public virtual int ActivityId { get; set; }
@@ -21,6 +21,6 @@ namespace PraLoup.DataAccess.Entities
 
         public virtual Event Event { get; set; }
 
-        public virtual ICollection<Invitation> Invites { get; set; }
+        public virtual Invitations Invites { get; set; }
     }
 }
