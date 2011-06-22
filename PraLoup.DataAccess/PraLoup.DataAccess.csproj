@@ -64,7 +64,7 @@
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Entities\Offer.cs" />
     <Compile Include="Enums\Privacy.cs" />
-    <Compile Include="Interfaces\IDataGenerator.cs" />
+    <Compile Include="Interfaces\IEntityGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Venue.cs" />
     <Compile Include="TestSeedDataGenerator.cs" />

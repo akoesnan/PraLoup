@@ -2,6 +2,9 @@
 using PraLoup.DataPurveyor.Attributes;
 using PraLoup.DataPurveyor.Service;
 using PraLoup.DataPurveyor.Converter;
+using PraLoup.DataAccess.Interfaces;
+using PraLoup.DataAccess;
+using System.Data.Entity;
 
 namespace PraLoup.WebApp.App_Start
 {
@@ -20,5 +23,14 @@ namespace PraLoup.WebApp.App_Start
         }
     }
 
-
+    public class DbEntityModule : NinjectModule 
+    {
+        public override void Load()
+        {
+            this.Bind<IDatabaseInitializer<EntityRepository>>().To<TestSeedDataGenerator>().InSingletonScope();
+            this.Bind<DbContext>().To<EntityRepository>().WithConstructorArgument("nameOrConnectionString", "EntityRepository");
+            this.Bind<EntityRepository>().To<EntityRepository>().WithConstructorArgument("nameOrConnectionString", "EntityRepository");
+            this.Bind<IRepository>().To<GenericRepository>().InSingletonScope();
+        }
+    }
 }

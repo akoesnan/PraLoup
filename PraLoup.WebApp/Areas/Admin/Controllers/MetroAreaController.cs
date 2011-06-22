@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
+using PraLoup.DataAccess.Interfaces;
 
 namespace PraLoup.WebApp.Areas.Admin.Controllers
 {
@@ -14,8 +15,12 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
     /// </summary>
     public class MetroAreaController : Controller
     {
-        GenericRepository db = new GenericRepository(new EntityRepository());
-        
+        IRepository db { get; set; }
+
+        public MetroAreaController(IRepository repository) {
+            this.db = repository;
+        }
+
         // TODO: need to add autorization for admin
         // GET: /MetroArea/
         public ActionResult Index()

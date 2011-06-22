@@ -1,0 +1,34 @@
+﻿@{
+    var e = ViewData["Event"] as PraLoup.DataAccess.Entities.Event;    
+}
+<div class="ttd_ovw">
+    <div class="ttd_img">
+        @if (!String.IsNullOrEmpty(e.ImageUrl))
+        { 
+            <img src="@e.ImageUrl" title="@e.Name" class="ttd_img"/>
+        }
+    </div>
+    <div class="ttd_info">
+        <div class="ttd_name">
+            <a href="@e.Url">
+                @e.Name
+            </a>- <span class="ttd_loc">
+                @if (e.Venue != null)
+                { 
+                    @e.Venue.DisplayedName
+                }
+            </span>
+        </div>
+        <div class="ttd_desc">
+            @e.Description
+        </div>
+        <div class="ttd_datetime">
+            @e.StartDateTime.ToShortDateString()
+            at
+            @e.StartDateTime.ToShortTimeString()
+        </div>
+        <div class="ttd_prc">
+            @e.Price
+        </div>
+    </div>
+</div>

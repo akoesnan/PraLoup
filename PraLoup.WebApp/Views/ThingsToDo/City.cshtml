@@ -11,21 +11,21 @@
 @if (@Model.Deals != null && @Model.Deals.Count() > 0)
 { 
     <div class="ttd_deals">
-        @ThingsToDoUtility.DisplayTable("Deals", @Model.Deals);
+        @{Html.Partial("ThingsToDoTable", new ViewDataDictionary() { { "ListName", "Deals" }, { "ThingsToDos", @Model.Deals } });}
     </div>
 }
 
 @if (@Model.HappyHours != null && @Model.HappyHours.Count() > 0)
 { 
     <div class="ttd_hh">
-        @ThingsToDoUtility.DisplayTable("Happy Hours", @Model.HappyHours);
+        @{Html.Partial("ThingsToDoTable", new ViewDataDictionary() { { "ListName", "Happy Hours" }, { "ThingsToDos", @Model.HappyHours } });}        
     </div>
 }
 
 @if (@Model.FunEvents != null && @Model.FunEvents.Count() > 0)
 { 
     <div class="ttd_hh">
-        @ThingsToDoUtility.DisplayTable("Fun Events", @Model.FunEvents);
+        @{Html.Partial("ThingsToDoTable", new ViewDataDictionary() { { "ListName", "Fun Events" }, { "ThingsToDos", @Model.FunEvents } });}                
     </div>
 }
 </div>

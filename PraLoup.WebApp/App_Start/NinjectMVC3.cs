@@ -3,11 +3,11 @@
 
 namespace PraLoup.WebApp.App_Start
 {
-    using System.Web.Mvc;
+    using System.Reflection;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject;
     using Ninject.Web.Mvc;
-    using Ninject.Web.Mvc.FilterBindingSyntax;
+    using PraLoup.WebApp;
 
     public static class NinjectMVC3 
     {
@@ -40,7 +40,6 @@ namespace PraLoup.WebApp.App_Start
             var kernel = new StandardKernel();
              
             RegisterServices(kernel);
-            kernel.Load(new ThingsToDoCityModule());
             return kernel;
         }
 
@@ -50,6 +49,7 @@ namespace PraLoup.WebApp.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Load(Assembly.GetExecutingAssembly());       
         }        
     }
 }

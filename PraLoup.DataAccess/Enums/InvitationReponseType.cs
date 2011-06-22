@@ -6,7 +6,7 @@ using System.Text;
 namespace PraLoup.DataAccess.Enums
 {
     public enum InvitationReponseType
-    {
+    {        
         Accept,
         Decline,
         Maybe

@@ -9,10 +9,10 @@ namespace PraLoup.WebApp.Models
 {
     public class ThingsToDoCityModel
     {
-        private IEnumerable<IEventService> DealServices { get; set; }
-        private IEnumerable<IEventService> EventsServices { get; set; }
-        private IEnumerable<IEventService> HappyHourServices { get; set; }
-        private IEnumerable<IEventService> PromotedServices { get; set; }
+        public IEnumerable<IEventService> DealServices { get; private set; }
+        public IEnumerable<IEventService> EventsServices { get; private set; }
+        public IEnumerable<IEventService> HappyHourServices { get; private set; }
+        public IEnumerable<IEventService> PromotedServices { get; private set; }
 
         public IEnumerable<Event> Deals { get; private set; }
         public IEnumerable<Event> FunEvents { get; private set; }
@@ -40,18 +40,26 @@ namespace PraLoup.WebApp.Models
 
         public void Construct(string city)
         {
-            if (UseMultiThreads == true)
+            if (string.IsNullOrEmpty(city))
             {
-                ConstructMultiThreads(city);
+                return;
             }
             else
             {
-                ConstructSingleThread(city);
+                if (UseMultiThreads == true)
+                {
+                    ConstructMultiThreads(city);
+                }
+                else
+                {
+                    ConstructSingleThread(city);
+                }
             }
         }
 
         private void ConstructMultiThreads(string city)
         {
+            //TODO; this need to be asyn instead of spinning threads. The work is not cpu bound so it should not using multi threads
             this.City = city;
 
             var getDealsTask = new Task(() => GetDealsData(city));

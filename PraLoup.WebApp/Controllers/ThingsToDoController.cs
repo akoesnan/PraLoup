@@ -9,8 +9,8 @@ namespace PraLoup.WebApp.Controllers
 {
     public class ThingsToDoController : Controller
     {
-        MetroAreaModel MetroAreaModel { get; set; }
-        ThingsToDoCityModel ThingsToDoCityModel { get; set; }
+        public MetroAreaModel MetroAreaModel { get; private set; }
+        public ThingsToDoCityModel ThingsToDoCityModel { get; private set; }
 
         public ThingsToDoController(MetroAreaModel metroAreaModel, ThingsToDoCityModel ttdCityModel)
         {
@@ -22,15 +22,28 @@ namespace PraLoup.WebApp.Controllers
         // GET: /ThingsToDo/  
         public ActionResult Index()
         {            
-            this.MetroAreaModel.Construct();
             return View(this.MetroAreaModel);
         }
 
         public ActionResult City(string city)
-        {            
-            this.ThingsToDoCityModel.Construct(city);
-            ViewData.Model = this.ThingsToDoCityModel;
-            return View();
+        {
+            if (this.ThingsToDoCityModel == null )
+            {
+                return View("Error");
+            }
+            else
+            {
+                if (String.IsNullOrEmpty(city) || !this.MetroAreaModel.IsSupportedMetro(city))
+                {
+                    return View("Error");
+                }
+                else
+                {
+                    this.ThingsToDoCityModel.Construct(city);
+                    ViewData.Model = this.ThingsToDoCityModel;
+                    return View();
+                }
+            }
         }
     }
 }
