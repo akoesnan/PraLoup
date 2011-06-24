@@ -12,7 +12,6 @@ namespace PraLoup.Facebook
 
     public class FacebookAccount : MembershipUser
     {
-
         private Account Account { get; set; }
         public FacebookAccount(OAuthHandler oAuth)
         {

@@ -17,9 +17,9 @@ namespace PraLoup.WebApp.App_Start
     {
         public override void Load()
         {
-            this.Bind<IEventService>().To<GrouponService>().WhenTargetHas<DealsAttributes>();
-            this.Bind<IEventService>().To<EventfulService>().WhenTargetHas<EventsAttributes>();
-            this.Bind<IEventService>().To<YelpService>().WhenTargetHas<HappyHourAttributes>();            
+            this.Bind<IEventClient>().To<GrouponClient>().WhenTargetHas<DealsAttributes>();
+            this.Bind<IEventClient>().To<EventfulClient>().WhenTargetHas<EventsAttributes>();
+            this.Bind<IEventClient>().To<YelpClient>().WhenTargetHas<HappyHourAttributes>();            
         }
     }
 

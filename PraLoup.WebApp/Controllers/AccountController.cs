@@ -14,8 +14,7 @@ namespace ProjectSafari.Controllers
     public class AccountController : Controller
     {
          public ActionResult Login()
-         {
-             
+         {             
              if (FacebookWebContext.Current.IsAuthenticated())
              {
                  FacebookWebAuthorizer fwa = new FacebookWebAuthorizer(new PraLoupFacebookApplication(), HttpContext);

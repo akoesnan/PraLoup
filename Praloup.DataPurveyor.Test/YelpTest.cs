@@ -15,7 +15,7 @@ namespace Praloup.DataPurveyor.Test
         [TestMethod]
         public void TestYelpService_ReturnEvents()
         {
-            var service = new YelpService();
+            var service = new YelpClient();
             var events = service.GetEventData("Settle");
             Assert.IsNotNull(events);
             Assert.IsTrue(events.Count() > 5, "Events from Yelp.com should be more than 0");

@@ -51,7 +51,7 @@ namespace PraLoup.WebApp.Controllers
             {
                 db.Add(activity);
                 db.SaveChanges();
-                return RedirectToAction("AddFacebookFriends", new { id = activity.ActivityId });
+                return RedirectToAction("AddFacebookFriends", new { id = activity.Id });
             }
 
             return View(activity);
@@ -79,7 +79,7 @@ namespace PraLoup.WebApp.Controllers
         [HttpPost]
         public ActionResult Edit(Activity activity)
         {
-            return RedirectToAction("AddFacebookFriends", new { id = activity.ActivityId });
+            return RedirectToAction("AddFacebookFriends", new { id = activity.Id });
         }
 
         //
@@ -157,19 +157,18 @@ namespace PraLoup.WebApp.Controllers
                 List<Account> fas = new List<Account>();
                 foreach (string token in tokens)
                 {
+                    Invitation i = new Invitation();
+                    i.Activity = o;
+                    i.CreateDateTime = System.DateTime.Now;
+
                     FacebookAccount fa = new FacebookAccount(oauth, token);
                     if (!fa.IsCreated())
                     {
                         fa.Register();
                     }
-
-                    fas.Add(fa.GetAccount());
-                }
-                Invitation i = new Invitation();
-                i.Activity = o;
-                i.CreateDateTime = System.DateTime.Now;
-
-                i.Recipients = fas;
+                    i.Recipient = fa.GetAccount();                    
+                }                
+                // TODO: dont' I need to save?
                 found = true;
             }
 

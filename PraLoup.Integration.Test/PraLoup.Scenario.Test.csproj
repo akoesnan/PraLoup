@@ -6,11 +6,11 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{BA3C1DBE-61B4-44E5-A1CD-A82CF2DC7A0A}</ProjectGuid>
+    <ProjectGuid>{FBC9F298-EED5-4ED1-A13F-1FCAEF01E3DE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PraLoup.DataAcess.Tests</RootNamespace>
-    <AssemblyName>PraLoup.DataAcess.Tests</AssemblyName>
+    <RootNamespace>PraLoup.Integration.Test</RootNamespace>
+    <AssemblyName>PraLoup.Integration.Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -46,13 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SeedDataTest.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PraLoup.DataAccess\PraLoup.DataAccess.csproj">
-      <Project>{699F3369-A9D5-4825-ACBC-41843104A795}</Project>
-      <Name>PraLoup.DataAccess</Name>
-    </ProjectReference>
+    <Compile Include="AccountTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

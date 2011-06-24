@@ -6,7 +6,7 @@ namespace PraLoup.DataAccess.Entities
 {
     public class Event
     {
-        public int EventId { get; set; }
+        public int Id { get; set; }
 
         // The event start time
         public DateTime StartDateTime { get; set; }
@@ -49,7 +49,7 @@ namespace PraLoup.DataAccess.Entities
 
         public string Source { get; set; }
 
-        public decimal UserRating { get; set; }
+        public float UserRating { get; set; }
 
         public uint UserReviewsCount { get; set; }
 

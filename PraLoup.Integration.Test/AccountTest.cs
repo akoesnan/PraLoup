@@ -3,18 +3,15 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PraLoup.DataAccess;
 
-namespace PraLoup.DataAcess.Tests
+namespace PraLoup.Integration.Test
 {
     [TestClass]
-    public class SeedDataTest
+    public class AccountTest
     {
         [TestMethod]
-        public void ValidateAllEntries()
+        public void CreateAccount()
         {
-            
-
         }
     }
 }

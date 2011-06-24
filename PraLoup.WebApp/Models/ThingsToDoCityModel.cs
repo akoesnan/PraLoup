@@ -9,10 +9,10 @@ namespace PraLoup.WebApp.Models
 {
     public class ThingsToDoCityModel
     {
-        public IEnumerable<IEventService> DealServices { get; private set; }
-        public IEnumerable<IEventService> EventsServices { get; private set; }
-        public IEnumerable<IEventService> HappyHourServices { get; private set; }
-        public IEnumerable<IEventService> PromotedServices { get; private set; }
+        public IEnumerable<IEventClient> DealServices { get; private set; }
+        public IEnumerable<IEventClient> EventsServices { get; private set; }
+        public IEnumerable<IEventClient> HappyHourServices { get; private set; }
+        public IEnumerable<IEventClient> PromotedServices { get; private set; }
 
         public IEnumerable<Event> Deals { get; private set; }
         public IEnumerable<Event> FunEvents { get; private set; }
@@ -29,9 +29,9 @@ namespace PraLoup.WebApp.Models
         /// <param name="dealsServices"></param>
         /// <param name="eventsServices"></param>
         /// <param name="happyHoursServices"></param>
-        public ThingsToDoCityModel([DealsAttributes] IEnumerable<IEventService> dealsServices,
-                                   [EventsAttributes]IEnumerable<IEventService> eventsServices,
-                                   [HappyHourAttributes] IEnumerable<IEventService> happyHoursServices)
+        public ThingsToDoCityModel([DealsAttributes] IEnumerable<IEventClient> dealsServices,
+                                   [EventsAttributes]IEnumerable<IEventClient> eventsServices,
+                                   [HappyHourAttributes] IEnumerable<IEventClient> happyHoursServices)
         {
             this.DealServices = dealsServices;
             this.EventsServices = eventsServices;
