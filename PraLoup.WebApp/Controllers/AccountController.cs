@@ -19,10 +19,12 @@ namespace ProjectSafari.Controllers
              if (FacebookWebContext.Current.IsAuthenticated())
              {
                  FacebookWebAuthorizer fwa = new FacebookWebAuthorizer(new PraLoupFacebookApplication(), HttpContext);
-                 fwa.Permissions = new string[]{"publish_stream"};
+                 fwa.Permissions = new string[]{"publish_stream","user_about_me","read_friendlists"};
                  fwa.ReturnUrlPath = HttpContext.Request.Url.ToString();
                  if (fwa.Authorize())
                  {
+                     Facebook.FacebookClient fc = new Facebook.FacebookClient(FacebookWebContext.Current.AccessToken);
+                     fc.Get("me");
                      Register();
                      return RedirectToAction("Home", "Home");
                  }
@@ -34,21 +36,13 @@ namespace ProjectSafari.Controllers
         
         public bool Register() 
         {
-            var oAuth = new OAuthHandler();
+            FacebookAccount fa = new FacebookAccount();
+            bool notregistered = fa.IsCreated();
 
-            //Get the access token and secret.
-            oAuth.Token = FacebookWebContext.Current.AccessToken;
-            if (oAuth.Token.Length > 0)
+            if (notregistered)
             {
-                FacebookAccount fa = new FacebookAccount(oAuth);
-                bool notregistered = fa.IsCreated();
-
-                if (notregistered)
-                {
-                    fa.Register();
-                }
+                fa.Register();
             }
-            Response.Cookies.Add(new System.Web.HttpCookie("LoggedIn", oAuth.Token));
             return true;
         }
     }

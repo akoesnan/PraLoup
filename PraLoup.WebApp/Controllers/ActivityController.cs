@@ -157,7 +157,7 @@ namespace PraLoup.WebApp.Controllers
                 List<Account> fas = new List<Account>();
                 foreach (string token in tokens)
                 {
-                    FacebookAccount fa = new FacebookAccount(oauth, token);
+                    FacebookAccount fa = new FacebookAccount(token);
                     if (!fa.IsCreated())
                     {
                         fa.Register();

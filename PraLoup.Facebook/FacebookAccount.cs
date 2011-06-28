@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Facebook;
 using Facebook.Web;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
@@ -22,11 +23,7 @@ namespace PraLoup.Facebook
                     {
                         if (_cur == null)
                         {
-                            var oAuth = new OAuthHandler();
-
-                            //Get the access token and secret.
-                            oAuth.Token = FacebookWebContext.Current.AccessToken;
-                            _cur = new FacebookAccount(oAuth);
+                           _cur = new FacebookAccount();
                         }
                     }
                 }
@@ -34,25 +31,26 @@ namespace PraLoup.Facebook
             }
         }
 
-        public FacebookAccount(OAuthHandler oAuth)
+        public FacebookAccount()
         {
+            FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
 
-            string url = "https://graph.facebook.com/me/?access_token=" + oAuth.Token;
-            string json = oAuth.WebRequest(OAuthHandler.Method.GET, url, String.Empty);
-            dynamic jsonobject = json.GetJson();
-            account = new Account();
-            account.FirstName = jsonobject.first_name;
-            account.UserId = jsonobject.id;
-            account.LastName = jsonobject.last_name;
+            string json = fc.Get("me").ToString();
 
-            account.UserName = jsonobject.name;
-
+            HydrateUserFromJson(json);
         }
 
-        public FacebookAccount(OAuthHandler oAuth, string id)
+        public FacebookAccount(string id)
         {
-            string url = "https://graph.facebook.com/" + id + "/?access_token=" + oAuth.Token;
-            string json = oAuth.WebRequest(OAuthHandler.Method.GET, url, String.Empty);
+            FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
+
+            string json = fc.Get(id).ToString();
+
+            HydrateUserFromJson(json);
+        }
+
+        public void HydrateUserFromJson(string json)
+        {
             dynamic jsonobject = json.GetJson();
             account = new Account();
             account.FirstName = jsonobject.first_name;

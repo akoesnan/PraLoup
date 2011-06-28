@@ -158,7 +158,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\EntityRepository.sdf" />
     <Content Include="Areas\Admin\Content\Admin.css" />
     <Content Include="Content\Praloup.css" />
     <Content Include="Global.asax" />
@@ -285,6 +284,7 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="App_LocalResources\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Models\Services\" />
