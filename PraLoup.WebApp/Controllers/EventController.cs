@@ -35,7 +35,7 @@ namespace PraLoup.WebApp.Controllers
                 // TODO: what to do when the user doesn't have perms
                 return RedirectToAction("Index");
             }
-            return View(o);
+            return View(em);
         }
 
         //
