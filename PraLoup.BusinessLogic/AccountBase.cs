@@ -45,7 +45,7 @@ namespace PraLoup.BusinessLogic
                              a.UserId == account.UserId
                          select a;
 
-            if (result.Count<Account>() == 0)
+            if (result.Count<Account>() != 0)
             {
                 return true;
             }
@@ -67,8 +67,19 @@ namespace PraLoup.BusinessLogic
         public Permissions GetPermissions(Event e)
         {
             Permissions mask = Permissions.EmptyMask;
+            bool isOwner = false;
+            bool isFriend = false;
+            bool isFriendOfFriend = false;
 
-            bool isOwner = e.Organizers.Any(x => x.Id == this.account.Id);
+            if (e.Organizers != null)
+            {
+                isOwner = e.Organizers.Any(x => x.Id == this.account.Id);
+                foreach (var x in e.Organizers)
+                {
+                    isFriend |= this.IsFriend(x);
+                    isFriendOfFriend |= this.IsFriendOfFriend(x);
+                }
+            }
 
             if (isOwner)
             {
@@ -78,9 +89,7 @@ namespace PraLoup.BusinessLogic
                 mask |= Permissions.Modify;
             }
 
-            bool isFriend = false;
-            bool isFriendOfFriend = false;
-
+            
             switch (e.Privacy)
             {
                 case DataAccess.Enums.Privacy.Public:
@@ -89,6 +98,13 @@ namespace PraLoup.BusinessLogic
                     mask |= Permissions.Accept;
                     break;
                 case DataAccess.Enums.Privacy.Friends:
+                    if (e.Organizers != null)
+                    {
+                        foreach (var x in e.Organizers)
+                        {
+                            isFriend |= this.IsFriend(x);
+                        }
+                    }
                     if (isFriend || isOwner)
                     {
                         mask |= Permissions.View;
@@ -96,6 +112,14 @@ namespace PraLoup.BusinessLogic
                     }
                     break;
                 case DataAccess.Enums.Privacy.FriendsOfFriend:
+                    if (e.Organizers != null)
+                    {
+                        foreach (var x in e.Organizers)
+                        {
+                            isFriend |= this.IsFriend(x);
+                            isFriendOfFriend |= this.IsFriendOfFriend(x);
+                        }
+                    }
                     if (isFriendOfFriend || isFriend || isOwner)
                     {
                         mask |= Permissions.View;

@@ -17,7 +17,18 @@ namespace PraLoup.DataAccess.Entities
 
         public virtual Account Organizer { get; set; }
 
-        public Privacy Privacy { get; set; }
+        public Privacy Privacy
+        {
+            get
+            {
+                return (Privacy)PrivacyInt;
+            }
+            set
+            {
+                PrivacyInt = (int)value;
+            }
+        }
+        public int PrivacyInt { get; set; }
 
         public virtual Event Event { get; set; }
 

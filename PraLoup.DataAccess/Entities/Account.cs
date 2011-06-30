@@ -23,7 +23,7 @@ namespace PraLoup.DataAccess.Entities
         [Required]
         public string LastName { get; set; }
 
-        [MaxLength(15)]
+        [MaxLength(100)]
         [Required]        
         public string UserName { get; set; }
 

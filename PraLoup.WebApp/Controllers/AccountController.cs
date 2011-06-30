@@ -23,8 +23,6 @@ namespace ProjectSafari.Controllers
                  fwa.ReturnUrlPath = HttpContext.Request.Url.ToString();
                  if (fwa.Authorize())
                  {
-                     Facebook.FacebookClient fc = new Facebook.FacebookClient(FacebookWebContext.Current.AccessToken);
-                     fc.Get("me");
                      Register();
                      return RedirectToAction("Home", "Home");
                  }
@@ -37,7 +35,7 @@ namespace ProjectSafari.Controllers
         public bool Register() 
         {
             FacebookAccount fa = new FacebookAccount();
-            bool notregistered = fa.IsCreated();
+            bool notregistered = !fa.IsCreated();
 
             if (notregistered)
             {

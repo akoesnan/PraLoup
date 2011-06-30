@@ -24,7 +24,19 @@ namespace PraLoup.DataAccess.Entities
         /// <summary>
         /// Events privacy
         /// </summary>
-        public Privacy Privacy { get; set; }
+        public Privacy Privacy 
+        {
+            get
+            {
+                return (Privacy)PrivacyInt;
+            }
+            set
+            {
+                PrivacyInt = (int)value;
+            }
+        }
+
+        public int PrivacyInt { get; set; }
 
         /// <summary>
         /// Events Tags
