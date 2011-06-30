@@ -6,6 +6,7 @@ using Facebook.Web.Mvc;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using PraLoup.Facebook;
+using PraLoup.WebApp.Models;
 
 namespace PraLoup.WebApp.Controllers
 { 
@@ -38,6 +39,14 @@ namespace PraLoup.WebApp.Controllers
 
         public ActionResult Create()
         {
+            return View();
+        }
+
+        public ActionResult CreateFromEvent(int id)
+        {
+            ActivityModel am = new ActivityModel();
+            am.Activity = new Activity();
+            am.Activity.Event = db.Find<Event>(id);
             return View();
         } 
 
