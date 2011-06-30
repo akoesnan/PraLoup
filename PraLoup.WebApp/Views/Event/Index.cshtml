@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PraLoup.DataAccess.Entities.Event>
+﻿@model IEnumerable<PraLoup.WebApp.Models.EventModel>
 
 @{
     ViewBag.Title = "Index";
@@ -30,26 +30,35 @@
     </tr>
 
 @foreach (var item in Model) {
+    if (!item.Permissions.HasFlag(PraLoup.BusinessLogic.Permissions.View))
+    {
+        continue;
+    }
     <tr>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.EventId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.EventId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.EventId })
+        @if(item.Permissions.HasFlag(PraLoup.BusinessLogic.Permissions.Edit)){
+            @Html.ActionLink("Edit", "Edit", new { id=item.Event.EventId })
+        }
+        @Html.ActionLink("Details", "Details", new { id = item.Event.EventId }) 
+        @if (item.Permissions.HasFlag(PraLoup.BusinessLogic.Permissions.Delete))
+        {
+            @Html.ActionLink("Delete", "Delete", new { id = item.Event.EventId })
+        }
         </td>
         <td>
-            @String.Format("{0:g}", item.StartDateTime)
+            @String.Format("{0:g}", item.Event.StartDateTime)
         </td>
         <td>
-            @String.Format("{0:g}", item.EndDateTime)
+            @String.Format("{0:g}", item.Event.EndDateTime)
         </td>
         <td>
-            @item.Name
+            @item.Event.Name
         </td>
         <td>
-            @item.Description
+            @item.Event.Description
         </td>
         <td>
-            @String.Format("{0:F}", item.Price)
+            @String.Format("{0:F}", item.Event.Price)
         </td>
     </tr>
 }
