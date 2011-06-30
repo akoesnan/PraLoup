@@ -13,6 +13,15 @@
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Activity</legend>
+        
+        @Html.HiddenFor(model => model.Activity.Event.EventId)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Activity.Privacy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Activity.Privacy)
+            @Html.ValidationMessageFor(model => model.Activity.Privacy)
+        </div>
 
         <p>
             <input type="submit" value="Create" />
