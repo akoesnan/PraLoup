@@ -1,4 +1,10 @@
 ﻿@inherits System.Web.Mvc.WebViewPage<PraLoup.DataAccess.Enums.Privacy?>
-<%= Model.ToString()   %>
+<select>
+@foreach (PraLoup.DataAccess.Enums.Privacy x in Enum.GetValues(typeof(PraLoup.DataAccess.Enums.Privacy)))
+{
+    <option value="@x">@x.ToString()</option>
+}
+</select>
+
 
 

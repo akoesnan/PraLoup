@@ -1,4 +1,9 @@
 ﻿@inherits System.Web.Mvc.WebViewPage<PraLoup.DataAccess.Enums.Privacy>
-<%= Model.ToString()   %>
-
-
+<ul>
+@foreach (string x in Enum.GetNames(typeof(PraLoup.DataAccess.Enums.Privacy)))
+{
+<li>
+    @x
+</li>
+}
+</ul>

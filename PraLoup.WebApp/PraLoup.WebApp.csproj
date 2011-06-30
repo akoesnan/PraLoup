@@ -413,28 +413,28 @@
     <Content Include="Views\Activity\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\DisplayTemplates\Account.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Account.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\DisplayTemplates\Event.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Event.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\DisplayTemplates\Privacy.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Privacy.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\DisplayTemplates\Invitations.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Invitations.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\EditorTemplates\Account.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Account.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\EditorTemplates\Event.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Event.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\EditorTemplates\Invitations.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Invitations.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\EditorTemplates\Privacy.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Privacy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Activity\CreateFromEvent.cshtml" />
