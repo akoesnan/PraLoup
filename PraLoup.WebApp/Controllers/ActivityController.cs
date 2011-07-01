@@ -42,14 +42,7 @@ namespace PraLoup.WebApp.Controllers
             return View();
         }
 
-        public ActionResult CreateFromEvent(int id)
-        {
-            ActivityModel am = new ActivityModel();
-            am.Activity = new Activity();
-            am.Activity.Event = db.Find<Event>(id);
-            return View();
-        } 
-
+      
         //
         // POST: /Default1/Create
 
@@ -65,7 +58,29 @@ namespace PraLoup.WebApp.Controllers
 
             return View(activity);
         }
-        
+
+        public ActionResult CreateFromEvent(int id)
+        {
+            ActivityModel am = new ActivityModel();
+            am.Activity = new Activity();
+            am.Activity.Event = db.Find<Event>(id);
+            return View(am);
+        }
+
+        [HttpPost]
+        public ActionResult CreateFromEvent(Activity am)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Add(am);
+                db.SaveChanges();
+                return RedirectToAction("AddFacebookFriends", new { id = am.ActivityId });
+            }
+            ActivityModel am2 = new ActivityModel();
+            am2.Activity = am;
+
+            return View(am2);
+        }
         //
         // GET: /Default1/Edit/5 
         public ActionResult Edit(int id)

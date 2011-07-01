@@ -1,2 +1,17 @@
 ﻿@inherits System.Web.Mvc.WebViewPage<PraLoup.DataAccess.Entities.Invitations>
-<b>Invitations</b>
+<div id="fb-root">
+  <fb:serverfbml width="615">
+    <script type="text/fbml">
+      <fb:request-form action="http://projectsafari.com/PraLoup.WebApp/Activity/AddFacebookFriends/"
+                     method="post"
+                     invite="true"
+                     type="More Like"
+                     content="Echo Content. <fb:req-choice url='/PraLoup.WebApp/Events/AddFacebookFriends' label='More Label' />">
+        <fb:multi-friend-selector showborder="false"
+                                bypass="cancel"
+                                cols=2
+                                actiontext="More Like Text"/>
+      </fb:request-form>
+    </script>
+  </fb:serverfbml>
+</div>

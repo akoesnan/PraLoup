@@ -22,7 +22,20 @@
             @Html.EditorFor(model => model.Activity.Privacy)
             @Html.ValidationMessageFor(model => model.Activity.Privacy)
         </div>
-
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Activity.Event)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Activity.Event)
+            @Html.ValidationMessageFor(model => model.Activity.Event)
+        </div>
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Activity.Invites)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Activity.Invites)
+            @Html.ValidationMessageFor(model => model.Activity.Invites)
+        </div>
         <p>
             <input type="submit" value="Create" />
         </p>
