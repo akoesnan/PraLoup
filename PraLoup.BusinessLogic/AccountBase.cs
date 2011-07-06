@@ -6,9 +6,9 @@ using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using System.Web.Security;
 using PraLoup.DataAccess.Interfaces;
-using PraLoup.Facebook;
-using PraLoup.Plugins;
 using PraLoup.FacebookObjects;
+using PraLoup.Plugins;
+
 
 namespace PraLoup.BusinessLogic
 {
@@ -206,17 +206,7 @@ namespace PraLoup.BusinessLogic
             return (result.Count() > 0);
         }
 
-        public bool IsInvited(ICollection<Invitation> e)
-        {
-            
-            var result = from a in e
-                         where a.Recipients != null && a.Recipients.Any(b => b.UserId == this.account.UserId)
-                         select a;
-
-            return (result.Count() > 0);
-        }
-
-        public Permissions GetPermissions(Activity e)
+        public Permissions GetPermissions(Activity activity)
         {
             Permissions mask = Permissions.EmptyMask;
             bool isOwner = false;

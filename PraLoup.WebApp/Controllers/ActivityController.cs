@@ -97,12 +97,12 @@ namespace PraLoup.WebApp.Controllers
         {
             // create the activity and save it, that way we can fetch this stuff again later.
             Activity f = new Activity();
-            am.Activity.Event = this.Repository.Find<Event>(id);
+            f.Event = this.Repository.Find<Event>(id);
 
-            f.Organizer = FacebookAccount.Current.GetAccount();
+            f.Organizer = AccountBase.GetAccount();
             f.IsCreated = false;
-            db.Add(f);
-            db.SaveChanges();
+            this.Repository.Add(f);
+            this.Repository.SaveChanges();
             
             
             return View(f);
@@ -114,7 +114,7 @@ namespace PraLoup.WebApp.Controllers
             if (ModelState.IsValid)
             {
                 //fetch item from db, fix updated fields
-                Activity dba = db.Find<Activity>(am.ActivityId);
+                Activity dba = Repository.Find<Activity>(am.Id);
 
                 dba.UpdatedTime = DateTime.UtcNow;
                 

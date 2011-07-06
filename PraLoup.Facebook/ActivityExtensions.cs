@@ -6,7 +6,7 @@ using System.Dynamic;
 using PraLoup.DataAccess.Entities;
 using PraLoup.Utilities;
 
-namespace PraLoup.Facebook
+namespace PraLoup.FacebookObjects
 {
     public static class ActivityExtensions
     {

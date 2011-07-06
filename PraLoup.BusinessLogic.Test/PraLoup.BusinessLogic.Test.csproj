@@ -55,7 +55,7 @@
     </ProjectReference>
     <ProjectReference Include="..\PraLoup.Facebook\PraLoup.FacebookObjects.csproj">
       <Project>{4C9EAD3E-DFC8-42CE-B324-015F3C9BB95C}</Project>
-      <Name>PraLoup.Facebook</Name>
+      <Name>PraLoup.FacebookObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
