@@ -4,9 +4,9 @@ using PraLoup.DataAccess.Entities;
 using PraLoup.Utilities;
 using PraLoup.DataPurveyor.Converter;
 
-namespace PraLoup.DataPurveyor.Service
+namespace PraLoup.DataPurveyor.Client
 {
-    public class GrouponService : IEventService
+    public class GrouponClient : IEventClient
     {
         private const string apiKey = "96df2a5ac1c730b86506dc349be6627e95945ee7";
 
@@ -15,7 +15,7 @@ namespace PraLoup.DataPurveyor.Service
 
         private IEventConverter EventConverter { get; set; }
 
-        public GrouponService()
+        public GrouponClient()
         {
             this.EventConverter = new GrouponConverter();
         }        

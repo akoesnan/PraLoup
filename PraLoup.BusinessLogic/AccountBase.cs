@@ -5,18 +5,35 @@ using System.Text;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using System.Web.Security;
-
+using PraLoup.DataAccess.Interfaces;
+using PraLoup.Facebook;
+using PraLoup.Plugins;
 
 namespace PraLoup.BusinessLogic
 {
-    public class AccountBase : MembershipUser
-    {
+    public partial class AccountBase : MembershipUser
+    {        
         protected Account account = null;
 
         protected string[] _friends = null;
 
         protected static object mutex = new object();
-    
+
+        internal IRepository Repository { get; set; }
+
+        private EventLogic eventLogic { get; set; }
+        private ActivityLogic activityLogic { get; set; }
+
+        public FacebookAccount FacebookAccount { get; set; }     
+        public EventActions EventActions { get; set; }
+       
+        public AccountBase(IRepository gr, IEnumerable<IEventAction> eventActionPlugins)
+        {
+            this.Repository = gr;
+            this.eventLogic = new EventLogic(this.Repository);
+            this.activityLogic = new ActivityLogic(this.Repository);
+            this.EventActions = new EventActions(this.account, this.Repository, eventActionPlugins);
+        }
 
         public string[] Friends
         {
@@ -24,7 +41,7 @@ namespace PraLoup.BusinessLogic
             {
                 if (_friends == null)
                 {
-                    lock(mutex)
+                    lock (mutex)
                     {
                         if (_friends == null)
                         {
@@ -49,24 +66,48 @@ namespace PraLoup.BusinessLogic
         /// <returns>true if fetch was successful</returns>
         public static Account Fetch(string UserId)
         {
-            EntityRepository er = new EntityRepository();
-
-            var result = from a in er.Accounts
+            // find by account id
+            if (account.Id != 0)
+            {
+                return FindById(account.Id);
+            }
+            // 
+            else if (!string.IsNullOrEmpty(account.UserName))
+            {
+                return FindByUserName(account.UserName);
+            }else {
+                 var result = from a in er.Accounts
                          where
                              a.UserId == UserId
                          select a;
             
-            return result.FirstOrDefault();
+                  return result.FirstOrDefault();
+            }
+            
+        }
+
+        private Account FindById(int id)
+        {
+            return this.Repository.Find<Account>(id);
+        }
+            
+        private Account FindByUserName(string userName)
+        {
+            return this.Repository.FirstOrDefault<Account>(a => String.Equals(userName, a.UserName, StringComparison.InvariantCultureIgnoreCase));
+        }
+
+
+        public bool IsCreated()
+        {
+            return Find(account) != null;
         }
 
         protected void Register(bool create)
         {
-            GenericRepository gr = new GenericRepository(new EntityRepository());
-            if (create)
+            this.Repository.Add<Account>(account);
+            this.Repository.SaveChanges();
             {
-                gr.Add<Account>(account);
             }
-            gr.SaveChanges();
         }
 
         public Account GetAccount()
@@ -102,11 +143,13 @@ namespace PraLoup.BusinessLogic
             
             switch (e.Privacy)
             {
+                // public event can be viewed, shared and accpeted by everyone 
                 case DataAccess.Enums.Privacy.Public:
                     mask |= Permissions.View;
                     mask |= Permissions.Share;
                     mask |= Permissions.Accept;
                     break;
+                // friend only event can be viewed and accpeted by friends and owner only
                 case DataAccess.Enums.Privacy.Friends:
                     if (e.Organizers != null)
                     {
@@ -121,6 +164,7 @@ namespace PraLoup.BusinessLogic
                         mask |= Permissions.Accept;
                     }
                     break;
+                // friend of friend can view and accept 
                 case DataAccess.Enums.Privacy.FriendsOfFriend:
                     if (e.Organizers != null)
                     {
@@ -136,6 +180,8 @@ namespace PraLoup.BusinessLogic
                         mask |= Permissions.Accept;
                     }
                     break;
+                // private means that only the owner can view and and accept
+                // Todo: how about people that are invited explicitly?
                 case DataAccess.Enums.Privacy.Private:
                     if (isOwner)
                     {
@@ -203,7 +249,7 @@ namespace PraLoup.BusinessLogic
                 mask |= Permissions.Edit;
                 mask |= Permissions.Modify;
                 mask |= Permissions.InviteGuests;
-            }
+            }            
             
             if (isInvited)
             {
@@ -213,7 +259,7 @@ namespace PraLoup.BusinessLogic
             }
 
             // for activities, privacy means who can invite people to the activity.
-            switch (e.Privacy)
+            switch (activity.Privacy)
             {
                 case DataAccess.Enums.Privacy.Public:
                     mask |= Permissions.View;
@@ -261,8 +307,8 @@ namespace PraLoup.BusinessLogic
         public Permissions GetPermissions(Invitation e)
         {
             Permissions mask = Permissions.EmptyMask;
-            bool isOwner = e.Recipients.Any(x => x.Id == this.account.Id);
-            bool isActivtyOwner = e.Activity.Organizer.Id == this.account.Id;
+            bool isOwner = e.Recipient == this.account;
+            bool isActivtyOwner = e.Activity.Organizer == this.account;
 
             if (isOwner || isActivtyOwner)
             {

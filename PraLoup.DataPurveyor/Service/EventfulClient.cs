@@ -6,14 +6,14 @@ using System;
 
 namespace PraLoup.DataPurveyor.Service
 {
-    public class EventfulService : IEventService
+    public class EventfulClient : IEventClient
     {
         public string ApiKey = "cpkPQVxfqTb6KF7d";
         public const string url = "http://api.eventful.com/json/events/search?q=fun&app_key=cpkPQVxfqTb6KF7d";
 
         private IEventConverter EventConverter { get; set; }
 
-        public EventfulService()
+        public EventfulClient()
         {
             this.EventConverter = new EventfulConverter();
         }

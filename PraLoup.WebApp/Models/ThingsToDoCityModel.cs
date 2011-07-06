@@ -3,16 +3,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataPurveyor.Attributes;
-using PraLoup.DataPurveyor.Service;
+using PraLoup.DataPurveyor.Client;
 
 namespace PraLoup.WebApp.Models
 {
     public class ThingsToDoCityModel
     {
-        public IEnumerable<IEventService> DealServices { get; private set; }
-        public IEnumerable<IEventService> EventsServices { get; private set; }
-        public IEnumerable<IEventService> HappyHourServices { get; private set; }
-        public IEnumerable<IEventService> PromotedServices { get; private set; }
+        public IEnumerable<IEventClient> DealServices { get; private set; }
+        public IEnumerable<IEventClient> EventsServices { get; private set; }
+        public IEnumerable<IEventClient> HappyHourServices { get; private set; }
+        public IEnumerable<IEventClient> PromotedServices { get; private set; }
 
         public IEnumerable<Event> Deals { get; private set; }
         public IEnumerable<Event> FunEvents { get; private set; }
@@ -29,9 +29,9 @@ namespace PraLoup.WebApp.Models
         /// <param name="dealsServices"></param>
         /// <param name="eventsServices"></param>
         /// <param name="happyHoursServices"></param>
-        public ThingsToDoCityModel([DealsAttributes] IEnumerable<IEventService> dealsServices,
-                                   [EventsAttributes]IEnumerable<IEventService> eventsServices,
-                                   [HappyHourAttributes] IEnumerable<IEventService> happyHoursServices)
+        public ThingsToDoCityModel([DealsAttributes] IEnumerable<IEventClient> dealsServices,
+                                   [EventsAttributes]IEnumerable<IEventClient> eventsServices,
+                                   [HappyHourAttributes] IEnumerable<IEventClient> happyHoursServices)
         {
             this.DealServices = dealsServices;
             this.EventsServices = eventsServices;
@@ -75,6 +75,7 @@ namespace PraLoup.WebApp.Models
         {
             this.City = city;
 
+            // TODO: the data purveyor should move to the background worker. it should not be in the worker thread.
             GetDealsData(city);
             GetFunEventsData(city);
             GetHappyHoursData(city);
@@ -84,20 +85,18 @@ namespace PraLoup.WebApp.Models
         {
             // TODO: make this multi threaded using plinq when there are multiple data purveyor:
             // this.Deals = this.DealServices.AsParallel().SelectMany(s => s.GetEventData(this.City));
-            this.Deals = this.DealServices.SelectMany(s => s.GetEventData(city));
+            this.Deals = this.DealServices.SelectMany(s => s.GetEventData(city)).ToList();
         }
+
         public void GetFunEventsData(string city)
         {
-            // TODO: make this multi threaded using plinq when there are multiple data purveyor:
-            // this.Deals = this.DealServices.AsParallel().SelectMany(s => s.GetEventData(this.City));
-            this.FunEvents = this.EventsServices.SelectMany(s => s.GetEventData(city));
+            // TODO: make this multi threaded using plinq when there are multiple data purveyor:            
+            this.FunEvents = this.EventsServices.SelectMany(s => s.GetEventData(city)).ToList();
         }
 
         public void GetHappyHoursData(string city)
-        {
-            // TODO: make this multi threaded using plinq when there are multiple data purveyor:
-            // this.Deals = this.DealServices.AsParallel().SelectMany(s => s.GetEventData(this.City));
-            this.HappyHours = this.HappyHourServices.SelectMany(s => s.GetEventData(city));
+        {            
+            this.HappyHours = this.HappyHourServices.SelectMany(s => s.GetEventData(city)).ToList();
         }
     }
 }

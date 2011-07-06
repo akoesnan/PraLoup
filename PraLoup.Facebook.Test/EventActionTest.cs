@@ -1,0 +1,52 @@
+﻿using System;
+using System.Text;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PraLoup.DataAccess.Entities;
+using PraLoup.DataAccess.Enums;
+using Moq;
+using PraLoup.DataAccess.Interfaces;
+
+namespace PraLoup.Facebook.Test
+{
+    [TestClass]
+    public class EventActionTest
+    {
+        [TestMethod]
+        public void CreateFacebookEvent()
+        {
+            var e = new Event()
+            {
+                Description = "desc test",
+                Name = "name test",
+                StartDateTime = DateTime.UtcNow.AddDays(5),
+                EndDateTime = DateTime.UtcNow.AddDays(6),
+                Venue = new Venue()
+                {
+                    StreetLine1 = "Univerisity St. 10",
+                    StreetLine2 = string.Empty,
+                    City = "Seattle",
+                    State = "Washington",
+                    Country = "United States",
+                    Lat = 1.123f,
+                    Lon = 12.123f
+                }
+            };
+            var actv = new Activity()
+            {
+                Event = e,
+                Privacy = Privacy.Public,
+                UpdatedTime = DateTime.UtcNow
+
+            };
+
+            Mock<IRepository> mockRepo = new Mock<IRepository>(); 
+            var oauth = new OAuthHandler();
+            oauth.Token = "";
+            //var fbAcct = new FacebookAccount(mockRepo.Object, oauth);
+
+            //fbAcct.CreateFacebookEvent(actv);
+        }
+    }
+}

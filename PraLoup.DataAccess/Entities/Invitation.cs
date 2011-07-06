@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using PraLoup.DataAccess.Enums;
 
 namespace PraLoup.DataAccess.Entities
 {
@@ -12,25 +13,31 @@ namespace PraLoup.DataAccess.Entities
         
         }
 
-        public Invitation(Account organizer, IEnumerable<Account> recipients, Activity activity, string message)
+        public Invitation(Account sender, Account recipient, Activity activity, string message)
         {
             this.Activity = activity;
             this.Message = message;
-            this.Recipients = new Accounts(recipients);
-            this.Sender = organizer;
+            this.Recipient = recipient;
+            this.Sender = sender;
             this.CreateDateTime = DateTime.UtcNow;
             // by default response is null
-            this.Responses = null;
+            this.InvitationResponse = new InvitationResponse();
         }
 
         public Activity Activity { get; set; }
 
         public Account Sender { get; set; }
 
-        public Accounts Recipients { get; set; }
+        public Account Recipient { get; set; }
 
-        public InvitationResponses Responses { get; set; }
+        public InvitationResponse InvitationResponse { get; set; }
 
         public string Message { get; set; }
+
+        public void Response (InvitationReponseType responseType, string message) 
+        {
+            this.InvitationResponse.InvitationResponseType = responseType;
+            this.InvitationResponse.Message = message;
+        }
     }
 }

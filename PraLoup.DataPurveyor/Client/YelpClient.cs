@@ -4,13 +4,13 @@ using PraLoup.DataAccess.Entities;
 using PraLoup.DataPurveyor.Converter;
 using PraLoup.Utilities;
 
-namespace PraLoup.DataPurveyor.Service
+namespace PraLoup.DataPurveyor.Client
 {
-    public class YelpService : IEventService
+    public class YelpClient : IEventClient
     {
         private IEventConverter EventConverter { get; set; }
 
-        public YelpService()
+        public YelpClient()
         {
             this.EventConverter = new YelpConverter();
         }

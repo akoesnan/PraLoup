@@ -7,6 +7,7 @@ namespace PraLoup.DataAccess.Enums
 {
     public enum InvitationReponseType
     {        
+        NotResponded,
         Accept,
         Decline,
         Maybe

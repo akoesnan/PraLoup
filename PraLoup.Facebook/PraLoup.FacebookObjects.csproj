@@ -54,7 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityExtensions.cs" />
     <Compile Include="FacebookAccount.cs" />
+    <Compile Include="FacebookAccount.EventActions.cs" />
     <Compile Include="Friend.cs" />
     <Compile Include="OAuthHandler.cs" />
     <Compile Include="PraLoupFacebookApplication.cs" />
@@ -64,10 +66,6 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PraLoup.BusinessLogic\PraLoup.BusinessLogic.csproj">
-      <Project>{4244F04E-3323-406B-BD22-5D743ACAE631}</Project>
-      <Name>PraLoup.BusinessLogic</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PraLoup.DataAccess\PraLoup.DataAccess.csproj">
       <Project>{699F3369-A9D5-4825-ACBC-41843104A795}</Project>
       <Name>PraLoup.DataAccess</Name>

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using PraLoup.DataAccess.Entities;
 
-namespace PraLoup.DataPurveyor.Service
+namespace PraLoup.DataPurveyor.Client
 {
-    public interface IEventService
+    public interface IEventClient
     {
         
         IEnumerable<Event> GetEventData(string city);

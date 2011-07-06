@@ -30,7 +30,7 @@
 
 @if (Model.Permissions.HasFlag(PraLoup.BusinessLogic.Permissions.Edit)){
     <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Event.EventId }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Event.Id }) |
     
     @Html.ActionLink("Back to List", "Index")
     </p>

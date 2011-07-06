@@ -9,7 +9,9 @@
         </div>
         <div id="right">
 <p>
-    @Html.ActionLink("Login", "Login", "Account");
+    @Html.ActionLink(LocStrings.LogIn, "Login", "Account") 
+    |
+    @Html.ActionLink(LocStrings.LogOut, "Logoff", "Account")
 </p>
         </div>
         <div class="clear">

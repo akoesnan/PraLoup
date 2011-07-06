@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Linq;
 using System.Collections.Generic;
 using Facebook.Web.Mvc;
 using PraLoup.DataAccess;
@@ -6,12 +7,23 @@ using PraLoup.DataAccess.Entities;
 using PraLoup.FacebookObjects;
 using PraLoup.WebApp.Models;
 using PraLoup.BusinessLogic;
+using PraLoup.DataAccess.Interfaces;
+using System.Collections.Generic;
+using PraLoup.Plugins;
+using PraLoup.DataAccess.Enums;
 
 namespace PraLoup.WebApp.Controllers
 {
     public class EventController : Controller
-    {        
-        GenericRepository db = new GenericRepository(new EntityRepository());
+    {
+        IRepository Repository { get; set; }
+        AccountBase AccountBase { get; set; }
+
+        public EventController(IRepository repository, IEnumerable<IEventAction> eventActionPlugins)
+        {
+            this.Repository = repository;
+            this.AccountBase = new AccountBase(this.Repository, eventActionPlugins);
+        }
 
         //
         // GET: /Event/        
@@ -35,10 +47,10 @@ namespace PraLoup.WebApp.Controllers
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Details(int id)
         {
-            var o = db.Find<Event>(id);
+            var o = Repository.Find<Event>(id);
             EventModel em = new EventModel();
             em.Event = o;
-            em.Permissions = FacebookAccount.Current.GetPermissions(o);
+            em.Permissions = this.AccountBase.GetPermissions(o);
             if (!em.Permissions.HasFlag(Permissions.View))
             {
                 // TODO: what to do when the user doesn't have perms
@@ -53,7 +65,7 @@ namespace PraLoup.WebApp.Controllers
         public ActionResult Create()
         {
             return View();
-        } 
+        }
 
         //
         // POST: /Event/Create
@@ -65,8 +77,8 @@ namespace PraLoup.WebApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Add(e);
-                    db.SaveChanges();
+                    Repository.Add(e);
+                    Repository.SaveChanges();
 
                     return RedirectToAction("Index");
                 }
@@ -81,14 +93,14 @@ namespace PraLoup.WebApp.Controllers
                 return View();
             }
         }
-        
+
         //
         // GET: /Event/Edit/5
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Edit(int id)
         {
             EventModel em = new EventModel();
-            var e = db.Find<Event>(id);
+            var e = Repository.Find<Event>(id);
             if (e == null)
             {
                 // TODO: what to do when there is no such event
@@ -96,7 +108,7 @@ namespace PraLoup.WebApp.Controllers
             }
 
             em.Event = e;
-            em.Permissions = FacebookAccount.Current.GetPermissions(e);
+            em.Permissions = this.AccountBase.GetPermissions(e);
 
             if (!em.Permissions.HasFlag(Permissions.Edit))
             {

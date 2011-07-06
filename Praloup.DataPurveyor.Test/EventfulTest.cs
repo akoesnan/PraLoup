@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PraLoup.DataPurveyor.Service;
+using PraLoup.DataPurveyor.Client;
 
 namespace Praloup.DataPurveyor.Test
 {
@@ -10,7 +10,7 @@ namespace Praloup.DataPurveyor.Test
         [TestMethod]
         public void EventfulFetchData_Success()
         {
-            var eventful = new EventfulService();
+            var eventful = new EventfulClient();
             var events = eventful.GetEventData("seattle");
             Assert.IsNotNull(events, "events should not be null");
             Assert.AreNotEqual(0, events.Count(), "There should be more than 0 events in seattle");

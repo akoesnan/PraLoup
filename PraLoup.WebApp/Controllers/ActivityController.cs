@@ -1,26 +1,44 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using Facebook.Web.Mvc;
 using PraLoup.BusinessLogic;
-using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
-using PraLoup.FacebookObjects;
+using PraLoup.DataAccess.Interfaces;
 using PraLoup.WebApp.Models;
+using PraLoup.Plugins;
 
 namespace PraLoup.WebApp.Controllers
 { 
     public class ActivityController : Controller
     {
-        GenericRepository db = new GenericRepository(new EntityRepository());
+        private IRepository Repository {get;set;}
+        private IEnumerable<IEventAction> EventActionPlugins { get; set; }
+
+        private AccountBase _accountbase;
+
+        private AccountBase AccountBase
+        {
+            get 
+            {
+                if (_accountbase == null) {
+                    _accountbase = new AccountBase(this.Repository, this.EventActionPlugins);
+                }
+                return _accountbase;
+            }
+        }
+
+        public ActivityController(IRepository repository, IEnumerable<IEventAction> eventActionPlugins) {
+            this.Repository = repository;
+            this.EventActionPlugins = eventActionPlugins;
+        }
 
         //
         // GET: /Default1/
 
         public ViewResult Index()
         {
-            var entities = db.GetAll<Activity>();
+            var entities = Repository.GetAll<Activity>();
             List<ActivityModel> ams = new List<ActivityModel>();
             foreach (var am in entities)
             {
@@ -38,7 +56,7 @@ namespace PraLoup.WebApp.Controllers
         public ActionResult Details(int id)
         {
 
-            var o = db.Find<Activity>(id);
+            var o = Repository.Find<Activity>(id);
             Permissions p = FacebookAccount.Current.GetPermissions(o);
             if (!p.HasFlag(Permissions.View))
             {
@@ -66,9 +84,8 @@ namespace PraLoup.WebApp.Controllers
             if (ModelState.IsValid)
             {
                 activity.Organizer = FacebookAccount.Current.GetAccount();
-                db.Add(activity);
-                db.SaveChanges();
-                return RedirectToAction("AddFacebookFriends", new { id = activity.ActivityId });
+                Repository.SaveChanges();
+                return RedirectToAction("AddFacebookFriends", new { id = activity.Id });
             }
 
             return View(activity);
@@ -107,7 +124,7 @@ namespace PraLoup.WebApp.Controllers
         // GET: /Default1/Edit/5 
         public ActionResult Edit(int id)
         {
-            var e = db.Find<Activity>(id);
+            var e = Repository.Find<Activity>(id);
             if (e != null)
             {
                 return View(e);
@@ -125,7 +142,7 @@ namespace PraLoup.WebApp.Controllers
         [HttpPost]
         public ActionResult Edit(Activity activity)
         {
-            return RedirectToAction("AddFacebookFriends", new { id = activity.ActivityId });
+            return RedirectToAction("AddFacebookFriends", new { id = activity.Id });
         }
 
         public ActionResult AcceptInvitation(int id)
@@ -161,7 +178,7 @@ namespace PraLoup.WebApp.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            Repository.Dispose();
             base.Dispose(disposing);
         }
 
@@ -169,7 +186,7 @@ namespace PraLoup.WebApp.Controllers
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult AddFacebookFriends(int id)
         {
-            var e = db.Find<Activity>(id);
+            var e = Repository.Find<Activity>(id);
             if (e != null)
             {
                 return View(e);
@@ -221,14 +238,17 @@ namespace PraLoup.WebApp.Controllers
                 foreach (string token in tokens)
                 {
                     FacebookAccount fa = new FacebookAccount(token);
-                    fas.Add(fa.GetAccount());
+                    //}
+                    //fas.Add(fa.GetAccount());
                 }
-                Invitation i = new Invitation();
-                i.Activity = o;
-                i.CreateDateTime = System.DateTime.Now;
 
-                i.Recipients = new Accounts(fas);
-                found = true;
+                var invitations = fas.Select(a => new Invitation()
+                {
+                    Activity = o,
+                    CreateDateTime = System.DateTime.UtcNow,
+                    Recipient = a
+                });
+                found = true;                 
             }
 
             // return RedirectToAction("Index", "Friends", new { invitationsSent = true });
@@ -238,7 +258,7 @@ namespace PraLoup.WebApp.Controllers
             }
             else
             {
-                var e = db.Find<Event>(id);
+                var e = Repository.Find<Event>(id);
                 if (e != null)
                 {
                     return View(e);

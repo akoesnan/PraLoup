@@ -10,9 +10,16 @@ namespace PraLoup.DataAccess.Enums
     [TypeConverter(typeof(PascalCaseWordSplittingEnumConverter))]
     public enum Privacy
     {
-        Private = 0 ,
+        [FacebookValue("SECRET")]
+        Private = 0,
+
+        [FacebookValue("CLOSED")]
         Friends = 1,
+
+        [FacebookValue("CLOSED")]
         FriendsOfFriend = 2,
-        Public = 3 
-    }
+
+        [FacebookValue("OPEN")]  
+        Public = 3
+    }    
 }

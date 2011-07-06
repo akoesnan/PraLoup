@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PraLoup.DataPurveyor.Service;
+using PraLoup.DataPurveyor.Client;
 
 namespace Praloup.DataPurveyor.Test
 {
@@ -10,14 +10,14 @@ namespace Praloup.DataPurveyor.Test
         [TestMethod]
         public void TestGetGrouponDivisionSuccess()
         {
-            GrouponService g = new GrouponService();
+            GrouponClient g = new GrouponClient();
             var id = g.GetGrouponDivision("Seattle");
             Assert.AreEqual("seattle", id, "The division id of seattle is seattle");
         }
 
         [TestMethod]
         public void TestGetGrouponDealInSeattle() {
-            GrouponService g = new GrouponService();
+            GrouponClient g = new GrouponClient();
             var events = g.GetDataFromDivisionId("seattle");
             Assert.AreNotEqual(0, events.Count(), "there should be more than 0 events in seattle");            
         }
