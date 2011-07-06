@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Facebook.Web.Mvc;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
-using PraLoup.Facebook;
+using PraLoup.FacebookObjects;
 using PraLoup.WebApp.Models;
 using PraLoup.BusinessLogic;
 

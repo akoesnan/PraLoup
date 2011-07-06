@@ -2,7 +2,7 @@ using System;
 using System.Web.Mvc;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
-using PraLoup.Facebook;
+using PraLoup.FacebookObjects;
 using PraLoup.Utilities;
 using PraLoup.WebApp.Models;
 using Facebook.Web;

@@ -5,7 +5,7 @@ using System.Web.Mvc;
 using Facebook.Web.Mvc;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
-using PraLoup.Facebook;
+using PraLoup.FacebookObjects;
 using PraLoup.WebApp.Models;
 
 namespace PraLoup.WebApp.Controllers
@@ -104,6 +104,20 @@ namespace PraLoup.WebApp.Controllers
         public ActionResult Edit(Activity activity)
         {
             return RedirectToAction("AddFacebookFriends", new { id = activity.ActivityId });
+        }
+
+        public ActionResult AcceptInvitation(int id)
+        {
+            var e = db.Find<Activity>(id);
+            if (e != null)
+            {
+                return View(e);
+            }
+            else
+            {
+                // TODO: what to do when there is no such event
+                return RedirectToAction("Index");
+            }
         }
 
         //

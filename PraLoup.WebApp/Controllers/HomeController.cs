@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using Facebook.Web;
 using Facebook.Web.Mvc;
-using PraLoup.Facebook;
+using PraLoup.FacebookObjects;
 
 namespace PraLoup.WebApp.Controllers
 {

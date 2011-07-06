@@ -310,9 +310,9 @@
       <Project>{1CE74374-6A41-41BD-9555-BA441640830B}</Project>
       <Name>PraLoup.DataPurveyor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PraLoup.Facebook\PraLoup.Facebook.csproj">
+    <ProjectReference Include="..\PraLoup.Facebook\PraLoup.FacebookObjects.csproj">
       <Project>{4C9EAD3E-DFC8-42CE-B324-015F3C9BB95C}</Project>
-      <Name>PraLoup.Facebook</Name>
+      <Name>PraLoup.FacebookObjects</Name>
     </ProjectReference>
     <ProjectReference Include="..\Praloup.Utility\Praloup.Utilities.csproj">
       <Project>{CDBDFC6A-C346-4010-B949-306801A5487D}</Project>
@@ -438,6 +438,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Activity\CreateFromEvent.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Activity\AcceptInvitation.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
