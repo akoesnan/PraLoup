@@ -51,10 +51,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\PraLoup.Plugins.csproj">
-      <Project>{5EEF5109-A372-4080-8E3B-3899C80F267F}</Project>
-      <Name>PraLoup.Plugins</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PraLoup.DataAccess\PraLoup.DataAccess.csproj">
       <Project>{699F3369-A9D5-4825-ACBC-41843104A795}</Project>
       <Name>PraLoup.DataAccess</Name>

@@ -36,7 +36,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.BusinessLogic.Test"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.Facebook.Test", "PraLoup.Facebook.Test\PraLoup.Facebook.Test.csproj", "{2BA175B7-EBD2-4E28-B38D-36FA60F83B80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.Plugins", "ClassLibrary1\PraLoup.Plugins.csproj", "{5EEF5109-A372-4080-8E3B-3899C80F267F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.Plugins", "PraLoup.Plugins\PraLoup.Plugins.csproj", "{5EEF5109-A372-4080-8E3B-3899C80F267F}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
