@@ -43,9 +43,14 @@ namespace PraLoup.DataAccess.Entities
         public override bool Equals(object obj)
         {
             var o = obj as Account;
-            
-            return o != null 
-                   && (o.Id == this.Id || o.UserId == this.UserId);            
+
+            return o != null
+                   && (o.Id == this.Id || o.UserId == this.UserId);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

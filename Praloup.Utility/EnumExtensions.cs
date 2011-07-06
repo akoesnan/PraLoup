@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using PraLoup.DataAccess.Enums;
+
 
 namespace PraLoup.Utilities
 {
@@ -18,7 +18,8 @@ namespace PraLoup.Utilities
 
         public static string GetFacebookValue(this Enum enumeration) 
         {
-            return enumeration.GetAttributeValue<FacebookValueAttribute, string>(e => e.FacebookValue);
+           // return enumeration.GetAttributeValue<FacebookValueAttribute, string>(e => e.FacebookValue);
+            return string.Empty;
         }
     }
 }

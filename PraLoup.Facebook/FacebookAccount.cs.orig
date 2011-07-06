@@ -1,102 +1,16 @@
 <<<<<<< HEAD
-﻿using System;
-using System.Linq;
-using System.Web.Security;
-using PraLoup.DataAccess;
-using PraLoup.DataAccess.Entities;
-using PraLoup.Utilities;
-using Facebook;
-using PraLoup.DataAccess.Interfaces;
-
-namespace PraLoup.Facebook
-{
-
-    public class FacebookAccount : MembershipUser
-    {
-        private Account Account { get; set; }
-        public FacebookAccount(OAuthHandler oAuth)
-        {
-
-            string url = "https://graph.facebook.com/me/?access_token=" + oAuth.Token;
-            string json = oAuth.WebRequest(OAuthHandler.Method.GET, url, String.Empty);
-            dynamic jsonobject = json.GetJson();
-            
-            var account = new Account();
-            account.FirstName = jsonobject.first_name;
-            account.FacebookId = jsonobject.id;
-            account.LastName = jsonobject.last_name;
-            account.UserName = jsonobject.name;
-            this.Account = account;
-        }
-
-        public FacebookAccount(OAuthHandler oAuth, string id)
-        {
-            string url = "https://graph.facebook.com/" + id + "/?access_token=" + oAuth.Token;
-            string json = oAuth.WebRequest(OAuthHandler.Method.GET, url, String.Empty);
-            dynamic jsonobject = json.GetJson();
-            
-            var account = new Account();
-            account.FirstName = jsonobject.first_name;
-            account.FacebookId = jsonobject.id;
-            account.LastName = jsonobject.last_name;
-            account.UserName = jsonobject.name;
-            this.Account = account;
-        }
-
-        public bool IsCreated()
-        {
-            EntityRepository er = new EntityRepository();
-
-            var result = from a in er.Accounts
-                         where
-                             a.FacebookId == this.Account.FacebookId
-                         select a;
-
-            if (result.Count<Account>() == 0)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public void Register()
-        {
-            GenericRepository gr = new GenericRepository(new EntityRepository());
-            gr.Add<Account>(this.Account);
-            gr.SaveChanges();
-        }
-
-        public Account GetAccount()
-        {
-            return this.Account;
-        }
-
-        public static void PostToWall(OAuthHandler oAuth)
-        {
-            var ptw = new Wall();
-            ptw.Message = "blank";
-            ptw.Action = "action";
-            ptw.Caption = "caption";
-            ptw.Description = "description";
-            ptw.Link = "http://projectsafari.org";
-            ptw.Name = "name";
-            ptw.Source = "http://www.google.com/images/logos/ps_logo2.png";
-            ptw.AccessToken = oAuth.Token;
-
-            ptw.Post();
-        }
-    }
-=======
 using System;
+using System.Dynamic;
 using System.Linq;
+using Facebook;
 using Facebook.Web;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using PraLoup.Utilities;
 using PraLoup.BusinessLogic;
-﻿
+using PraLoup.DataAccess.Enums;
 
-namespace PraLoup.Facebook
+namespace PraLoup.FacebookObjects
 {
     public class FacebookAccount : AccountBase
     {
@@ -111,11 +25,166 @@ namespace PraLoup.Facebook
                     {
                         if (_cur == null)
                         {
-                            var oAuth = new OAuthHandler();
+                           _cur = new FacebookAccount();
+                        }
+                    }
+                }
+                return _cur;
+            }
+        } 
 
-                            //Get the access token and secret.
-                            oAuth.Token = FacebookWebContext.Current.AccessToken;
-                            _cur = new FacebookAccount(oAuth);
+        public FacebookAccount()
+        {
+            FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
+
+            dynamic jsonobject = fc.Get("me");
+
+            HydrateUserFromJson(jsonobject);
+        }
+
+        public FacebookAccount(string id)
+        {
+            FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
+
+            dynamic json = fc.Get(id);
+
+            HydrateUserFromJson(json);
+        }
+
+        public void HydrateUserFromJson(dynamic jsonobject)
+        {
+            account = AccountBase.Fetch(jsonobject.id);
+            bool create = false;
+            if(account == null)
+            {
+                account = new Account();
+                create = true;
+            }
+            
+            account.FirstName = jsonobject.first_name;
+            account.UserId = jsonobject.id;
+            account.LastName = jsonobject.last_name;
+            account.UserName = jsonobject.name;
+            Register(create);
+        }
+        
+        public static void PostToWall(Event e)
+        {
+            FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
+            dynamic parameters = PopulateParametersForEvent(e);
+            parameters.actions = new
+            {
+                name = "View on Wildfire",
+                link = "http://www.projectsafari.com/"
+            };
+            SetPrivacy(parameters, e.Privacy);
+            dynamic result = fc.Post("me/feed", parameters);
+        }
+
+        public static void PostToWall(Activity a)
+        {
+            FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
+            dynamic parameters = PopulateParametersForEvent(a.Event);
+            parameters.actions = new
+            {
+                name = "View on Wildfire",
+                link = "http://www.projectsafari.com/"
+            };
+            SetPrivacy(parameters, a.Privacy);
+            dynamic result = fc.Post("me/feed", parameters);
+        }
+
+        public void InviteFriend(Activity e, FacebookAccount f)
+        {
+
+        }
+
+        public void SetPrivacy(dynamic obj, Privacy p)
+        {
+            switch(p )
+            {
+                case Privacy.Public:
+                    {
+                        obj.privacy = new
+                        {
+                            value = "EVERYONE",
+                        };
+                        break;
+                    }
+                case Privacy.FriendsOfFriend:
+                    {
+                        obj.privacy = new
+                        {
+                            value = "ALL_FRIENDS",
+                        };
+                        break;
+                    }
+                case Privacy.Friends:
+                    {
+                        obj.privacy = new
+                        {
+                            value = "ALL_FRIENDS",
+                        };
+                        break;
+                    }
+                case Privacy.Private:
+                    {
+                        obj.privacy = new
+                        {
+                            value = "SELF",
+                        };
+                        break;
+                    }
+            }
+        }
+
+        protected static dynamic PopulateParametersForEvent(Event e)
+        {
+            dynamic parameters = new ExpandoObject();
+            parameters.message = e.Venue;
+            parameters.link = e.Url;
+            parameters.picture = "";
+            parameters.name = e.Name;
+            parameters.caption = e.Description;
+            parameters.description = e.Description;
+            parameters.targeting = new
+            {
+                countries = "US",
+                regions = "6,53",
+                locales = "6",
+            };
+            
+            return parameters;
+        }
+    }
+=======
+using System;
+using System.Dynamic;
+using System.Linq;
+using Facebook;
+using Facebook.Web;
+using PraLoup.DataAccess;
+using PraLoup.DataAccess.Entities;
+using PraLoup.Utilities;
+using PraLoup.BusinessLogic;
+using PraLoup.DataAccess.Enums;
+
+namespace PraLoup.FacebookObjects
+{
+    public class FacebookAccount : AccountBase
+    {
+        private static FacebookAccount _cur = null;
+         public static FacebookAccount Current
+        {
+            get
+            {
+                if (_cur == null)
+                {
+                    lock (mutex)
+                    {
+                        if (_cur == null)
+                        {
+                           _cur = new FacebookAccount();
                         }
                     }
                 }
@@ -123,50 +192,129 @@ namespace PraLoup.Facebook
             }
         }
 
-        public FacebookAccount(OAuthHandler oAuth)
+        public FacebookAccount()
         {
+            FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
 
-            string url = "https://graph.facebook.com/me/?access_token=" + oAuth.Token;
-            string json = oAuth.WebRequest(OAuthHandler.Method.GET, url, String.Empty);
-            dynamic jsonobject = json.GetJson();
-            account = new Account();
-            account.FirstName = jsonobject.first_name;
-            account.UserId = jsonobject.id;
-            account.LastName = jsonobject.last_name;
+            dynamic jsonobject = fc.Get("me");
 
-            account.UserName = jsonobject.name;
-
+            HydrateUserFromJson(jsonobject);
         }
 
-        public FacebookAccount(OAuthHandler oAuth, string id)
+        public FacebookAccount(string id)
         {
-            string url = "https://graph.facebook.com/" + id + "/?access_token=" + oAuth.Token;
-            string json = oAuth.WebRequest(OAuthHandler.Method.GET, url, String.Empty);
-            dynamic jsonobject = json.GetJson();
-            account = new Account();
+            FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
+
+            dynamic json = fc.Get(id);
+
+            HydrateUserFromJson(json);
+        }
+
+        public void HydrateUserFromJson(dynamic jsonobject)
+        {
+            account = this.Fetch(jsonobject.id);
+            bool create = false;
+            if(account == null)
+            {
+                account = new Account();
+                create = true;
+            }
+            
             account.FirstName = jsonobject.first_name;
             account.UserId = jsonobject.id;
             account.LastName = jsonobject.last_name;
-
             account.UserName = jsonobject.name;
+            Register(create);
         }
         
-        public static void PostToWall(OAuthHandler oAuth)
+        public static void PostToWall(Event e)
         {
-            var ptw = new Wall();
-            ptw.Message = "blank";
-            ptw.Action = "action";
-            ptw.Caption = "caption";
-            ptw.Description = "description";
-            ptw.Link = "http://projectsafari.org";
-            ptw.Name = "name";
-            ptw.Source = "http://www.google.com/images/logos/ps_logo2.png";
-            ptw.AccessToken = oAuth.Token;
-
-            ptw.Post();
+            FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
+            dynamic parameters = PopulateParametersForEvent(e);
+            parameters.actions = new
+            {
+                name = "View on Wildfire",
+                link = "http://www.projectsafari.com/"
+            };
+            SetPrivacy(parameters, e.Privacy);
+            dynamic result = fc.Post("me/feed", parameters);
         }
 
+        public static void PostToWall(Activity a)
+        {
+            FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
+            dynamic parameters = PopulateParametersForEvent(a.Event);
+            parameters.actions = new
+            {
+                name = "View on Wildfire",
+                link = "http://www.projectsafari.com/"
+            };
+            SetPrivacy(parameters, a.Privacy);
+            dynamic result = fc.Post("me/feed", parameters);
+        }
 
+        public void InviteFriend(Activity e, FacebookAccount f)
+        {
+
+        }
+
+        public void SetPrivacy(dynamic obj, Privacy p)
+        {
+            switch(p )
+            {
+                case Privacy.Public:
+                    {
+                        obj.privacy = new
+                        {
+                            value = "EVERYONE",
+                        };
+                        break;
+                    }
+                case Privacy.FriendsOfFriend:
+                    {
+                        obj.privacy = new
+                        {
+                            value = "ALL_FRIENDS",
+                        };
+                        break;
+                    }
+                case Privacy.Friends:
+                    {
+                        obj.privacy = new
+                        {
+                            value = "ALL_FRIENDS",
+                        };
+                        break;
+                    }
+                case Privacy.Private:
+                    {
+                        obj.privacy = new
+                        {
+                            value = "SELF",
+                        };
+                        break;
+                    }
+            }
+        }
+
+        protected static dynamic PopulateParametersForEvent(Event e)
+        {
+            dynamic parameters = new ExpandoObject();
+            parameters.message = e.Venue;
+            parameters.link = e.Url;
+            parameters.picture = "";
+            parameters.name = e.Name;
+            parameters.caption = e.Description;
+            parameters.description = e.Description;
+            parameters.targeting = new
+            {
+                countries = "US",
+                regions = "6,53",
+                locales = "6",
+            };
+            
+            return parameters;
+        }
     }
->>>>>>> c387eebb75712fcedabe15f49d9c231647099605
+>>>>>>> e68e0c9233b568c7eddf87ea0b1533a9b8d2a841
 }
