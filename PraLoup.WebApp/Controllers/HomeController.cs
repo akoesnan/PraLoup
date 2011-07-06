@@ -29,8 +29,7 @@ namespace PraLoup.WebApp.Controllers
                 //Get the access token and secret.
                 oAuth.Token = FacebookWebContext.Current.AccessToken;
                 Friends f = new Friends(oAuth);
-                FriendsLists fl = new FriendsLists(oAuth);
-            
+                FriendsLists fl = new FriendsLists(oAuth);            
             }
             
             return View();

@@ -1,77 +1,44 @@
-﻿using System;
+using System;
 using System.Linq;
-using System.Web.Security;
+using Facebook.Web;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using PraLoup.Utilities;
-using Facebook;
 using PraLoup.DataAccess.Interfaces;
+using Facebook;
+﻿
 
 namespace PraLoup.Facebook
 {
-
-    public class FacebookAccount : MembershipUser
+    public partial class FacebookAccount 
     {
+        private OAuthHandler OAuth { get; set; }
+        private FacebookClient FbClient { get; set; }
         private Account Account { get; set; }
-        public FacebookAccount(OAuthHandler oAuth)
+
+        private static FacebookAccount _cur = null;
+                
+        public FacebookAccount(FacebookClient fbClient, Account account)            
+        {            
+            this.FbClient = fbClient;
+            this.Account = account;      
+            this.Account = GetFacebookAccount();
+        }        
+
+        private Account GetFacebookAccount()
         {
-
-            string url = "https://graph.facebook.com/me/?access_token=" + oAuth.Token;
-            string json = oAuth.WebRequest(OAuthHandler.Method.GET, url, String.Empty);
-            dynamic jsonobject = json.GetJson();
-            
-            var account = new Account();
-            account.FirstName = jsonobject.first_name;
-            account.FacebookId = jsonobject.id;
-            account.LastName = jsonobject.last_name;
-            account.UserName = jsonobject.name;
-            this.Account = account;
-        }
-
-        public FacebookAccount(OAuthHandler oAuth, string id)
-        {
-            string url = "https://graph.facebook.com/" + id + "/?access_token=" + oAuth.Token;
-            string json = oAuth.WebRequest(OAuthHandler.Method.GET, url, String.Empty);
-            dynamic jsonobject = json.GetJson();
-            
-            var account = new Account();
-            account.FirstName = jsonobject.first_name;
-            account.FacebookId = jsonobject.id;
-            account.LastName = jsonobject.last_name;
-            account.UserName = jsonobject.name;
-            this.Account = account;
-        }
-
-        public bool IsCreated()
-        {
-            EntityRepository er = new EntityRepository();
-
-            var result = from a in er.Accounts
-                         where
-                             a.FacebookId == this.Account.FacebookId
-                         select a;
-
-            if (result.Count<Account>() == 0)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public void Register()
-        {
-            GenericRepository gr = new GenericRepository(new EntityRepository());
-            gr.Add<Account>(this.Account);
-            gr.SaveChanges();
-        }
-
-        public Account GetAccount()
-        {
-            return this.Account;
+            dynamic fbAccount = FbClient.Get("me");                            
+            var acct = new Account();
+            acct.FirstName = fbAccount.first_name;
+            acct.UserId = fbAccount.id;
+            acct.LastName = fbAccount.last_name;
+            acct.UserName = fbAccount.name;
+            return acct;
         }
 
         public static void PostToWall(OAuthHandler oAuth)
         {
+            // use facebook c# sdk method instead...
             var ptw = new Wall();
             ptw.Message = "blank";
             ptw.Action = "action";

@@ -41,14 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\Attributes.cs" />
+    <Compile Include="Client\EventfulClient.cs" />
+    <Compile Include="Client\GrouponClient.cs" />
+    <Compile Include="Client\IEventClient.cs" />
+    <Compile Include="Client\YelpClient.cs" />
     <Compile Include="Converter\EventfulConverter.cs" />
     <Compile Include="Converter\GrouponConverter.cs" />
     <Compile Include="Converter\IEventConverter.cs" />
     <Compile Include="Converter\YelpConverter.cs" />
-    <Compile Include="Service\EventfulService.cs" />
-    <Compile Include="Service\GrouponService.cs" />
-    <Compile Include="Service\IEventService.cs" />
-    <Compile Include="Service\YelpService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PraLoup.DataAccess\PraLoup.DataAccess.csproj">

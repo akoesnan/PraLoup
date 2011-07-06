@@ -18,6 +18,7 @@ namespace PraLoup.DataAccess.Interfaces
         IEnumerable<T> Where<T>(Expression<Func<T, bool>> predicate) where T : class;
         T FirstOrDefault <T>(Expression<Func<T, bool>> preicate) where T : class;
         void Add<T>(T entity) where T:class;
+        void AddAll<T>(IEnumerable<T> entities) where T : class;
         void Delete<T>(T entity) where T:class;
         void SaveChanges();
     }

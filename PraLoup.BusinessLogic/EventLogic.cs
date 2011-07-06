@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using PraLoup.DataAccess.Entities;
+using PraLoup.DataAccess.Enums;
 using PraLoup.DataAccess.Interfaces;
 
-namespace PraLoup.Services
+namespace PraLoup.BusinessLogic
 {
-    public class EventService
+    public class EventLogic
     {
         IRepository Repository { get; set; }
 
-        public EventService(IRepository gr)
+        public EventLogic(IRepository gr)
         {
             this.Repository = gr;
         }
 
-        public Event Save(Event activity)
+        public Activity Save(Activity activity)
         {
             if (activity.Id == 0)
             {
@@ -24,7 +25,7 @@ namespace PraLoup.Services
             }
             else
             {
-                var a = this.Repository.Find<Event>(activity.Id);
+                var a = this.Repository.Find<Activity>(activity.Id);
                 if (a == null)
                 {
                     this.Repository.Add(activity);
@@ -37,12 +38,12 @@ namespace PraLoup.Services
             }
             this.Repository.SaveChanges();
             // TODO: is thsi necessary
-            return this.Repository.Find<Event>(activity.Id);
+            return this.Repository.Find<Activity>(activity.Id);
         }
 
-        public Event Find(Event activity)
+        public Activity Find(Activity activity)
         {
-            return this.Repository.Find<Event>(activity.Id);
+            return this.Repository.Find<Activity>(activity.Id);
         }
     }
 }

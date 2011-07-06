@@ -4,7 +4,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PraLoup.DataPurveyor.Service;
+using PraLoup.DataPurveyor.Client;
 using PraLoup.DataAccess.Entities;
 
 namespace Praloup.DataPurveyor.Test

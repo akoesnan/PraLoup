@@ -1,9 +1,7 @@
-﻿using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ninject;
 using PraLoup.WebApp.App_Start;
 using PraLoup.WebApp.Controllers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PraLoup.WebApp.Tests.Controllers
 {

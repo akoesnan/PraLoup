@@ -1,6 +1,6 @@
 ﻿using Ninject.Modules;
 using PraLoup.DataPurveyor.Attributes;
-using PraLoup.DataPurveyor.Service;
+using PraLoup.DataPurveyor.Client;
 using PraLoup.DataPurveyor.Converter;
 using PraLoup.DataAccess.Interfaces;
 using PraLoup.DataAccess;

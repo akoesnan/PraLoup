@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <configuration>	
 	<system.web>
 		<httpHandlers>
@@ -12,4 +13,20 @@
 				 type="Facebook.Web.FacebookAppRedirectHttpHandler, Facebook.Web" />
 		</handlers>
 	</system.webServer>
+=======
+<configuration>	
+	<system.web>
+		<httpHandlers>
+			<add verb="*" path="facebookredirect.axd"
+				 type="Facebook.Web.FacebookAppRedirectHttpHandler, Facebook.Web" />
+		</httpHandlers>
+	</system.web>
+	
+	<system.webServer>
+		<handlers>
+			<add name="facebookredirect.axd" verb="*" path="facebookredirect.axd"
+				 type="Facebook.Web.FacebookAppRedirectHttpHandler, Facebook.Web" />
+		</handlers>
+	</system.webServer>
+>>>>>>> 8d6fdda124404f2eea2207d3fc53dc1faa69a80b
 </configuration>

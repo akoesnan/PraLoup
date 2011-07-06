@@ -9,13 +9,13 @@ namespace PraLoup.DataAccess
         public DbSet<Event> Events { get; set; }
         public DbSet<Invitation> Invitations { get; set; }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<FacebookUser> FacebookUsers { get; set; }
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Offer> Offers { get; set; }
         public DbSet<MetroArea> MetroAreas { get; set; }
         // NOTE: Enter new entities here
 
-        public IDatabaseInitializer<EntityRepository> DataGenerator { get; private set; }
-        
+        public IDatabaseInitializer<EntityRepository> DataGenerator { get; private set; }        
 
         public EntityRepository(IDatabaseInitializer<EntityRepository> dataGenerator, string nameOrConnectionString)
             : base(nameOrConnectionString) 

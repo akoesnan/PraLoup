@@ -9,5 +9,6 @@ namespace PraLoup.DataAccess.Entities
     {
         public int Id { get; set; }
         public DateTime CreateDateTime { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
     }
 }

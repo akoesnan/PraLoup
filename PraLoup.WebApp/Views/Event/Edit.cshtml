@@ -1,4 +1,4 @@
-﻿@model PraLoup.DataAccess.Entities.Event
+﻿@model PraLoup.WebApp.Models.EventModel
 
 @{
     ViewBag.Title = "Edit";
@@ -14,46 +14,46 @@
     <fieldset>
         <legend>Event</legend>
 
-        @Html.HiddenFor(model => model.EventId)
+        @Html.HiddenFor(model => model.Event.Id)
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.StartDateTime)
+            @Html.LabelFor(model => model.Event.StartDateTime)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.StartDateTime)
-            @Html.ValidationMessageFor(model => model.StartDateTime)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.EndDateTime)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.EndDateTime)
-            @Html.ValidationMessageFor(model => model.EndDateTime)
+            @Html.EditorFor(model => model.Event.StartDateTime)
+            @Html.ValidationMessageFor(model => model.Event.StartDateTime)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
+            @Html.LabelFor(model => model.Event.EndDateTime)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
+            @Html.EditorFor(model => model.Event.EndDateTime)
+            @Html.ValidationMessageFor(model => model.Event.EndDateTime)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
+            @Html.LabelFor(model => model.Event.Name)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Description)
-            @Html.ValidationMessageFor(model => model.Description)
+            @Html.EditorFor(model => model.Event.Name)
+            @Html.ValidationMessageFor(model => model.Event.Name)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Price)
+            @Html.LabelFor(model => model.Event.Description)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Price)
-            @Html.ValidationMessageFor(model => model.Price)
+            @Html.EditorFor(model => model.Event.Description)
+            @Html.ValidationMessageFor(model => model.Event.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Event.Price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Event.Price)
+            @Html.ValidationMessageFor(model => model.Event.Price)
         </div>
 
         <p>

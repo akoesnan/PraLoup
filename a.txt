@@ -1,0 +1,88 @@
+ Volume in drive C has no label.
+ Volume Serial Number is 2875-8226
+
+ Directory of c:\Users\ANDHYK\Dropbox\PraLoup\PraLoup.DataAcess.Tests\obj\Debug
+
+06/18/2011  04:49 PM             5,292 DesignTimeResolveAssemblyReferencesInput (ANDHYKLAPPIE's conflicted copy 2011-06-22).cache
+               1 File(s)          5,292 bytes
+
+ Directory of c:\Users\ANDHYK\Dropbox\PraLoup\PraLoup.DataPurveyor\bin\Debug
+
+05/22/2011  06:58 PM            18,944 PraLoup.DataPurveyor (ANDHYKLAPPIE's conflicted copy 2011-05-23).dll
+05/22/2011  06:58 PM            30,208 PraLoup.DataPurveyor (ANDHYKLAPPIE's conflicted copy 2011-05-23).pdb
+               2 File(s)         49,152 bytes
+
+ Directory of c:\Users\ANDHYK\Dropbox\PraLoup\PraLoup.DataPurveyor\obj\Debug
+
+05/22/2011  06:58 PM            18,944 PraLoup.DataPurveyor (ANDHYKLAPPIE's conflicted copy 2011-05-23).dll
+05/22/2011  06:58 PM            30,208 PraLoup.DataPurveyor (ANDHYKLAPPIE's conflicted copy 2011-05-23).pdb
+               2 File(s)         49,152 bytes
+
+ Directory of c:\Users\ANDHYK\Dropbox\PraLoup\PraLoup.Facebook\bin\Debug
+
+06/18/2011  04:49 PM            15,360 PraLoup.Facebook (ANDHYKLAPPIE's conflicted copy 2011-06-22).dll
+06/18/2011  04:49 PM            36,352 PraLoup.Facebook (ANDHYKLAPPIE's conflicted copy 2011-06-22).pdb
+               2 File(s)         51,712 bytes
+
+ Directory of c:\Users\ANDHYK\Dropbox\PraLoup\PraLoup.Facebook\obj\Debug
+
+05/27/2011  02:48 PM             6,282 DesignTimeResolveAssemblyReferencesInput (ANDHYKLAPPIE's conflicted copy 2011-05-27).cache
+06/11/2011  01:06 PM             6,437 DesignTimeResolveAssemblyReferencesInput (ANDHYKLAPPIE's conflicted copy 2011-06-11).cache
+06/18/2011  04:49 PM            15,360 PraLoup.Facebook (ANDHYKLAPPIE's conflicted copy 2011-06-22).dll
+06/18/2011  04:49 PM            36,352 PraLoup.Facebook (ANDHYKLAPPIE's conflicted copy 2011-06-22).pdb
+               4 File(s)         64,431 bytes
+
+ Directory of c:\Users\ANDHYK\Dropbox\PraLoup\PraLoup.Services
+
+06/18/2011  04:47 PM             2,707 PraLoup.Services (ANDHYKLAPPIE's conflicted copy 2011-06-22).csproj
+               1 File(s)          2,707 bytes
+
+ Directory of c:\Users\ANDHYK\Dropbox\PraLoup\PraLoup.Services.Test
+
+06/22/2011  12:45 AM             2,297 AccountServiceTest (ANDHYKLAPPIE's conflicted copy 2011-06-22).cs
+06/22/2011  12:45 AM               394 ActivityServiceTest (ANDHYKLAPPIE's conflicted copy 2011-06-22).cs
+06/18/2011  04:47 PM             1,999 EventServiceTest (ANDHYKLAPPIE's conflicted copy 2011-06-22).cs
+06/22/2011  12:45 AM             4,150 PraLoup.Services.Test (ANDHYKLAPPIE's conflicted copy 2011-06-22).csproj
+               4 File(s)          8,840 bytes
+
+ Directory of c:\Users\ANDHYK\Dropbox\PraLoup\PraLoup.Services.Test\obj\Debug
+
+06/18/2011  04:49 PM           124,329 ResolveAssemblyReference (ANDHYKLAPPIE's conflicted copy 2011-06-22).cache
+               1 File(s)        124,329 bytes
+
+ Directory of c:\Users\ANDHYK\Dropbox\PraLoup\PraLoup.WebApp\App_Data
+
+06/06/2011  09:14 PM           217,088 EntityRepository (ANDHYKLAPPIE's conflicted copy 2011-06-06).sdf
+               1 File(s)        217,088 bytes
+
+ Directory of c:\Users\ANDHYK\Dropbox\PraLoup\PraLoup.WebApp\bin
+
+06/18/2011  04:49 PM            15,360 PraLoup.Facebook (ANDHYKLAPPIE's conflicted copy 2011-06-22).dll
+06/18/2011  04:49 PM            36,352 PraLoup.Facebook (ANDHYKLAPPIE's conflicted copy 2011-06-22).pdb
+               2 File(s)         51,712 bytes
+
+ Directory of c:\Users\ANDHYK\Dropbox\PraLoup\PraLoup.WebApp\obj\Debug
+
+06/18/2011  04:49 PM           118,454 ResolveAssemblyReference (ANDHYKLAPPIE's conflicted copy 2011-06-22).cache
+               1 File(s)        118,454 bytes
+
+ Directory of c:\Users\ANDHYK\Dropbox\PraLoup\PraLoup.WebApp.Test\bin\Debug
+
+05/22/2011  06:58 PM            18,944 PraLoup.DataPurveyor (ANDHYKLAPPIE's conflicted copy 2011-05-23).dll
+05/22/2011  06:58 PM            30,208 PraLoup.DataPurveyor (ANDHYKLAPPIE's conflicted copy 2011-05-23).pdb
+05/22/2011  08:23 PM            22,016 PraLoup.WebApp (ANDHYKLAPPIE's conflicted copy 2011-05-23).dll
+05/22/2011  08:23 PM            75,264 PraLoup.WebApp (ANDHYKLAPPIE's conflicted copy 2011-05-23).pdb
+05/22/2011  08:23 PM             6,656 PraLoup.WebApp.Tests (ANDHYKLAPPIE's conflicted copy 2011-05-23).dll
+05/22/2011  08:23 PM            17,920 PraLoup.WebApp.Tests (ANDHYKLAPPIE's conflicted copy 2011-05-23).pdb
+               6 File(s)        171,008 bytes
+
+ Directory of c:\Users\ANDHYK\Dropbox\PraLoup\PraLoup.WebApp.Test\obj\Debug
+
+05/22/2011  08:23 PM             6,656 PraLoup.WebApp.Tests (ANDHYKLAPPIE's conflicted copy 2011-05-23).dll
+05/22/2011  08:23 PM            17,920 PraLoup.WebApp.Tests (ANDHYKLAPPIE's conflicted copy 2011-05-23).pdb
+05/22/2011  08:23 PM           140,578 ResolveAssemblyReference (ANDHYKLAPPIE's conflicted copy 2011-05-23).cache
+               3 File(s)        165,154 bytes
+
+     Total Files Listed:
+              30 File(s)      1,079,031 bytes
+               0 Dir(s)  454,695,919,616 bytes free

@@ -4,7 +4,7 @@ using PraLoup.Utilities;
 using PraLoup.DataPurveyor.Converter;
 using System;
 
-namespace PraLoup.DataPurveyor.Service
+namespace PraLoup.DataPurveyor.Client
 {
     public class EventfulClient : IEventClient
     {

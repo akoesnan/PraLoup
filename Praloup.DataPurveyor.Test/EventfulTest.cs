@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PraLoup.DataPurveyor.Service;
+using PraLoup.DataPurveyor.Client;
 
 namespace Praloup.DataPurveyor.Test
 {

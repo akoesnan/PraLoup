@@ -145,6 +145,14 @@
     <value>HappyHours</value>
     <comment>Text for Happy Hours</comment>
   </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Log In</value>
+    <comment>Text for Log In </comment>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Log Out </value>
+    <comment>Text for Log Out</comment>
+  </data>
   <data name="Menu_Admin" xml:space="preserve">
     <value>Administrator</value>
     <comment>Text for Administrator</comment>

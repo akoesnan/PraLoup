@@ -4,7 +4,7 @@ using PraLoup.DataAccess.Entities;
 using PraLoup.Utilities;
 using PraLoup.DataPurveyor.Converter;
 
-namespace PraLoup.DataPurveyor.Service
+namespace PraLoup.DataPurveyor.Client
 {
     public class GrouponClient : IEventClient
     {

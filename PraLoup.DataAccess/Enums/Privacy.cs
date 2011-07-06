@@ -7,9 +7,16 @@ namespace PraLoup.DataAccess.Enums
 {
     public enum Privacy
     {
+        [FacebookValue("SECRET")]
         Private,
+
+        [FacebookValue("CLOSED")]
         Friends,
+
+        [FacebookValue("CLOSED")]
         FriendsOfFriend,
+
+        [FacebookValue("OPEN")]  
         Public
-    }
+    }    
 }

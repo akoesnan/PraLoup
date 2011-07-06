@@ -40,6 +40,21 @@ namespace PraLoup.DataAccess
             return this.DbContext.Set<T>().Find(keys);
         }
 
+        public IEnumerable<T> Where<T>(ISpecification<T> criteria) where T : class
+        {
+            return criteria.Where(GetQuery<T>());
+        }
+        
+        public T First<T>(ISpecification<T> criteria) where T : class
+        {
+            return criteria.First(GetQuery<T>());
+        }
+
+        public bool Any<T>(ISpecification<T> criteria) where T : class
+        {
+            return criteria.Any(GetQuery<T>());
+        }
+
         public IEnumerable<T> Where<T>(Expression<Func<T, bool>> predicate) where T : class
         {            
             return this.DbContext.Set<T>().Where(predicate);
@@ -53,6 +68,14 @@ namespace PraLoup.DataAccess
         public void Add<T>(T entity) where T : class
         {
             this.DbContext.Set<T>().Add(entity);
+        }
+
+        public void AddAll<T>(IEnumerable<T> entities) where T : class
+        {
+            foreach (var e in entities)
+            {
+                this.DbContext.Set<T>().Add(e);
+            }
         }
 
         public void Delete<T>(T entity) where T : class

@@ -21,7 +21,7 @@ namespace PraLoup.DataAccess.Entities
             this.Sender = sender;
             this.CreateDateTime = DateTime.UtcNow;
             // by default response is null
-            this.InvitationResponse = null;
+            this.InvitationResponse = new InvitationResponse();
         }
 
         public Activity Activity { get; set; }

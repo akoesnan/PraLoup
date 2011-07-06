@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <configuration>
 	<configSections>
 		<section name="facebookSettings" type="Facebook.FacebookConfigurationSection"/>
@@ -6,4 +7,14 @@
 	<facebookSettings
 		appId="{app id}"
 		appSecret="{app secret}" />
+=======
+<configuration>
+	<configSections>
+		<section name="facebookSettings" type="Facebook.FacebookConfigurationSection"/>
+	</configSections>
+
+	<facebookSettings
+		appId="{app id}"
+		appSecret="{app secret}" />
+>>>>>>> 8d6fdda124404f2eea2207d3fc53dc1faa69a80b
 </configuration>

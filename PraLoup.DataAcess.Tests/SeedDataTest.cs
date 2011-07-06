@@ -11,7 +11,7 @@ namespace PraLoup.DataAcess.Tests
     public class SeedDataTest
     {
         [TestMethod]
-        public void ValidateAllEntries()
+        public void ValidateAccountsCreated()
         {
             
 

@@ -14,7 +14,7 @@ namespace PraLoup.DataAccess.Entities
         public int Id { get; set; }
 
         [MaxLength(25)]
-        public string FacebookId { get; set; }
+        public string UserId { get; set; }
 
         [MaxLength(50)]
         [Required(ErrorMessage = "Firstname is required")]
@@ -36,5 +36,16 @@ namespace PraLoup.DataAccess.Entities
         public string TwitterId { get; set; }
 
         public Address Address { get; set; }
+
+        // TODO: what is the representation of this friends? should we store it as array of ids instead?
+        public string Friends { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var o = obj as Account;
+            
+            return o != null 
+                   && (o.Id == this.Id || o.UserId == this.UserId);            
+        }
     }
 }

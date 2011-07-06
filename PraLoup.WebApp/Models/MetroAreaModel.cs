@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using PraLoup.DataAccess.Entities;
-using PraLoup.DataPurveyor.Service;
+using PraLoup.DataPurveyor.Client;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Interfaces;
 
@@ -24,7 +24,7 @@ namespace PraLoup.WebApp.Models
             {
                 if (this.supportedMetros == null)
                 {
-                    this.supportedMetros = Repository.GetAll<MetroArea>();
+                    this.supportedMetros = Repository.GetAll<MetroArea>().ToList();
                 }
                 return this.supportedMetros;
             }

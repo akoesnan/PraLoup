@@ -4,7 +4,7 @@ using PraLoup.DataAccess.Entities;
 using PraLoup.DataPurveyor.Converter;
 using PraLoup.Utilities;
 
-namespace PraLoup.DataPurveyor.Service
+namespace PraLoup.DataPurveyor.Client
 {
     public class YelpClient : IEventClient
     {
