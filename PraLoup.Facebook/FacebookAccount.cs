@@ -30,7 +30,7 @@ namespace PraLoup.FacebookObjects
                 }
                 return _cur;
             }
-        }
+        } 
 
         public FacebookAccount()
         {

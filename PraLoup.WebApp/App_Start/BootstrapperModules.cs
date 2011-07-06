@@ -19,7 +19,7 @@ namespace PraLoup.WebApp.App_Start
         {
             this.Bind<IEventService>().To<GrouponService>().WhenTargetHas<DealsAttributes>();
             this.Bind<IEventService>().To<EventfulService>().WhenTargetHas<EventsAttributes>();
-            this.Bind<IEventService>().To<YelpService>().WhenTargetHas<HappyHourAttributes>();            
+            this.Bind<IEventService>().To<YelpService>().WhenTargetHas<HappyHourAttributes>();
         }
     }
 
