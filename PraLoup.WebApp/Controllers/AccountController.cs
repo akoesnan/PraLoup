@@ -35,10 +35,7 @@ namespace ProjectSafari.Controllers
         public bool Register() 
         {
             FacebookAccount fa = new FacebookAccount();
-            if (!fa.IsCreated())
-            {
-                fa.Register();
-            }
+            
             return true;
         }
     }

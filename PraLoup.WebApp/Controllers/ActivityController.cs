@@ -202,7 +202,8 @@ namespace PraLoup.WebApp.Controllers
                 }
                 found = true;
             }
-             var o = db.Find<Activity>(id);
+
+            var o = db.Find<Activity>(id);
             //both the uncondensed and condensed fb:form-request will contain a key called "id[]" which will contain a list of facebook id's
             if (results.Any(s => s.Key == "ids[]"))
             {
@@ -212,11 +213,6 @@ namespace PraLoup.WebApp.Controllers
                 foreach (string token in tokens)
                 {
                     FacebookAccount fa = new FacebookAccount(token);
-                    if (!fa.IsCreated())
-                    {
-                        fa.Register();
-                    }
-
                     fas.Add(fa.GetAccount());
                 }
                 Invitation i = new Invitation();

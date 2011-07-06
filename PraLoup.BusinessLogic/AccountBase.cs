@@ -43,26 +43,29 @@ namespace PraLoup.BusinessLogic
             }
         }
 
-        public bool IsCreated()
+        /// <summary>
+        /// Fetch from store
+        /// </summary>
+        /// <returns>true if fetch was successful</returns>
+        public static Account Fetch(string UserId)
         {
             EntityRepository er = new EntityRepository();
 
             var result = from a in er.Accounts
                          where
-                             a.UserId == account.UserId
+                             a.UserId == UserId
                          select a;
-
-            if (result.Count<Account>() != 0)
-            {
-                return true;
-            }
-            return false;
+            
+            return result.FirstOrDefault();
         }
 
-        public void Register()
+        protected void Register(bool create)
         {
             GenericRepository gr = new GenericRepository(new EntityRepository());
-            gr.Add<Account>(account);
+            if (create)
+            {
+                gr.Add<Account>(account);
+            }
             gr.SaveChanges();
         }
 

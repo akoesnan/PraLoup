@@ -36,9 +36,9 @@ namespace PraLoup.FacebookObjects
         {
             FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
 
-            string json = fc.Get("me").ToString();
+            dynamic jsonobject = fc.Get("me").ToString();
 
-            HydrateUserFromJson(json);
+            HydrateUserFromJson(jsonobject);
         }
 
         public FacebookAccount(string id)
@@ -50,14 +50,21 @@ namespace PraLoup.FacebookObjects
             HydrateUserFromJson(json);
         }
 
-        public void HydrateUserFromJson(string json)
+        public void HydrateUserFromJson(dynamic jsonobject)
         {
-            dynamic jsonobject = json.GetJson();
-            account = new Account();
+            account = this.Fetch(jsonobject.id);
+            bool create = false;
+            if(account == null)
+            {
+                account = new Account();
+                create = true;
+            }
+            
             account.FirstName = jsonobject.first_name;
             account.UserId = jsonobject.id;
             account.LastName = jsonobject.last_name;
             account.UserName = jsonobject.name;
+            Register(create);
         }
         
         public static void PostToWall(Event e)
