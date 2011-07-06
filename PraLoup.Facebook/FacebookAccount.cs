@@ -36,7 +36,7 @@ namespace PraLoup.FacebookObjects
         {
             FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
 
-            dynamic jsonobject = fc.Get("me").ToString();
+            dynamic jsonobject = fc.Get("me");
 
             HydrateUserFromJson(jsonobject);
         }
@@ -45,7 +45,7 @@ namespace PraLoup.FacebookObjects
         {
             FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
 
-            string json = fc.Get(id).ToString();
+            dynamic json = fc.Get(id);
 
             HydrateUserFromJson(json);
         }
