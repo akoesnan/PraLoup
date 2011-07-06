@@ -7,6 +7,8 @@ using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Interfaces;
 using PraLoup.WebApp.Models;
 using PraLoup.Plugins;
+using PraLoup.FacebookObjects;
+using System;
 
 namespace PraLoup.WebApp.Controllers
 { 
@@ -43,7 +45,7 @@ namespace PraLoup.WebApp.Controllers
             foreach (var am in entities)
             {
                 ActivityModel em = new ActivityModel();
-                em.Permissions = FacebookAccount.Current.GetPermissions(am);
+                em.Permissions = this.AccountBase.GetPermissions(am);
                 em.Activity = am;
                 ams.Add(em);
             }
@@ -57,7 +59,7 @@ namespace PraLoup.WebApp.Controllers
         {
 
             var o = Repository.Find<Activity>(id);
-            Permissions p = FacebookAccount.Current.GetPermissions(o);
+            Permissions p = this.AccountBase.GetPermissions(o);
             if (!p.HasFlag(Permissions.View))
             {
                 return RedirectToAction("Index");
@@ -83,7 +85,7 @@ namespace PraLoup.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                activity.Organizer = FacebookAccount.Current.GetAccount();
+                activity.Organizer = this.AccountBase.GetAccount();
                 Repository.SaveChanges();
                 return RedirectToAction("AddFacebookFriends", new { id = activity.Id });
             }
@@ -95,7 +97,8 @@ namespace PraLoup.WebApp.Controllers
         {
             // create the activity and save it, that way we can fetch this stuff again later.
             Activity f = new Activity();
-            f.Event = db.Find<Event>(id);
+            am.Activity.Event = this.Repository.Find<Event>(id);
+
             f.Organizer = FacebookAccount.Current.GetAccount();
             f.IsCreated = false;
             db.Add(f);
@@ -112,10 +115,12 @@ namespace PraLoup.WebApp.Controllers
             {
                 //fetch item from db, fix updated fields
                 Activity dba = db.Find<Activity>(am.ActivityId);
+
+                dba.UpdatedTime = DateTime.UtcNow;
+                
                 dba.Privacy = am.Privacy;
                 dba.IsCreated = true;
-                db.SaveChanges();
-                return RedirectToAction("AddFacebookFriends", new { id = am.ActivityId });
+                return RedirectToAction("AddFacebookFriends", new { id = am.Id });
             }
 
             return View(am);
@@ -147,7 +152,7 @@ namespace PraLoup.WebApp.Controllers
 
         public ActionResult AcceptInvitation(int id)
         {
-            var e = db.Find<Activity>(id);
+            var e = this.Repository.Find<Activity>(id);
             if (e != null)
             {
                 return View(e);
@@ -228,7 +233,7 @@ namespace PraLoup.WebApp.Controllers
             }
             */
 
-            var o = db.Find<Activity>(id);
+            var o = this.Repository.Find<Activity>(id);
             //both the uncondensed and condensed fb:form-request will contain a key called "id[]" which will contain a list of facebook id's
             if (results.Any(s => s.Key == "ids[]"))
             {
@@ -242,12 +247,8 @@ namespace PraLoup.WebApp.Controllers
                     //fas.Add(fa.GetAccount());
                 }
 
-                var invitations = fas.Select(a => new Invitation()
-                {
-                    Activity = o,
-                    CreateDateTime = System.DateTime.UtcNow,
-                    Recipient = a
-                });
+                var invitations = fas.Select(a => new Invitation(this.AccountBase.GetAccount(), a, o, "invite message"));
+                
                 found = true;                 
             }
 

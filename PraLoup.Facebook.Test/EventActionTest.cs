@@ -7,6 +7,7 @@ using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Enums;
 using Moq;
 using PraLoup.DataAccess.Interfaces;
+using PraLoup.FacebookObjects;
 
 namespace PraLoup.Facebook.Test
 {

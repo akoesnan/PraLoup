@@ -37,12 +37,12 @@
     <tr>
         <td>
         @if(item.Permissions.HasFlag(PraLoup.BusinessLogic.Permissions.Edit)){
-            @Html.ActionLink("Edit", "Edit", new { id=item.Event.EventId })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Event.Id })
         }
-        @Html.ActionLink("Details", "Details", new { id = item.Event.EventId }) 
+        @Html.ActionLink("Details", "Details", new { id = item.Event.Id }) 
         @if (item.Permissions.HasFlag(PraLoup.BusinessLogic.Permissions.Delete))
         {
-            @Html.ActionLink("Delete", "Delete", new { id = item.Event.EventId })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Event.Id })
         }
         </td>
         <td>

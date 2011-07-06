@@ -30,12 +30,12 @@ namespace PraLoup.WebApp.Controllers
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Index()
         {
-            var entities = db.GetAll<Event>();
+            var entities = this.Repository.GetAll<Event>();
             List<EventModel> ens = new List<EventModel>();
             foreach (var en in entities)
             {
                 EventModel em = new EventModel();
-                em.Permissions = FacebookAccount.Current.GetPermissions(en);
+                em.Permissions = this.AccountBase.GetPermissions(en);
                 em.Event = en;
                 ens.Add(em);
             }
