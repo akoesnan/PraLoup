@@ -1,7 +1,7 @@
 ﻿using System;
 using Facebook;
 
-namespace PraLoup.Facebook
+namespace PraLoup.FacebookObjects
 {
     public class PraLoupFacebookApplication : IFacebookApplication
     {

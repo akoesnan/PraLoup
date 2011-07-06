@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using PraLoup.Utilities;
 
-namespace PraLoup.Facebook
+namespace PraLoup.FacebookObjects
 {
 
     public class Wall

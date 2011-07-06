@@ -39,13 +39,20 @@ namespace PraLoup.BusinessLogic
         {
             get
             {
-                if (Friends == null)
+                if (_friends == null)
                 {
                     lock (mutex)
                     {
-                        if (Friends == null)
+                        if (_friends == null)
                         {
-                            _friends = account.Friends.Split(new char[] { ';' });
+                            if (String.IsNullOrEmpty(account.Friends))
+                            {
+                                _friends = new string[] { };
+                            }
+                            else
+                            {
+                                _friends = account.Friends.Split(new char[] { ';' });
+                            }
                         }
                     }
                 }
@@ -53,7 +60,11 @@ namespace PraLoup.BusinessLogic
             }
         }
 
-        public Account Find(Account account)
+        /// <summary>
+        /// Fetch from store
+        /// </summary>
+        /// <returns>true if fetch was successful</returns>
+        public static Account Fetch(string UserId)
         {
             // find by account id
             if (account.Id != 0)
@@ -64,15 +75,22 @@ namespace PraLoup.BusinessLogic
             else if (!string.IsNullOrEmpty(account.UserName))
             {
                 return FindByUserName(account.UserName);
+            }else {
+                 var result = from a in er.Accounts
+                         where
+                             a.UserId == UserId
+                         select a;
+            
+                  return result.FirstOrDefault();
             }
-            return null;
+            
         }
 
         private Account FindById(int id)
         {
             return this.Repository.Find<Account>(id);
         }
-
+            
         private Account FindByUserName(string userName)
         {
             return this.Repository.FirstOrDefault<Account>(a => String.Equals(userName, a.UserName, StringComparison.InvariantCultureIgnoreCase));
@@ -84,10 +102,12 @@ namespace PraLoup.BusinessLogic
             return Find(account) != null;
         }
 
-        public void Register()
+        protected void Register(bool create)
         {
             this.Repository.Add<Account>(account);
             this.Repository.SaveChanges();
+            {
+            }
         }
 
         public Account GetAccount()
@@ -98,8 +118,19 @@ namespace PraLoup.BusinessLogic
         public Permissions GetPermissions(Event e)
         {
             Permissions mask = Permissions.EmptyMask;
+            bool isOwner = false;
+            bool isFriend = false;
+            bool isFriendOfFriend = false;
 
-            bool isOwner = e.Organizers.Any(x => x.Id == this.account.Id);
+            if (e.Organizers != null)
+            {
+                isOwner = e.Organizers.Any(x => x.Id == this.account.Id);
+                foreach (var x in e.Organizers)
+                {
+                    isFriend |= this.IsFriend(x);
+                    isFriendOfFriend |= this.IsFriendOfFriend(x);
+                }
+            }
 
             if (isOwner)
             {
@@ -109,9 +140,7 @@ namespace PraLoup.BusinessLogic
                 mask |= Permissions.Modify;
             }
 
-            bool isFriend = false;
-            bool isFriendOfFriend = false;
-
+            
             switch (e.Privacy)
             {
                 // public event can be viewed, shared and accpeted by everyone 
@@ -122,6 +151,13 @@ namespace PraLoup.BusinessLogic
                     break;
                 // friend only event can be viewed and accpeted by friends and owner only
                 case DataAccess.Enums.Privacy.Friends:
+                    if (e.Organizers != null)
+                    {
+                        foreach (var x in e.Organizers)
+                        {
+                            isFriend |= this.IsFriend(x);
+                        }
+                    }
                     if (isFriend || isOwner)
                     {
                         mask |= Permissions.View;
@@ -130,6 +166,14 @@ namespace PraLoup.BusinessLogic
                     break;
                 // friend of friend can view and accept 
                 case DataAccess.Enums.Privacy.FriendsOfFriend:
+                    if (e.Organizers != null)
+                    {
+                        foreach (var x in e.Organizers)
+                        {
+                            isFriend |= this.IsFriend(x);
+                            isFriendOfFriend |= this.IsFriendOfFriend(x);
+                        }
+                    }
                     if (isFriendOfFriend || isFriend || isOwner)
                     {
                         mask |= Permissions.View;
@@ -146,6 +190,7 @@ namespace PraLoup.BusinessLogic
                     }
                     break;
             }
+            mask |= Permissions.View;
             return mask;
         }
 
@@ -156,6 +201,10 @@ namespace PraLoup.BusinessLogic
 
         public bool IsFriendOfFriend(Account ab)
         {
+            if (String.IsNullOrEmpty(ab.Friends))
+            {
+                return false;
+            }
             string[] friends = ab.Friends.Split(new char[] { ';' });
             var result = from a in this.Friends
                          where friends.Any(c => c == a)
@@ -168,6 +217,20 @@ namespace PraLoup.BusinessLogic
         {
             Permissions mask = Permissions.EmptyMask;
             bool isOwner = activity.Organizer.Id == this.account.Id;
+            bool isFriend = false;
+            bool isFriendOfFriend = false;
+            bool isInvited = false;
+
+            if (e.Organizer != null)
+            {
+                isOwner = e.Organizer.Id == this.account.Id;
+                if (!isOwner)
+                {
+                    isFriend = IsFriend(e.Organizer);
+                    isFriendOfFriend = IsFriendOfFriend(e.Organizer);
+                    isInvited = IsInvited(e.Invites);
+                }
+            }
 
             if (isOwner)
             {
@@ -177,11 +240,7 @@ namespace PraLoup.BusinessLogic
                 mask |= Permissions.Modify;
                 mask |= Permissions.InviteGuests;
             }            
-
-            bool isFriend = IsFriend(activity.Organizer);
-            bool isFriendOfFriend = IsFriendOfFriend(activity.Organizer);
-            bool isInvited = this.EventActions.IsInvited(activity);
-
+            
             if (isInvited)
             {
                 mask |= Permissions.Accept;
@@ -214,7 +273,10 @@ namespace PraLoup.BusinessLogic
                 case DataAccess.Enums.Privacy.Private:
                     break;
             }
-
+            if (mask != Permissions.EmptyMask)
+            {
+                mask |= Permissions.View;
+            }
             return mask;
         }
 

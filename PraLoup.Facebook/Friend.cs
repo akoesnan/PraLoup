@@ -8,7 +8,7 @@ using Facebook;
 using Facebook.Web;
 
 
-namespace PraLoup.Facebook
+namespace PraLoup.FacebookObjects
 {
     public class Friends
     {

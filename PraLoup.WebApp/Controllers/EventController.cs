@@ -1,9 +1,10 @@
 ﻿using System.Web.Mvc;
 using System.Linq;
+using System.Collections.Generic;
 using Facebook.Web.Mvc;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
-using PraLoup.Facebook;
+using PraLoup.FacebookObjects;
 using PraLoup.WebApp.Models;
 using PraLoup.BusinessLogic;
 using PraLoup.DataAccess.Interfaces;
@@ -29,8 +30,16 @@ namespace PraLoup.WebApp.Controllers
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Index()
         {
-            var entities = Repository.GetAll<Event>().ToList();
-            return View(entities);
+            var entities = db.GetAll<Event>();
+            List<EventModel> ens = new List<EventModel>();
+            foreach (var en in entities)
+            {
+                EventModel em = new EventModel();
+                em.Permissions = FacebookAccount.Current.GetPermissions(en);
+                em.Event = en;
+                ens.Add(em);
+            }
+            return View(ens);
         }
 
         //
@@ -47,7 +56,7 @@ namespace PraLoup.WebApp.Controllers
                 // TODO: what to do when the user doesn't have perms
                 return RedirectToAction("Index");
             }
-            return View(o);
+            return View(em);
         }
 
         //
@@ -107,7 +116,7 @@ namespace PraLoup.WebApp.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(e);
+            return View(em);
         }
 
         //

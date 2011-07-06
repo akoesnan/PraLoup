@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.DataAccess", "PraLoup.DataAccess\PraLoup.DataAccess.csproj", "{699F3369-A9D5-4825-ACBC-41843104A795}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.Facebook", "PraLoup.Facebook\PraLoup.Facebook.csproj", "{4C9EAD3E-DFC8-42CE-B324-015F3C9BB95C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.FacebookObjects", "PraLoup.Facebook\PraLoup.FacebookObjects.csproj", "{4C9EAD3E-DFC8-42CE-B324-015F3C9BB95C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.WebApp", "PraLoup.WebApp\PraLoup.WebApp.csproj", "{B23CD01A-9405-411E-ABC2-4CDB64194C15}"
 EndProject

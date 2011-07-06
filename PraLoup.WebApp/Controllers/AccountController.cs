@@ -2,7 +2,7 @@ using System;
 using System.Web.Mvc;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
-using PraLoup.Facebook;
+using PraLoup.FacebookObjects;
 using PraLoup.Utilities;
 using PraLoup.WebApp.Models;
 using Facebook.Web;
@@ -57,7 +57,7 @@ namespace ProjectSafari.Controllers
             else
             {
                 FacebookWebAuthorizer fwa = new FacebookWebAuthorizer(new PraLoupFacebookApplication(), HttpContext);
-                fwa.Permissions = new string[] { "publish_stream" };
+                 fwa.Permissions = new string[]{"publish_stream","user_about_me","read_friendlists"};
                 fwa.ReturnUrlPath = returnUrl;
                 fwa.CancelUrlPath = returnUrl;
                 if (fwa.Authorize())
@@ -80,20 +80,8 @@ namespace ProjectSafari.Controllers
 
         public bool Register()
         {
-            var oAuth = new OAuthHandler();
-
-            //Get the access token and secret.
-            oAuth.Token = FacebookWebContext.Current.AccessToken;
-            if (oAuth.Token.Length > 0)
-            {
-                bool notregistered = this.AccountBase.IsCreated();
-
-                if (notregistered)
-                {
-                    this.AccountBase.Register();
-                }
-            }
-            Response.Cookies.Add(new System.Web.HttpCookie("LoggedIn", oAuth.Token));
+            FacebookAccount fa = new FacebookAccount();
+            
             return true;
         }
 

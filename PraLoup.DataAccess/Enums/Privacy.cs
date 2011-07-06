@@ -5,18 +5,19 @@ using System.Text;
 
 namespace PraLoup.DataAccess.Enums
 {
+
     public enum Privacy
     {
         [FacebookValue("SECRET")]
-        Private,
+        Private = 0,
 
         [FacebookValue("CLOSED")]
-        Friends,
+        Friends = 1,
 
         [FacebookValue("CLOSED")]
-        FriendsOfFriend,
+        FriendsOfFriend = 2,
 
         [FacebookValue("OPEN")]  
-        Public
+        Public = 3
     }    
 }

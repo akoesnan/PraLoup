@@ -24,7 +24,7 @@ namespace PraLoup.DataAccess.Entities
         [Required(ErrorMessage = "Lastname is required")]
         public string LastName { get; set; }
 
-        [MaxLength(15)]
+        [MaxLength(100)]
         [Required(ErrorMessage = "UserName is required")]
         public string UserName { get; set; }
 

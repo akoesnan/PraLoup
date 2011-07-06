@@ -5,7 +5,7 @@ using Facebook.Web.Mvc;
 using PraLoup.BusinessLogic;
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Interfaces;
-using PraLoup.Facebook;
+using PraLoup.WebApp.Models;
 using PraLoup.Plugins;
 
 namespace PraLoup.WebApp.Controllers
@@ -39,16 +39,29 @@ namespace PraLoup.WebApp.Controllers
         public ViewResult Index()
         {
             var entities = Repository.GetAll<Activity>();
-            return View(entities);
+            List<ActivityModel> ams = new List<ActivityModel>();
+            foreach (var am in entities)
+            {
+                ActivityModel em = new ActivityModel();
+                em.Permissions = FacebookAccount.Current.GetPermissions(am);
+                em.Activity = am;
+                ams.Add(em);
+            }
+            return View(ams);
         }
 
         //
         // GET: /Default1/Details/5
 
-        public ViewResult Details(int id)
+        public ActionResult Details(int id)
         {
 
             var o = Repository.Find<Activity>(id);
+            Permissions p = FacebookAccount.Current.GetPermissions(o);
+            if (!p.HasFlag(Permissions.View))
+            {
+                return RedirectToAction("Index");
+            }
             return View(o);
           
         }
@@ -59,8 +72,9 @@ namespace PraLoup.WebApp.Controllers
         public ActionResult Create()
         {
             return View();
-        } 
+        }
 
+      
         //
         // POST: /Default1/Create
 
@@ -69,14 +83,37 @@ namespace PraLoup.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                Repository.Add(activity);
+                activity.Organizer = FacebookAccount.Current.GetAccount();
                 Repository.SaveChanges();
                 return RedirectToAction("AddFacebookFriends", new { id = activity.Id });
             }
 
             return View(activity);
         }
-        
+
+        public ActionResult CreateFromEvent(int id)
+        {
+            ActivityModel am = new ActivityModel();
+            am.Activity = new Activity();
+            am.Activity.Event = db.Find<Event>(id);
+            return View(am);
+        }
+
+        [HttpPost]
+        public ActionResult CreateFromEvent(Activity am)
+        {
+            if (ModelState.IsValid)
+            {
+                am.Organizer = FacebookAccount.Current.GetAccount();
+                db.Add(am);
+                db.SaveChanges();
+                return RedirectToAction("AddFacebookFriends", new { id = am.ActivityId });
+            }
+            ActivityModel am2 = new ActivityModel();
+            am2.Activity = am;
+
+            return View(am2);
+        }
         //
         // GET: /Default1/Edit/5 
         public ActionResult Edit(int id)
@@ -100,6 +137,20 @@ namespace PraLoup.WebApp.Controllers
         public ActionResult Edit(Activity activity)
         {
             return RedirectToAction("AddFacebookFriends", new { id = activity.Id });
+        }
+
+        public ActionResult AcceptInvitation(int id)
+        {
+            var e = db.Find<Activity>(id);
+            if (e != null)
+            {
+                return View(e);
+            }
+            else
+            {
+                // TODO: what to do when there is no such event
+                return RedirectToAction("Index");
+            }
         }
 
         //
@@ -168,7 +219,8 @@ namespace PraLoup.WebApp.Controllers
                 }
                 found = true;
             }
-             var o = Repository.Find<Activity>(id);
+
+            var o = db.Find<Activity>(id);
             //both the uncondensed and condensed fb:form-request will contain a key called "id[]" which will contain a list of facebook id's
             if (results.Any(s => s.Key == "ids[]"))
             {
@@ -177,13 +229,8 @@ namespace PraLoup.WebApp.Controllers
                 List<Account> fas = new List<Account>();
                 foreach (string token in tokens)
                 {
-                    // Are we registering their friends as well?
-                    //FacebookAccount fa = new FacebookAccount(this.Repository, oauth, token);
-                    //if (!fa.IsCreated())
-                    //{
-                    //    fa.Register();
+                    FacebookAccount fa = new FacebookAccount(token);
                     //}
-
                     //fas.Add(fa.GetAccount());
                 }
 

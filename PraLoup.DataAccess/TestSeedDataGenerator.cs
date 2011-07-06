@@ -162,6 +162,7 @@ namespace PraLoup.DataAccess
                 Price = 50,
                 Value = 50,
                 Source = "Seed",
+                Privacy = Enums.Privacy.Public,
                 Venue = GetVenue(venueName)
             };
             return e;
