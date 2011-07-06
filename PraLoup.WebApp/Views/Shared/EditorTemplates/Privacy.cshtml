@@ -1,17 +1,7 @@
 ﻿@inherits System.Web.Mvc.WebViewPage<PraLoup.DataAccess.Enums.Privacy?>
-<select>
-@foreach (PraLoup.DataAccess.Enums.Privacy x in Enum.GetValues(typeof(PraLoup.DataAccess.Enums.Privacy)))
-{
-    if (x == Model)
-    {
-        <option value="@x">@x.ToString()</option>
-    }
-    else
-    {
-        <option value="@x" selected>@x.ToString()</option>
-    }
-}
-</select>
+@using PraLoup.Utilities
+@Html.EnumDropDownListFor(model => model)
+
 
 
 

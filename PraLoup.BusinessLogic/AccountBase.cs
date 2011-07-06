@@ -169,8 +169,9 @@ namespace PraLoup.BusinessLogic
 
         public bool IsInvited(ICollection<Invitation> e)
         {
+            
             var result = from a in e
-                         where a.Recipients.Any(b => b.UserId == this.account.UserId)
+                         where a.Recipients != null && a.Recipients.Any(b => b.UserId == this.account.UserId)
                          select a;
 
             return (result.Count() > 0);

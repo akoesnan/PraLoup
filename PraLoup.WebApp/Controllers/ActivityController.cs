@@ -76,10 +76,16 @@ namespace PraLoup.WebApp.Controllers
 
         public ActionResult CreateFromEvent(int id)
         {
-            ActivityModel am = new ActivityModel();
-            am.Activity = new Activity();
-            am.Activity.Event = db.Find<Event>(id);
-            return View(am);
+            // create the activity and save it, that way we can fetch this stuff again later.
+            Activity f = new Activity();
+            f.Event = db.Find<Event>(id);
+            f.Organizer = FacebookAccount.Current.GetAccount();
+            f.IsCreated = false;
+            db.Add(f);
+            db.SaveChanges();
+            
+            
+            return View(f);
         }
 
         [HttpPost]
@@ -87,15 +93,15 @@ namespace PraLoup.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                am.Organizer = FacebookAccount.Current.GetAccount();
-                db.Add(am);
+                //fetch item from db, fix updated fields
+                Activity dba = db.Find<Activity>(am.ActivityId);
+                dba.Privacy = am.Privacy;
+                dba.IsCreated = true;
                 db.SaveChanges();
                 return RedirectToAction("AddFacebookFriends", new { id = am.ActivityId });
             }
-            ActivityModel am2 = new ActivityModel();
-            am2.Activity = am;
 
-            return View(am2);
+            return View(am);
         }
         //
         // GET: /Default1/Edit/5 
@@ -191,6 +197,7 @@ namespace PraLoup.WebApp.Controllers
             string[] tokens;
             bool found = false;
             OAuthHandler oauth = new OAuthHandler();
+            /*
             //in the uncondensed fb:form-request, there will be a form collection key called "emails[]" which will contain a comma delimited list of emails
             if (results.Any(s => s.Key == "emails[]"))
             {
@@ -202,6 +209,7 @@ namespace PraLoup.WebApp.Controllers
                 }
                 found = true;
             }
+            */
 
             var o = db.Find<Activity>(id);
             //both the uncondensed and condensed fb:form-request will contain a key called "id[]" which will contain a list of facebook id's

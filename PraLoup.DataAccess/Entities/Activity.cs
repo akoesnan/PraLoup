@@ -33,5 +33,7 @@ namespace PraLoup.DataAccess.Entities
         public virtual Event Event { get; set; }
 
         public virtual Invitations Invites { get; set; }
+
+        public bool IsCreated { get; set; }
     }
 }

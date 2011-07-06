@@ -11,11 +11,12 @@
                      method="post"
                      invite="false"
                      type="More Like"
-                     content="Echo Content. <fb:req-choice url='/PraLoup.WebApp/Events/AddFacebookFriends' label='More Label' />">
+                     content="Content @Model.Event.Name <fb:req-choice url='http://projectsafari.com/PraLoup.WebApp/Activity/Details/@Model.ActivityId' label='@Model.Event.Name' />">
         <fb:multi-friend-selector showborder="false"
                                 bypass="cancel"
                                 cols=2
-                                actiontext="More Like Text"/>
+                                import_external_friends="false"
+                                actiontext="Click here to @Model.Event.Name"/>
       </fb:request-form>
     </script>
   </fb:serverfbml>

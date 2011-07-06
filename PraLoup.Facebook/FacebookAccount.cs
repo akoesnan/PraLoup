@@ -52,7 +52,7 @@ namespace PraLoup.FacebookObjects
 
         public void HydrateUserFromJson(dynamic jsonobject)
         {
-            account = this.Fetch(jsonobject.id);
+            account = AccountBase.Fetch(jsonobject.id);
             bool create = false;
             if(account == null)
             {
