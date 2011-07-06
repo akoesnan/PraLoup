@@ -2,7 +2,14 @@
 <select>
 @foreach (PraLoup.DataAccess.Enums.Privacy x in Enum.GetValues(typeof(PraLoup.DataAccess.Enums.Privacy)))
 {
-    <option value="@x">@x.ToString()</option>
+    if (x == Model)
+    {
+        <option value="@x">@x.ToString()</option>
+    }
+    else
+    {
+        <option value="@x" selected>@x.ToString()</option>
+    }
 }
 </select>
 

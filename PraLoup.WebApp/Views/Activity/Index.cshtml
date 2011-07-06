@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PraLoup.DataAccess.Entities.Activity>
+﻿@model IEnumerable<PraLoup.WebApp.Models.ActivityModel>
 
 @{
     ViewBag.Title = "Index";
@@ -12,14 +12,32 @@
 <table>
     <tr>
         <th></th>
+        <th>
+            Event
+        </th>
+        
     </tr>
 
 @foreach (var item in Model) {
+    if (!item.Permissions.HasFlag(PraLoup.BusinessLogic.Permissions.View))
+    {
+        continue;
+    }
     <tr>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ActivityId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ActivityId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ActivityId })
+        @if(item.Permissions.HasFlag(PraLoup.BusinessLogic.Permissions.Edit))
+        {
+            @Html.ActionLink("Edit", "Edit", new { id=item.Activity.ActivityId }) 
+        }
+        
+        @Html.ActionLink("Details", "Details", new { id = item.Activity.ActivityId }) |
+        @if (item.Permissions.HasFlag(PraLoup.BusinessLogic.Permissions.Delete))
+        {
+            @Html.ActionLink("Delete", "Delete", new { id = item.Activity.ActivityId })
+        }
+        </td>
+        <td>
+            @String.Format("{0:g}", item.Activity.Event.Name)
         </td>
     </tr>
 }

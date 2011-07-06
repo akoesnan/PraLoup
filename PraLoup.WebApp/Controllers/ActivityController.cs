@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using Facebook.Web.Mvc;
+using PraLoup.BusinessLogic;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using PraLoup.FacebookObjects;
@@ -20,16 +21,29 @@ namespace PraLoup.WebApp.Controllers
         public ViewResult Index()
         {
             var entities = db.GetAll<Activity>();
-            return View(entities);
+            List<ActivityModel> ams = new List<ActivityModel>();
+            foreach (var am in entities)
+            {
+                ActivityModel em = new ActivityModel();
+                em.Permissions = FacebookAccount.Current.GetPermissions(am);
+                em.Activity = am;
+                ams.Add(em);
+            }
+            return View(ams);
         }
 
         //
         // GET: /Default1/Details/5
 
-        public ViewResult Details(int id)
+        public ActionResult Details(int id)
         {
 
             var o = db.Find<Activity>(id);
+            Permissions p = FacebookAccount.Current.GetPermissions(o);
+            if (!p.HasFlag(Permissions.View))
+            {
+                return RedirectToAction("Index");
+            }
             return View(o);
           
         }
@@ -51,6 +65,7 @@ namespace PraLoup.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                activity.Organizer = FacebookAccount.Current.GetAccount();
                 db.Add(activity);
                 db.SaveChanges();
                 return RedirectToAction("AddFacebookFriends", new { id = activity.ActivityId });
@@ -72,6 +87,7 @@ namespace PraLoup.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                am.Organizer = FacebookAccount.Current.GetAccount();
                 db.Add(am);
                 db.SaveChanges();
                 return RedirectToAction("AddFacebookFriends", new { id = am.ActivityId });
