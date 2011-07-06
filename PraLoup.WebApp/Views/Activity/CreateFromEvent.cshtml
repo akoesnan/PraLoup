@@ -14,7 +14,7 @@
     <fieldset>
         <legend>Activity</legend>
         
-        @Html.HiddenFor(model => model.Activity.Event.EventId)
+        @Html.HiddenFor(model => model.Activity.Event.Id)
         <div class="editor-label">
             @Html.LabelFor(model => model.Activity.Privacy)
         </div>
@@ -29,13 +29,13 @@
             @Html.EditorFor(model => model.Activity.Event)
             @Html.ValidationMessageFor(model => model.Activity.Event)
         </div>
-         <div class="editor-label">
+         @*<div class="editor-label">
             @Html.LabelFor(model => model.Activity.Invites)
-        </div>
-        <div class="editor-field">
+        </div>*@
+        @*<div class="editor-field">
             @Html.EditorFor(model => model.Activity.Invites)
             @Html.ValidationMessageFor(model => model.Activity.Invites)
-        </div>
+        </div>*@
         <p>
             <input type="submit" value="Create" />
         </p>

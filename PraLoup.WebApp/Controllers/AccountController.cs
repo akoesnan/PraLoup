@@ -80,7 +80,8 @@ namespace ProjectSafari.Controllers
 
         public bool Register()
         {
-            FacebookAccount fa = new FacebookAccount();
+            // Merge issue?
+            this.AccountBase.SetupFacebookAccount();            
             
             return true;
         }

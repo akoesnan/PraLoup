@@ -6,34 +6,18 @@ using Facebook.Web;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using PraLoup.Utilities;
-using PraLoup.BusinessLogic;
 using PraLoup.DataAccess.Enums;
 
 namespace PraLoup.FacebookObjects
 {
-    public class FacebookAccount : AccountBase
+    public class FacebookAccount 
     {
-        private static FacebookAccount _cur = null;
-         public static FacebookAccount Current
-        {
-            get
-            {
-                if (_cur == null)
-                {
-                    lock (mutex)
-                    {
-                        if (_cur == null)
-                        {
-                           _cur = new FacebookAccount();
-                        }
-                    }
-                }
-                return _cur;
-            }
-        }
+        public Account Account { get; set; }        
 
-        public FacebookAccount()
+        public FacebookAccount(Account account)
         {
+            this.Account = new Account() ;
+
             FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
 
             dynamic jsonobject = fc.Get("me");
@@ -51,20 +35,11 @@ namespace PraLoup.FacebookObjects
         }
 
         public void HydrateUserFromJson(dynamic jsonobject)
-        {
-            account = this.Fetch(jsonobject.id);
-            bool create = false;
-            if(account == null)
-            {
-                account = new Account();
-                create = true;
-            }
-            
-            account.FirstName = jsonobject.first_name;
-            account.UserId = jsonobject.id;
-            account.LastName = jsonobject.last_name;
-            account.UserName = jsonobject.name;
-            Register(create);
+        {                    
+            this.Account.FirstName = jsonobject.first_name;
+            this.Account.UserId = jsonobject.id;
+            this.Account.LastName = jsonobject.last_name;
+            this.Account.UserName = jsonobject.name;            
         }
         
         public static void PostToWall(Event e)

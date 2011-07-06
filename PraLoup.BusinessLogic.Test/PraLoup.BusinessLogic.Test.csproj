@@ -53,7 +53,7 @@
       <Project>{4244F04E-3323-406B-BD22-5D743ACAE631}</Project>
       <Name>PraLoup.BusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PraLoup.Facebook\PraLoup.Facebook.csproj">
+    <ProjectReference Include="..\PraLoup.Facebook\PraLoup.FacebookObjects.csproj">
       <Project>{4C9EAD3E-DFC8-42CE-B324-015F3C9BB95C}</Project>
       <Name>PraLoup.Facebook</Name>
     </ProjectReference>
