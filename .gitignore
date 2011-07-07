@@ -22,6 +22,14 @@ TestResults/
 *.tar
 *.zip
 
+# visual studio files#
+######################
+*.user
+
+# git files#
+######################
+*.orig
+
 # Logs and databases #
 ######################
 *.log
