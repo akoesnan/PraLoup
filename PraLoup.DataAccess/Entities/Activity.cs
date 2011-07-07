@@ -42,5 +42,7 @@ namespace PraLoup.DataAccess.Entities
         public virtual Event Event { get; set; }
 
         public virtual DateTime UpdatedTime { get; set; }
+
+        public bool IsCreated { get; set; }
     }
 }

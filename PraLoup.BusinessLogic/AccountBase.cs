@@ -6,9 +6,9 @@ using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using System.Web.Security;
 using PraLoup.DataAccess.Interfaces;
-using PraLoup.Facebook;
-using PraLoup.Plugins;
 using PraLoup.FacebookObjects;
+using PraLoup.Plugins;
+
 
 namespace PraLoup.BusinessLogic
 {
@@ -209,7 +209,7 @@ namespace PraLoup.BusinessLogic
         public Permissions GetPermissions(Activity activity)
         {
             Permissions mask = Permissions.EmptyMask;
-            bool isOwner = activity.Organizer.Id == this.account.Id;
+            bool isOwner = false;
             bool isFriend = false;
             bool isFriendOfFriend = false;
             bool isInvited = false;

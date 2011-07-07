@@ -38,7 +38,7 @@
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Ninject">
-      <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
+      <HintPath>..\packages\Ninject.2.2.1.4\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -63,10 +63,6 @@
     <ProjectReference Include="..\PraLoup.DataAccess\PraLoup.DataAccess.csproj">
       <Project>{699F3369-A9D5-4825-ACBC-41843104A795}</Project>
       <Name>PraLoup.DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PraLoup.Services\PraLoup.Services.csproj">
-      <Project>{EEFC6A80-C58B-4AAD-8CF5-64064EA8BAD0}</Project>
-      <Name>PraLoup.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\PraLoup.WebApp\PraLoup.WebApp.csproj">
       <Project>{B23CD01A-9405-411E-ABC2-4CDB64194C15}</Project>

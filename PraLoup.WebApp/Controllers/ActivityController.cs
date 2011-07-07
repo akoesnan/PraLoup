@@ -95,10 +95,17 @@ namespace PraLoup.WebApp.Controllers
 
         public ActionResult CreateFromEvent(int id)
         {
-            ActivityModel am = new ActivityModel();
-            am.Activity = new Activity();
-            am.Activity.Event = this.Repository.Find<Event>(id);
-            return View(am);
+            // create the activity and save it, that way we can fetch this stuff again later.
+            Activity f = new Activity();
+            f.Event = this.Repository.Find<Event>(id);
+
+            f.Organizer = AccountBase.GetAccount();
+            f.IsCreated = false;
+            this.Repository.Add(f);
+            this.Repository.SaveChanges();
+            
+            
+            return View(f);
         }
 
         [HttpPost]
@@ -106,16 +113,17 @@ namespace PraLoup.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                am.Organizer = this.AccountBase.GetAccount();
-                am.UpdatedTime = DateTime.UtcNow;
-                this.Repository.Add(am);
-                this.Repository.SaveChanges();
+                //fetch item from db, fix updated fields
+                Activity dba = Repository.Find<Activity>(am.Id);
+
+                dba.UpdatedTime = DateTime.UtcNow;
+                
+                dba.Privacy = am.Privacy;
+                dba.IsCreated = true;
                 return RedirectToAction("AddFacebookFriends", new { id = am.Id });
             }
-            ActivityModel am2 = new ActivityModel();
-            am2.Activity = am;
 
-            return View(am2);
+            return View(am);
         }
         //
         // GET: /Default1/Edit/5 
@@ -211,6 +219,7 @@ namespace PraLoup.WebApp.Controllers
             string[] tokens;
             bool found = false;
             OAuthHandler oauth = new OAuthHandler();
+            /*
             //in the uncondensed fb:form-request, there will be a form collection key called "emails[]" which will contain a comma delimited list of emails
             if (results.Any(s => s.Key == "emails[]"))
             {
@@ -222,6 +231,7 @@ namespace PraLoup.WebApp.Controllers
                 }
                 found = true;
             }
+            */
 
             var o = this.Repository.Find<Activity>(id);
             //both the uncondensed and condensed fb:form-request will contain a key called "id[]" which will contain a list of facebook id's

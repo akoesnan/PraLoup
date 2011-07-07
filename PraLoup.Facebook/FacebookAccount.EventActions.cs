@@ -6,7 +6,7 @@ using PraLoup.Utilities;
 using PraLoup.Plugins;
 using Facebook;
 
-namespace PraLoup.Facebook
+namespace PraLoup.FacebookObjects
 {
     public class FacebookEventActions : IEventAction
     {
