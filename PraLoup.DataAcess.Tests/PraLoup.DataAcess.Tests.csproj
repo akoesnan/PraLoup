@@ -49,9 +49,6 @@
     <Reference Include="NHibernate.ByteCode.Castle">
       <HintPath>..\packages\NHibernate.Castle.3.1.0.4000\lib\Net35\NHibernate.ByteCode.Castle.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate.Linq">
-      <HintPath>..\packages\NHibernate.Linq.1.0\lib\NHibernate.Linq.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -86,7 +83,7 @@
       <Project>{4C9EAD3E-DFC8-42CE-B324-015F3C9BB95C}</Project>
       <Name>PraLoup.FacebookObjects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PraLoup.Plugins\PraLoup.Infrastructure.csproj">
+    <ProjectReference Include="..\PraLoup.Infrastructure\PraLoup.Infrastructure.csproj">
       <Project>{5EEF5109-A372-4080-8E3B-3899C80F267F}</Project>
       <Name>PraLoup.Infrastructure</Name>
     </ProjectReference>

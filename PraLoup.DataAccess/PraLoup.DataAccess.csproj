@@ -107,7 +107,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PraLoup.Plugins\PraLoup.Infrastructure.csproj">
+    <ProjectReference Include="..\PraLoup.Infrastructure\PraLoup.Infrastructure.csproj">
       <Project>{5EEF5109-A372-4080-8E3B-3899C80F267F}</Project>
       <Name>PraLoup.Infrastructure</Name>
     </ProjectReference>

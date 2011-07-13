@@ -64,7 +64,7 @@
       <Project>{4C9EAD3E-DFC8-42CE-B324-015F3C9BB95C}</Project>
       <Name>PraLoup.FacebookObjects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PraLoup.Plugins\PraLoup.Infrastructure.csproj">
+    <ProjectReference Include="..\PraLoup.Infrastructure\PraLoup.Infrastructure.csproj">
       <Project>{5EEF5109-A372-4080-8E3B-3899C80F267F}</Project>
       <Name>PraLoup.Infrastructure</Name>
     </ProjectReference>
