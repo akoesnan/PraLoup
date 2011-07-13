@@ -1,4 +1,4 @@
-﻿@model PraLoup.DataAccess.Entities.Activity
+﻿@model PraLoup.WebApp.Models.ActivityCreationModel
 
 @{
     ViewBag.Title = "Create";
@@ -13,13 +13,13 @@
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Activity</legend>
-        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.Event.Id)
         <div class="editor-label">
-            @Html.LabelFor(model => model.Privacy)
+            @Html.LabelFor(model => model.Activity.Privacy)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Privacy)
-            @Html.ValidationMessageFor(model => model.Privacy)
+            @Html.EditorFor(model => model.Activity.Privacy, "privacy", "privacy")
+            @Html.ValidationMessageFor(model => model.Activity.Privacy)            
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.Event)

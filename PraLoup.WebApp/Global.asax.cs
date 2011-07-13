@@ -3,6 +3,15 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using PraLoup.DataAccess;
+using FluentNHibernate.Automapping;
+using PraLoup.DataAccess.Entities;
+using PraLoup.DataAccess.Mapping;
+using NHibernate;
+using FluentNHibernate.Cfg.Db;
+using FluentNHibernate.Cfg;
+using System.IO;
+using NHibernate.Tool.hbm2ddl;
+using NHibernate.Cfg;
 
 namespace PraLoup.WebApp
 {
@@ -41,9 +50,7 @@ namespace PraLoup.WebApp
         {
             AreaRegistration.RegisterAllAreas();
             RegisterGlobalFilters(GlobalFilters.Filters);
-            RegisterRoutes(RouteTable.Routes);
-
-
-        }
-    }    
+            RegisterRoutes(RouteTable.Routes);            
+        }        
+    }
 }

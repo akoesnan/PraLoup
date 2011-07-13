@@ -4,35 +4,22 @@ using System.Web.Mvc;
 using Facebook.Web.Mvc;
 using PraLoup.BusinessLogic;
 using PraLoup.DataAccess.Entities;
-using PraLoup.DataAccess.Interfaces;
-using PraLoup.WebApp.Models;
-using PraLoup.Plugins;
+using PraLoup.DataAccess.Enums;
+using PraLoup.DataAccess.Services;
 using PraLoup.FacebookObjects;
-using System;
+using PraLoup.WebApp.Models;
 
 namespace PraLoup.WebApp.Controllers
-{ 
+{
     public class ActivityController : Controller
     {
-        private IRepository Repository {get;set;}
-        private IEnumerable<IEventAction> EventActionPlugins { get; set; }
+        private IDataService DataService;
+        private AccountBase AccountBase;
 
-        private AccountBase _accountbase;
-
-        private AccountBase AccountBase
+        public ActivityController(AccountBase accountBase, IDataService dataService)
         {
-            get 
-            {
-                if (_accountbase == null) {
-                    _accountbase = new AccountBase(this.Repository, this.EventActionPlugins);
-                }
-                return _accountbase;
-            }
-        }
-
-        public ActivityController(IRepository repository, IEnumerable<IEventAction> eventActionPlugins) {
-            this.Repository = repository;
-            this.EventActionPlugins = eventActionPlugins;
+            this.AccountBase = accountBase;
+            this.DataService = dataService;
         }
 
         //
@@ -40,16 +27,9 @@ namespace PraLoup.WebApp.Controllers
 
         public ViewResult Index()
         {
-            var entities = Repository.GetAll<Activity>();
-            List<ActivityModel> ams = new List<ActivityModel>();
-            foreach (var am in entities)
-            {
-                ActivityModel em = new ActivityModel();
-                em.Permissions = this.AccountBase.GetPermissions(am);
-                em.Activity = am;
-                ams.Add(em);
-            }
-            return View(ams);
+            ActivityDiscoveryModel adm = new ActivityDiscoveryModel(this.AccountBase);
+            adm.Setup();
+            return View(adm);
         }
 
         //
@@ -58,14 +38,14 @@ namespace PraLoup.WebApp.Controllers
         public ActionResult Details(int id)
         {
 
-            var o = Repository.Find<Activity>(id);
+            var o = DataService.Activity.Find(id);
             Permissions p = this.AccountBase.GetPermissions(o);
             if (!p.HasFlag(Permissions.View))
             {
                 return RedirectToAction("Index");
             }
             return View(o);
-          
+
         }
 
         //
@@ -76,7 +56,7 @@ namespace PraLoup.WebApp.Controllers
             return View();
         }
 
-      
+
         //
         // POST: /Default1/Create
 
@@ -86,50 +66,33 @@ namespace PraLoup.WebApp.Controllers
             if (ModelState.IsValid)
             {
                 activity.Organizer = this.AccountBase.GetAccount();
-                Repository.SaveChanges();
+
                 return RedirectToAction("AddFacebookFriends", new { id = activity.Id });
             }
 
             return View(activity);
         }
 
-        public ActionResult CreateFromEvent(int id)
+        public ActionResult CreateFromEvent(int eventId)
         {
-            // create the activity and save it, that way we can fetch this stuff again later.
-            Activity f = new Activity();
-            f.Event = this.Repository.Find<Event>(id);
-
-            f.Organizer = AccountBase.GetAccount();
-            f.IsCreated = false;
-            this.Repository.Add(f);
-            this.Repository.SaveChanges();
-            
-            
-            return View(f);
+            var ev = AccountBase.EventActions.GetEvent(eventId);
+            var m = new ActivityCreationModel(null, ev);
+            return View(m);
         }
 
         [HttpPost]
-        public ActionResult CreateFromEvent(Activity am)
+        public ActionResult CreateFromEvent(int eventId, Privacy privacy)
         {
-            if (ModelState.IsValid)
-            {
-                //fetch item from db, fix updated fields
-                Activity dba = Repository.Find<Activity>(am.Id);
-
-                dba.UpdatedTime = DateTime.UtcNow;
-                
-                dba.Privacy = am.Privacy;
-                dba.IsCreated = true;
-                return RedirectToAction("AddFacebookFriends", new { id = am.Id });
-            }
-
-            return View(am);
+            var ev = AccountBase.EventActions.GetEvent(eventId);
+            var actv = AccountBase.ActivityActions.CreateActivityFromExistingEvent(ev, privacy);
+            return View("AddFacebookFriends", actv);
         }
+
         //
         // GET: /Default1/Edit/5 
         public ActionResult Edit(int id)
         {
-            var e = Repository.Find<Activity>(id);
+            var e = DataService.Activity.Find(id);
             if (e != null)
             {
                 return View(e);
@@ -152,7 +115,7 @@ namespace PraLoup.WebApp.Controllers
 
         public ActionResult AcceptInvitation(int id)
         {
-            var e = this.Repository.Find<Activity>(id);
+            var e = this.DataService.Activity.Find(id);
             if (e != null)
             {
                 return View(e);
@@ -166,7 +129,7 @@ namespace PraLoup.WebApp.Controllers
 
         //
         // GET: /Default1/Delete/5
- 
+
         public ActionResult Delete(int id)
         {
             return View();
@@ -181,17 +144,12 @@ namespace PraLoup.WebApp.Controllers
             return View();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            Repository.Dispose();
-            base.Dispose(disposing);
-        }
 
         [ActionName("AddFacebookFriends")]
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult AddFacebookFriends(int id)
         {
-            var e = Repository.Find<Activity>(id);
+            var e = DataService.Activity.Find(id);
             if (e != null)
             {
                 return View(e);
@@ -233,7 +191,7 @@ namespace PraLoup.WebApp.Controllers
             }
             */
 
-            var o = this.Repository.Find<Activity>(id);
+            var o = this.DataService.Activity.Find(id);
             //both the uncondensed and condensed fb:form-request will contain a key called "id[]" which will contain a list of facebook id's
             if (results.Any(s => s.Key == "ids[]"))
             {
@@ -243,13 +201,12 @@ namespace PraLoup.WebApp.Controllers
                 foreach (string token in tokens)
                 {
                     FacebookAccount fa = new FacebookAccount(token);
-                    //}
-                    //fas.Add(fa.GetAccount());
+                    fas.Add(fa.Account);
                 }
 
                 var invitations = fas.Select(a => new Invitation(this.AccountBase.GetAccount(), a, o, "invite message"));
-                
-                found = true;                 
+                DataService.Commit();
+                found = true;
             }
 
             // return RedirectToAction("Index", "Friends", new { invitationsSent = true });
@@ -259,7 +216,7 @@ namespace PraLoup.WebApp.Controllers
             }
             else
             {
-                var e = Repository.Find<Event>(id);
+                var e = DataService.Activity.Find(id);
                 if (e != null)
                 {
                     return View(e);

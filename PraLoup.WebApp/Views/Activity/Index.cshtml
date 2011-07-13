@@ -1,45 +1,61 @@
-﻿@model IEnumerable<PraLoup.WebApp.Models.ActivityModel>
-
+﻿@model PraLoup.WebApp.Models.ActivityDiscoveryModel
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
-
+<h2>
+    Index</h2>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table>
-    <tr>
-        <th></th>
-        <th>
-            Event
-        </th>
-        
-    </tr>
-
-@foreach (var item in Model) {
-    if (!item.Permissions.HasFlag(PraLoup.BusinessLogic.Permissions.View))
-    {
-        continue;
-    }
-    <tr>
-        <td>
-        @if(item.Permissions.HasFlag(PraLoup.BusinessLogic.Permissions.Edit))
-        {
-            @Html.ActionLink("Edit", "Edit", new { id=item.Activity.Id  }) 
+@if (Model.MyActivity != null && Model.MyActivity.Count() > 0)
+{ 
+    <table>
+        <tr>            
+            <th>
+                Activity that I Organize
+            </th>
+        </tr>
+        @foreach (var item in Model.MyActivity)
+        {    
+            <tr>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+                <td>
+                    @item.Event.Name
+                </td>
+            </tr>
         }
-        
-        @Html.ActionLink("Details", "Details", new { id = item.Activity.Id  }) |
-        @if (item.Permissions.HasFlag(PraLoup.BusinessLogic.Permissions.Delete))
-        {
-            @Html.ActionLink("Delete", "Delete", new { id = item.Activity.Id  })
-        }
-        </td>
-        <td>
-            @item.Activity.Event.Name
-        </td>
-    </tr>
+    </table>
 }
-
-</table>
+@if (Model.MyOtherActivity != null && Model.MyOtherActivity.Count() > 0)
+{ 
+    <table>
+        <tr>            
+            <th>
+                My Other Activities
+            </th>
+        </tr>
+        @foreach (var item in Model.MyOtherActivity)
+        {    
+            <tr>
+                <td>
+                    @if (item.CanEdit)
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Activity.Id }) 
+                    }
+                    @Html.ActionLink("Details", "Details", new { id = item.Activity.Id }) |
+                    @if (item.CanDelete)
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Activity.Id })
+                    }
+                </td>
+                <td>
+                    @item.Activity.Event.Name
+                </td>
+            </tr>
+        }
+    </table>
+}

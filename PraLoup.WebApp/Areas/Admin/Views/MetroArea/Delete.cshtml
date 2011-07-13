@@ -27,7 +27,7 @@
 
     <div class="display-label">DisplayedName</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.DisplayedName)
+        @Html.DisplayFor(model => model.GetDisplayedName())
     </div>
 </fieldset>
 @using (Html.BeginForm()) {

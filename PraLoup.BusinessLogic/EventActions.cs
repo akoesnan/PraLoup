@@ -1,94 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using PraLoup.BusinessLogic.Plugins;
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Enums;
-using PraLoup.DataAccess.Interfaces;
-using PraLoup.Plugins;
+using PraLoup.DataAccess.Services;
+using PraLoup.Infrastructure.Logging;
+using System.Linq.Expressions;
 
 namespace PraLoup.BusinessLogic
 {
-    public partial class EventActions
+    public class EventActions : ActionBase<IEventAction>
     {
         private Account Account { get; set; }
-        private IRepository Repository { get; set; }
-        public IEnumerable<IEventAction> EventActionPlugins { get; set; }
 
-        public EventActions(Account account, IRepository repository, IEnumerable<IEventAction> eventActionPlugins) {
-            this.Account = account;
-            this.Repository = repository;
-            this.EventActionPlugins = eventActionPlugins;
+
+        public EventActions(Account account, IDataService dataService, ILogger log, IEnumerable<IEventAction> actionPlugins)
+            : base(account, dataService, log, actionPlugins)
+        {
         }
 
-        public Activity CreateActivityFromExistingEvent(Event evt, Privacy p)
+        public Event SaveEvent(Event ev)
         {
-            var actv = new Activity(this.Account, evt, p);
-            this.Repository.Add(actv);
-
-            // TODO: this should not be here, we should decouple
-            ExecutePlugins(t => t.CreateActivityFromExistingEvent(actv));        
-
-            this.Repository.SaveChanges();
-            return actv;
-        }
-
-        public Activity CreateActivityFromNotExistingEvent(Event evt, Privacy p)
-        {
-            evt.Privacy = p;
-            this.Repository.Add(evt);
-            return CreateActivityFromExistingEvent(evt, p);
-        }
-
-        public IEnumerable<Invitation> Invite(Activity actv, IEnumerable<AccountBase> invites, string message)
-        {
-            if (actv == null)
+            IEnumerable<string> brokenRules;
+            var success = this.dataService.Event.SaveOrUpdate(ev, out brokenRules);
+            if (success)
             {
-                throw new ArgumentException("activity should not be null");
+                this.dataService.Commit();
+                this.log.Info("Succesfully created event {0}", ev);
+                return ev;
             }
-
-            if (invites == null || invites.Count() == 0)
+            else
             {
-                throw new ArgumentException("there should be one or more invites");
+                this.log.Debug("Unable to create event {0}. Validation {1}", ev, brokenRules);
+                return null;
             }
-            
-            var invitations = from i in invites
-                              select new Invitation(this.Account, i.GetAccount(), actv, message);
-            this.Repository.AddAll(invitations);
-
-            ExecutePlugins(f => f.Invite(actv, invitations));
-
-            this.Repository.SaveChanges();
-            return invitations;
         }
 
-        public Invitation Response(Invitation invitation, InvitationReponseType responseType, string message)
+        public IEnumerable<Event> GetAllEvents()
         {
-            if (invitation.Recipient.Id != this.Account.Id)
-            {
-                throw new ArgumentException(String.Format("this invitation is not for user {0}", this.Account));
-            }
-            invitation.InvitationResponse.InvitationResponseType = responseType;
-            invitation.InvitationResponse.Message = message;
-            invitation.CreateDateTime = DateTime.UtcNow;
-            return invitation;
+            return this.dataService.Event.GetAll();
         }
 
-        public bool IsInvited(Activity activity)
+        public IEnumerable<Event> GetEvents(Expression<Func<Event, bool>> predicate)
         {
-            var result = this.Repository.FirstOrDefault<Invitation>(i => i.Activity == activity && i.Recipient == this.Account);
-
-            return result != null;
+            return this.dataService.Event.Where(predicate);
         }
 
-        private void ExecutePlugins<T>(Func<IEventAction, T> f)
+        public Event GetEvent(int eventId)
         {
-            if (EventActionPlugins != null)
-            {
-                foreach (var plugin in this.EventActionPlugins)
-                {
-                    f.Invoke(plugin);
-                }
-            }
+            return this.dataService.Event.Find(eventId);
         }
     }
 }

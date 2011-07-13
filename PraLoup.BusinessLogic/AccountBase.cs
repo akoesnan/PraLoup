@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using PraLoup.DataAccess;
-using PraLoup.DataAccess.Entities;
 using System.Web.Security;
-using PraLoup.DataAccess.Interfaces;
+using PraLoup.BusinessLogic.Plugins;
+using PraLoup.DataAccess.Entities;
 using PraLoup.FacebookObjects;
-using PraLoup.Plugins;
-
+using PraLoup.DataAccess.Services;
+using PraLoup.Infrastructure.Logging;
 
 namespace PraLoup.BusinessLogic
 {
-    public partial class AccountBase : MembershipUser
+    public class AccountBase : MembershipUser
     {
         protected Account account = null;
 
@@ -20,21 +18,22 @@ namespace PraLoup.BusinessLogic
 
         protected static object mutex = new object();
 
-        internal IRepository Repository { get; set; }
-
-        private EventLogic eventLogic { get; set; }
-        private ActivityLogic activityLogic { get; set; }
+        internal IDataService DataService { get; set; }
 
         public FacebookAccount FacebookAccount { get; set; }
-        public EventActions EventActions { get; set; }
+        public ActivityActions ActivityActions { get; private set; }
+        public EventActions EventActions { get; private set; }
+        public ILogger Log { get; set; }
 
-        public AccountBase(IRepository gr, IEnumerable<IEventAction> eventActionPlugins)
+        public AccountBase(IDataService dataService,
+            EventActions eventActions,
+            ActivityActions activityActions,
+            ILogger log)
         {
-            this.Repository = gr;
-            this.eventLogic = new EventLogic(this.Repository);
-            this.activityLogic = new ActivityLogic(this.Repository);
-            this.EventActions = new EventActions(this.account, this.Repository, eventActionPlugins);
-            this.SetupFacebookAccount();
+            this.DataService = dataService;
+            this.EventActions = eventActions;
+            this.ActivityActions = activityActions;
+            this.Log = log;
         }
 
         public string[] Friends
@@ -62,45 +61,44 @@ namespace PraLoup.BusinessLogic
             }
         }
 
-        /// <summary>
-        /// Fetch from store
-        /// </summary>
-        /// <returns>true if fetch was successful</returns>
-        public Account Fetch(string UserId)
-        {
-            return this.Repository.FirstOrDefault<Account>(a => a.UserId == UserId);
-        }
-
         private Account FindById(int id)
         {
-            return this.Repository.Find<Account>(id);
+            return this.DataService.Account.Find(id);
         }
 
-        private Account FindByUserName(string userName)
+        private Account GetAccountByFacebookId(long userName)
         {
-            return this.Repository.FirstOrDefault<Account>(a => String.Equals(userName, a.UserName, StringComparison.InvariantCultureIgnoreCase));
+            return this.DataService.Account.FirstOrDefault(a => userName == a.FacebookLogon.FacebookId);
         }
 
-        public void SetupFacebookAccount() {
+        public void SetupFacebookAccount()
+        {
             this.FacebookAccount = new FacebookAccount(this.account);
-            var acct = this.Fetch(this.FacebookAccount.Account.UserId);
+            var acct = this.GetAccountByFacebookId(this.FacebookAccount.Account.FacebookLogon.FacebookId);
             if (acct == null)
             {
-                this.Repository.Add<Account>(this.FacebookAccount.Account);
+                IEnumerable<string> brokenRules;
+                var success = this.DataService.Account.SaveOrUpdate(this.FacebookAccount.Account, out brokenRules);
+                if (success)
+                {
+                    this.DataService.Commit();
+                    this.Log.Info("Saved facebook login information");
+                }
+                else
+                {
+                    this.Log.Info("Unable to save facebook logon information");
+                }
             }
             this.account = this.FacebookAccount.Account;
-            this.Repository.SaveChanges();           
         }
-
-        //public bool IsCreated()
-        //{
-        //    return Fetch(account) != null;
-        //}
 
         protected void Register(bool create)
         {
-            this.Repository.Add<Account>(account);
-            this.Repository.SaveChanges();            
+            IEnumerable<string> brokenRules;
+            var success = this.DataService.Account.SaveOrUpdate(account, out brokenRules);
+            if (success)
+            {
+            }
         }
 
         public Account GetAccount()
@@ -221,7 +219,7 @@ namespace PraLoup.BusinessLogic
                 {
                     isFriend = IsFriend(activity.Organizer);
                     isFriendOfFriend = IsFriendOfFriend(activity.Organizer);
-                    isInvited = this.EventActions.IsInvited(activity);
+                    isInvited = this.ActivityActions.IsInvited(activity);
                 }
             }
 

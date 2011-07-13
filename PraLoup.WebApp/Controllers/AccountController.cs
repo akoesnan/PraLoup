@@ -6,43 +6,33 @@ using PraLoup.FacebookObjects;
 using PraLoup.Utilities;
 using PraLoup.WebApp.Models;
 using Facebook.Web;
-using PraLoup.DataAccess.Interfaces;
 using Facebook;
 using PraLoup.BusinessLogic;
 using System.Collections;
-using PraLoup.Plugins;
 using System.Collections.Generic;
 using System.Web.Security;
+using PraLoup.BusinessLogic.Plugins;
+using PraLoup.DataAccess.Services;
 
 namespace ProjectSafari.Controllers
 {
     [HandleError]
     public class AccountController : Controller
     {
-        private IRepository Repository { get; set; }
-        private IEnumerable<IEventAction> EventActionPlugins { get; set; }
+        private IDataService DataService { get; set; }
+        private IEnumerable<IActivityAction> EventActionPlugins { get; set; }
 
-        private AccountBase _accountbase;
+        private AccountBase AccountBase;
         private const string returnUrl = "http://localhost/praloup.webapp/Event";
         private const string logoffUrl = "http://localhost/praloup.webapp/Event";
         private const string redirectUrl = "http://localhost/praloup.webapp/account/OAuth";
 
-        private AccountBase AccountBase
-        {
-            get
-            {
-                if (_accountbase == null)
-                {
-                    _accountbase = new AccountBase(this.Repository, this.EventActionPlugins);
-                }
-                return _accountbase;
-            }
-        }
 
-        public AccountController(IRepository repository, IEnumerable<IEventAction> eventActionPlugins)
+
+        public AccountController(AccountBase accountBase, IDataService dataService)
         {
-            this.Repository = repository;
-            this.EventActionPlugins = eventActionPlugins;
+            this.AccountBase = accountBase;
+            this.DataService = DataService;
         }
 
         public ActionResult Login()
@@ -57,7 +47,7 @@ namespace ProjectSafari.Controllers
             else
             {
                 FacebookWebAuthorizer fwa = new FacebookWebAuthorizer(new PraLoupFacebookApplication(), HttpContext);
-                 fwa.Permissions = new string[]{"publish_stream","user_about_me","read_friendlists"};
+                fwa.Permissions = new string[] { "publish_stream", "user_about_me", "read_friendlists" };
                 fwa.ReturnUrlPath = returnUrl;
                 fwa.CancelUrlPath = returnUrl;
                 if (fwa.Authorize())
@@ -81,8 +71,8 @@ namespace ProjectSafari.Controllers
         public bool Register()
         {
             // Merge issue?
-            this.AccountBase.SetupFacebookAccount();            
-            
+            this.AccountBase.SetupFacebookAccount();
+
             return true;
         }
 
@@ -111,13 +101,16 @@ namespace ProjectSafari.Controllers
                     dynamic me = fbClient.Get("me?fields=id,name");
                     long facebookId = Convert.ToInt64(me.id);
 
-                    this.Repository.Add(new FacebookUser
-                    {
-                        AccessToken = accessToken,
-                        Expires = expiresOn,
-                        FacebookId = facebookId,
-                        Name = (string)me.name,
-                    });
+
+
+                    // TODO: add this to the account 
+                    //this.Repository.Add(new FacebookUser
+                    //{
+                    //    AccessToken = accessToken,
+                    //    Expires = expiresOn,
+                    //    FacebookId = facebookId,
+                    //    Name = (string)me.name,
+                    //});
 
                     FormsAuthentication.SetAuthCookie(facebookId.ToString(), false);
 

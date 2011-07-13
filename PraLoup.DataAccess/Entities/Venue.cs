@@ -10,17 +10,18 @@ namespace PraLoup.DataAccess.Entities
 {
     public class Venue : Address
     {
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
-        public string DisplayedName {
-            get {
+        public virtual string DisplayedName
+        {
+            get
+            {
                 if (!String.IsNullOrEmpty(this.Name))
                     return this.Name;
                 else if (!String.IsNullOrEmpty(this.City))
                     return this.City;
                 else
                     return String.Empty;
-
             }
         }
     }

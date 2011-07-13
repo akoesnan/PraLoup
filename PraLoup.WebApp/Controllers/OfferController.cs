@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess;
-using PraLoup.DataAccess.Interfaces;
+using PraLoup.Infrastructure.Data;
 
 namespace PraLoup.WebApp.Controllers
 {

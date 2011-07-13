@@ -31,13 +31,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.2.5.2\lib\NET35\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\packages\FluentNHibernate.1.2.0.712\lib\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.3.1.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.3.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\external\MySql\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.3.1.0.4000\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.Castle">
+      <HintPath>..\packages\NHibernate.Castle.3.1.0.4000\lib\Net35\NHibernate.ByteCode.Castle.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\external\SqlLite\System.Data.SQLite.DLL</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,41 +67,56 @@
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Activity.cs" />
     <Compile Include="Entities\Address.cs" />
-    <Compile Include="Entities\CollectionAliases.cs" />
     <Compile Include="Entities\Comment.cs" />
-    <Compile Include="Entities\FacebookUser.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\FacebookLogon.cs" />
     <Compile Include="Entities\Image.cs" />
     <Compile Include="Entities\Post.cs" />
     <Compile Include="Entities\MetroArea.cs" />
     <Compile Include="Entities\Review.cs" />
     <Compile Include="Entities\Tag.cs" />
     <Compile Include="Enums\Category.cs" />
-    <Compile Include="EntityRepository.cs" />
     <Compile Include="Entities\Event.cs" />
     <Compile Include="Enums\FacebookEnum.cs" />
     <Compile Include="GenericRepository.cs" />
     <Compile Include="Entities\Invitation.cs" />
     <Compile Include="Enums\InvitationReponseType.cs" />
     <Compile Include="Entities\InvitationResponse.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Entities\Offer.cs" />
     <Compile Include="Enums\Privacy.cs" />
-    <Compile Include="Interfaces\IEntityGenerator.cs" />
-    <Compile Include="Interfaces\ISpecification.cs" />
+    <Compile Include="Mapping\AccountMap.cs" />
+    <Compile Include="Mapping\CascadeConvention.cs" />
+    <Compile Include="Mapping\EventMappingOverride.cs" />
+    <Compile Include="Mapping\PraLoupAutoMappingConfiguration.cs" />
+    <Compile Include="NHibernateDbConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Venue.cs" />
+    <Compile Include="Services\EntityDataService.cs" />
+    <Compile Include="Services\DataService.cs" />
+    <Compile Include="Services\IDataService.cs" />
     <Compile Include="Specification.cs" />
     <Compile Include="TestSeedDataGenerator.cs" />
+    <Compile Include="UnitOfWork.cs" />
+    <Compile Include="Validators\AccountValidator.cs" />
+    <Compile Include="Validators\ActivityValidator.cs" />
+    <Compile Include="Validators\InvitationValidator.cs" />
+    <Compile Include="Validators\OfferValidator.cs" />
+    <Compile Include="Validators\EventValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PraLoup.Plugins\PraLoup.Infrastructure.csproj">
+      <Project>{5EEF5109-A372-4080-8E3B-3899C80F267F}</Project>
+      <Name>PraLoup.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Praloup.Utility\Praloup.Utilities.csproj">
       <Project>{CDBDFC6A-C346-4010-B949-306801A5487D}</Project>
       <Name>Praloup.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

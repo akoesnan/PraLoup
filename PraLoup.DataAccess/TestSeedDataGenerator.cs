@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
 using PraLoup.DataAccess.Entities;
+using NHibernate;
+using PraLoup.Infrastructure.Data;
 
 namespace PraLoup.DataAccess
 {
-    public class TestSeedDataGenerator : DropCreateDatabaseAlways<EntityRepository>
+    public class TestSeedDataGenerator
     {
-        #region ISeedDataGenerator Members
+        IRepository Repository { get; set; }
 
-        GenericRepository Repository { get; set; }
-
-        protected override void Seed(EntityRepository repository)
+        public TestSeedDataGenerator(IRepository repository)
         {
-            this.Repository = new GenericRepository(repository);
+            this.Repository = repository;
+        }
 
+        public void Seed()
+        {
             SetupAccountsData();
             SetupEventData();
             SetupActivityData();
@@ -30,10 +33,9 @@ namespace PraLoup.DataAccess
                 new MetroArea("Seattle", "Washington", "United States"),
                 new MetroArea("Portland", "Oregon", "United States")
             };
-            metros.ForEach(m => Repository.Add<MetroArea>(m));
+            metros.ForEach(m => Repository.SaveOrUpdate<MetroArea>(m));
             Repository.SaveChanges();
         }
-        #endregion
 
         /// <summary>
         /// Create seed data for users 
@@ -50,7 +52,7 @@ namespace PraLoup.DataAccess
                 GetAccount("Andhy", "Koesnandar"),
                 GetAccount("Andrew", "Smith")
             };
-            accounts.ForEach(s => Repository.Add<Account>(s));
+            accounts.ForEach(s => Repository.SaveOrUpdate<Account>(s));
             Repository.SaveChanges();
         }
 
@@ -80,7 +82,7 @@ namespace PraLoup.DataAccess
                 GetThingsToDo("Philadelphia Phillies @ Seattle Mariners", "Safeco Field"),
                 GetThingsToDo("Seattle Mariners vs. Florida Marlins", "Safeco Field"),
             };
-            events.ForEach(e => Repository.Add<Event>(e));
+            events.ForEach(e => Repository.SaveOrUpdate<Event>(e));
             Repository.SaveChanges();
         }
 
@@ -113,11 +115,6 @@ namespace PraLoup.DataAccess
             }
             // TODO: what to do when I pass in incorret stuff?
             return null;
-        }
-
-        private void SetupOffersData(EntityRepository repository)
-        {
-
         }
 
         private Account GetAccount(string firstName, string lastName)

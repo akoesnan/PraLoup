@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
-using PraLoup.DataAccess.Interfaces;
+using PraLoup.Infrastructure.Data;
 
 namespace PraLoup.WebApp.Areas.Admin.Controllers
 {
@@ -45,7 +45,7 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Add(m);
+                    db.SaveOrUpdate(m);
                     db.SaveChanges();
 
                     // TODO: create a page that says events is added succesfully

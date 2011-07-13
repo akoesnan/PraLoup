@@ -5,10 +5,9 @@ using System.Text;
 
 namespace PraLoup.DataAccess.Entities
 {
-    public abstract class Post
-    {
-        public int Id { get; set; }
-        public DateTime CreateDateTime { get; set; }
-        public IEnumerable<Comment> Comments { get; set; }
+    public abstract class Post : BaseEntity
+    {        
+        public virtual DateTime CreateDateTime { get; set; }
+        public virtual IEnumerable<Comment> Comments { get; set; }
     }
 }

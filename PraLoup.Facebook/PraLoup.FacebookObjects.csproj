@@ -66,13 +66,17 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PraLoup.BusinessLogic.Plugins\PraLoup.BusinessLogic.Plugins.csproj">
+      <Project>{75EF3F94-D922-45D2-8864-74D7242402BA}</Project>
+      <Name>PraLoup.BusinessLogic.Plugins</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PraLoup.DataAccess\PraLoup.DataAccess.csproj">
       <Project>{699F3369-A9D5-4825-ACBC-41843104A795}</Project>
       <Name>PraLoup.DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PraLoup.Plugins\PraLoup.Plugins.csproj">
+    <ProjectReference Include="..\PraLoup.Plugins\PraLoup.Infrastructure.csproj">
       <Project>{5EEF5109-A372-4080-8E3B-3899C80F267F}</Project>
-      <Name>PraLoup.Plugins</Name>
+      <Name>PraLoup.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\Praloup.Utility\Praloup.Utilities.csproj">
       <Project>{CDBDFC6A-C346-4010-B949-306801A5487D}</Project>

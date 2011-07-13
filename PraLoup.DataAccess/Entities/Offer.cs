@@ -5,28 +5,26 @@ using System.Text;
 
 namespace PraLoup.DataAccess.Entities
 {
-    public class Offer
+    public class Offer : BaseEntity
     {
-        public int OfferId { get; set; }
+        public virtual decimal OriginalValue { get; set; }
 
-        public decimal OriginalValue { get; set; }
-        
-        public decimal Saving { get; set; }
+        public virtual decimal Saving { get; set; }
 
-        public decimal CurrentValue { get; set; }
+        public virtual decimal CurrentValue { get; set; }
 
-        public DateTime StartDateTime { get; set; }
+        public virtual DateTime StartDateTime { get; set; }
 
-        public DateTime EndDateTime { get; set; }
+        public virtual DateTime EndDateTime { get; set; }
 
-        public IEnumerable<string> Highlights { get; set; }
+        //public virtual IList<string> Highlights { get; set; }
 
-        public string Description { get; set; }
+        public virtual string Description { get; set; }
 
-        public string FinePrint { get; set; }
+        public virtual string FinePrint { get; set; }
 
-        public int Available { get; set; }
+        public virtual int Available { get; set; }
 
-        public int Bought { get; set; }
+        public virtual int Bought { get; set; }
     }
 }

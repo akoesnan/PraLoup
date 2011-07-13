@@ -38,7 +38,7 @@
             @Html.DisplayFor(modelItem => item.Country)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DisplayedName)
+            @Html.DisplayFor(modelItem => item.GetDisplayedName())
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

@@ -5,16 +5,20 @@ using System.Text;
 
 namespace PraLoup.DataAccess.Entities
 {
-    public class Tag
+    public class Tag : BaseEntity
     {
-        public int Id { get; set; }
+        public Tag() { }
 
-        public string Text { get; set; }
+        public Tag(string text)
+        {
+            this.Text = text;
+        }
 
-        public string Category { get; set; }
+        public virtual string Text { get; set; }
 
-        public string Source { get; set; }
-
-        public bool Selected { get; set; }
+        public override string ToString()
+        {
+            return string.Format("id{0} text:{1}", this.Id, this.Text);
+        }
     }
 }

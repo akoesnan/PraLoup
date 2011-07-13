@@ -8,9 +8,9 @@ namespace PraLoup.DataAccess.Entities
 {
     public class Invitation : Post
     {
-        public Invitation() 
-        { 
-        
+        public Invitation()
+        {
+
         }
 
         public Invitation(Account sender, Account recipient, Activity activity, string message)
@@ -24,17 +24,17 @@ namespace PraLoup.DataAccess.Entities
             this.InvitationResponse = new InvitationResponse();
         }
 
-        public Activity Activity { get; set; }
+        public virtual Activity Activity { get; set; }
 
-        public Account Sender { get; set; }
+        public virtual Account Sender { get; set; }
 
-        public Account Recipient { get; set; }
+        public virtual Account Recipient { get; set; }
 
-        public InvitationResponse InvitationResponse { get; set; }
+        public virtual InvitationResponse InvitationResponse { get; set; }
 
-        public string Message { get; set; }
+        public virtual string Message { get; set; }
 
-        public void Response (InvitationReponseType responseType, string message) 
+        public virtual void Response(InvitationReponseType responseType, string message)
         {
             this.InvitationResponse.InvitationResponseType = responseType;
             this.InvitationResponse.Message = message;

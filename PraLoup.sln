@@ -32,7 +32,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.BusinessLogic.Test"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.Facebook.Test", "PraLoup.Facebook.Test\PraLoup.Facebook.Test.csproj", "{2BA175B7-EBD2-4E28-B38D-36FA60F83B80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.Plugins", "PraLoup.Plugins\PraLoup.Plugins.csproj", "{5EEF5109-A372-4080-8E3B-3899C80F267F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.Infrastructure", "PraLoup.Plugins\PraLoup.Infrastructure.csproj", "{5EEF5109-A372-4080-8E3B-3899C80F267F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.BusinessLogic.Plugins", "PraLoup.BusinessLogic.Plugins\PraLoup.BusinessLogic.Plugins.csproj", "{75EF3F94-D922-45D2-8864-74D7242402BA}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -89,6 +91,10 @@ Global
 		{5EEF5109-A372-4080-8E3B-3899C80F267F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EEF5109-A372-4080-8E3B-3899C80F267F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EEF5109-A372-4080-8E3B-3899C80F267F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75EF3F94-D922-45D2-8864-74D7242402BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75EF3F94-D922-45D2-8864-74D7242402BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75EF3F94-D922-45D2-8864-74D7242402BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75EF3F94-D922-45D2-8864-74D7242402BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

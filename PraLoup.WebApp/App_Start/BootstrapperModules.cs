@@ -1,13 +1,45 @@
-﻿using Ninject.Modules;
+﻿using NHibernate;
+using Ninject;
+using Ninject.Activation;
+using Ninject.Modules;
+using PraLoup.DataAccess;
+using PraLoup.DataAccess.Services;
 using PraLoup.DataPurveyor.Attributes;
 using PraLoup.DataPurveyor.Client;
-using PraLoup.DataPurveyor.Converter;
-using PraLoup.DataAccess.Interfaces;
-using PraLoup.DataAccess;
-using System.Data.Entity;
+using PraLoup.Infrastructure.Data;
+using PraLoup.Infrastructure.Logging;
+using PraLoup.BusinessLogic.Plugins;
+using System.Collections.Generic;
+using PraLoup.FacebookObjects;
+using PraLoup.BusinessLogic;
+using Facebook;
 
 namespace PraLoup.WebApp.App_Start
 {
+
+    public class AppModule : NinjectModule
+    {
+        public override void Load()
+        {
+            this.Bind<ILogger>().To<PraLoup.Infrastructure.Logging.Log4NetLogger>().InSingletonScope();
+
+            ILogger logger = Kernel.Get<ILogger>();
+            logger.Info("Application Started");
+
+            logger.Info("Binding NHibernate dependencies");
+            NHibernateDbConfiguration nhUtility = new NHibernateDbConfiguration();
+            this.Bind<ISessionFactory>().ToConstant(nhUtility.SessionFactory).InSingletonScope();
+            this.Bind<IDataService>().To<DataService>().InRequestScope();
+            this.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
+            this.Bind<ISession>().ToProvider(new SessionProvider()).InRequestScope();
+            this.Bind<IRepository>().To<GenericRepository>();
+
+            // logger.Info("Binding Facebook Action");
+            this.Bind<IActivityAction>().To<FacebookEventActions>();
+            this.Bind<FacebookClient>().To<FacebookClient>().InRequestScope();
+            this.Bind<AccountBase>().To<AccountBase>().InRequestScope();
+        }
+    }
 
     /// <summary>
     /// Ninject module for things to do module
@@ -23,14 +55,12 @@ namespace PraLoup.WebApp.App_Start
         }
     }
 
-    public class DbEntityModule : NinjectModule 
+    public class SessionProvider : Provider<ISession>
     {
-        public override void Load()
+        protected override ISession CreateInstance(IContext context)
         {
-            this.Bind<IDatabaseInitializer<EntityRepository>>().To<TestSeedDataGenerator>().InSingletonScope();
-            this.Bind<DbContext>().To<EntityRepository>().WithConstructorArgument("nameOrConnectionString", "EntityRepository");
-            this.Bind<EntityRepository>().To<EntityRepository>().WithConstructorArgument("nameOrConnectionString", "EntityRepository");
-            this.Bind<IRepository>().To<GenericRepository>().InSingletonScope();
+            UnitOfWork unitOfWork = (UnitOfWork)context.Kernel.Get<IUnitOfWork>();
+            return unitOfWork.Session;
         }
     }
 }

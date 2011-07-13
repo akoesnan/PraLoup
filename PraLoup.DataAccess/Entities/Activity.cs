@@ -7,7 +7,7 @@ namespace PraLoup.DataAccess.Entities
     /// <summary>
     /// Activity is an instance of an event that is created for a particular user
     /// </summary>
-    public class Activity
+    public class Activity : BaseEntity
     {
         public Activity()
         {
@@ -20,13 +20,11 @@ namespace PraLoup.DataAccess.Entities
             this.Privacy = privacy;
         }
 
-        public virtual int Id { get; set; }
-
         public virtual int FacebookId { get; set; }
 
         public virtual Account Organizer { get; set; }
 
-        public Privacy Privacy
+        public virtual Privacy Privacy
         {
             get
             {
@@ -37,12 +35,13 @@ namespace PraLoup.DataAccess.Entities
                 PrivacyInt = (int)value;
             }
         }
-        public int PrivacyInt { get; set; }
+
+        public virtual int PrivacyInt { get; set; }
 
         public virtual Event Event { get; set; }
 
         public virtual DateTime UpdatedTime { get; set; }
 
-        public bool IsCreated { get; set; }
+        public virtual bool IsCreated { get; set; }
     }
 }
