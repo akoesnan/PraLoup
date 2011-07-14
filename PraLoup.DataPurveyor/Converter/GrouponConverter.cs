@@ -35,7 +35,7 @@ namespace PraLoup.DataPurveyor.Converter
             {
                 tags.Add(t.name);
             }
-            e.Tags = tags;
+            // e.Tags = tags;
             dynamic options = deal.options;
             if (deal.options != null && options[0] != null)
             {

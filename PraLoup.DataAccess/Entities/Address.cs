@@ -5,28 +5,26 @@ using System.Text;
 
 namespace PraLoup.DataAccess.Entities
 {
-    public class Address
+    public class Address : BaseEntity
     {
-        public int AddressId { get; set; }
+        public virtual string StreetLine1 { get; set; }
 
-        public string StreetLine1 { get; set; }
+        public virtual string StreetLine2 { get; set; }
 
-        public string StreetLine2 { get; set; }
+        public virtual string PhoneNumber { get; set; }
 
-        public string PhoneNumber { get; set; }
-        
-        public string PostalCode { get; set; }
+        public virtual string PostalCode { get; set; }
 
-        public string City { get; set; }
+        public virtual string City { get; set; }
 
-        public string State { get; set; }
+        public virtual string State { get; set; }
 
-        public string Country { get; set; }
+        public virtual string Country { get; set; }
 
-        public float Lat { get; set; }
+        public virtual float Lat { get; set; }
 
-        public float Lon { get; set; }
+        public virtual float Lon { get; set; }
 
-        public string Neighboorhood { get; set; }
+        public virtual string Neighboorhood { get; set; }
     }
 }

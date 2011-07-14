@@ -13,11 +13,11 @@ namespace PraLoup.WebApp.Tests.Controllers
         {
             var kernel = new StandardKernel();
             kernel.Load(new ThingsToDoCityModule());
-            kernel.Load(new DbEntityModule());
+            kernel.Load(new AppModule());
 
             var controller = kernel.Get<ThingsToDoController>();
             Assert.IsNotNull(controller.MetroAreaModel);
-            Assert.IsNotNull(controller.ThingsToDoCityModel);            
+            Assert.IsNotNull(controller.ThingsToDoCityModel);
         }
     }
 }

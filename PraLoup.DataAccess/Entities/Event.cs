@@ -1,30 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using PraLoup.DataAccess.Enums;
+using NHibernate.UserTypes;
 
 namespace PraLoup.DataAccess.Entities
 {
-    public class Event
+    public class Event : BaseEntity
     {
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
         // The event start time
-        public DateTime StartDateTime { get; set; }
+        public virtual DateTime StartDateTime { get; set; }
 
-        public DateTime EndDateTime { get; set; }
+        public virtual DateTime EndDateTime { get; set; }
 
         // The event title
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         /// <summary>
         /// Events description
         /// </summary>
-        public string Description { get; set; }
+        public virtual string Description { get; set; }
 
         /// <summary>
         /// Events privacy
         /// </summary>
-        public Privacy Privacy 
+        public virtual Privacy Privacy
         {
             get
             {
@@ -36,38 +37,45 @@ namespace PraLoup.DataAccess.Entities
             }
         }
 
-        public int PrivacyInt { get; set; }
+        public virtual int PrivacyInt { get; set; }
 
         /// <summary>
         /// Events Tags
         /// </summary>
-        public IEnumerable<string> Tags { get; set; }        
+        public virtual IList<Tag> Tags { get; set; }
 
-        public Venue Venue { get; set; }
+        public virtual Venue Venue { get; set; }
 
-        public Event Parent { get; set; }
+        public virtual Event Parent { get; set; }
 
-        public decimal Price { get; set; }
+        public virtual decimal Price { get; set; }
 
-        public decimal Value { get; set; }
+        public virtual decimal Value { get; set; }
 
-        public IEnumerable<Offer> Offers { get; set; }
+        public virtual IList<Offer> Offers { get; set; }
 
-        public string Url { get; set; }
+        public virtual string Url { get; set; }
 
-        public string MobileUrl { get; set; }
+        public virtual string MobileUrl { get; set; }
 
-        public string ImageUrl { get; set; }
+        public virtual string ImageUrl { get; set; }
 
-        public string Source { get; set; }
+        public virtual string Source { get; set; }
 
-        public float UserRating { get; set; }
+        public virtual float UserRating { get; set; }
 
-        public uint UserReviewsCount { get; set; }
+        public virtual uint UserReviewsCount { get; set; }
 
-        public IEnumerable<Review> UserReviews { get; set; }
+        public virtual IList<Review> UserReviews { get; set; }
 
-        public Accounts Organizers { get; set; }
+        public virtual IList<Account> Organizers { get; set; }
 
+        public virtual DateTime CreatedDateTime { get; set; }
+
+        public virtual Account CreatedBy { get; set; }
+
+        public virtual DateTime LastUpdatedDateTime { get; set; }
+
+        public virtual Account LastUpdatedBy { get; set; }
     }
 }

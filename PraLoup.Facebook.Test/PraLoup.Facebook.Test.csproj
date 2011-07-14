@@ -49,6 +49,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EventActionTest.cs" />
   </ItemGroup>
@@ -63,10 +64,11 @@
     </ProjectReference>
     <ProjectReference Include="..\PraLoup.Facebook\PraLoup.FacebookObjects.csproj">
       <Project>{4C9EAD3E-DFC8-42CE-B324-015F3C9BB95C}</Project>
-      <Name>PraLoup.Facebook</Name>
+      <Name>PraLoup.FacebookObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

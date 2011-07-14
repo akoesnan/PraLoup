@@ -13,9 +13,9 @@ namespace PraLoup.DataAccess.Entities
             this.InvitationResponseType = InvitationReponseType.NotResponded;
         }
 
-        public InvitationReponseType InvitationResponseType { get; set; }
+        public virtual InvitationReponseType InvitationResponseType { get; set; }
 
-        public string Message { get; set; }        
+        public virtual string Message { get; set; }        
     }
 
 }

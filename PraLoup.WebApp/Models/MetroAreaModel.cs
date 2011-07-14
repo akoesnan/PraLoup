@@ -4,7 +4,7 @@ using System.Linq;
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataPurveyor.Client;
 using PraLoup.DataAccess;
-using PraLoup.DataAccess.Interfaces;
+using PraLoup.Infrastructure.Data;
 
 namespace PraLoup.WebApp.Models
 {

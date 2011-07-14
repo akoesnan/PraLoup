@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using PraLoup.DataAccess.Interfaces;
 using System.Linq.Expressions;
+using PraLoup.Infrastructure.Data;
 
 namespace PraLoup.DataAccess
 {
@@ -12,8 +12,8 @@ namespace PraLoup.DataAccess
         public Expression<Func<T, bool>> Predicate { get; set; }
 
         public Specification()
-        {            
-        }        
+        {
+        }
 
         public And<T> And(Specification<T> specification)
         {

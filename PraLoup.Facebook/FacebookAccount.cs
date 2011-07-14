@@ -10,13 +10,13 @@ using PraLoup.DataAccess.Enums;
 
 namespace PraLoup.FacebookObjects
 {
-    public class FacebookAccount 
+    public class FacebookAccount
     {
-        public Account Account { get; set; }        
+        public Account Account { get; set; }
 
         public FacebookAccount(Account account)
         {
-            this.Account = new Account() ;
+            this.Account = new Account();
 
             FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
 
@@ -30,18 +30,19 @@ namespace PraLoup.FacebookObjects
             FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
 
             dynamic json = fc.Get(id);
-
+            // need to instantiate a new account for this user
+            this.Account = new Account();
             HydrateUserFromJson(json);
         }
 
         public void HydrateUserFromJson(dynamic jsonobject)
-        {                    
+        {
             this.Account.FirstName = jsonobject.first_name;
             this.Account.UserId = jsonobject.id;
             this.Account.LastName = jsonobject.last_name;
-            this.Account.UserName = jsonobject.name;            
+            this.Account.UserName = jsonobject.name;
         }
-        
+
         public static void PostToWall(Event e)
         {
             FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
@@ -75,7 +76,7 @@ namespace PraLoup.FacebookObjects
 
         public void SetPrivacy(dynamic obj, Privacy p)
         {
-            switch(p )
+            switch (p)
             {
                 case Privacy.Public:
                     {
@@ -127,7 +128,7 @@ namespace PraLoup.FacebookObjects
                 regions = "6,53",
                 locales = "6",
             };
-            
+
             return parameters;
         }
     }

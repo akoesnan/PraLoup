@@ -1,9 +1,5 @@
 ﻿@model PraLoup.WebApp.Models.EventModel
 
-@{
-    ViewBag.Title = "Details";
-}
-
 <h2>Details</h2>
 
 <fieldset>
@@ -24,7 +20,7 @@
     <div class="display-label">Price</div>
     <div class="display-field">@String.Format("{0:F}", Model.Event.Price)</div>
 
-    <div class="display-label">@Html.ActionLink("Create an Activity for this Event", "CreateFromEvent", "Activity", new { id = Model.Event.Id }, null)</div>
+    <div class="display-label">@Html.ActionLink("Create an Activity for this Event", "CreateFromEvent", "Activity", new { eventId = Model.Event.Id}, null)</div>
     <div class="display-field"></div>
 </fieldset>
 

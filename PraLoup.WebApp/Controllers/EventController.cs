@@ -1,28 +1,25 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Collections.Generic;
+using System.Web.Mvc;
 using Facebook.Web.Mvc;
-using PraLoup.DataAccess;
-using PraLoup.DataAccess.Entities;
-using PraLoup.FacebookObjects;
-using PraLoup.WebApp.Models;
 using PraLoup.BusinessLogic;
-using PraLoup.DataAccess.Interfaces;
-using System.Collections.Generic;
-using PraLoup.Plugins;
-using PraLoup.DataAccess.Enums;
+using PraLoup.BusinessLogic.Plugins;
+using PraLoup.DataAccess.Entities;
+using PraLoup.WebApp.Models;
+using PraLoup.DataAccess.Services;
+using PraLoup.Infrastructure.Logging;
 
 namespace PraLoup.WebApp.Controllers
 {
     public class EventController : Controller
     {
-        IRepository Repository { get; set; }
+        IDataService DataService { get; set; }
         AccountBase AccountBase { get; set; }
 
-        public EventController(IRepository repository, IEnumerable<IEventAction> eventActionPlugins)
+        public EventController(AccountBase accountBase, IDataService dataService, ILogger logger)
         {
-            this.Repository = repository;
-            this.AccountBase = new AccountBase(this.Repository, eventActionPlugins);
+            this.DataService = dataService;
+            this.AccountBase = accountBase;
         }
 
         //
@@ -30,6 +27,7 @@ namespace PraLoup.WebApp.Controllers
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Index()
         {
+<<<<<<< HEAD
             this.Repository.Context.Database.Connection.Open();
             var entities = this.Repository.GetAll<Event>();
             List<EventModel> ens = new List<EventModel>();
@@ -41,6 +39,13 @@ namespace PraLoup.WebApp.Controllers
                 ens.Add(em);
             }
             return View(ens);
+=======
+            // TODO: validate that this generate sql that execute permission on the sql level
+            var events = this.AccountBase.EventActions.GetAllEvents()
+                .Where(e => this.AccountBase.GetPermissions(e) == Permissions.View).Take(10)
+                .Select(e => new EventModel(e, this.AccountBase.GetPermissions(e)));
+            return View(events);
+>>>>>>> af941e6edca84663c9fa24559ad630c88a5f1047
         }
 
         //
@@ -48,11 +53,9 @@ namespace PraLoup.WebApp.Controllers
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Details(int id)
         {
-            var o = Repository.Find<Event>(id);
-            EventModel em = new EventModel();
-            em.Event = o;
-            em.Permissions = this.AccountBase.GetPermissions(o);
-            if (!em.Permissions.HasFlag(Permissions.View))
+            var o = DataService.Event.Find(id);
+            EventModel em = new EventModel(o, this.AccountBase.GetPermissions(o));
+            if (!em.CanView)
             {
                 // TODO: what to do when the user doesn't have perms
                 return RedirectToAction("Index");
@@ -78,8 +81,16 @@ namespace PraLoup.WebApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    Repository.Add(e);
-                    Repository.SaveChanges();
+                    IEnumerable<string> brokenRules;
+                    var success = DataService.Event.SaveOrUpdate(e, out brokenRules);
+                    if (success)
+                    {
+                        DataService.Commit();
+                    }
+                    else
+                    {
+
+                    }
 
                     return RedirectToAction("Index");
                 }
@@ -100,18 +111,16 @@ namespace PraLoup.WebApp.Controllers
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Edit(int id)
         {
-            EventModel em = new EventModel();
-            var e = Repository.Find<Event>(id);
+
+            var e = DataService.Event.Find(id);
             if (e == null)
             {
                 // TODO: what to do when there is no such event
                 return RedirectToAction("Index");
             }
+            EventModel em = new EventModel(e, this.AccountBase.GetPermissions(e));
 
-            em.Event = e;
-            em.Permissions = this.AccountBase.GetPermissions(e);
-
-            if (!em.Permissions.HasFlag(Permissions.Edit))
+            if (!em.CanEdit)
             {
                 // TODO: what to do when the user doesn't have perms
                 return RedirectToAction("Index");
