@@ -30,6 +30,7 @@ namespace PraLoup.WebApp.Controllers
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Index()
         {
+            this.Repository.Context.Database.Connection.Open();
             var entities = this.Repository.GetAll<Event>();
             List<EventModel> ens = new List<EventModel>();
             foreach (var en in entities)

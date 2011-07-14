@@ -165,8 +165,6 @@
     <Content Include="Content\Praloup.css" />
     <Content Include="Global.asax" />
     <Content Include="PraLoup.WebApp.Publish.xml" />
-    <Content Include="System.Web.WebPages.Administration.dll" />
-    <Content Include="System.Web.WebPages.Deployment.dll" />
     <Content Include="Views\Account\Register.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -450,6 +448,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Activity\AcceptInvitation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Calendar\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
