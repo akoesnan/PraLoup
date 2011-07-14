@@ -27,25 +27,11 @@ namespace PraLoup.WebApp.Controllers
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Index()
         {
-<<<<<<< HEAD
-            this.Repository.Context.Database.Connection.Open();
-            var entities = this.Repository.GetAll<Event>();
-            List<EventModel> ens = new List<EventModel>();
-            foreach (var en in entities)
-            {
-                EventModel em = new EventModel();
-                em.Permissions = this.AccountBase.GetPermissions(en);
-                em.Event = en;
-                ens.Add(em);
-            }
-            return View(ens);
-=======
             // TODO: validate that this generate sql that execute permission on the sql level
             var events = this.AccountBase.EventActions.GetAllEvents()
                 .Where(e => this.AccountBase.GetPermissions(e) == Permissions.View).Take(10)
                 .Select(e => new EventModel(e, this.AccountBase.GetPermissions(e)));
             return View(events);
->>>>>>> af941e6edca84663c9fa24559ad630c88a5f1047
         }
 
         //
