@@ -63,10 +63,10 @@ namespace PraLoup.DataAccess
                 {
                     m_Connection = new MySqlConnection(MYSQL_CONNECTION_STRING);
                 }
-                else
+              /*  else
                 {
                     m_Connection = new SQLiteConnection(SQLLITE_CONNECTION_STRING);
-                }
+                }*/
                 m_Connection.Open();
             }
             return m_Connection;
@@ -100,11 +100,11 @@ namespace PraLoup.DataAccess
                 return MySQLConfiguration.Standard
                     .ConnectionString(cs => cs.Is(MYSQL_CONNECTION_STRING));
             }
-            else
+           /* else
             {
                 return SQLiteConfiguration.Standard
                     .ConnectionString(cs => cs.Is(SQLLITE_CONNECTION_STRING));
-            }
+            }*/
         }
 
         private static void GetMappings(MappingConfiguration x)

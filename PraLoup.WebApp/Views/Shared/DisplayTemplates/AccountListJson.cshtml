@@ -1,0 +1,14 @@
+﻿
+@using System.Collections.Generic;
+
+@inherits System.Web.Mvc.WebViewPage<PraLoup.WebApp.Models.AccountListJson>
+
+<div id="@Model.guid.ToString()">
+
+</div>
+<script type="text/javascript">
+    var events = [
+        @Model.ToString();
+    ]  ;
+    RenderAccountList($("@Model.guid.ToString()"), events);
+</script>

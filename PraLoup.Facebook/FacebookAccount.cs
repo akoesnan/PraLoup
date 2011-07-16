@@ -41,6 +41,9 @@ namespace PraLoup.FacebookObjects
             this.Account.UserId = jsonobject.id;
             this.Account.LastName = jsonobject.last_name;
             this.Account.UserName = jsonobject.name;
+            this.Account.FacebookLogon = new FacebookLogon();
+            this.Account.FacebookLogon.AccessToken = FacebookWebContext.Current.AccessToken;
+            this.Account.FacebookLogon.FacebookId = FacebookWebContext.Current.UserId;
         }
 
         public static void PostToWall(Event e)
