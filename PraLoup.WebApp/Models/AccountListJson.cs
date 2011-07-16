@@ -14,13 +14,13 @@ namespace PraLoup.WebApp.Models
             public string image { get; set; }
         }
 
-        public Guid guid { get; set; }
+        public string uniqueId{ get; set; }
 
         IEnumerable<Account> _accounts;
         public AccountListJson(IEnumerable<Account> list)
         {
             _accounts = list;
-            guid = Guid.NewGuid();
+            uniqueId = Guid.NewGuid().ToString().Replace('-','_');
         }
 
         public override string ToString()

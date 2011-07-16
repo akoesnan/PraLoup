@@ -1,4 +1,5 @@
 ﻿using PraLoup.DataAccess.Entities;
+using System.Collections.Generic;
 
 namespace PraLoup.WebApp.Models
 {
@@ -6,7 +7,7 @@ namespace PraLoup.WebApp.Models
     {
         public Activity Activity { get; private set; }
         public Event Event { get; private set; }
-
+        
         public ActivityCreationModel(Activity activity, Event ev)
         {
             this.Activity = activity;

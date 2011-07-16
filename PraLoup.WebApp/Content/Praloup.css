@@ -41,3 +41,25 @@ div.ttd_info
     overflow:hidden;    
 }
 
+
+
+.image
+{
+	width: 70px;
+	float: left;
+}
+.name
+{
+	width: 70px;
+	float: right;
+	font-size: 1em;
+	font-family: "lucida grande" ,tahoma,verdana,arial,sans-serif;
+	color: #3b5998;
+	font-weight: bold;
+}
+.userlabel
+{
+	width: 144px;
+	padding: 2px;
+}
+
