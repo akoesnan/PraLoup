@@ -42,7 +42,7 @@ namespace ProjectSafari.Controllers
             else
             {
                 FacebookWebAuthorizer fwa = new FacebookWebAuthorizer(new PraLoupFacebookApplication(), HttpContext);
-                fwa.Permissions = new string[] { "publish_stream", "user_about_me", "read_friendlists" };
+                fwa.Permissions = new string[] { "publish_stream", "user_about_me", "read_friendlists","user_photos","friends_photos" };
                 fwa.ReturnUrlPath = returnUrl;
                 fwa.CancelUrlPath = returnUrl;
                 if (fwa.Authorize())

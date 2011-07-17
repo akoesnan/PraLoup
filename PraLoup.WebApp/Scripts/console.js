@@ -13,7 +13,7 @@
         } else {
             // user is not logged in
         }
-    }, { perms: 'read_stream,publish_stream,offline_access' });
+    }, { perms: 'publish_stream, user_about_me, read_friendlists,user_photos,friends_photos' });
 }
 
 

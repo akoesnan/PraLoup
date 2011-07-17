@@ -2,14 +2,18 @@
 @using System.Web;
 @using System.Collections.Generic;
 
-<div id="@Model.uniqueId">
+ @{
+string name = ViewData.TemplateInfo.HtmlFieldPrefix;
+string id = name.Replace( ".", "_" );
+}
+<div id="@id">
 
 </div>
 <script type="text/javascript">
-    var @Model.uniqueId =
+    var @id=
         @Html.Raw(Model.ToString());
     
-    RenderAccountList($("#@Model.uniqueId"), @Model.uniqueId);
+    RenderAccountList($("#@id"), @id);
 
 </script>
     
