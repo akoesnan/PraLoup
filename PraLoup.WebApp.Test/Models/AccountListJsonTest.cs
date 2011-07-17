@@ -28,7 +28,7 @@ namespace PraLoup.WebApp.Tests.Models
             la.Add(acc2);
 
             AccountListJson alj = new AccountListJson(la);
-            string x = alj.ToString();
+            string x = alj.DisplayJSON();
             JavaScriptSerializer jss = new JavaScriptSerializer();
             IEnumerable<AccountListJson.UserJson> alj2 = jss.Deserialize<AccountListJson.UserJson[]>(x);
         }

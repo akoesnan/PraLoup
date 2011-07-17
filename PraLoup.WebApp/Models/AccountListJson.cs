@@ -8,20 +8,40 @@ namespace PraLoup.WebApp.Models
 {
     public class AccountListJson
     {
-        public class UserJson
-        {
-            public string name { get; set; }
-            public string image { get; set; }
-        }
-
         IEnumerable<Account> _accounts;
         public AccountListJson(IEnumerable<Account> list)
         {
             _accounts = list;
         }
 
-        public override string ToString()
+        public class UserJson
         {
+            public string name { get; set; }
+            public string image { get; set; }
+        }
+
+        public string EditJSON()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("{ pre_selected_friends: [");
+            bool added = false;
+            foreach (var account in _accounts)
+            {
+                if (added)
+                {
+                    sb.Append(",");
+                }
+                sb.Append(account.FacebookLogon.FacebookId);
+                added = true;
+            }
+            sb.Append("]}");
+
+            return sb.ToString();
+        }
+
+        public string DisplayJSON()
+        {
+
             List<UserJson> l = new List<UserJson>();
             foreach (Account acc in _accounts)
             {

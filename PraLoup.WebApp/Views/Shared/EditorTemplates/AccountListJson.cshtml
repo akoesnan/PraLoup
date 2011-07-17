@@ -1,19 +1,22 @@
 ﻿@inherits System.Web.Mvc.WebViewPage<PraLoup.WebApp.Models.AccountListJson>
 @using System.Web;
 @using System.Collections.Generic;
-
- @{
-string name = ViewData.TemplateInfo.HtmlFieldPrefix;
-string id = name.Replace( ".", "_" );
+@{
+    string name = ViewData.TemplateInfo.HtmlFieldPrefix;
+    string id =  name.Replace(".", "_");
+    string divid = "div" + id;
 }
-<div id="@id">
-
+<div id="@divid">
 </div>
+<input type="hidden" id="@id"  name="@id" />
 <script type="text/javascript">
-    var @id=
-        @Html.Raw(Model.ToString());
+        var @divid = @Html.Raw(Model.EditJSON());
+        
+        $("#@divid").jfmfs();
+    $("#@divid").bind("jfmfs.selection.changed", function(e, data) { 
+        var friendSelector  = $("#@divid").data('jfmfs');
+        var selectedFriends = friendSelector.getSelectedIds();
+        $("#@id").value = selectedFriends;
+    });            
     
-    RenderAccountList($("#@id"), @id);
-
 </script>
-    

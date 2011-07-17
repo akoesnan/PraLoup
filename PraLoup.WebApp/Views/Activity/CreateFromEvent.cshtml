@@ -28,6 +28,13 @@
             @Html.EditorFor(model => model.Event)
             @Html.ValidationMessageFor(model => model.Event)
         </div>
+          <div class="editor-label">
+            @Html.LabelFor(model => model.Invited)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Invited)
+            @Html.ValidationMessageFor(model => model.Invited)
+        </div>
         <p>
             <input type="submit" value="Create" />
         </p>

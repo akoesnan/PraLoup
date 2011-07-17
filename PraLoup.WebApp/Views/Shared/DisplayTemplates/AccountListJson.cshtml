@@ -11,7 +11,7 @@ string id = name.Replace( ".", "_" );
 </div>
 <script type="text/javascript">
     var @id=
-        @Html.Raw(Model.ToString());
+        @Html.Raw(Model.DisplayJSON());
     
     RenderAccountList($("#@id"), @id);
 

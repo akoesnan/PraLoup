@@ -177,10 +177,14 @@
   <ItemGroup>
     <Content Include="App_Data\EntityRepository.sdf" />
     <Content Include="Areas\Admin\Content\Admin.css" />
+    <Content Include="Content\jquery.facebook.multifriend.select-list.css" />
+    <Content Include="Content\jquery.facebook.multifriend.select.css" />
     <Content Include="Content\Praloup.css" />
     <Content Include="Global.asax" />
     <Content Include="PraLoup.WebApp.Publish.xml" />
     <Content Include="Scripts\datetime.js" />
+    <Content Include="Scripts\jquery.facebook.multifriend.select.js" />
+    <Content Include="Scripts\jquery.facebook.multifriend.select.min.js" />
     <Content Include="System.Web.WebPages.Administration.dll" />
     <Content Include="System.Web.WebPages.Deployment.dll" />
     <Content Include="Views\Account\Register.cshtml">
@@ -422,9 +426,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ThingsToDo\ThingsToDoItem.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Activity\AddFacebookFriends.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Activity\Index.cshtml" />
