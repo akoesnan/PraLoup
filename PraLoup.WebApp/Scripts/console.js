@@ -17,7 +17,10 @@
 }
 
 
-function RenderAccountList(cont, events) {
+function RenderAccountList(cont, events, selectedFriends) {
+
+    cont.empty();
+
     for (var y in events) {
         var x = events[y];
         $(" <div class='userlabel'>" +
@@ -28,6 +31,33 @@ function RenderAccountList(cont, events) {
             x.name
         + "</div><div class='clear'></div></div>"
         ).appendTo(cont);
+    }
+
+    for (var y in events) {
 
     }
 }
+
+
+
+function AddNewUsers(cont, selectedFriends) {
+
+    cont.empty();
+
+    for (var y in selectedFriends) {
+        var x = selectedFriends[y];
+        $(" <div class='userlabel'>" +
+            "<div class='name' >" +
+            x.name
+        + "</div></div>"
+        ).appendTo(cont);
+    }
+}
+
+
+function displaywindow(name) {
+    $('#' + name).jqmShow();
+}
+
+
+

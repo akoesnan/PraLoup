@@ -183,6 +183,7 @@
     <Content Include="Global.asax" />
     <Content Include="PraLoup.WebApp.Publish.xml" />
     <Content Include="Scripts\datetime.js" />
+    <Content Include="Scripts\jqModal.js" />
     <Content Include="Scripts\jquery.facebook.multifriend.select.js" />
     <Content Include="Scripts\jquery.facebook.multifriend.select.min.js" />
     <Content Include="System.Web.WebPages.Administration.dll" />

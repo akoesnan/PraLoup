@@ -127,3 +127,23 @@ div.ttd_info
 	background-position: left -0px;
 	z-index:999;
 	}
+	
+
+
+.jqmWindow {
+    display: none;
+    
+    position: fixed;
+    top: 17%;
+    left: 50%;
+    
+    margin-left: -300px;
+    width: 600px;
+    padding: 12px;
+    border: 1px;
+	border-color:#ddd;
+	border-style:solid;
+	background-color:#FFFFFF;
+}
+
+.jqmOverlay { background-color: #000; }
