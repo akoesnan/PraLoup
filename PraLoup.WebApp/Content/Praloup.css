@@ -41,3 +41,109 @@ div.ttd_info
     overflow:hidden;    
 }
 
+
+
+.image
+{
+	width: 70px;
+	float: left;
+}
+.name
+{
+	width: 70px;
+	float: right;
+	font-size: 1em;
+	font-family: "lucida grande" ,tahoma,verdana,arial,sans-serif;
+	color: #3b5998;
+	font-weight: bold;
+}
+.userlabel
+{
+	width: 144px;
+	padding: 2px;
+}
+.ui-datetimepicker-with-clock
+{
+	width:41em;
+}
+
+.ui-datetimepicker-calendar-side
+{
+	width:17em;
+	float:left;
+}
+
+.ui-datetimepicker-clock 
+{
+	width: 392px;
+	height: 392px;
+	background: url(jquery.ui.datetimepicker.png) no-repeat;
+	float:left;
+}
+
+.ui-datetimepicker-clock-minute-overlay 
+{
+	width: 392px;
+	height: 392px;
+	top:-535px;
+	left:0px;
+	position: relative;
+	background: url(jquery.ui.datetimepicker.png) no-repeat;
+	background-position: left -393px;
+}
+
+.ui-datetimepicker-clock-hour-overlay 
+{
+	width: 392px;
+	height: 392px;
+	top:-535px;
+	left:5px;
+	position: relative;
+	background: url(jquery.ui.datetimepicker.png) no-repeat;
+	background-position: left -786px;
+}
+
+.ui-datetimepicker-clock-minute-hand 
+ {
+	width: 269px;
+	height: 269px;
+	position: relative;
+	top: 62px;
+	left: 0px;
+	margin: 0 auto;
+	background: url(jquery.ui.datetimepicker.minutes.png) no-repeat;
+	background-position: left -0px;
+	}
+	
+.ui-datetimepicker-clock-hour-hand 
+	{
+	width: 269px;
+	height: 269px;
+	position: relative;
+	top: -205px;
+	left: 0px;
+	margin: 0 auto;
+	background: url(jquery.ui.datetimepicker.hours.png) no-repeat;
+	background-position: left -0px;
+	z-index:999;
+	}
+	
+
+
+.jqmWindow {
+    display: none;
+    
+    position: fixed;
+    top: 17%;
+    left: 50%;
+    
+    margin-left: -300px;
+    width: 600px;
+    padding: 12px;
+    border: 1px;
+	border-color:#ddd;
+	border-style:solid;
+	background-color:#FFFFFF;
+}
+
+.jqmOverlay { background-color: #000; }

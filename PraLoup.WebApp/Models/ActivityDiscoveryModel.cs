@@ -29,6 +29,7 @@ namespace PraLoup.WebApp.Models
     public class ActivityViewModel : BaseModel
     {
         public Activity Activity { get; private set; }
+        public AccountListJson Invited { get; private set; }
 
         public ActivityViewModel(Activity a, Permission p)
             : base(p)

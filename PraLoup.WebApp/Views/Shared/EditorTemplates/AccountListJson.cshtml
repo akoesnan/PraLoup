@@ -1,0 +1,38 @@
+﻿@inherits System.Web.Mvc.WebViewPage<PraLoup.WebApp.Models.AccountListJson>
+@using System.Web;
+@using System.Collections.Generic;
+@{
+    string name = ViewData.TemplateInfo.HtmlFieldPrefix;
+    string id =  name.Replace(".", "_");
+    string divid = "div" + id;
+    string dialogid = "dialog" + id;
+    string controlid = "sf" + id;
+}
+
+<div id="@divid" >
+</div>
+
+<div  class="jqmWindow" id="@dialogid">
+<a href="#" class="jqmClose">Close</a>
+<div id="@controlid">
+</div>
+</div>
+<input type="hidden" id="@id"  name="@id" />
+
+
+<script type="text/javascript">
+    var @divid = @Html.Raw(Model.EditJSON());
+    $("#@controlid").jfmfs();
+    $("#@controlid").bind("jfmfs.selection.changed", function(e, data) { 
+        var friendSelector  = $("#@controlid").data('jfmfs');
+        var selectedFriends = friendSelector.getSelectedIds();
+        var @dialogid = friendSelector.getSelectedIdsAndNames();
+        $("#@id").value = selectedFriends;
+        AddNewUsers($("#@divid"), @dialogid);
+    });
+    $().ready(function () {
+        $('#@dialogid').jqm();
+    });
+    
+</script>
+<input type="button"  onclick='javascript:displaywindow("@dialogid")' value="Add Users"/>

@@ -23,6 +23,8 @@ namespace PraLoup.DataAccess.Entities
 
         public virtual Address Address { get; set; }
 
+        public virtual string ImageUrl { get; set; }
+
         // TODO: what is the representation of this friends? should we store it as array of ids instead?
         public virtual IEnumerable<long> FacebookFriendIds
         {

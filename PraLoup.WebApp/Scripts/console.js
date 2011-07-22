@@ -1,25 +1,63 @@
-﻿function loginp(uids, sesk) {
-    var str = FB.JSON.stringify({ uid: uids, sessionkey: sesk });
-   
-    $.post(
-        '/Praloup.WebApp/Account/Register',
-        { json: str },
-        function (data) {
-            
+﻿function FacebookLogin() {
+    FB.login(function (response) {
+        if (response.session) {
+            if (response.perms) {
+                // user is logged in and granted some permissions.
+                // perms is a comma separated list of granted permissions
+                $.post("http://localhost/Praloup.WebApp/Account/OAuth", { access_token: response.session.access_token, expires: response.session.expires }, function (data) {
+                    alert('Http POST – ' + data.Data);
+                });
+            } else {
+                // user is logged in, but did not grant any permissions
+            }
+        } else {
+            // user is not logged in
         }
-    );
+    }, { perms: 'publish_stream, user_about_me, read_friendlists,user_photos,friends_photos' });
 }
 
-function EnableForm() {
-    var input = $("input").get();
-    for (var i = 0; i < input.length; i++) {
-        input[i].disabled = false;
+
+function RenderAccountList(cont, events, selectedFriends) {
+
+    cont.empty();
+
+    for (var y in events) {
+        var x = events[y];
+        $(" <div class='userlabel'>" +
+            "<div class='image'>" +
+            "<img src='" + x.image + "' />" +
+            "</div>" +
+            "<div class='name' >" +
+            x.name
+        + "</div><div class='clear'></div></div>"
+        ).appendTo(cont);
+    }
+
+    for (var y in events) {
+
     }
 }
 
-function DisableForm() {
-    var input = $("input").get();
-    for (var i = 0; i < input.length; i++) {
-        input[i].disabled = true;
+
+
+function AddNewUsers(cont, selectedFriends) {
+
+    cont.empty();
+
+    for (var y in selectedFriends) {
+        var x = selectedFriends[y];
+        $(" <div class='userlabel'>" +
+            "<div class='name' >" +
+            x.name
+        + "</div></div>"
+        ).appendTo(cont);
     }
 }
+
+
+function displaywindow(name) {
+    $('#' + name).jqmShow();
+}
+
+
+

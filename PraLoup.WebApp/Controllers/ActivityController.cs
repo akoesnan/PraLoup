@@ -44,7 +44,6 @@ namespace PraLoup.WebApp.Controllers
                 return RedirectToAction("Index");
             }
             return View(actv);
-
         }
 
         //
@@ -57,7 +56,6 @@ namespace PraLoup.WebApp.Controllers
 
         //
         // POST: /Default1/Create
-
         [HttpPost]
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Create(Activity activity)
@@ -68,7 +66,6 @@ namespace PraLoup.WebApp.Controllers
 
                 return RedirectToAction("AddFacebookFriends", new { id = activity.Id });
             }
-
             return View(activity);
         }
 
@@ -81,12 +78,11 @@ namespace PraLoup.WebApp.Controllers
         }
 
         [HttpPost]
-        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
-        public ActionResult CreateFromEvent(int eventId, Privacy privacy)
+        public ActionResult CreateFromEvent(int eventId, Privacy privacy, string Invited)
         {
             var ev = AccountBase.EventActions.GetEvent(eventId);
             var actv = AccountBase.ActivityActions.CreateActivityFromExistingEvent(ev, privacy);
-            return View("AddFacebookFriends", actv);
+            return RedirectToAction("Index", "Activity");
         }
 
         //
@@ -161,71 +157,6 @@ namespace PraLoup.WebApp.Controllers
             else
             {
                 // TODO: what to do when there is no such event
-                return RedirectToAction("Index");
-            }
-        }
-
-        [ActionName("AddFacebookFriends")]
-        [AcceptVerbs(HttpVerbs.Post)]
-        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
-        public ActionResult AddFacebookFriends(int id, FormCollection formCollection)
-        {
-
-            //from the form collection, create a key value pair (just easier to work with for me, you dont have to do this)
-            List<KeyValuePair<string, string>> results = new List<KeyValuePair<string, string>>();
-            foreach (string key in formCollection.AllKeys)
-            {
-                results.Add(new KeyValuePair<string, string>(key, formCollection[key]));
-            }
-
-            string[] tokens;
-            bool found = false;
-            OAuthHandler oauth = new OAuthHandler();
-            /*
-            //in the uncondensed fb:form-request, there will be a form collection key called "emails[]" which will contain a comma delimited list of emails
-            if (results.Any(s => s.Key == "emails[]"))
-            {
-                string emails = results.SingleOrDefault(s => s.Key == "emails[]").Value;
-                tokens = emails.Split(',');
-                foreach (string token in tokens)
-                {
-                    
-                }
-                found = true;
-            }
-            */
-
-            var o = this.DataService.Activity.Find(id);
-            //both the uncondensed and condensed fb:form-request will contain a key called "id[]" which will contain a list of facebook id's
-            if (results.Any(s => s.Key == "ids[]"))
-            {
-                string facebookUserIds = results.SingleOrDefault(s => s.Key == "ids[]").Value;
-                tokens = facebookUserIds.Split(',');
-                List<Account> fas = new List<Account>();
-                foreach (string token in tokens)
-                {
-                    FacebookAccount fa = new FacebookAccount(token);
-                    fas.Add(fa.Account);
-                }
-
-                var invitations = fas.Select(a => new Invitation(this.AccountBase.Account, a, o, "invite message"));
-                DataService.Commit();
-                found = true;
-            }
-
-            // return RedirectToAction("Index", "Friends", new { invitationsSent = true });
-            if (found)
-            {
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                var e = DataService.Activity.Find(id);
-                if (e != null)
-                {
-                    return View(e);
-                }
-                // todo handle error
                 return RedirectToAction("Index");
             }
         }

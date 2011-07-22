@@ -32,21 +32,27 @@ namespace ProjectSafari.Controllers
         {
             if (!FacebookWebContext.Current.IsAuthenticated())
             {
-                var oAuthClient = new FacebookOAuthClient(FacebookApplication.Current);
-                oAuthClient.RedirectUri = new Uri(redirectUrl);
-                var loginUri = oAuthClient.GetLoginUrl(new Dictionary<string, object> { { "state", returnUrl } });
-                return Redirect(loginUri.AbsoluteUri);
+                return View();
             }
             else
             {
                 FacebookWebAuthorizer fwa = new FacebookWebAuthorizer(new PraLoupFacebookApplication(), HttpContext);
-                fwa.Permissions = new string[] { "publish_stream", "user_about_me", "read_friendlists" };
+                fwa.Permissions = new string[] { "publish_stream", "user_about_me", "read_friendlists","user_photos","friends_photos" };
                 fwa.ReturnUrlPath = returnUrl;
                 fwa.CancelUrlPath = returnUrl;
                 if (fwa.Authorize())
                 {
                     Register();
-                    return RedirectToAction("Home", "Home");
+                    string url;
+                    if (FacebookWebContext.Current.HttpContext.Request.UrlReferrer != null)
+                    {
+                        url = FacebookWebContext.Current.HttpContext.Request.UrlReferrer.ToString();
+                    }
+                    else
+                    {
+                        url = returnUrl;
+                    }
+                    return Redirect(url);
                 }
                 return View();
             }
@@ -69,55 +75,32 @@ namespace ProjectSafari.Controllers
 
         //
         // GET: /Account/OAuth/
-        public ActionResult OAuth(string code, string state)
+        [HttpPost]
+        public ActionResult OAuth(string access_token, string expires)
         {
-            FacebookOAuthResult oauthResult;
-            if (FacebookOAuthResult.TryParse(Request.Url, out oauthResult))
+            DateTime expiresOn = DateTime.MaxValue;
+            if (!String.IsNullOrEmpty(expires) && expires != "0")
             {
-                if (oauthResult.IsSuccess)
-                {
-                    var oAuthClient = new FacebookOAuthClient(FacebookApplication.Current);
-                    oAuthClient.RedirectUri = new Uri(redirectUrl);
-                    dynamic tokenResult = oAuthClient.ExchangeCodeForAccessToken(code);
-                    string accessToken = tokenResult.access_token;
-
-                    DateTime expiresOn = DateTime.MaxValue;
-
-                    if (tokenResult.ContainsKey("expires"))
-                    {
-                        expiresOn = DateTimeConvertor.FromUnixTime(tokenResult.expires);
-                    }
-
-                    FacebookClient fbClient = new FacebookClient(accessToken);
-                    dynamic me = fbClient.Get("me?fields=id,name");
-                    long facebookId = Convert.ToInt64(me.id);
-
-
-
-                    // TODO: add this to the account 
-                    //this.Repository.Add(new FacebookUser
-                    //{
-                    //    AccessToken = accessToken,
-                    //    Expires = expiresOn,
-                    //    FacebookId = facebookId,
-                    //    Name = (string)me.name,
-                    //});
-
-                    FormsAuthentication.SetAuthCookie(facebookId.ToString(), false);
-
-                    // prevent open redirection attack by checking if the url is local.
-                    if (Url.IsLocalUrl(state))
-                    {
-                        return Redirect(state);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
-                }
+                expiresOn = DateTimeConvertor.FromUnixTime(expires);
             }
 
-            return RedirectToAction("Index", "Home");
+            FacebookClient fbClient = new FacebookClient(access_token);
+            dynamic me = fbClient.Get("me?fields=id,name");
+            long facebookId = Convert.ToInt64(me.id);
+            
+            // TODO: add this to the account 
+            //this.Repository.Add(new FacebookUser
+            //{
+            //    AccessToken = accessToken,
+            //    Expires = expiresOn,
+            //    FacebookId = facebookId,
+            //    Name = (string)me.name,
+            //});
+
+            FormsAuthentication.SetAuthCookie(facebookId.ToString(), false);
+
+            // prevent open redirection attack by checking if the url is local.
+            return View();
         }
 
     }

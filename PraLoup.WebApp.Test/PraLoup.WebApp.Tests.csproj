@@ -69,6 +69,7 @@
     <Compile Include="App_Start\NinjectMVC3.cs" />
     <Compile Include="Controllers\RoutingTest.cs" />
     <Compile Include="Controllers\ThingsToDoControllerTest.cs" />
+    <Compile Include="Models\AccountListJsonTest.cs" />
     <Compile Include="Models\MetroAreaModelTest.cs" />
     <Compile Include="Models\ThingsToDoCityModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
