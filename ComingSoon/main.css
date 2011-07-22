@@ -1,0 +1,39 @@
+﻿/*----------------------------------------------------------
+The base color for this template is #5c87b2. If you'd like
+to use a different color start by replacing all instances of
+#5c87b2 with your new color.
+----------------------------------------------------------*/
+body
+{
+	background-color: #FFFFFF;
+	font-size: 75%;
+	font-family: Verdana, Tahoma, Arial, "Helvetica Neue" , Helvetica, Sans-Serif;
+	margin: 50px;
+	padding: 0;
+	color: black;
+	text-align:center;
+
+}
+
+
+#container
+{
+	margin:0px  auto;
+	width: 500px;
+	text-align: center;
+}
+
+
+#action_buttons
+{
+	border: 1px solid #cccccc;
+	background-color: rgb(174, 196, 135);
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	padding-left: 13px;
+	height: 42px;
+	position: relative;
+	top: 0;
+	width: 100%;
+}

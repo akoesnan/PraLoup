@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.Infrastructure", "P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QRCodeTest", "QRCodeTest\QRCodeTest.csproj", "{B7A5E058-BBF6-476B-BA79-265389EF720D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComingSoon", "ComingSoon\ComingSoon.csproj", "{61BA7F14-9541-488E-A85E-9817867224CA}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = PraLoup.vsmdi
@@ -189,6 +191,16 @@ Global
 		{B7A5E058-BBF6-476B-BA79-265389EF720D}.Release|Mixed Platforms.Build.0 = Release|x86
 		{B7A5E058-BBF6-476B-BA79-265389EF720D}.Release|x86.ActiveCfg = Release|x86
 		{B7A5E058-BBF6-476B-BA79-265389EF720D}.Release|x86.Build.0 = Release|x86
+		{61BA7F14-9541-488E-A85E-9817867224CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61BA7F14-9541-488E-A85E-9817867224CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61BA7F14-9541-488E-A85E-9817867224CA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{61BA7F14-9541-488E-A85E-9817867224CA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{61BA7F14-9541-488E-A85E-9817867224CA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{61BA7F14-9541-488E-A85E-9817867224CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61BA7F14-9541-488E-A85E-9817867224CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61BA7F14-9541-488E-A85E-9817867224CA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{61BA7F14-9541-488E-A85E-9817867224CA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{61BA7F14-9541-488E-A85E-9817867224CA}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
