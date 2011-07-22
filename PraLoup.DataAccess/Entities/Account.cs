@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using PraLoup.DataAccess;
-using PraLoup.DataAccess.Enums;
-using System.ComponentModel.DataAnnotations;
 
 namespace PraLoup.DataAccess.Entities
 {
     public class Account : BaseEntity
     {
-        public virtual string UserId { get; set; }
+        // public virtual string UserId { get; set; }
 
         public virtual FacebookLogon FacebookLogon { get; set; }
 
@@ -29,14 +24,20 @@ namespace PraLoup.DataAccess.Entities
         public virtual Address Address { get; set; }
 
         // TODO: what is the representation of this friends? should we store it as array of ids instead?
-        public virtual string Friends { get; set; }
+        public virtual IEnumerable<long> FacebookFriendIds
+        {
+            get
+            {
+                return this.Connections.Select(c => c.FriendId);
+            }
+        }
+
+        public virtual IList<Connection> Connections { get; set; }
 
         public override bool Equals(object obj)
         {
             var o = obj as Account;
-
-            return o != null
-                   && (o.Id == this.Id || o.UserId == this.UserId);
+            return o != null && (o.Id == this.Id);
         }
 
         public override int GetHashCode()

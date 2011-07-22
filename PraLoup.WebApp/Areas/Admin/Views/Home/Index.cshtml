@@ -1,4 +1,5 @@
 ﻿@using PraLoup.WebApp.Areas.Admin.Resources;
+@model PraLoup.WebApp.Areas.Admin.Models.AdminHomePageModel
 
 @{
     ViewBag.Title = "Index";
@@ -6,7 +7,13 @@
 
 <h2>@LocStrings.Tasks</h2>
 
+@if (Model != null && Model.Message != null) { 
+    <div class="adm_hm_msg">
+    @Model.Message
+    </div>
+}
+
 <ul class="Adm_tasks">
     <li>@Html.ActionLink(LocStrings.ManageMetro, "Index", "MetroArea")</li>
-    
+    <li>@Html.ActionLink("Generate Test Data", "CreateTestData", "Home")</li>
 </ul>

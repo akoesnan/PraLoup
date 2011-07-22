@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using PraLoup.DataAccess.Entities;
 using PraLoup.BusinessLogic;
+using PraLoup.DataAccess.Entities;
+using PraLoup.DataAccess.Enums;
 
 namespace PraLoup.WebApp.Models
 {
     public class ActivityDiscoveryModel
     {
         public IEnumerable<Activity> MyActivity { get; private set; }
-        public IEnumerable<ActivityViewModel> MyOtherActivity { get; private set; }
+        public IEnumerable<Activity> MyFriendActivity { get; private set; }
+        public IEnumerable<Activity> MyFriendOfFriendActivity { get; private set; }
         public AccountBase Account { get; private set; }
 
         public ActivityDiscoveryModel(AccountBase account)
@@ -21,11 +21,8 @@ namespace PraLoup.WebApp.Models
         public void Setup()
         {
             this.MyActivity = Account.ActivityActions.GetMyActivities(0, 10).ToList();
-
-            // TODO: edit this linq so that we do the calculation in the db layer
-            this.MyOtherActivity = this.Account.ActivityActions.GetAllActivies()
-                .Where(a => this.Account.GetPermissions(a).HasFlag(Permissions.View))
-                .Select(a => new ActivityViewModel(a, this.Account.GetPermissions(a))).ToList();
+            this.MyFriendActivity = Account.ActivityActions.GetFriendsActivities(0, 10);
+            this.MyFriendOfFriendActivity = Account.ActivityActions.GetFriendsOfFriendsActivities(0, 10);
         }
     }
 
@@ -33,7 +30,7 @@ namespace PraLoup.WebApp.Models
     {
         public Activity Activity { get; private set; }
 
-        public ActivityViewModel(Activity a, Permissions p)
+        public ActivityViewModel(Activity a, Permission p)
             : base(p)
         {
             this.Activity = a;

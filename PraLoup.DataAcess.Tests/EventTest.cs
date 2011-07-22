@@ -1,20 +1,22 @@
 ﻿using System;
-using System.Text;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PraLoup.DataAccess.Mapping;
-using PraLoup.DataAccess.Entities;
-using NHibernate;
 using FluentNHibernate.Testing;
-using System.Collections;
+using NHibernate;
+using NUnit.Framework;
+using PraLoup.DataAccess.Entities;
+using PraLoup.DataAccess.Mapping;
 
 namespace PraLoup.DataAcess.Tests
 {
-    [TestClass]
-    public class EventTest : BaseDataTestClass
+    [TestFixture]
+    public class EventTest : BaseDataTestFixture
     {
-        [TestMethod]
+        /// <summary>
+        /// Validate that the event basic CRUD can be executed
+        /// </summary>
+        [Test]
         public void EventBasicCRUD_Success()
         {
             using (var Scope = new SQLiteDatabaseScope<PraLoupAutoMappingConfiguration>())

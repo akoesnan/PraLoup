@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NHibernate;
+using System.Data.SQLite;
+using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using System.Data.SQLite;
+using NHibernate;
 using NHibernate.Tool.hbm2ddl;
-using PraLoup.DataAccess.Mapping;
-using FluentNHibernate.Automapping;
 using PraLoup.DataAccess.Entities;
+using PraLoup.DataAccess.Mapping;
 
 namespace PraLoup.DataAcess.Tests
 {
@@ -39,14 +36,14 @@ namespace PraLoup.DataAcess.Tests
         {
             return SQLiteConfiguration.Standard
                 .ConnectionString(cs => cs.Is(CONNECTION_STRING));
-        }     
+        }
 
         private void GetMappings(MappingConfiguration x)
         {
             x.AutoMappings.Add(AutoMap.AssemblyOf<Account>(new PraLoupAutoMappingConfiguration())
-                .UseOverridesFromAssemblyOf<EventMappingOverride>()                    
+                .UseOverridesFromAssemblyOf<EventMappingOverride>()
                 .Conventions.Add<CascadeConvention>())
-                                    
+
              .ExportTo(".");
         }
 
@@ -69,6 +66,11 @@ namespace PraLoup.DataAcess.Tests
         public ISession OpenSession()
         {
             return m_SessionFactory.OpenSession(GetConnection());
+        }
+
+        public ISessionFactory GetSessionFactory()
+        {
+            return m_SessionFactory;
         }
 
         private bool disposedValue = false;

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using PraLoup.DataAccess.Entities;
 using PraLoup.Infrastructure.Validation;
 
@@ -16,11 +15,21 @@ namespace PraLoup.DataAccess.Validators
 
         public IEnumerable<string> BrokenRules(Account entity)
         {
-            if (entity.FacebookLogon != null && entity.FacebookLogon.FacebookId != default(long))
+            if (entity.FacebookLogon == null)
             {
-                yield return "Facebook Logon should not be null and the facebook id should be valid ";
+                yield return "Facebook Logon should not be null";
             }
-
+            else
+            {
+                if (entity.FacebookLogon.FacebookId == default(long))
+                {
+                    yield return "Facebook Logon should not be null and the facebook id should be valid ";
+                }
+                if (String.IsNullOrEmpty(entity.FacebookLogon.AccessToken))
+                {
+                    yield return "Facebook access tokens should be populated";
+                }
+            }
             yield break;
         }
     }

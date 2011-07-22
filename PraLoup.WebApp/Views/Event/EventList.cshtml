@@ -1,0 +1,15 @@
+﻿@{
+    var listName = ViewBag.ListName as string;
+    var events = ViewBag.Events as IEnumerable<PraLoup.DataAccess.Entities.Event>; 
+}
+<div class="evt_lst">
+    <div class="evt_lst_name">
+        <h3>@listName</h3>
+    </div>
+    @{
+        foreach (var e in events)
+        {            
+            Html.RenderPartial("EventItem", new ViewDataDictionary() { {"Event", e} } );         
+        }
+    }
+</div>

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using NHibernate;
+using NHibernate.Criterion;
 using PraLoup.Infrastructure.Data;
 using PraLoup.Infrastructure.Validation;
 
@@ -18,6 +20,16 @@ namespace PraLoup.DataAccess.Services
         {
             this.repository = r;
             this.validator = v;
+        }
+
+        public IQueryOver<TEntity> ExecuteQuery(IQuery<TEntity> t)
+        {
+            return repository.ExecuteQuery<TEntity>(t);
+        }
+
+        public IQueryOver<TEntity> ExecuteQuery(QueryOver<TEntity> t)
+        {
+            return repository.ExecuteQuery<TEntity>(t);
         }
 
         public IQueryable<TEntity> GetQuery()
@@ -58,6 +70,16 @@ namespace PraLoup.DataAccess.Services
                 repository.SaveOrUpdate(entity);
             }
             brokenRules = null;
+            return true;
+        }
+
+        public bool SaveOrUpdate(TEntity entity)
+        {
+            if (!validator.IsValid(entity))
+            {
+                return false;
+            }
+            repository.SaveOrUpdate(entity);
             return true;
         }
 

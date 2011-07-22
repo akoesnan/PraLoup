@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using PraLoup.DataAccess.Enums;
-using NHibernate.UserTypes;
 
 namespace PraLoup.DataAccess.Entities
 {
@@ -25,19 +24,7 @@ namespace PraLoup.DataAccess.Entities
         /// <summary>
         /// Events privacy
         /// </summary>
-        public virtual Privacy Privacy
-        {
-            get
-            {
-                return (Privacy)PrivacyInt;
-            }
-            set
-            {
-                PrivacyInt = (int)value;
-            }
-        }
-
-        public virtual int PrivacyInt { get; set; }
+        public virtual Privacy Privacy { get; set; }
 
         /// <summary>
         /// Events Tags
@@ -77,5 +64,9 @@ namespace PraLoup.DataAccess.Entities
         public virtual DateTime LastUpdatedDateTime { get; set; }
 
         public virtual Account LastUpdatedBy { get; set; }
+
+        public virtual Permission Permission { get; set; }
+
+        public virtual ConnectionType ConnectionType { get; set; }
     }
 }

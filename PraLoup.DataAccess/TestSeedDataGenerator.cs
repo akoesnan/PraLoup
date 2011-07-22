@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data.Entity;
 using PraLoup.DataAccess.Entities;
-using NHibernate;
-using PraLoup.Infrastructure.Data;
+using PraLoup.DataAccess.Services;
+using PraLoup.Infrastructure.Logging;
 
 namespace PraLoup.DataAccess
 {
     public class TestSeedDataGenerator
     {
-        IRepository Repository { get; set; }
+        private IDataService DataService;
+        private ILogger Log;
 
-        public TestSeedDataGenerator(IRepository repository)
+        public TestSeedDataGenerator(IDataService dataService, ILogger log)
         {
-            this.Repository = repository;
+            this.DataService = dataService;
+            this.Log = log;
         }
 
         public void Seed()
@@ -23,8 +24,9 @@ namespace PraLoup.DataAccess
             SetupEventData();
             SetupActivityData();
             SetupMetroData();
-
             //SetupOffersData();
+
+            this.DataService.Commit();
         }
 
         private void SetupMetroData()
@@ -33,8 +35,10 @@ namespace PraLoup.DataAccess
                 new MetroArea("Seattle", "Washington", "United States"),
                 new MetroArea("Portland", "Oregon", "United States")
             };
-            metros.ForEach(m => Repository.SaveOrUpdate<MetroArea>(m));
-            Repository.SaveChanges();
+            IEnumerable<string> brokenRules = null;
+            metros.ForEach(m => DataService.MetroArea.SaveOrUpdate(m, out brokenRules));
+            if (brokenRules != null)
+                this.Log.Debug("brokenRules for Metro Area {0}", String.Join(",", brokenRules));
         }
 
         /// <summary>
@@ -43,17 +47,19 @@ namespace PraLoup.DataAccess
         private void SetupAccountsData()
         {
             var accounts = new List<Account>() {
-                GetAccount("Jhony", "Depp"),
-                GetAccount("Bill", "Finger"),
-                GetAccount("Martin", "Nordell"),
-                GetAccount("John", "Broome"),
-                GetAccount("Angela", "Bassett"),                
-                GetAccount("Peggy", "Justice"),    
-                GetAccount("Andhy", "Koesnandar"),
-                GetAccount("Andrew", "Smith")
+                EntityHelper.GetAccount("Jhony", "Depp"),
+                EntityHelper.GetAccount("Bill", "Finger"),
+                EntityHelper.GetAccount("Martin", "Nordell"),
+                EntityHelper.GetAccount("John", "Broome"),
+                EntityHelper.GetAccount("Angela", "Bassett"),                
+                EntityHelper.GetAccount("Peggy", "Justice"),    
+                EntityHelper.GetAccount("Andhy", "Koesnandar"),
+                EntityHelper.GetAccount("Andrew", "Smith")
             };
-            accounts.ForEach(s => Repository.SaveOrUpdate<Account>(s));
-            Repository.SaveChanges();
+            IEnumerable<string> brokenRules = null;
+            accounts.ForEach(s => this.DataService.Account.SaveOrUpdate(s, out brokenRules));
+            if (brokenRules != null)
+                this.Log.Debug("brokenRules for Account {0}", String.Join(",", brokenRules));
         }
 
         /// <summary>
@@ -63,27 +69,30 @@ namespace PraLoup.DataAccess
         {
             var events = new List<Event>() {
                 
-                GetThingsToDo("Broadway Sunday Farmers Market", "Seattle Central Community College"),
-                GetThingsToDo("Queen Anne Farmers Market", "Queen Anne Farmers Market"),
-                GetThingsToDo("Madrona Farmers Market", "Madrona Farmers Market"),
+                EntityHelper.GetEvent("Broadway Sunday Farmers Market", "Seattle Central Community College"),
+                EntityHelper.GetEvent("Queen Anne Farmers Market", "Queen Anne Farmers Market"),
+                EntityHelper.GetEvent("Madrona Farmers Market", "Madrona Farmers Market"),
 
-                GetThingsToDo("Adele", "Paramount Theatre"),
-                GetThingsToDo("Guys & Dolls", "5th Avenue Theatre"),                
-                GetThingsToDo("Bruno Mars and Janelle Monae: Hooligans in Wondaland Tour", "WaMu Theater"),
+                EntityHelper.GetEvent("Adele", "Paramount Theatre"),
+                EntityHelper.GetEvent("Guys & Dolls", "5th Avenue Theatre"),                
+                EntityHelper.GetEvent("Bruno Mars and Janelle Monae: Hooligans in Wondaland Tour", "WaMu Theater"),
                 
-                GetThingsToDo("Seattle Sounders FC vs. Vancouver Whitecaps", "Qwest Field"),
-                GetThingsToDo("Seattle Sounders FC vs. New York Red Bulls", "Qwest Field"),
-                GetThingsToDo("Seattle Sounders FC vs. New England Revolution", "Qwest Field"),
-                GetThingsToDo("Seattle Sounders FC vs. Colorado Rapids", "Qwest Field"),
+                EntityHelper.GetEvent("Seattle Sounders FC vs. Vancouver Whitecaps", "Qwest Field"),
+                EntityHelper.GetEvent("Seattle Sounders FC vs. New York Red Bulls", "Qwest Field"),
+                EntityHelper.GetEvent("Seattle Sounders FC vs. New England Revolution", "Qwest Field"),
+                EntityHelper.GetEvent("Seattle Sounders FC vs. Colorado Rapids", "Qwest Field"),
 
-                GetThingsToDo("Baltimore Orioles @ Seattle Mariners", "Safeco Field"),
-                GetThingsToDo("Tampa Bay Rays @ Seattle Mariners", "Safeco Field"),
-                GetThingsToDo("Los Angeles Angels @ Seattle Mariners", "Safeco Field"),
-                GetThingsToDo("Philadelphia Phillies @ Seattle Mariners", "Safeco Field"),
-                GetThingsToDo("Seattle Mariners vs. Florida Marlins", "Safeco Field"),
+                EntityHelper.GetEvent("Baltimore Orioles @ Seattle Mariners", "Safeco Field"),
+                EntityHelper.GetEvent("Tampa Bay Rays @ Seattle Mariners", "Safeco Field"),
+                EntityHelper.GetEvent("Los Angeles Angels @ Seattle Mariners", "Safeco Field"),
+                EntityHelper.GetEvent("Philadelphia Phillies @ Seattle Mariners", "Safeco Field"),
+                EntityHelper.GetEvent("Seattle Mariners vs. Florida Marlins", "Safeco Field"),
             };
-            events.ForEach(e => Repository.SaveOrUpdate<Event>(e));
-            Repository.SaveChanges();
+            IEnumerable<string> brokenRules = null;
+            events.ForEach(e => this.DataService.Event.SaveOrUpdate(e, out brokenRules));
+            if (brokenRules != null)
+                this.Log.Debug("brokenRules for Event {0}", String.Join(",", brokenRules));
+
         }
 
         /// <summary>
@@ -92,18 +101,21 @@ namespace PraLoup.DataAccess
         private void SetupActivityData()
         {
             var activities = new List<Activity>() {
-                GetActivity(GetUserName("Johny","Depp"), "Adele", new string[] {GetUserName("Bill", "Finger"), GetUserName("John", "Broome")}),
-                GetActivity(GetUserName("Angela", "Bassett"), "Seattle Sounders FC vs. New England Revolution", new string[] {GetUserName("Peggy", "Justice"), GetUserName("Angela", "Bassett")})                
+                GetActivity(EntityHelper.GetUserName("Johny","Depp"), "Adele", new string[] {EntityHelper.GetUserName("Bill", "Finger"), EntityHelper.GetUserName("John", "Broome")}),
+                GetActivity(EntityHelper.GetUserName("Angela", "Bassett"), "Seattle Sounders FC vs. New England Revolution", new string[] {EntityHelper.GetUserName("Peggy", "Justice"), EntityHelper.GetUserName("Angela", "Bassett")})                
             };
+            IEnumerable<string> brokenRules = null;
+            activities.ForEach(a => this.DataService.Activity.SaveOrUpdate(a, out brokenRules));
+            if (brokenRules != null)
+                this.Log.Debug("brokenRules for activity {0}", String.Join(",", brokenRules));
 
-            Repository.SaveChanges();
         }
 
         private Activity GetActivity(string hostUserName, string evtName, string[] invitesUserName)
         {
-            var organizerAcct = Repository.FirstOrDefault<Account>(a => hostUserName.Equals(a.UserName, StringComparison.InvariantCultureIgnoreCase));
-            var evt = Repository.FirstOrDefault<Event>(e => evtName.Equals(e.Name, StringComparison.InvariantCultureIgnoreCase) == true);
-            var inviteAccts = Repository.Where<Account>(a => invitesUserName.Any(i => i.Equals(a.UserName, StringComparison.InvariantCultureIgnoreCase) == true));
+            var organizerAcct = this.DataService.Account.FirstOrDefault(a => hostUserName.ToLower() == a.UserName.ToLower());
+            var evt = this.DataService.Event.FirstOrDefault(e => evtName.ToLower() == e.Name.ToLower());
+            var inviteAccts = this.DataService.Account.Where(a => invitesUserName.Any(i => i.ToLower() == a.UserName.ToLower()));
             if (organizerAcct != null && evt != null)
             {
                 var activity = new Activity()
@@ -117,66 +129,5 @@ namespace PraLoup.DataAccess
             return null;
         }
 
-        private Account GetAccount(string firstName, string lastName)
-        {
-            var a = new Account()
-            {
-                FirstName = firstName,
-                LastName = lastName,
-                UserName = GetUserName(firstName, lastName)
-            };
-            a.Email = String.Format("{0}@example.com", a.UserName);
-            a.Address = GetRandomAddress();
-            return a;
-        }
-
-        private string GetUserName(string firstName, string lastName)
-        {
-            return firstName.First() + lastName;
-        }
-
-        private Address GetRandomAddress()
-        {
-            return new Address()
-            {
-                StreetLine1 = "",
-                StreetLine2 = "",
-                City = "Seattle",
-                State = "WA",
-                Country = "United States"
-            };
-        }
-
-        private Event GetThingsToDo(string eventName, string venueName)
-        {
-            var rand = new Random(eventName.GetHashCode());
-            var e = new Event()
-            {
-                Name = eventName,
-                Description = String.Format("Join us to the exciting {0}.", eventName),
-                StartDateTime = DateTime.Today.AddDays(rand.Next(5, 30)).AddHours(15),
-                EndDateTime = DateTime.Today.AddDays(rand.Next(5, 30)).AddHours(18),
-                Price = 50,
-                Value = 50,
-                Source = "Seed",
-                Privacy = Enums.Privacy.Public,
-                Venue = GetVenue(venueName)
-            };
-            return e;
-        }
-
-        private Venue GetVenue(string venueName)
-        {
-            var v = new Venue()
-            {
-                Name = venueName,
-                StreetLine1 = "",
-                StreetLine2 = "",
-                City = "Seattle",
-                State = "WA",
-                Country = "United States"
-            };
-            return v;
-        }
     }
 }

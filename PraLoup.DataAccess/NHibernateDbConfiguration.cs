@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NHibernate;
+using System.Data.Common;
+using System.Data.SQLite;
 using FluentNHibernate.Automapping;
-using PraLoup.DataAccess.Entities;
-using PraLoup.DataAccess.Mapping;
-using NHibernate.Cfg;
-using System.IO;
-using NHibernate.Tool.hbm2ddl;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using System.Data.SQLite;
 using MySql.Data.MySqlClient;
-using System.Data.Common;
+using NHibernate;
+using NHibernate.Cfg;
+using NHibernate.Tool.hbm2ddl;
+using PraLoup.DataAccess.Entities;
+using PraLoup.DataAccess.Mapping;
 
 namespace PraLoup.DataAccess
 {
@@ -110,7 +106,7 @@ namespace PraLoup.DataAccess
         private static void GetMappings(MappingConfiguration x)
         {
             x.AutoMappings.Add(AutoMap.AssemblyOf<Account>(new PraLoupAutoMappingConfiguration())
-                .UseOverridesFromAssemblyOf<EventMappingOverride>()
+                .UseOverridesFromAssemblyOf<AccountMappingOverride>()
                 .Conventions.Add<CascadeConvention>());
             //.ExportTo("."); // This will export the hql file. we should comment this out otherwise it will try to use these files
         }

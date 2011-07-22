@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel.DataAnnotations;
-using System.Collections;
 
 namespace PraLoup.DataAccess.Entities
 {
-    public class FacebookLogon 
+    public class FacebookLogon
     {
         public virtual long FacebookId { get; set; }
         public virtual string AccessToken { get; set; }
@@ -16,7 +11,7 @@ namespace PraLoup.DataAccess.Entities
         public override bool Equals(object obj)
         {
             var fl = obj as FacebookLogon;
-            return fl.FacebookId == this.FacebookId && fl.AccessToken == this.AccessToken && fl.Expires == this.Expires;                
+            return fl.FacebookId == this.FacebookId && fl.AccessToken == this.AccessToken && fl.Expires == this.Expires;
         }
 
         public override int GetHashCode()
@@ -28,6 +23,6 @@ namespace PraLoup.DataAccess.Entities
         {
             return string.Format("Id:{0} AccessToken:{1} Expires:{2}", this.FacebookId, this.AccessToken, this.Expires);
         }
-    
+
     }
 }

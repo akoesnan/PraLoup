@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using PraLoup.DataAccess.Enums;
-using System;
 
 namespace PraLoup.DataAccess.Entities
 {
@@ -20,28 +19,18 @@ namespace PraLoup.DataAccess.Entities
             this.Privacy = privacy;
         }
 
-        public virtual int FacebookId { get; set; }
+        public virtual long FacebookId { get; set; }
 
         public virtual Account Organizer { get; set; }
 
-        public virtual Privacy Privacy
-        {
-            get
-            {
-                return (Privacy)PrivacyInt;
-            }
-            set
-            {
-                PrivacyInt = (int)value;
-            }
-        }
-
-        public virtual int PrivacyInt { get; set; }
+        public virtual Privacy Privacy { get; set; }
 
         public virtual Event Event { get; set; }
 
         public virtual DateTime UpdatedTime { get; set; }
 
-        public virtual bool IsCreated { get; set; }
+        public virtual Permission Permission { get; set; }
+
+        public virtual ConnectionType ConnectionType { get; set; }
     }
 }

@@ -25,6 +25,7 @@ TestResults/
 # visual studio files#
 ######################
 *.user
+*.docstates
 
 # git files#
 ######################
@@ -33,8 +34,14 @@ TestResults/
 # Logs and databases #
 ######################
 *.log
+*.log*
 *.sql
 *.sqlite
+Logs/
+
+# nhibernate files   #
+######################
+*.hbm.xml
 
 # OS generated files #
 ######################

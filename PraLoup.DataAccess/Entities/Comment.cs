@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace PraLoup.DataAccess.Entities
 {
@@ -12,4 +10,3 @@ namespace PraLoup.DataAccess.Entities
         public virtual IList<Comment> Comments { get; set; }
     }
 }
-

@@ -11,6 +11,8 @@ namespace PraLoup.DataAccess.Services
         public EntityDataService<Activity, ActivityValidator> Activity { get; private set; }
         public EntityDataService<Invitation, InvitationValidator> Invitation { get; private set; }
         public EntityDataService<Offer, OfferValidator> Offer { get; private set; }
+        public EntityDataService<MetroArea, MetroAreaValidator> MetroArea { get; private set; }
+        public EntityDataService<Connection, ConnectionValidator> Connection { get; private set; }
 
         private IUnitOfWork unitOfWork;
 
@@ -18,12 +20,16 @@ namespace PraLoup.DataAccess.Services
             EntityDataService<Event, EventValidator> eventDataService,
             EntityDataService<Activity, ActivityValidator> activityDataService,
             EntityDataService<Invitation, InvitationValidator> invitationDataService,
+            EntityDataService<MetroArea, MetroAreaValidator> metroAreaDataService,
+            EntityDataService<Connection, ConnectionValidator> connectionDataService,
             IUnitOfWork unitOfWork)
         {
             this.Account = accountDataService;
             this.Event = eventDataService;
             this.Activity = activityDataService;
             this.Invitation = invitationDataService;
+            this.MetroArea = metroAreaDataService;
+            this.Connection = connectionDataService;
             this.unitOfWork = unitOfWork;
         }
 
@@ -32,7 +38,7 @@ namespace PraLoup.DataAccess.Services
             this.unitOfWork.Commit();
         }
 
-        public void RollBack()
+        public void Rollback()
         {
             this.unitOfWork.Rollback();
         }

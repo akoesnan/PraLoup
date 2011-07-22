@@ -1,5 +1,4 @@
-﻿using System;
-using PraLoup.DataAccess.Entities;
+﻿using PraLoup.DataAccess.Entities;
 namespace PraLoup.DataAccess.Services
 {
     public interface IDataService
@@ -9,6 +8,9 @@ namespace PraLoup.DataAccess.Services
         EntityDataService<Event, PraLoup.DataAccess.Validators.EventValidator> Event { get; }
         EntityDataService<Invitation, PraLoup.DataAccess.Validators.InvitationValidator> Invitation { get; }
         EntityDataService<Offer, PraLoup.DataAccess.Validators.OfferValidator> Offer { get; }
+        EntityDataService<MetroArea, PraLoup.DataAccess.Validators.MetroAreaValidator> MetroArea { get; }
+        EntityDataService<Connection, PraLoup.DataAccess.Validators.ConnectionValidator> Connection { get; }
         void Commit();
+        void Rollback();
     }
 }

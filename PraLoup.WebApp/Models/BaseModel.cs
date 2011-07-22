@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using PraLoup.BusinessLogic;
+﻿using PraLoup.DataAccess.Enums;
 
 namespace PraLoup.WebApp.Models
 {
     public class BaseModel
     {
-        public bool CanView { get { return this.Permissions.HasFlag(Permissions.View); } }
-        public bool CanEdit { get { return this.Permissions.HasFlag(Permissions.Edit); } }
-        public bool CanDelete { get { return this.Permissions.HasFlag(Permissions.Delete); } }
+        public Permission Permission { get; private set; }
 
-        public Permissions Permissions;
-
-        public BaseModel(Permissions permissions)
+        public BaseModel(Permission permissions)
         {
-            this.Permissions = permissions;
+            this.Permission = permissions;
         }
 
     }

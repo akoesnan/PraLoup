@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using NHibernate;
+using NHibernate.Criterion;
 using NHibernate.Linq;
 using PraLoup.Infrastructure.Data;
-using PraLoup.Infrastructure.Logging;
 
 namespace PraLoup.DataAccess
 {
+    /// <summary>
+    /// Generic Repository is an abstraction of database in our system.
+    /// </summary>
     public class GenericRepository : IRepository
     {
         private ISession dbSession;
@@ -162,6 +165,29 @@ namespace PraLoup.DataAccess
         public T Find<T>(object id) where T : class
         {
             return dbSession.Get<T>(id);
+        }
+
+
+        public IQueryOver<T> GetQueryOver<T>() where T : class
+        {
+            return dbSession.QueryOver<T>();
+        }
+
+        public IQueryOver<T> ExecuteQuery<T>(QueryOver<T> query) where T : class
+        {
+            return query.GetExecutableQueryOver(dbSession);
+        }
+
+        public IQueryOver<T1, T1> ExecuteQuery<T1, T2>(QueryOver<T1, T2> query)
+            where T1 : class
+            where T2 : class
+        {
+            return query.GetExecutableQueryOver(dbSession);
+        }
+
+        public IQueryOver<T> ExecuteQuery<T>(IQuery<T> spec) where T : class
+        {
+            return spec.GetQuery().GetExecutableQueryOver(dbSession);
         }
     }
 }

@@ -1,11 +1,8 @@
 using System;
 using System.Dynamic;
-using System.Linq;
 using Facebook;
 using Facebook.Web;
-using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
-using PraLoup.Utilities;
 using PraLoup.DataAccess.Enums;
 
 namespace PraLoup.FacebookObjects
@@ -14,18 +11,23 @@ namespace PraLoup.FacebookObjects
     {
         public Account Account { get; set; }
 
-        public FacebookAccount(Account account)
+        public FacebookAccount()
         {
-            this.Account = new Account();
-
-            FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
-
-            dynamic jsonobject = fc.Get("me");
-
-            HydrateUserFromJson(jsonobject);
+            if (HasFacebookAccessToken)
+            {
+                GetFacebookLoginInformation("me");
+            }
         }
 
         public FacebookAccount(string id)
+        {
+            if (HasFacebookAccessToken)
+            {
+                GetFacebookLoginInformation(id);
+            }
+        }
+
+        public void GetFacebookLoginInformation(string id)
         {
             FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
 
@@ -35,12 +37,23 @@ namespace PraLoup.FacebookObjects
             HydrateUserFromJson(json);
         }
 
+        public static bool HasFacebookAccessToken
+        {
+            get
+            {
+                return !String.IsNullOrEmpty(FacebookWebContext.Current.AccessToken);
+            }
+        }
+
         public void HydrateUserFromJson(dynamic jsonobject)
         {
             this.Account.FirstName = jsonobject.first_name;
-            this.Account.UserId = jsonobject.id;
             this.Account.LastName = jsonobject.last_name;
             this.Account.UserName = jsonobject.name;
+            this.Account.FacebookLogon = new FacebookLogon();
+            this.Account.FacebookLogon.AccessToken = FacebookWebContext.Current.AccessToken;
+            this.Account.FacebookLogon.Expires = FacebookWebContext.Current.Session.Expires;
+            this.Account.FacebookLogon.FacebookId = FacebookWebContext.Current.UserId;
         }
 
         public static void PostToWall(Event e)

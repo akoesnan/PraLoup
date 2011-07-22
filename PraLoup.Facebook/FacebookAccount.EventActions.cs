@@ -28,5 +28,15 @@ namespace PraLoup.FacebookObjects
         {
             return invitations;
         }
+
+        public Activity SendUpdate(Activity activity)
+        {
+            return activity;
+        }
+
+        public Activity SendReminder(Activity activity)
+        {
+            return activity;
+        }
     }
 }

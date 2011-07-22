@@ -8,21 +8,25 @@ namespace PraLoup.WebApp.App_Start
     using Ninject;
     using Ninject.Web.Mvc;
     using PraLoup.WebApp;
+    using PraLoup.DataAccess;
 
-    public static class NinjectMVC3 
+    public static class NinjectMVC3
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application
         /// </summary>
-        public static void Start() 
+        public static void Start()
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestModule));
             DynamicModuleUtility.RegisterModule(typeof(HttpApplicationInitializationModule));
             bootstrapper.Initialize(CreateKernel);
+
+            //var dataGenerator = bootstrapper.Kernel.Get<TestSeedDataGenerator>();
+            //dataGenerator.Seed();
         }
-        
+
         /// <summary>
         /// Stops the application.
         /// </summary>
@@ -30,7 +34,7 @@ namespace PraLoup.WebApp.App_Start
         {
             bootstrapper.ShutDown();
         }
-        
+
         /// <summary>
         /// Creates the kernel that will manage your application.
         /// </summary>
@@ -38,7 +42,7 @@ namespace PraLoup.WebApp.App_Start
         private static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
-             
+
             RegisterServices(kernel);
             return kernel;
         }
@@ -49,7 +53,7 @@ namespace PraLoup.WebApp.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Load(Assembly.GetExecutingAssembly());       
-        }        
+            kernel.Load(Assembly.GetExecutingAssembly());
+        }
     }
 }

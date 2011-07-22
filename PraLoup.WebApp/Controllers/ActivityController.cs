@@ -24,9 +24,10 @@ namespace PraLoup.WebApp.Controllers
 
         //
         // GET: /Default1/
-
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ViewResult Index()
         {
+            this.AccountBase.SetupActionAccount();
             ActivityDiscoveryModel adm = new ActivityDiscoveryModel(this.AccountBase);
             adm.Setup();
             return View(adm);
@@ -34,38 +35,36 @@ namespace PraLoup.WebApp.Controllers
 
         //
         // GET: /Default1/Details/5
-
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Details(int id)
         {
-
-            var o = DataService.Activity.Find(id);
-            Permissions p = this.AccountBase.GetPermissions(o);
-            if (!p.HasFlag(Permissions.View))
+            var actv = this.AccountBase.ActivityActions.GetActivy(id);
+            if (!actv.Permission.CanView)
             {
                 return RedirectToAction("Index");
             }
-            return View(o);
+            return View(actv);
 
         }
 
         //
         // GET: /Default1/Create
-
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Create()
         {
             return View();
         }
 
-
         //
         // POST: /Default1/Create
 
         [HttpPost]
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Create(Activity activity)
         {
             if (ModelState.IsValid)
             {
-                activity.Organizer = this.AccountBase.GetAccount();
+                activity.Organizer = this.AccountBase.Account;
 
                 return RedirectToAction("AddFacebookFriends", new { id = activity.Id });
             }
@@ -73,6 +72,7 @@ namespace PraLoup.WebApp.Controllers
             return View(activity);
         }
 
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult CreateFromEvent(int eventId)
         {
             var ev = AccountBase.EventActions.GetEvent(eventId);
@@ -81,6 +81,7 @@ namespace PraLoup.WebApp.Controllers
         }
 
         [HttpPost]
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult CreateFromEvent(int eventId, Privacy privacy)
         {
             var ev = AccountBase.EventActions.GetEvent(eventId);
@@ -90,6 +91,7 @@ namespace PraLoup.WebApp.Controllers
 
         //
         // GET: /Default1/Edit/5 
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Edit(int id)
         {
             var e = DataService.Activity.Find(id);
@@ -108,11 +110,13 @@ namespace PraLoup.WebApp.Controllers
         // POST: /Default1/Edit/5
 
         [HttpPost]
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Edit(Activity activity)
         {
             return RedirectToAction("AddFacebookFriends", new { id = activity.Id });
         }
 
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult AcceptInvitation(int id)
         {
             var e = this.DataService.Activity.Find(id);
@@ -204,7 +208,7 @@ namespace PraLoup.WebApp.Controllers
                     fas.Add(fa.Account);
                 }
 
-                var invitations = fas.Select(a => new Invitation(this.AccountBase.GetAccount(), a, o, "invite message"));
+                var invitations = fas.Select(a => new Invitation(this.AccountBase.Account, a, o, "invite message"));
                 DataService.Commit();
                 found = true;
             }

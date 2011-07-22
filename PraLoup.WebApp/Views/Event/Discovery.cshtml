@@ -1,0 +1,28 @@
+﻿@model PraLoup.WebApp.Models.EventDiscoveryModel
+@{
+    ViewBag.Title = "Index";
+}
+<div class="evt_city_ttl">
+    <h2>
+        Discover events around @Model.Location</h2>
+</div>
+<div class="evt_lst_col">    
+    @{
+        if (Model.MyEvent != null && Model.MyEvent.Count() > 0)
+        {            
+            Html.RenderPartial("EventList", new ViewDataDictionary() { { "ListName", "My Event" }, { "Events", Model.MyEvent } });
+        }
+        if (Model.PublicEvent != null && Model.PublicEvent.Count() > 0)
+        {
+            Html.RenderPartial("EventList", new ViewDataDictionary() { { "ListName", "Public Events" }, { "Events", Model.PublicEvent } });
+        }
+        if (Model.MyFriendEvent != null && Model.MyFriendEvent.Count() > 0)
+        {
+            Html.RenderPartial("EventList", new ViewDataDictionary() { { "ListName", "Friends Event" }, { "Events", Model.MyFriendEvent } });
+        }
+        if (Model.MyFriendOfFriendEvent != null && Model.MyFriendOfFriendEvent.Count() > 0)
+        {
+            Html.RenderPartial("EventList", new ViewDataDictionary() { { "ListName", "Friends of Friends Events" }, { "Events", Model.MyFriendOfFriendEvent } });
+        }
+    }    
+</div>

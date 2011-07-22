@@ -1,18 +1,13 @@
 using System;
-using System.Web.Mvc;
-using PraLoup.DataAccess;
-using PraLoup.DataAccess.Entities;
-using PraLoup.FacebookObjects;
-using PraLoup.Utilities;
-using PraLoup.WebApp.Models;
-using Facebook.Web;
-using Facebook;
-using PraLoup.BusinessLogic;
-using System.Collections;
 using System.Collections.Generic;
+using System.Web.Mvc;
 using System.Web.Security;
+using Facebook;
+using Facebook.Web;
+using PraLoup.BusinessLogic;
 using PraLoup.BusinessLogic.Plugins;
 using PraLoup.DataAccess.Services;
+using PraLoup.FacebookObjects;
 
 namespace ProjectSafari.Controllers
 {
@@ -26,8 +21,6 @@ namespace ProjectSafari.Controllers
         private const string returnUrl = "http://localhost/praloup.webapp/Event";
         private const string logoffUrl = "http://localhost/praloup.webapp/Event";
         private const string redirectUrl = "http://localhost/praloup.webapp/account/OAuth";
-
-
 
         public AccountController(AccountBase accountBase, IDataService dataService)
         {
@@ -70,9 +63,7 @@ namespace ProjectSafari.Controllers
 
         public bool Register()
         {
-            // Merge issue?
             this.AccountBase.SetupFacebookAccount();
-
             return true;
         }
 

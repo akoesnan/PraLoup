@@ -30,7 +30,7 @@
         }
     </table>
 }
-@if (Model.MyOtherActivity != null && Model.MyOtherActivity.Count() > 0)
+@if (Model.MyFriendActivity != null && Model.MyFriendActivity.Count() > 0)
 { 
     <table>
         <tr>            
@@ -38,22 +38,22 @@
                 My Other Activities
             </th>
         </tr>
-        @foreach (var item in Model.MyOtherActivity)
+        @foreach (var item in Model.MyFriendActivity)
         {    
             <tr>
                 <td>
-                    @if (item.CanEdit)
+                    @if (item.Permission.CanEdit)
                     {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Activity.Id }) 
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) 
                     }
-                    @Html.ActionLink("Details", "Details", new { id = item.Activity.Id }) |
-                    @if (item.CanDelete)
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @if (item.Permission.CanDelete)
                     {
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Activity.Id })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                     }
                 </td>
                 <td>
-                    @item.Activity.Event.Name
+                    @item.Event.Name
                 </td>
             </tr>
         }

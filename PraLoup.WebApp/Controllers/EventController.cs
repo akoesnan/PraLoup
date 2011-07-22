@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using Facebook.Web.Mvc;
 using PraLoup.BusinessLogic;
-using PraLoup.BusinessLogic.Plugins;
 using PraLoup.DataAccess.Entities;
-using PraLoup.WebApp.Models;
 using PraLoup.DataAccess.Services;
 using PraLoup.Infrastructure.Logging;
+using PraLoup.WebApp.Models;
 
 namespace PraLoup.WebApp.Controllers
 {
@@ -27,11 +25,18 @@ namespace PraLoup.WebApp.Controllers
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Index()
         {
-            // TODO: validate that this generate sql that execute permission on the sql level
-            var events = this.AccountBase.EventActions.GetAllEvents()
-                .Where(e => this.AccountBase.GetPermissions(e) == Permissions.View).Take(10)
-                .Select(e => new EventModel(e, this.AccountBase.GetPermissions(e)));
-            return View(events);
+            this.AccountBase.SetupActionAccount();
+
+            var publicEvents = this.AccountBase.EventActions.GetPublicEvents(0, 10);
+            return View(publicEvents);
+        }
+
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
+        public ActionResult Discovery()
+        {
+            this.AccountBase.SetupActionAccount();
+            var ed = new EventDiscoveryModel(this.AccountBase);
+            return View(ed);
         }
 
         //
@@ -39,14 +44,15 @@ namespace PraLoup.WebApp.Controllers
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Details(int id)
         {
-            var o = DataService.Event.Find(id);
-            EventModel em = new EventModel(o, this.AccountBase.GetPermissions(o));
-            if (!em.CanView)
+            this.AccountBase.SetupActionAccount();
+
+            var e = this.AccountBase.EventActions.GetEvent(id);
+            if (!e.Permission.CanView)
             {
                 // TODO: what to do when the user doesn't have perms
                 return RedirectToAction("Index");
             }
-            return View(em);
+            return View(e);
         }
 
         //
@@ -54,6 +60,7 @@ namespace PraLoup.WebApp.Controllers
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Create()
         {
+            this.AccountBase.SetupActionAccount();
             return View();
         }
 
@@ -63,6 +70,7 @@ namespace PraLoup.WebApp.Controllers
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Create(Event e)
         {
+            this.AccountBase.SetupActionAccount();
             try
             {
                 if (ModelState.IsValid)
@@ -97,22 +105,22 @@ namespace PraLoup.WebApp.Controllers
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Edit(int id)
         {
+            this.AccountBase.SetupActionAccount();
 
-            var e = DataService.Event.Find(id);
+            var e = this.AccountBase.EventActions.GetEvent(id);
             if (e == null)
             {
                 // TODO: what to do when there is no such event
                 return RedirectToAction("Index");
             }
-            EventModel em = new EventModel(e, this.AccountBase.GetPermissions(e));
 
-            if (!em.CanEdit)
+            if (!e.Permission.CanEdit)
             {
                 // TODO: what to do when the user doesn't have perms
                 return RedirectToAction("Index");
             }
 
-            return View(em);
+            return View(e);
         }
 
         //
@@ -121,6 +129,7 @@ namespace PraLoup.WebApp.Controllers
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Edit(int id, FormCollection collection)
         {
+            this.AccountBase.SetupActionAccount();
             // Todo: perms?
             try
             {

@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using NHibernate.Criterion;
 
 namespace PraLoup.Infrastructure.Data
 {
-    public interface ISpecification<T>
+    public interface IQuery<T>
     {
-        T First (IQueryable<T> query);
-        
-        T FirstOrDefault(IQueryable<T> query);
+        QueryOver<T> GetQuery();
+    }
 
-        bool Any(IQueryable<T> query);
-
-        IQueryable<T> Where (IQueryable<T> query);
+    public interface IQuery<T1, T2>
+    {
+        QueryOver<T1, T2> GetQuery();
     }
 }

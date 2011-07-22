@@ -4,36 +4,41 @@ using System.Linq;
 using PraLoup.BusinessLogic.Plugins;
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Enums;
+using PraLoup.DataAccess.Query;
 using PraLoup.DataAccess.Services;
 using PraLoup.Infrastructure.Logging;
-using System.Linq.Expressions;
 
 namespace PraLoup.BusinessLogic
 {
     public class ActivityActions : ActionBase<IActivityAction>
     {
-        public ActivityActions(Account account, IDataService dataService, IEnumerable<IActivityAction> activityActionPlugins, ILogger log)
-            : base(account, dataService, log, activityActionPlugins)
+        public ActivityActions(IDataService dataService, IEnumerable<IActivityAction> activityActionPlugins, ILogger log)
+            : base(dataService, log, activityActionPlugins)
         {
         }
 
         public Activity CreateActivityFromExistingEvent(Event evt, Privacy p)
         {
-            var actv = new Activity(this.account, evt, p);
+            var actv = new Activity(this.Account, evt, p);
             IEnumerable<string> brokenRules;
             var success = this.dataService.Activity.SaveOrUpdate(actv, out brokenRules);
-            if (success)
-            {
-                this.dataService.Commit();
-                this.log.Info("[] - {0} Succesfully created activity {1}", account, actv);
-            }
-            else
-            {
-                this.log.Debug("[] - {0} Unable to create activity {1}. Violated rules {2}", account, actv, brokenRules.First());
-            }
 
             // TODO: this should not be here, we should decouple facebook stuff
             ExecutePlugins(t => t.CreateActivityFromExistingEvent(actv));
+
+            // if there are different 
+            success = this.dataService.Activity.SaveOrUpdate(actv, out brokenRules);
+
+            if (success)
+            {
+                this.dataService.Commit();
+                this.log.Info("[] - {0} Succesfully created activity {1}", Account, actv);
+            }
+            else
+            {
+                this.dataService.Rollback();
+                this.log.Debug("[] - {0} Unable to create activity {1}. Violated rules {2}", Account, actv, brokenRules.First());
+            }
 
             return actv;
         }
@@ -52,57 +57,25 @@ namespace PraLoup.BusinessLogic
             }
             else
             {
+                this.dataService.Rollback();
                 this.log.Debug("Unable to save event {0}. Violated rule {1}", evt, String.Join(",", brokenRules));
                 return null;
             }
         }
 
-        public IEnumerable<Invitation> Invite(Activity actv, IEnumerable<AccountBase> invites, string message)
+        public IEnumerable<Invitation> GetAllInvitationsForActivity(Activity activity)
         {
-            if (actv == null)
-            {
-                throw new ArgumentException("activity should not be null");
-            }
-
-            if (invites == null || invites.Count() == 0)
-            {
-                throw new ArgumentException("there should be one or more invites");
-            }
-
-            var invitations = from i in invites
-                              select new Invitation(this.account, i.GetAccount(), actv, message);
-
-            IEnumerable<string> brokenRules;
-            var success = this.dataService.Invitation.SaveOrUpdateAll(invitations, out brokenRules);
-            if (success)
-            {
-                this.log.Info("Sucessfully saving {0} invitations for {1}", invitations.Count(), actv);
-                ExecutePlugins(f => f.Invite(actv, invitations));
-                this.dataService.Commit();
-                return invitations;
-            }
-            else
-            {
-                this.log.Debug("Error: Unable to save invitations broken rules {0}", String.Join(",", brokenRules));
-                return null;
-            }
+            return this.dataService.Invitation.Where(i => i.Activity == activity);
         }
 
-        public Invitation Response(Invitation invitation, InvitationReponseType responseType, string message)
+        public IEnumerable<Invitation> GetAcceptedInvitationsForActivity(Activity activity, InvitationResponse response)
         {
-            if (invitation.Recipient.Id != this.account.Id)
-            {
-                throw new ArgumentException(String.Format("this invitation is not for user {0}", this.account));
-            }
-            invitation.InvitationResponse.InvitationResponseType = responseType;
-            invitation.InvitationResponse.Message = message;
-            invitation.CreateDateTime = DateTime.UtcNow;
-            return invitation;
+            return GetAllInvitationsForActivity(activity).Where(i => i.InvitationResponse == response);
         }
 
         public bool IsInvited(Activity activity)
         {
-            var result = this.dataService.Invitation.FirstOrDefault(i => i.Activity == activity && i.Recipient == this.account);
+            var result = this.dataService.Invitation.FirstOrDefault(i => i.Activity == activity && i.Recipient == this.Account);
 
             return result != null;
         }
@@ -119,16 +92,80 @@ namespace PraLoup.BusinessLogic
 
         public IEnumerable<Activity> GetMyActivities(int pageStart, int pagecount)
         {
-            return this.dataService.Activity.Where(a => a.Organizer == this.account).Skip(pageStart).Take(pagecount);
+            var activities = this.dataService.Activity.Where(a => a.Organizer == this.Account).Skip(pageStart).Take(pagecount).ToList();
+            foreach (var a in activities)
+            {
+                a.Permission = Permission.GetPermissions(a, ConnectionType.Owner);
+            }
+            return activities;
         }
 
         public IEnumerable<Activity> GetAllActivies()
         {
             return this.dataService.Activity.GetAll();
         }
-        public IEnumerable<Activity> GetActivies(Expression<Func<Activity, bool>> predicate)
+
+        public IEnumerable<Activity> GetFriendsActivities()
         {
-            return this.dataService.Activity.Where(predicate);
+            return GetFriendsActivities(0, 10);
+        }
+
+        public IEnumerable<Activity> GetFriendsActivities(int pagecount)
+        {
+            return GetFriendsActivities(0, pagecount);
+        }
+
+        public IEnumerable<Activity> GetFriendsActivities(int pageStart, int pagecount)
+        {
+            var q = new ActivityOrganizedByFriendQuery(this.Account);
+            var activities = this.dataService.Activity.ExecuteQuery(q).Skip(pageStart).Take(pagecount).List();
+            foreach (var a in activities)
+            {
+                a.Permission = Permission.GetPermissions(a, ConnectionType.Friend);
+            }
+            return activities;
+        }
+
+        public IEnumerable<Activity> GetFriendsOfFriendsActivities()
+        {
+            return GetFriendsOfFriendsActivities(0, 10);
+        }
+
+        public IEnumerable<Activity> GetFriendsOfFriendsActivities(int pagecount)
+        {
+            return GetFriendsOfFriendsActivities(0, pagecount);
+        }
+
+        public IEnumerable<Activity> GetFriendsOfFriendsActivities(int pageStart, int pagecount)
+        {
+            var q = new ActivityOrganizedByFriendOfFriendQuery(this.Account);
+            var activities = this.dataService.Activity.ExecuteQuery(q).Skip(pageStart).Take(pagecount).List();
+            foreach (var a in activities)
+            {
+                a.Permission = Permission.GetPermissions(a, ConnectionType.FriendOfFriend);
+            }
+            return activities;
+        }
+
+        public Activity GetActivy(object key)
+        {
+            var actv = this.dataService.Activity.Find(key);
+            if (actv != null)
+            {
+                actv.ConnectionType = this.Account.GetConnection(actv, this.dataService);
+                actv.Permission = Permission.GetPermissions(actv, actv.ConnectionType);
+            }
+            return actv;
+        }
+
+        public Activity SendUpdate(Activity activity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Activity SendReminder(Activity activity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

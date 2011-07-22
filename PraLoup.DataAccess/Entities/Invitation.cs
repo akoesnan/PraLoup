@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using PraLoup.DataAccess.Enums;
 
 namespace PraLoup.DataAccess.Entities
@@ -33,6 +30,10 @@ namespace PraLoup.DataAccess.Entities
         public virtual InvitationResponse InvitationResponse { get; set; }
 
         public virtual string Message { get; set; }
+
+        public virtual Permission Permission { get; set; }
+
+        public virtual ConnectionType ConnectionType { get; set; }
 
         public virtual void Response(InvitationReponseType responseType, string message)
         {

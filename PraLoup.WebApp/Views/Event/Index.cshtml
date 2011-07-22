@@ -1,17 +1,16 @@
-﻿@model IEnumerable<PraLoup.WebApp.Models.EventModel>
-
+﻿@model IEnumerable<PraLoup.DataAccess.Entities.Event>
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
-
+<h2>
+    Index</h2>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table>
     <tr>
-        <th></th>
+        <th>
+        </th>
         <th>
             StartDateTime
         </th>
@@ -29,39 +28,39 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    if (!item.Permissions.HasFlag(PraLoup.BusinessLogic.Permissions.View))
+    @foreach (var item in Model)
     {
-        continue;
-    }
-    <tr>
-        <td>
-        @if(item.Permissions.HasFlag(PraLoup.BusinessLogic.Permissions.Edit)){
-            @Html.ActionLink("Edit", "Edit", new { id=item.Event.Id })
-        }
-        @Html.ActionLink("Details", "Details", new { id = item.Event.Id }) 
-        @if (item.Permissions.HasFlag(PraLoup.BusinessLogic.Permissions.Delete))
+        if (!item.Permission.CanView)
         {
-            @Html.ActionLink("Delete", "Delete", new { id = item.Event.Id })
+            continue;
         }
-        </td>
-        <td>
-            @String.Format("{0:g}", item.Event.StartDateTime)
-        </td>
-        <td>
-            @String.Format("{0:g}", item.Event.EndDateTime)
-        </td>
-        <td>
-            @item.Event.Name
-        </td>
-        <td>
-            @item.Event.Description
-        </td>
-        <td>
-            @String.Format("{0:F}", item.Event.Price)
-        </td>
-    </tr>
-}
-
+        <tr>
+            <td>
+                @if (item.Permission.CanEdit)
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                }
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                @if (item.Permission.CanDelete)
+                {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                }
+            </td>
+            <td>
+                @String.Format("{0:g}", item.StartDateTime)
+            </td>
+            <td>
+                @String.Format("{0:g}", item.EndDateTime)
+            </td>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Description
+            </td>
+            <td>
+                @String.Format("{0:F}", item.Price)
+            </td>
+        </tr>
+    }
 </table>
-
