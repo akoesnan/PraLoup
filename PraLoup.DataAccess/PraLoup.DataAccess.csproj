@@ -98,11 +98,6 @@
     <Compile Include="Mapping\CascadeConvention.cs" />
     <Compile Include="Mapping\MappingOverride.cs" />
     <Compile Include="Mapping\PraLoupAutoMappingConfiguration.cs" />
-    <Compile Include="Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
     <Compile Include="NHibernateDbConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Venue.cs" />
@@ -124,10 +119,6 @@
     <Compile Include="Validators\EventValidator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
