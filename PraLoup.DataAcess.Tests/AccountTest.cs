@@ -13,7 +13,7 @@ using PraLoup.DataAccess.Services;
 using PraLoup.DataAccess.Validators;
 using PraLoup.Infrastructure.Data;
 
-namespace PraLoup.DataAcess.Tests
+namespace PraLoup.DataAccess.Tests
 {
     [TestFixture]
     public class AccountTest : BaseDataTestFixture

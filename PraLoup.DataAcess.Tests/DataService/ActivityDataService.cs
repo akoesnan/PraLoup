@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using PraLoup.DataAccess.Mapping;
 
-namespace PraLoup.DataAcess.Tests
+namespace PraLoup.DataAccess.Tests
 {
     /// <summary>
     /// Summary description for UnitTest1

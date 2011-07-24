@@ -8,7 +8,7 @@ using NUnit.Framework;
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Mapping;
 
-namespace PraLoup.DataAcess.Tests
+namespace PraLoup.DataAccess.Tests
 {
     [TestFixture]
     public class EventTest : BaseDataTestFixture

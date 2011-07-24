@@ -45,6 +45,7 @@
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\Iesi.Collections.3.1.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\Moq.dll</HintPath>
     </Reference>
@@ -73,6 +74,7 @@
   <ItemGroup>
     <Compile Include="AccountExtensionsTest.cs" />
     <Compile Include="BaseBusinessLogicTestFixture.cs" />
+    <Compile Include="CouponTest.cs" />
     <Compile Include="InviteActionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -89,9 +91,9 @@
       <Project>{699F3369-A9D5-4825-ACBC-41843104A795}</Project>
       <Name>PraLoup.DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PraLoup.DataAcess.Tests\PraLoup.DataAcess.Tests.csproj">
+    <ProjectReference Include="..\PraLoup.DataAcess.Tests\PraLoup.DataAccess.Tests.csproj">
       <Project>{BA3C1DBE-61B4-44E5-A1CD-A82CF2DC7A0A}</Project>
-      <Name>PraLoup.DataAcess.Tests</Name>
+      <Name>PraLoup.DataAccess.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\PraLoup.Facebook\PraLoup.FacebookObjects.csproj">
       <Project>{4C9EAD3E-DFC8-42CE-B324-015F3C9BB95C}</Project>

@@ -8,7 +8,7 @@ using NHibernate.Tool.hbm2ddl;
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Mapping;
 
-namespace PraLoup.DataAcess.Tests
+namespace PraLoup.DataAccess.Tests
 {
     public class SQLiteDatabaseScope<TClassFromMappingAssembly> : IDisposable
     {

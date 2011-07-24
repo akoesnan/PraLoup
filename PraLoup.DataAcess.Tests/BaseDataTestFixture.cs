@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using PraLoup.Infrastructure.Logging;
 
-namespace PraLoup.DataAcess.Tests
+namespace PraLoup.DataAccess.Tests
 {
     [TestFixture]
     public abstract class BaseDataTestFixture

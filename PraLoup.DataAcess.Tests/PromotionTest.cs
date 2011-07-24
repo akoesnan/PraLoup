@@ -7,7 +7,7 @@ using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Mapping;
 
-namespace PraLoup.DataAcess.Tests
+namespace PraLoup.DataAccess.Tests
 {
     [TestFixture]
     public class PromotionTest : BaseDataTestFixture

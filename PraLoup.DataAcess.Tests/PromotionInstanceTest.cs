@@ -3,7 +3,7 @@ using NHibernate;
 using NUnit.Framework;
 using PraLoup.DataAccess.Mapping;
 
-namespace PraLoup.DataAcess.Tests
+namespace PraLoup.DataAccess.Tests
 {
     [TestFixture]
     public class PromotionInstanceTest

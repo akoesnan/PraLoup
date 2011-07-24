@@ -48,6 +48,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml.Linq" />
@@ -60,6 +61,7 @@
     <Compile Include="AccountBase.cs" />
     <Compile Include="AccountExtensions.cs" />
     <Compile Include="ActionBase.cs" />
+    <Compile Include="CouponExtensions.cs" />
     <Compile Include="EventExtensions.cs" />
     <Compile Include="EventActions.cs">
       <SubType>Code</SubType>

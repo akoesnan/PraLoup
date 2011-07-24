@@ -24,7 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{EE2847BF-1467-43FC-8C8B-B493CBF70865}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.DataAcess.Tests", "PraLoup.DataAcess.Tests\PraLoup.DataAcess.Tests.csproj", "{BA3C1DBE-61B4-44E5-A1CD-A82CF2DC7A0A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.DataAccess.Tests", "PraLoup.DataAcess.Tests\PraLoup.DataAccess.Tests.csproj", "{BA3C1DBE-61B4-44E5-A1CD-A82CF2DC7A0A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraLoup.BusinessLogic", "PraLoup.BusinessLogic\PraLoup.BusinessLogic.csproj", "{4244F04E-3323-406B-BD22-5D743ACAE631}"
 EndProject
