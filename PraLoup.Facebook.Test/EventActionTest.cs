@@ -32,14 +32,7 @@ namespace PraLoup.Facebook.Test
                     Lat = 1.123f,
                     Lon = 12.123f
                 }
-            };
-            var actv = new Activity()
-            {
-                Event = e,
-                Privacy = Privacy.Public,
-                UpdatedTime = DateTime.UtcNow
-
-            };
+            };            
 
             Mock<IRepository> mockRepo = new Mock<IRepository>(); 
             var oauth = new OAuthHandler();

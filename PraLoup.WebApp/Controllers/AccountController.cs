@@ -14,8 +14,7 @@ namespace ProjectSafari.Controllers
     [HandleError]
     public class AccountController : Controller
     {
-        private IDataService DataService { get; set; }
-        private IEnumerable<IActivityAction> EventActionPlugins { get; set; }
+        private IDataService DataService { get; set; }        
 
         private AccountBase AccountBase;
         private const string returnUrl = "http://localhost/praloup.webapp/Event";

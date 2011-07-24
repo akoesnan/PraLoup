@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using Facebook;
+﻿using Facebook;
 using PraLoup.BusinessLogic.Plugins;
 using PraLoup.DataAccess.Entities;
 
 namespace PraLoup.FacebookObjects
 {
-    public class FacebookEventActions : IActivityAction
+    public class FacebookEventActions : IEventAction
     {
         private FacebookClient FbClient { get; set; }
 
@@ -14,29 +13,14 @@ namespace PraLoup.FacebookObjects
             this.FbClient = fbClient;
         }
 
-        public Activity CreateActivityFromExistingEvent(Activity activity)
+        public Event SendUpdate(Event ev)
         {
-            return activity;
+            return ev;
         }
 
-        public Activity CreateActivityFromNotExistingEvent(Activity activity)
+        public Event SendReminder(Event ev)
         {
-            return activity;
-        }
-
-        public IEnumerable<Invitation> Invite(Activity actv, IEnumerable<Invitation> invitations)
-        {
-            return invitations;
-        }
-
-        public Activity SendUpdate(Activity activity)
-        {
-            return activity;
-        }
-
-        public Activity SendReminder(Activity activity)
-        {
-            return activity;
+            return ev;
         }
     }
 }

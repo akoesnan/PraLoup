@@ -26,6 +26,20 @@ namespace PraLoup.DataAccess
             return e;
         }
 
+        public static Deal GetDeal(string description, int available)
+        {
+            var d = new Deal()
+            {
+                Available = available,
+                Taken = 0,
+                CurrentValue = 5,
+                Description = "description",
+                EndDateTime = DateTime.Now.AddDays(5),
+                StartDateTime = DateTime.Now,
+            };
+            return d;
+        }
+
         public static Venue GetVenue(string venueName)
         {
             var v = new Venue()

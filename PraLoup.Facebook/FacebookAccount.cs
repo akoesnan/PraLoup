@@ -69,22 +69,17 @@ namespace PraLoup.FacebookObjects
             dynamic result = fc.Post("me/feed", parameters);
         }
 
-        public static void PostToWall(Activity a)
+        public static void PostToWall(PromotionInstance a)
         {
             FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
-            dynamic parameters = PopulateParametersForEvent(a.Event);
+            dynamic parameters = PopulateParametersForEvent(a.Promotion.Event);
             parameters.actions = new
             {
                 name = "View on Wildfire",
                 link = "http://www.projectsafari.com/"
             };
-            SetPrivacy(parameters, a.Privacy);
+            SetPrivacy(parameters, a.Promotion.Event.Privacy);
             dynamic result = fc.Post("me/feed", parameters);
-        }
-
-        public void InviteFriend(Activity e, FacebookAccount f)
-        {
-
         }
 
         public void SetPrivacy(dynamic obj, Privacy p)

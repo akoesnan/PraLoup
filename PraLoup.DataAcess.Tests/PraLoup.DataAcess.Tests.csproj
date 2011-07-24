@@ -77,9 +77,9 @@
   <ItemGroup>
     <Compile Include="AccountTest.cs" />
     <Compile Include="BaseDataTestFixture.cs" />
-    <Compile Include="ActivityTest.cs" />
+    <Compile Include="PromotionTest.cs" />
     <Compile Include="EventTest.cs" />
-    <Compile Include="InvitationTest.cs" />
+    <Compile Include="PromotionInstanceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataService\ActivityDataService.cs" />
     <Compile Include="SQLiteDatabaseScope.cs" />

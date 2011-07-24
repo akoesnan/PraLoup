@@ -23,6 +23,5 @@ namespace PraLoup.DataAccess.Entities
         {
             return string.Format("Id:{0} AccessToken:{1} Expires:{2}", this.FacebookId, this.AccessToken, this.Expires);
         }
-
     }
 }

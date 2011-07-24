@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Services;
 using PraLoup.Infrastructure.Logging;
@@ -22,23 +21,9 @@ namespace PraLoup.DataAccess
         {
             SetupAccountsData();
             SetupEventData();
-            SetupActivityData();
-            SetupMetroData();
             //SetupOffersData();
 
             this.DataService.Commit();
-        }
-
-        private void SetupMetroData()
-        {
-            var metros = new List<MetroArea>() {
-                new MetroArea("Seattle", "Washington", "United States"),
-                new MetroArea("Portland", "Oregon", "United States")
-            };
-            IEnumerable<string> brokenRules = null;
-            metros.ForEach(m => DataService.MetroArea.SaveOrUpdate(m, out brokenRules));
-            if (brokenRules != null)
-                this.Log.Debug("brokenRules for Metro Area {0}", String.Join(",", brokenRules));
         }
 
         /// <summary>
@@ -94,40 +79,5 @@ namespace PraLoup.DataAccess
                 this.Log.Debug("brokenRules for Event {0}", String.Join(",", brokenRules));
 
         }
-
-        /// <summary>
-        /// Create seed data for user invite 
-        /// </summary>
-        private void SetupActivityData()
-        {
-            var activities = new List<Activity>() {
-                GetActivity(EntityHelper.GetUserName("Johny","Depp"), "Adele", new string[] {EntityHelper.GetUserName("Bill", "Finger"), EntityHelper.GetUserName("John", "Broome")}),
-                GetActivity(EntityHelper.GetUserName("Angela", "Bassett"), "Seattle Sounders FC vs. New England Revolution", new string[] {EntityHelper.GetUserName("Peggy", "Justice"), EntityHelper.GetUserName("Angela", "Bassett")})                
-            };
-            IEnumerable<string> brokenRules = null;
-            activities.ForEach(a => this.DataService.Activity.SaveOrUpdate(a, out brokenRules));
-            if (brokenRules != null)
-                this.Log.Debug("brokenRules for activity {0}", String.Join(",", brokenRules));
-
-        }
-
-        private Activity GetActivity(string hostUserName, string evtName, string[] invitesUserName)
-        {
-            var organizerAcct = this.DataService.Account.FirstOrDefault(a => hostUserName.ToLower() == a.UserName.ToLower());
-            var evt = this.DataService.Event.FirstOrDefault(e => evtName.ToLower() == e.Name.ToLower());
-            var inviteAccts = this.DataService.Account.Where(a => invitesUserName.Any(i => i.ToLower() == a.UserName.ToLower()));
-            if (organizerAcct != null && evt != null)
-            {
-                var activity = new Activity()
-                {
-                    Event = evt,
-                    Organizer = organizerAcct,
-                };
-                return activity;
-            }
-            // TODO: what to do when I pass in incorret stuff?
-            return null;
-        }
-
     }
 }

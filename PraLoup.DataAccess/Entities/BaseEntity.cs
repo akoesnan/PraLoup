@@ -4,7 +4,7 @@ namespace PraLoup.DataAccess.Entities
 {
     public abstract class BaseEntity
     {
-        public virtual int Id { get; protected set; }
+        public virtual Guid Id { get; protected set; }
 
         public override bool Equals(object obj)
         {

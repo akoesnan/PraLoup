@@ -18,8 +18,7 @@ namespace PraLoup.DataAccess.Enums
         {
             get
             {
-                if (entity is Event
-                    || entity is Activity)
+                if (entity is Event)
                     return value.HasFlag(PermissionEnum.Edit);
                 else
                     return false;
@@ -31,9 +30,8 @@ namespace PraLoup.DataAccess.Enums
             get
             {
                 if (entity is Event
-                    || entity is Activity
-                    || entity is Invitation)
-                    return value.HasFlag(PermissionEnum.Edit);
+                    || entity is PromotionInstance)
+                    return value.HasFlag(PermissionEnum.Delete);
                 else
                     return false;
             }
@@ -44,9 +42,9 @@ namespace PraLoup.DataAccess.Enums
             get
             {
                 if (entity is Event
-                    || entity is Activity
-                    || entity is Invitation
-                    || entity is InvitationResponse
+                    || entity is Deal
+                    || entity is PromotionInstance
+                    || entity is PromotionInstanceStatus
                     || entity is Comment)
                     return value.HasFlag(PermissionEnum.View);
                 else
@@ -58,19 +56,19 @@ namespace PraLoup.DataAccess.Enums
         {
             get
             {
-                if (entity is Invitation)
+                if (entity is PromotionInstance)
                     return value.HasFlag(PermissionEnum.Accept);
                 else
                     return false; ;
             }
         }
 
-        public bool CanInvite
+        public bool CanForward
         {
             get
             {
-                if (entity is Activity)
-                    return value.HasFlag(PermissionEnum.InviteGuests);
+                if (entity is Promotion)
+                    return value.HasFlag(PermissionEnum.Forward);
                 else
                     return false;
             }
@@ -81,7 +79,7 @@ namespace PraLoup.DataAccess.Enums
             get
             {
                 if (entity is Event
-                    || entity is Activity)
+                    || entity is Promotion)
                     return value.HasFlag(PermissionEnum.Copy);
                 else
                     return false;
@@ -93,7 +91,7 @@ namespace PraLoup.DataAccess.Enums
             get
             {
                 if (entity is Event
-                    || entity is Activity)
+                    || entity is Promotion)
                     return value.HasFlag(PermissionEnum.Comment);
                 else
                     return false;
@@ -105,22 +103,22 @@ namespace PraLoup.DataAccess.Enums
             get
             {
                 if (entity is Event
-                    || entity is Activity)
+                    || entity is Promotion)
                     return value.HasFlag(PermissionEnum.Share);
                 else
                     return false;
             }
         }
 
-        public static Permission GetPermissions(Activity activity, ConnectionType connection)
+        public static Permission GetPermissions(Promotion promo, ConnectionType connection)
         {
-            var p = new Permission(activity);
+            var p = new Permission(promo);
             if (connection.HasFlag(ConnectionType.Owner))
             {
                 p.value |= PermissionEnum.Copy;
                 p.value |= PermissionEnum.Delete;
                 p.value |= PermissionEnum.Edit;
-                p.value |= PermissionEnum.InviteGuests;
+                p.value |= PermissionEnum.Forward;
             }
 
             if (connection.HasFlag(ConnectionType.Invited))
@@ -131,25 +129,25 @@ namespace PraLoup.DataAccess.Enums
             }
 
             // for activities, privacy means who can invite people to the activity.
-            switch (activity.Privacy)
+            switch (promo.Event.Privacy)
             {
                 case DataAccess.Enums.Privacy.Public:
                     p.value |= PermissionEnum.View;
                     p.value |= PermissionEnum.Share;
                     p.value |= PermissionEnum.Accept;
-                    p.value |= PermissionEnum.InviteGuests;
+                    p.value |= PermissionEnum.Forward;
                     break;
                 case DataAccess.Enums.Privacy.Friends:
                     if (connection.HasFlag(ConnectionType.Friend) && connection.HasFlag(ConnectionType.Invited))
                     {
-                        p.value |= PermissionEnum.InviteGuests;
+                        p.value |= PermissionEnum.Forward;
                     }
 
                     break;
                 case DataAccess.Enums.Privacy.FriendsOfFriend:
                     if ((connection.HasFlag(ConnectionType.FriendOfFriend) && connection.HasFlag(ConnectionType.Invited)))
                     {
-                        p.value |= PermissionEnum.InviteGuests;
+                        p.value |= PermissionEnum.Forward;
                     }
                     break;
                 case DataAccess.Enums.Privacy.Private:
@@ -216,20 +214,20 @@ namespace PraLoup.DataAccess.Enums
             return p;
         }
 
-        public static Permission GetPermissions(InvitationResponse ir, ConnectionType connection)
-        {
-            var p = new Permission(ir);
+        //public static Permission GetPermissions(InvitationResponse ir, ConnectionType connection)
+        //{
+        //    var p = new Permission(ir);
 
-            if (connection.HasFlag(ConnectionType.Owner)
-                // connection.HasFlag(ConnectionType.ActivityOwner) -- why do we have activity owner deleting the response for?
-                )
-            {
-                p.value |= PermissionEnum.Delete;
-            }
-            return p;
-        }
+        //    if (connection.HasFlag(ConnectionType.Owner)
+        //        // connection.HasFlag(ConnectionType.ActivityOwner) -- why do we have activity owner deleting the response for?
+        //        )
+        //    {
+        //        p.value |= PermissionEnum.Delete;
+        //    }
+        //    return p;
+        //}
 
-        public static Permission GetPermissions(Invitation i, ConnectionType connection)
+        public static Permission GetPermissions(PromotionInstance i, ConnectionType connection)
         {
             var p = new Permission(i);
 
@@ -243,17 +241,7 @@ namespace PraLoup.DataAccess.Enums
             return p;
 
         }
-    }
-
-    [Flags]
-    public enum ConnectionType
-    {
-        NoConnection = 0,
-        Owner = 1,
-        Invited = 2,
-        Friend = 4,
-        FriendOfFriend = 8,
-    }
+    }   
 
     [Flags]
     internal enum PermissionEnum
@@ -288,7 +276,7 @@ namespace PraLoup.DataAccess.Enums
         /// Permission to invite guests
         /// Applies to activities
         /// </summary>
-        InviteGuests = 32,
+        Forward = 32,
         /// <summary>
         /// Permission to copy 
         /// Applies to events and activities

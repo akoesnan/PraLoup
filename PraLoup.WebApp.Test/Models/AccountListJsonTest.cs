@@ -1,18 +1,15 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
+using System.Web.Script.Serialization;
+using NUnit.Framework;
 using PraLoup.DataAccess.Entities;
 using PraLoup.WebApp.Models;
-using System.Web.Script.Serialization;
 
 namespace PraLoup.WebApp.Tests.Models
 {
-    [TestClass]
+    [TestFixture]
     public class AccountListJsonTest
     {
-        [TestMethod]
+        [Test]
         public void GenerateJson()
         {
             Account acc1 = new Account();

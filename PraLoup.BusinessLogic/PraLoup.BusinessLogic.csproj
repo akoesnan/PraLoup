@@ -60,8 +60,6 @@
     <Compile Include="AccountBase.cs" />
     <Compile Include="AccountExtensions.cs" />
     <Compile Include="ActionBase.cs" />
-    <Compile Include="ActivityActions.cs" />
-    <Compile Include="ActivityExtensions.cs" />
     <Compile Include="EventExtensions.cs" />
     <Compile Include="EventActions.cs">
       <SubType>Code</SubType>
