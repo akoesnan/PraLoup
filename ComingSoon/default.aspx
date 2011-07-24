@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="ComingSoon.Index" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="ComingSoon.Index" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"> 
 <head> 
@@ -20,7 +20,7 @@
 
 
 	<div id="action_buttons" style="width:460px;top:0;height:85px;padding:10px 0 0 17px;"> 
-		<form action="index.aspx" method="post"> 
+		<form action="default.aspx" method="post"> 
 		
 			<h3 class="form_action">Register for early access now.</h3> 
 			<input id="id_email" type="text" name="email" value="Enter your email"

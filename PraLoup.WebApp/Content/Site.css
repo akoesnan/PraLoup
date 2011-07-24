@@ -5,13 +5,28 @@ to use a different color start by replacing all instances of
 ----------------------------------------------------------*/
 body
 {
-    background-color: #5c87b2;
+    background-color: #ffffff;
     font-size: 75%;
     font-family: Verdana, Tahoma, Arial, "Helvetica Neue", Helvetica, Sans-Serif;
     margin: 0;
     padding: 0;
-    color: #696969;
+    color: #000000;
 }
+
+.lightbackground 
+{
+	background-color:rgb(220,230,242);
+}
+
+.darktbackground 
+{
+	background-color:rgb(79,129,189);
+}
+.orange
+{
+	background-color:rgb(228,108,10);
+}
+
 #container {
    margin: 1%;
    padding: 0;

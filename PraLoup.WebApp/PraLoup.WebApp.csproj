@@ -481,7 +481,7 @@
   <ItemGroup>
     <Content Include="Views\Event\EventList.cshtml" />
   </ItemGroup>
-   <ItemGroup>
+  <ItemGroup>
     <Content Include="Views\Shared\DisplayTemplates\AccountListJson.cshtml" />
   </ItemGroup>
   <ItemGroup>
