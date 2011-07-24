@@ -8,8 +8,8 @@ using NUnit.Framework;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Mapping;
-using PraLoup.DataAccess.Services;
 using PraLoup.DataAccess.Query;
+using PraLoup.DataAccess.Services;
 using PraLoup.DataAccess.Validators;
 using PraLoup.Infrastructure.Data;
 
@@ -25,9 +25,9 @@ namespace PraLoup.DataAcess.Tests
             {
                 using (ISession Session = Scope.OpenSession())
                 {
+
                     var now = DateTime.Now;
                     new PersistenceSpecification<Account>(Session, new CustomEqualityComparer())
-                   .CheckProperty(c => c.Id, 1)
                    .CheckProperty(c => c.FirstName, "John")
                    .CheckProperty(c => c.LastName, "Doe")
                    .CheckProperty(c => c.FacebookLogon, new FacebookLogon() { FacebookId = 1000, AccessToken = "abc", Expires = now })

@@ -12,22 +12,20 @@ namespace PraLoup.DataAccess.Mapping
         }
     }
 
+    public class BusinessMappingOverride : IAutoMappingOverride<Business>
+    {
+        public void Override(FluentNHibernate.Automapping.AutoMapping<Business> mapping)
+        {
+            mapping.IgnoreProperty(x => x.FacebookFriendIds);            
+            mapping.HasMany(x => x.Connections);
+        }
+    }
+
     public class VenueMappingOverride : IAutoMappingOverride<Venue>
     {
         public void Override(FluentNHibernate.Automapping.AutoMapping<Venue> mapping)
         {
             mapping.IgnoreProperty(x => x.DisplayedName);
-        }
-    }
-
-    public class ActivityMappingOverride : IAutoMappingOverride<Activity>
-    {
-        public void Override(FluentNHibernate.Automapping.AutoMapping<Activity> mapping)
-        {
-            mapping.References(x => x.Event).Not.Nullable().Index("EventId");
-            mapping.References(x => x.Organizer).Not.Nullable();
-            mapping.IgnoreProperty(x => x.Permission);
-            mapping.IgnoreProperty(x => x.ConnectionType);
         }
     }
 
@@ -40,21 +38,25 @@ namespace PraLoup.DataAccess.Mapping
         }
     }
 
-    public class InvitationMappingOverride : IAutoMappingOverride<Invitation>
+    public class InvitationMappingOverride : IAutoMappingOverride<PromotionInstance>
     {
-        public void Override(FluentNHibernate.Automapping.AutoMapping<Invitation> mapping)
+        public void Override(FluentNHibernate.Automapping.AutoMapping<PromotionInstance> mapping)
         {
+            mapping.HasMany(x => x.UserRatings);
+            mapping.HasMany(x => x.Coupons);
+            mapping.HasMany(x => x.ForwardedPromotionInstances);
+
             mapping.IgnoreProperty(x => x.Permission);
             mapping.IgnoreProperty(x => x.ConnectionType);
         }
     }
 
-    public class InvitationResponseMappingOverride : IAutoMappingOverride<InvitationResponse>
+    public class PromotionInstanceStatusMappingOverride : IAutoMappingOverride<PromotionInstanceStatus>
     {
-        public void Override(FluentNHibernate.Automapping.AutoMapping<InvitationResponse> mapping)
+        public void Override(FluentNHibernate.Automapping.AutoMapping<PromotionInstanceStatus> mapping)
         {
             mapping.IgnoreProperty(x => x.Permission);
-            mapping.IgnoreProperty(x => x.ConnectionType);
+
         }
     }
 

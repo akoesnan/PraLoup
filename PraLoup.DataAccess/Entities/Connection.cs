@@ -1,8 +1,8 @@
-﻿using System;
+﻿using PraLoup.DataAccess.Enums;
 
 namespace PraLoup.DataAccess.Entities
 {
-    public class Connection
+    public class Connection : BaseEntity
     {
         public Connection() { }
 
@@ -12,11 +12,11 @@ namespace PraLoup.DataAccess.Entities
             this.FriendId = friendId;
         }
 
-        public virtual Guid Id { get; protected set; }
-
         public virtual long MyId { get; set; }
 
         public virtual long FriendId { get; set; }
+
+        public virtual ConnectionType Type { get; set; }
 
         public override bool Equals(object obj)
         {

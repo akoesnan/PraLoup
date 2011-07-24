@@ -36,8 +36,10 @@
     <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\YellowPagesScrapper\TutorialMvcApplication1\packages\EntityFramework.4.1.10311.0\lib\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\packages\FluentAssertions.1.5.0.0\Lib\.NetFramework 4.0\FluentAssertions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
@@ -47,6 +49,15 @@
     </Reference>
     <Reference Include="Ninject.Web.Mvc">
       <HintPath>..\packages\Ninject.MVC3.2.2.2.0\lib\net40-Full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.mocks">
+      <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="pnunit.framework">
+      <HintPath>..\packages\NUnit.2.5.10.11092\lib\pnunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -68,13 +79,10 @@
   <ItemGroup>
     <Compile Include="App_Start\NinjectMVC3.cs" />
     <Compile Include="Controllers\RoutingTest.cs" />
-    <Compile Include="Controllers\ThingsToDoControllerTest.cs" />
+    <Compile Include="Controllers\EventControllerTest.cs" />
     <Compile Include="Models\AccountListJsonTest.cs" />
-    <Compile Include="Models\MetroAreaModelTest.cs" />
-    <Compile Include="Models\ThingsToDoCityModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
-    <Compile Include="Controllers\AccountControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config">
@@ -82,6 +90,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PraLoup.BusinessLogic\PraLoup.BusinessLogic.csproj">
+      <Project>{4244F04E-3323-406B-BD22-5D743ACAE631}</Project>
+      <Name>PraLoup.BusinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PraLoup.DataAccess\PraLoup.DataAccess.csproj">
       <Project>{699F3369-A9D5-4825-ACBC-41843104A795}</Project>
       <Name>PraLoup.DataAccess</Name>

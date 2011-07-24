@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PraLoup.DataAccess.Enums
 {
-    public enum InvitationReponseType
+    public enum StatusType
     {        
         NotResponded,
         Accept,

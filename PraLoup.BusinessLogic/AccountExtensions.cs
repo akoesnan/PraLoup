@@ -33,22 +33,6 @@ namespace PraLoup.BusinessLogic
             // TODO: is invited
 
             return ct;
-        }
-
-        public static ConnectionType GetConnection(this Account a, Activity actv, IDataService ds)
-        {
-            ConnectionType ct = ConnectionType.NoConnection;
-
-            if (actv.Organizer == a)
-                ct |= ConnectionType.Owner;
-            else if (actv.IsOrganizedByFriend(a, ds))
-                ct |= ConnectionType.Friend;
-            else if (actv.IsOrganizedByFriendOfFriend(a, ds))
-                ct |= ConnectionType.FriendOfFriend;
-
-            // TODO: is invited
-
-            return ct;
-        }
+        }        
     }
 }

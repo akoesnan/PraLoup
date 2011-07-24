@@ -68,16 +68,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Account.cs" />
-    <Compile Include="Entities\Activity.cs" />
     <Compile Include="Entities\Address.cs" />
+    <Compile Include="Entities\BusinessUser.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Connection.cs" />
+    <Compile Include="Entities\Business.cs" />
+    <Compile Include="Entities\Coupon.cs" />
     <Compile Include="Entities\FacebookLogon.cs" />
-    <Compile Include="Entities\Image.cs" />
-    <Compile Include="Entities\Post.cs" />
-    <Compile Include="Entities\MetroArea.cs" />
+    <Compile Include="Entities\Promotion.cs" />
     <Compile Include="Entities\Review.cs" />
+    <Compile Include="Entities\UserRating.cs" />
+    <Compile Include="Enums\ConnectionType.cs" />
+    <Compile Include="Enums\Role.cs" />
     <Compile Include="Entities\Tag.cs" />
     <Compile Include="EntityHelper.cs" />
     <Compile Include="Enums\Category.cs" />
@@ -85,10 +88,10 @@
     <Compile Include="Enums\FacebookEnum.cs" />
     <Compile Include="Enums\Permissions.cs" />
     <Compile Include="GenericRepository.cs" />
-    <Compile Include="Entities\Invitation.cs" />
+    <Compile Include="Entities\PromotionInstance.cs" />
     <Compile Include="Enums\InvitationReponseType.cs" />
-    <Compile Include="Entities\InvitationResponse.cs" />
-    <Compile Include="Entities\Offer.cs" />
+    <Compile Include="Entities\PromotionInstanceStatus.cs" />
+    <Compile Include="Entities\Deal.cs" />
     <Compile Include="Enums\Privacy.cs" />
     <Compile Include="Mapping\CascadeConvention.cs" />
     <Compile Include="Mapping\MappingOverride.cs" />
@@ -103,17 +106,13 @@
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="Specification.cs" />
     <Compile Include="Queries\ConnectionIsFriendQuery.cs" />
-    <Compile Include="Queries\ActivityOrganizedByFriendQuery.cs" />
     <Compile Include="Queries\AccountGetFriendQuery.cs" />
     <Compile Include="Queries\ConnectionIsFriendOfFriendQuery.cs" />
-    <Compile Include="Queries\ActivityOrganizedByFriendOfFriendQuery.cs" />
     <Compile Include="TestSeedDataGenerator.cs" />
     <Compile Include="UnitOfWork.cs" />
     <Compile Include="Validators\AccountValidator.cs" />
-    <Compile Include="Validators\ActivityValidator.cs" />
     <Compile Include="Validators\ConnectionValidator.cs" />
     <Compile Include="Validators\InvitationValidator.cs" />
-    <Compile Include="Validators\MetroAreaValidator.cs" />
     <Compile Include="Validators\OfferValidator.cs" />
     <Compile Include="Validators\EventValidator.cs" />
   </ItemGroup>

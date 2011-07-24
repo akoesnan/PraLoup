@@ -40,9 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IInviteAction.cs" />
+    <Compile Include="IPromotionInstanceAction.cs" />
     <Compile Include="IEventAction.cs" />
-    <Compile Include="IActivityAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

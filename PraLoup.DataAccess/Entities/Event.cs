@@ -5,9 +5,7 @@ using PraLoup.DataAccess.Enums;
 namespace PraLoup.DataAccess.Entities
 {
     public class Event : BaseEntity
-    {
-        public virtual int Id { get; set; }
-
+    {        
         // The event start time
         public virtual DateTime StartDateTime { get; set; }
 
@@ -39,7 +37,7 @@ namespace PraLoup.DataAccess.Entities
 
         public virtual decimal Value { get; set; }
 
-        public virtual IList<Offer> Offers { get; set; }
+        public virtual IList<Deal> Offers { get; set; }
 
         public virtual string Url { get; set; }
 

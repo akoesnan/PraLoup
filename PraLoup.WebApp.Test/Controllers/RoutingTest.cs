@@ -1,41 +1,38 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+﻿using System.Collections.Generic;
 using System.Web;
-using System.Web.Routing;
-using Events;
-using PraLoup.WebApp.Areas.Admin;
 using System.Web.Mvc;
+using System.Web.Routing;
+using Moq;
+using NUnit.Framework;
+using PraLoup.WebApp.Areas.Admin;
 
 namespace PraLoup.WebApp.Tests.Controllers
 {
-    [TestClass]
+    [TestFixture]
     public class RoutingTest
     {
-        [TestMethod]
+        [Test]
         public void ForwardSlashGoToHomeIndex()
         {
             TestIncomingRoute("~/", new Dictionary<string, string> { { "controller", "Home" }, { "action", "Index" } });
         }
 
-        [TestMethod]
+        [Test]
         public void ThingsToDoCityRouteTest()
         {
-            TestIncomingRoute("~/ThingsToDo/Seattle", new Dictionary<string, string> { { "controller", "ThingsToDo" }, { "action", "City" }, {"city", "Seattle"} });
+            TestIncomingRoute("~/ThingsToDo/Seattle", new Dictionary<string, string> { { "controller", "ThingsToDo" }, { "action", "City" }, { "city", "Seattle" } });
         }
 
-        [TestMethod]
+        [Test]
         public void AdminHomeRouteTest()
         {
             TestIncomingRoute("~/Admin", new Dictionary<string, string> { { "controller", "Home" }, { "action", "Index" } });
         }
 
-        [TestMethod]
-        public void ThingsToDoUrlGenerationTest() {
-            var url = GenerateUrlFromMock(new { controller = "ThingsToDo", action="City", city = "Seattle" });
+        [Test]
+        public void ThingsToDoUrlGenerationTest()
+        {
+            var url = GenerateUrlFromMock(new { controller = "ThingsToDo", action = "City", city = "Seattle" });
             Assert.AreEqual("/ThingsToDo/Seattle", url);
         }
 
@@ -64,8 +61,8 @@ namespace PraLoup.WebApp.Tests.Controllers
                     Assert.AreEqual(route[key], routeData.Values[key], "unexptected value for {0}", key);
                 }
             }
-        }        
-       
+        }
+
         private static Mock<HttpContextBase> GetMockHttpContext(string url)
         {
             var httpContext = new Mock<HttpContextBase>();

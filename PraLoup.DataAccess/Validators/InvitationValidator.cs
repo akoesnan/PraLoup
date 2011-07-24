@@ -6,21 +6,21 @@ using PraLoup.Infrastructure.Validation;
 
 namespace PraLoup.DataAccess.Validators
 {
-    public class InvitationValidator : IValidator<Invitation>
+    public class InvitationValidator : IValidator<PromotionInstance>
     {
-        public bool IsValid(Invitation entity)
+        public bool IsValid(PromotionInstance entity)
         {
             return BrokenRules(entity).Count() == 0;
         }
 
-        public IEnumerable<string> BrokenRules(Invitation entity)
+        public IEnumerable<string> BrokenRules(PromotionInstance entity)
         {
             if (entity == null)
             {
                 yield return "Invitation should not be null";
             }
 
-            if (entity.Activity == null)
+            if (entity.Promotion == null)
                 yield return "Activity should not be null or empty";
 
             if (entity.Sender == null)

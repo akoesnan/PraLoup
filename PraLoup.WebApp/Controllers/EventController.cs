@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Facebook.Web.Mvc;
 using PraLoup.BusinessLogic;
 using PraLoup.DataAccess.Entities;
-using PraLoup.DataAccess.Services;
 using PraLoup.Infrastructure.Logging;
 using PraLoup.WebApp.Models;
 
@@ -11,12 +9,10 @@ namespace PraLoup.WebApp.Controllers
 {
     public class EventController : Controller
     {
-        IDataService DataService { get; set; }
-        AccountBase AccountBase { get; set; }
+        public AccountBase AccountBase { get; private set; }
 
-        public EventController(AccountBase accountBase, IDataService dataService, ILogger logger)
+        public EventController(AccountBase accountBase, ILogger logger)
         {
-            this.DataService = dataService;
             this.AccountBase = accountBase;
         }
 
@@ -75,16 +71,7 @@ namespace PraLoup.WebApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    IEnumerable<string> brokenRules;
-                    var success = DataService.Event.SaveOrUpdate(e, out brokenRules);
-                    if (success)
-                    {
-                        DataService.Commit();
-                    }
-                    else
-                    {
-
-                    }
+                    this.AccountBase.EventActions.SaveEvent(e);
 
                     return RedirectToAction("Index");
                 }

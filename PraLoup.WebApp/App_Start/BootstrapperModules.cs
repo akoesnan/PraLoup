@@ -1,18 +1,17 @@
-﻿using NHibernate;
+﻿using Facebook;
+using NHibernate;
 using Ninject;
 using Ninject.Activation;
 using Ninject.Modules;
+using PraLoup.BusinessLogic;
+using PraLoup.BusinessLogic.Plugins;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Services;
 using PraLoup.DataPurveyor.Attributes;
 using PraLoup.DataPurveyor.Client;
+using PraLoup.FacebookObjects;
 using PraLoup.Infrastructure.Data;
 using PraLoup.Infrastructure.Logging;
-using PraLoup.BusinessLogic.Plugins;
-using System.Collections.Generic;
-using PraLoup.FacebookObjects;
-using PraLoup.BusinessLogic;
-using Facebook;
 
 namespace PraLoup.WebApp.App_Start
 {
@@ -35,7 +34,7 @@ namespace PraLoup.WebApp.App_Start
             this.Bind<IRepository>().To<GenericRepository>();
 
             // logger.Info("Binding Facebook Action");
-            this.Bind<IActivityAction>().To<FacebookEventActions>();
+            this.Bind<IEventAction>().To<FacebookEventActions>();
             this.Bind<FacebookClient>().To<FacebookClient>().InRequestScope();
             this.Bind<AccountBase>().To<AccountBase>().InRequestScope();
         }

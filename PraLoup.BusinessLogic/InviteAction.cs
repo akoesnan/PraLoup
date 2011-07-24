@@ -9,18 +9,18 @@ using PraLoup.Infrastructure.Logging;
 
 namespace PraLoup.BusinessLogic
 {
-    public class InviteAction : ActionBase<IInviteAction>
+    public class PromotionInstanceAction : ActionBase<IPromotionInstanceAction>
     {
-        public InviteAction(IDataService dataService, IEnumerable<IInviteAction> inviteActionPlugins, ILogger log)
+        public PromotionInstanceAction(IDataService dataService, IEnumerable<IPromotionInstanceAction> inviteActionPlugins, ILogger log)
             : base(dataService, log, inviteActionPlugins)
         {
         }
 
-        public IEnumerable<Invitation> Invite(Activity actv, IEnumerable<Account> invites, string message)
+        public IEnumerable<PromotionInstance> Forward(PromotionInstance pi, IEnumerable<Account> invites, string message)
         {
-            if (actv == null)
+            if (pi == null)
             {
-                throw new ArgumentException("activity should not be null");
+                throw new ArgumentException("promotion should not be null");
             }
 
             if (invites == null || invites.Count() == 0)
@@ -28,17 +28,18 @@ namespace PraLoup.BusinessLogic
                 throw new ArgumentException("there should be one or more invites");
             }
 
-            var invitations = from i in invites
-                              select new Invitation(this.Account, i, actv, message);
+            // TODO: what is the logic to decide what is the deal that can be forwarded
+            var forwards = from i in invites
+                           select new PromotionInstance(this.Account, i, pi.Promotion, pi.Deal, message);
 
             IEnumerable<string> brokenRules;
-            var success = this.dataService.Invitation.SaveOrUpdateAll(invitations, out brokenRules);
+            var success = this.dataService.Invitation.SaveOrUpdateAll(forwards, out brokenRules);
             if (success)
             {
-                this.log.Info("Sucessfully saving {0} invitations for {1}", invitations.Count(), actv);
-                ExecutePlugins(f => f.Invite(actv, invites , message));
+                this.log.Info("Sucessfully saving {0} promotion forwards for {1}", forwards.Count(), pi.Promotion);
+                ExecutePlugins(f => f.Forward(pi, invites, message));
                 this.dataService.Commit();
-                return invitations;
+                return forwards;
             }
             else
             {
@@ -47,32 +48,32 @@ namespace PraLoup.BusinessLogic
             }
         }
 
-        public Invitation Response(Invitation invitation, InvitationReponseType responseType, string message)
+        public PromotionInstance Response(PromotionInstance pi, StatusType responseType, string message)
         {
-            if (invitation.Recipient.Id != this.Account.Id)
+            if (pi.Recipient.Id != this.Account.Id)
             {
                 throw new ArgumentException(String.Format("this invitation is not for user {0}", this.Account));
             }
 
-            invitation.InvitationResponse.InvitationResponseType = responseType;
-            invitation.InvitationResponse.Message = message;
-            invitation.CreateDateTime = DateTime.UtcNow;
+            pi.Status.StatusType = responseType;
+            pi.Status.Message = message;
+            pi.CreateDateTime = DateTime.UtcNow;
 
             IEnumerable<string> brokenRules;
-            var success = this.dataService.Invitation.SaveOrUpdate(invitation, out brokenRules);
+            var success = this.dataService.Invitation.SaveOrUpdate(pi, out brokenRules);
 
             if (success)
             {
                 this.dataService.Commit();
-                this.log.Info("[] - {0} Succesfully saved invitation {1}", Account, invitation);
+                this.log.Info("[] - {0} Succesfully saved invitation {1}", Account, pi);
                 // TODO: this should not be here, we should decouple facebook stuff
-                ExecutePlugins(t => t.Response(invitation));
-                return invitation;
+                ExecutePlugins(t => t.Response(pi));
+                return pi;
             }
             else
             {
                 this.dataService.Rollback();
-                this.log.Debug("[] - {0} Unable to create activity {1}. Violated rules {2}", Account, invitation, brokenRules.First());
+                this.log.Debug("[] - {0} Unable to create activity {1}. Violated rules {2}", Account, pi, brokenRules.First());
                 return null;
             }
         }

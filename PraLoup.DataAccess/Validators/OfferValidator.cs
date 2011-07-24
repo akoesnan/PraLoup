@@ -7,14 +7,14 @@ using PraLoup.Infrastructure.Validation;
 
 namespace PraLoup.DataAccess.Validators
 {
-    public class OfferValidator : IValidator<Offer>
+    public class OfferValidator : IValidator<Deal>
     {
-        public bool IsValid(Offer entity)
+        public bool IsValid(Deal entity)
         {
             return BrokenRules(entity).Count() == 0;
         }
 
-        public IEnumerable<string> BrokenRules(Offer entity)
+        public IEnumerable<string> BrokenRules(Deal entity)
         {
             yield break;
         }
