@@ -9,5 +9,6 @@ namespace PraLoup.DataAccess.Entities
         public virtual int Available { get; set; }
         public virtual int Taken { get; set; }
         public virtual byte MaxReferal { get; set; }
+        
     }
 }

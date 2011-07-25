@@ -11,6 +11,7 @@ namespace PraLoup.DataAccess.Services
         public EntityDataService<PromotionInstance, InvitationValidator> Invitation { get; private set; }
         public EntityDataService<Deal, OfferValidator> Offer { get; private set; }
         public EntityDataService<Connection, ConnectionValidator> Connection { get; private set; }
+        public EntityDataService<Promotion, PromotionValidator> Promotions { get; private set; }
 
         private IUnitOfWork unitOfWork;
 

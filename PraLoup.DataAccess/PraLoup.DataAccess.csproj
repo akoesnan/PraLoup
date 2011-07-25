@@ -114,6 +114,7 @@
     <Compile Include="UnitOfWork.cs" />
     <Compile Include="Validators\AccountValidator.cs" />
     <Compile Include="Validators\ConnectionValidator.cs" />
+    <Compile Include="Validators\PromotionValidator.cs" />
     <Compile Include="Validators\InvitationValidator.cs" />
     <Compile Include="Validators\OfferValidator.cs" />
     <Compile Include="Validators\EventValidator.cs" />

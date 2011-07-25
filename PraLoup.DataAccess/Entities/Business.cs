@@ -14,6 +14,7 @@ namespace PraLoup.DataAccess.Entities
         public virtual string TwitterId { get; set; }
         public virtual IList<Connection> Connections { get; set; }
         public virtual IList<Review> Reviews { get; set; }
+        public virtual IList<BusinessUser> User { get; set; }
 
         public virtual decimal Rating { get; set; }
 

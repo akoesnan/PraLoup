@@ -22,9 +22,13 @@ namespace PraLoup.BusinessLogic.Test
         }
 
         [Test]
-        public void CreateActivityWithNoEvent_Success()
+        public void PromotionInstanceForUserPromotion_Success()
         {
+            var mockDS = new Mock<IDataService>();
+            IEnumerable<IPromotionInstanceAction> plugins = null;
 
+            var inviteAction = new PromotionInstanceAction(mockDS.Object, plugins, new Log4NetLogger());
+            inviteAction.GetAvailableInvitationsForUser();
         }
     }
 }

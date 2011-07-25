@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Web.Security;
+
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Services;
 using PraLoup.FacebookObjects;
@@ -16,14 +17,16 @@ namespace PraLoup.BusinessLogic
 
         public FacebookAccount FacebookAccount { get; set; }
         public EventActions EventActions { get; private set; }
+        public PromotionInstanceAction PromotionInstanceAction { get; private set; }
         public ILogger Log { get; set; }
 
         public AccountBase(IDataService dataService,
-            EventActions eventActions,
+            EventActions eventActions, PromotionInstanceAction promoActions,
             ILogger log)
         {
             this.DataService = dataService;
             this.EventActions = eventActions;
+            this.PromotionInstanceAction = promoActions;
             this.Log = log;
 
             //this.account = this.GetFacebookAccount();

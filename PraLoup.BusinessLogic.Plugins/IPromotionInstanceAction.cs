@@ -8,5 +8,7 @@ namespace PraLoup.BusinessLogic.Plugins
         IEnumerable<PromotionInstance> Forward(PromotionInstance promotionInstance, IEnumerable<Account> invites, string message);
 
         PromotionInstance Response(PromotionInstance promotionInstance);
+
+
     }
 }

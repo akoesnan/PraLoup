@@ -33,9 +33,7 @@ function RenderAccountList(cont, events, selectedFriends) {
         ).appendTo(cont);
     }
 
-    for (var y in events) {
-
-    }
+   
 }
 
 

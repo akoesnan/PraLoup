@@ -6,8 +6,8 @@ using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Mapping;
 using PraLoup.DataAccess.Services;
-using PraLoup.DataAccess.Validators;
 using PraLoup.DataAccess.Tests;
+using PraLoup.DataAccess.Validators;
 using PraLoup.Infrastructure.Data;
 
 namespace PraLoup.BusinessLogic.Test

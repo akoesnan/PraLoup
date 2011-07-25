@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Security.Cryptography;
 using PraLoup.DataAccess.Entities;
-using System.Security.Cryptography;
 
 
 namespace PraLoup.BusinessLogic
