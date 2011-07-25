@@ -6,7 +6,7 @@ namespace PraLoup.DataAccess.Entities
     {
         public virtual decimal OriginalValue { get; set; }
 
-        public virtual decimal CurrentValue { get; set; }
+        public virtual decimal DealValue { get; set; }
 
         public virtual decimal Saving { get; set; }
 

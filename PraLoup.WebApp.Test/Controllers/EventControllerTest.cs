@@ -16,7 +16,6 @@ namespace PraLoup.WebApp.Tests.Controllers
             kernel.Load(new AppModule());
 
             var controller = kernel.Get<EventController>();
-            Assert.IsNotNull(controller.AccountBase);
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Web.Routing;
 using Moq;
 using NUnit.Framework;
 using PraLoup.WebApp.Areas.Admin;
+using PraLoup.WebApp.Areas.Business;
 
 namespace PraLoup.WebApp.Tests.Controllers
 {
@@ -27,6 +28,30 @@ namespace PraLoup.WebApp.Tests.Controllers
         public void AdminHomeRouteTest()
         {
             TestIncomingRoute("~/Admin", new Dictionary<string, string> { { "controller", "Home" }, { "action", "Index" } });
+        }
+
+        [Test]
+        public void BusinessHomeRouteTest()
+        {
+            TestIncomingRoute("~/Business", new Dictionary<string, string> { { "controller", "Business" }, { "action", "Index" } });
+        }
+
+        [Test]
+        public void BusinessCreateRouteTest()
+        {
+            TestIncomingRoute("~/Business/Create", new Dictionary<string, string> { { "controller", "Business" }, { "action", "Create" } });
+        }
+
+        [Test]
+        public void BusinessCreatePromotionRouteTest()
+        {
+            TestIncomingRoute("~/Business/Promotion/Create", new Dictionary<string, string> { { "controller", "Promotion" }, { "action", "Create" } });
+        }
+
+        [Test]
+        public void AdminCreateBusinessRouteTest()
+        {
+            TestIncomingRoute("~/Admin/Business/Index", new Dictionary<string, string> { { "controller", "Business" }, { "action", "Index" } });
         }
 
         [Test]
@@ -83,7 +108,9 @@ namespace PraLoup.WebApp.Tests.Controllers
         {
             var routes = new RouteCollection();
             var adminArea = new AdminAreaRegistration();
+            var businessArea = new BusinessAreaRegistration();
             adminArea.RegisterArea(new AreaRegistrationContext(adminArea.AreaName, routes));
+            businessArea.RegisterArea(new AreaRegistrationContext(businessArea.AreaName, routes));
             MvcApplication.RegisterRoutes(routes);
 
             var context = GetMockHttpContext(null);

@@ -9,11 +9,13 @@ namespace PraLoup.WebApp.Controllers
 {
     public class EventController : Controller
     {
-        public AccountBase AccountBase { get; private set; }
+        private ILogger Log;
+        private AccountBase AccountBase;
 
-        public EventController(AccountBase accountBase, ILogger logger)
+        public EventController(AccountBase accountBase, ILogger log)
         {
             this.AccountBase = accountBase;
+            this.Log = log;
         }
 
         //

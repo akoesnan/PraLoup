@@ -3,9 +3,10 @@
     public enum Role
     {
         NoRole = 0,
-        Owner = 1,
-        Promoter = 2,
-        DoorStaff = 3,
-        StoreStaff = 4
+        Administrator = 1,
+        BusinessAdmin = 2,
+        Promoter = 3,
+        DoorStaff = 4,
+        StoreStaff = 5
     }
 }

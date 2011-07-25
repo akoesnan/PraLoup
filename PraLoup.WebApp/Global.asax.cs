@@ -1,17 +1,6 @@
-﻿using System.Data.Entity;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using PraLoup.DataAccess;
-using FluentNHibernate.Automapping;
-using PraLoup.DataAccess.Entities;
-using PraLoup.DataAccess.Mapping;
-using NHibernate;
-using FluentNHibernate.Cfg.Db;
-using FluentNHibernate.Cfg;
-using System.IO;
-using NHibernate.Tool.hbm2ddl;
-using NHibernate.Cfg;
 
 namespace PraLoup.WebApp
 {
@@ -30,12 +19,6 @@ namespace PraLoup.WebApp
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "ThingsToDoInCity", // Route name
-                "ThingsToDo/{city}", // URL with parameters
-                new { controller = "ThingsToDo", action = "City" } // Parameter defaults
-            );
-
-            routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional }, // Parameter defaults
@@ -50,7 +33,7 @@ namespace PraLoup.WebApp
         {
             AreaRegistration.RegisterAllAreas();
             RegisterGlobalFilters(GlobalFilters.Filters);
-            RegisterRoutes(RouteTable.Routes);            
-        }        
+            RegisterRoutes(RouteTable.Routes);
+        }
     }
 }

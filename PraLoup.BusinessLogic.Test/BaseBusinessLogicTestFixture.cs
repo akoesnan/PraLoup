@@ -6,7 +6,7 @@ namespace PraLoup.BusinessLogic.Test
     [TestFixture]
     public abstract class BaseBusinessLogicTestFixture
     {
-        protected static readonly ILogger Log = GetLogger();
+        protected ILogger Log = GetLogger();
 
         private static ILogger GetLogger()
         {

@@ -15,19 +15,27 @@ namespace PraLoup.BusinessLogic
         internal IDataService DataService { get; set; }
 
         public FacebookAccount FacebookAccount { get; set; }
+
+        public PromotionActions PromotionActions { get; private set; }
+        public PromotionInstanceActions PromotionInstanceActions { get; private set; }
+        public BusinessActions BusinessActions { get; private set; }
         public EventActions EventActions { get; private set; }
+
         public ILogger Log { get; set; }
 
         public AccountBase(IDataService dataService,
             EventActions eventActions,
+            BusinessActions businessActions,
+            PromotionActions promoActions,
+            PromotionInstanceActions promoInstanceActions,
             ILogger log)
         {
             this.DataService = dataService;
             this.EventActions = eventActions;
+            this.BusinessActions = businessActions;
+            this.PromotionActions = promoActions;
+            this.PromotionInstanceActions = promoInstanceActions;
             this.Log = log;
-
-            //this.account = this.GetFacebookAccount();
-            //this.SetActionsAccount(this.account);
         }
 
         public void SetupActionAccount()

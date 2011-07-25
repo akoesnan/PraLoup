@@ -13,10 +13,11 @@ namespace PraLoup.DataAccess.Entities
 
         public PromotionInstance(Account sender, Account recipient, Promotion ev, Deal deal, string message)
         {
+            this.Sender = sender;
+
             this.Promotion = ev;
             this.Deal = deal;
             this.Recipient = recipient;
-            this.Sender = sender;
             this.Message = message;
             this.CreateDateTime = DateTime.UtcNow;
             // by default response is null

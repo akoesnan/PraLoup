@@ -12,14 +12,15 @@ namespace PraLoup.BusinessLogic
         protected IDataService dataService;
         protected IEnumerable<T> actionPlugins;
 
-        public ActionBase(IDataService dataService, ILogger log, IEnumerable<T> actionPlugins)
+        public ActionBase(Account account, IDataService dataService, ILogger log, IEnumerable<T> actionPlugins)
         {
+            this.Account = account;
             this.dataService = dataService;
             this.log = log;
             this.actionPlugins = actionPlugins;
         }
 
-        public Account Account { get; set; }
+        internal Account Account { get; set; }
 
         protected void ExecutePlugins<TOut>(Func<T, TOut> f)
         {

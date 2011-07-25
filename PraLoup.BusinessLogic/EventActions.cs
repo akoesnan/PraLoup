@@ -14,7 +14,7 @@ namespace PraLoup.BusinessLogic
     public class EventActions : ActionBase<IEventAction>
     {
         public EventActions(Account account, IDataService dataService, ILogger log, IEnumerable<IEventAction> actionPlugins)
-            : base(dataService, log, actionPlugins)
+            : base(account, dataService, log, actionPlugins)
         {
         }
 

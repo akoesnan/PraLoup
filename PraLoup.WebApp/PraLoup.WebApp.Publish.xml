@@ -38,8 +38,7 @@
     <file relUrl="Scripts/xfbml/tags/add_profile_tab.js" publishTime="05/23/2011 22:52:13" />
     <file relUrl="Scripts/xfbml/tags/sharebutton.js" publishTime="05/23/2011 22:52:13" />
     <file relUrl="System.Web.WebPages.Deployment.dll" publishTime="06/06/2011 23:05:32" />
-    <file relUrl="Scripts/xfbml/tags/live_stream.js" publishTime="05/23/2011 22:52:13" />
-    <file relUrl="Views/Activity/Delete.cshtml" publishTime="06/08/2011 00:43:38" />
+    <file relUrl="Scripts/xfbml/tags/live_stream.js" publishTime="05/23/2011 22:52:13" />    
     <file relUrl="Scripts/css/share_button.css" publishTime="05/23/2011 22:52:12" />
     <file relUrl="Scripts/xfbml/xfbml.js" publishTime="05/23/2011 22:52:13" />
     <file relUrl="Scripts/jquery/jquery.unobtrusive-ajax.min.js" publishTime="05/23/2011 22:52:13" />
@@ -47,16 +46,14 @@
     <file relUrl="Scripts/css/button.css" publishTime="05/23/2011 22:52:12" />
     <file relUrl="bin/System.Web.dll" publishTime="03/18/2010 19:31:26" />
     <file relUrl="Scripts/xfbml/element.js" publishTime="05/23/2011 22:52:13" />
-    <file relUrl="Scripts/jquery/jquery-ui.min.js" publishTime="05/23/2011 22:52:13" />
-    <file relUrl="Views/Activity/AddFacebookFriends.cshtml" publishTime="06/08/2011 00:43:38" />
+    <file relUrl="Scripts/jquery/jquery-ui.min.js" publishTime="05/23/2011 22:52:13" />    
     <file relUrl="App_Data/EntityRepository.sdf" publishTime="06/08/2011 01:47:20" />
     <file relUrl="bin/PraLoup.Facebook.pdb" publishTime="06/08/2011 02:05:28" />
     <file relUrl="Scripts/jquery/jquery.validate.js" publishTime="05/23/2011 22:52:13" />
     <file relUrl="Content/themes/base/jquery-ui.css" publishTime="04/23/2011 12:58:33" />
     <file relUrl="Scripts/css/iframe_widget.css" publishTime="05/23/2011 22:52:12" />
     <file relUrl="Scripts/MicrosoftMvcAjax.debug.js" publishTime="04/23/2011 12:58:34" />
-    <file relUrl="bin/System.Web.WebPages.xml" publishTime="12/19/2010 22:59:38" />
-    <file relUrl="Views/Activity/Create.cshtml" publishTime="06/08/2011 00:43:38" />
+    <file relUrl="bin/System.Web.WebPages.xml" publishTime="12/19/2010 22:59:38" />    
     <file relUrl="Areas/Admin/Views/MetroArea/Edit.cshtml" publishTime="05/22/2011 14:45:24" />
     <file relUrl="Scripts/core/intl.js" publishTime="05/23/2011 22:52:12" />
     <file relUrl="Views/Event/Index.cshtml" publishTime="04/25/2011 02:46:51" />
@@ -95,8 +92,7 @@
     <file relUrl="Content/themes/base/images/ui-icons_222222_256x240.png" publishTime="04/23/2011 12:58:33" />
     <file relUrl="bin/PraLoup.Utilities.dll" publishTime="06/07/2011 23:40:56" />
     <file relUrl="Content/themes/base/images/ui-bg_glass_75_dadada_1x400.png" publishTime="04/23/2011 12:58:33" />
-    <file relUrl="Scripts/xfbml/tags/facepile.js" publishTime="05/23/2011 22:52:13" />
-    <file relUrl="Views/Activity/Details.cshtml" publishTime="06/08/2011 00:43:38" />
+    <file relUrl="Scripts/xfbml/tags/facepile.js" publishTime="05/23/2011 22:52:13" />    
     <file relUrl="Scripts/css/edge_comment_widget.css" publishTime="05/23/2011 22:52:12" />
     <file relUrl="Scripts/core/auth.js" publishTime="05/23/2011 22:52:12" />
     <file relUrl="Scripts/jquery/jquery-ui.js" publishTime="05/23/2011 22:52:13" />
@@ -166,8 +162,7 @@
     <file relUrl="Scripts/jquery/jquery.unobtrusive-ajax.js" publishTime="05/23/2011 22:52:13" />
     <file relUrl="Scripts/common/type.js" publishTime="05/23/2011 22:52:12" />
     <file relUrl="Views/Event/Delete.cshtml" publishTime="04/24/2011 15:19:14" />
-    <file relUrl="Content/themes/base/images/ui-icons_888888_256x240.png" publishTime="04/23/2011 12:58:33" />
-    <file relUrl="Views/Activity/Index.cshtml" publishTime="06/08/2011 00:43:38" />
+    <file relUrl="Content/themes/base/images/ui-icons_888888_256x240.png" publishTime="04/23/2011 12:58:33" />    
     <file relUrl="Scripts/css/base.css" publishTime="05/23/2011 22:52:12" />
     <file relUrl="System.Web.WebPages.Administration.dll" publishTime="06/06/2011 23:05:32" />
     <file relUrl="Scripts/xfbml/iframe_widget.js" publishTime="05/23/2011 22:52:13" />
@@ -181,8 +176,7 @@
     <file relUrl="Areas/Admin/Views/Web.config" publishTime="05/22/2011 19:41:53" />
     <file relUrl="bin/PraLoup.Utilities.pdb" publishTime="06/07/2011 23:40:56" />
     <file relUrl="Scripts/data/query.js" publishTime="05/23/2011 22:52:12" />
-    <file relUrl="Views/Account/Register.cshtml" publishTime="06/08/2011 01:16:28" />
-    <file relUrl="Views/Activity/Edit.cshtml" publishTime="06/08/2011 00:43:38" />
+    <file relUrl="Views/Account/Register.cshtml" publishTime="06/08/2011 01:16:28" />    
     <file relUrl="Scripts/jquery/jquery.validate.min.js" publishTime="05/23/2011 22:52:13" />
     <file relUrl="Scripts/xfbml/tags/friendpile.js" publishTime="05/23/2011 22:52:13" />
     <file relUrl="Scripts/jquery/jquery-1.4.4-vsdoc.js" publishTime="05/23/2011 22:52:12" />
