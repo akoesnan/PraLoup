@@ -44,7 +44,7 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
         public ActionResult Create()
         {
             this.AccountBase.SetupActionAccount();
-            return View(new BusinessModel(new Entities.Business(), Role.BusinessAdmin));
+            return View(new BusinessModel());
         }
 
         //

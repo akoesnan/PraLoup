@@ -60,7 +60,6 @@ namespace PraLoup.WebApp.Areas.Business.Controllers
                 if (ModelState.IsValid)
                 {
                     var bcm = new BusinessCreateModel(this.AccountBase, new Entities.Business(), Role.BusinessAdmin);
-                    bcm
                     return RedirectToAction("Index");
                 }
                 else
