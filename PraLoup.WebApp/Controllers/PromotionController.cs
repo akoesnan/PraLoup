@@ -81,7 +81,7 @@ namespace PraLoup.WebApp.Controllers
                 {
                     foreach (dynamic foo in deal)
                     {
-                        Deal d = ConvertDynamicToDeal(deal);
+                        Deal d = ConvertDynamicToDeal(foo);
                         pcm.Deals.Add(d);
                     }
                 }
