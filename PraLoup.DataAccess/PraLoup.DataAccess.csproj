@@ -113,6 +113,7 @@
     <Compile Include="TestSeedDataGenerator.cs" />
     <Compile Include="UnitOfWork.cs" />
     <Compile Include="Validators\AccountValidator.cs" />
+    <Compile Include="Validators\BusinessUserValidator.cs" />
     <Compile Include="Validators\ConnectionValidator.cs" />
     <Compile Include="Validators\BusinessValidator.cs" />
     <Compile Include="Validators\PromotionInstanceValidator.cs" />

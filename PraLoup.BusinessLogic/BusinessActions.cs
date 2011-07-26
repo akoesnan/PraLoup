@@ -25,6 +25,16 @@ namespace PraLoup.BusinessLogic
             return this.dataService.Business.GetQuery().Skip(skipCount).Take(pageCount);
         }
 
+        public IEnumerable<Business> GetBusinessForUser(Account user)
+        {
+            IEnumerable<BusinessUser> f = this.dataService.BusinessUsers.Where(b => b.User.Id == user.Id);
+            if (f == null || f.Count() == 0)
+            {
+                return new List<Business>();
+            }
+            return this.dataService.Business.Where(t => f.Any(c => t.BusinessUsers.Contains(c)));
+        }
+
         public Business CreateBusiness(Business business, Role role)
         {
 

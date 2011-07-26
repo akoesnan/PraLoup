@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System;
 using Facebook.Web.Mvc;
 using PraLoup.BusinessLogic;
 using PraLoup.DataAccess.Entities;
@@ -41,12 +42,12 @@ namespace PraLoup.WebApp.Controllers
         private static Deal ConvertDynamicToDeal(dynamic deal)
         {
             Deal d = new Deal();
-            d.Available = deal.DealListAvailable;
-            d.OriginalValue = deal.DealListOriginalValue;
-            d.DealValue = deal.DealListCurrentValue;
-            d.Saving = deal.DealListSaving;
-            d.StartDateTime = deal.DealListStartDateTime;
-            d.EndDateTime = deal.DealListEndDateTime;
+            d.Available = int.Parse(deal.DealListAvailable);
+            d.OriginalValue = int.Parse(deal.DealListOriginalValue);
+            d.DealValue = int.Parse(deal.DealListCurrentValue);
+            d.Saving = int.Parse(deal.DealListSaving);
+            d.StartDateTime = DateTime.Parse(deal.DealListStartDateTime);
+            d.EndDateTime = DateTime.Parse(deal.DealListEndDateTime);
             d.Description = deal.DealListDescription;
             d.FinePrint = deal.DealListFinePrint;
             d.RedemptionInstructions = deal.DealListRedemptionInstructions;
@@ -56,17 +57,23 @@ namespace PraLoup.WebApp.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult PromotionCreate(PromotionCreateModel pcm)
         {
+            this.AccountBase.SetupActionAccount();
+          
             // Because of the weird control, we fetch deals from a json param:
             string jsonDeal = Request.Form["Deals"];
             // first try to serialize it as a single thing, then try as an array;
-            dynamic deal = jsonDeal.GetJson();
+            dynamic deal = null;
             pcm.Deals = new DealList();
-            if (deal != null)
+            try
             {
+                deal = jsonDeal.GetJson();
                 Deal d = ConvertDynamicToDeal(deal);
-                pcm.Deals.Add(d);
+                pcm.Deals.Add(d);            
             }
-            else
+            catch(Exception)
+            {
+            }
+            if (deal == null)
             {
                 jsonDeal = "[" + jsonDeal + "]";
                 deal = jsonDeal.GetJson();
@@ -82,8 +89,12 @@ namespace PraLoup.WebApp.Controllers
                 {
                     //error
                 }
-            }
+            } 
 
+            Promotion p = pcm.ToPromotion();
+            var userbusinesses = AccountBase.BusinessActions.GetBusinessForUser(AccountBase.Account);
+            p.Business = userbusinesses != null && userbusinesses.Count() > 0 ? userbusinesses.First() : new Business();
+            this.AccountBase.PromotionActions.SavePromotion(p);
             return View(pcm);
         }
 

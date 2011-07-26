@@ -9,6 +9,7 @@ namespace PraLoup.DataAccess.Services
         EntityDataService<PromotionInstance, PraLoup.DataAccess.Validators.PromotionInstanceValidator> PromotionInstance { get; }
         EntityDataService<Event, PraLoup.DataAccess.Validators.EventValidator> Event { get; }        
         EntityDataService<Deal, PraLoup.DataAccess.Validators.OfferValidator> Offer { get; }
+        EntityDataService<BusinessUser, PraLoup.DataAccess.Validators.BusinessUserValidator> BusinessUsers { get; }
 
         EntityDataService<Connection, PraLoup.DataAccess.Validators.ConnectionValidator> Connection { get; }
         void Commit();
