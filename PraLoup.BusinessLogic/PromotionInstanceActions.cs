@@ -159,14 +159,66 @@ namespace PraLoup.BusinessLogic
         {
             if (pi.Deal != null)
             {
-                var coupon = new Coupon()
-                {
-                    CouponCode = Guid.NewGuid().ToString(),
-                    Redeemed = false
-                };
+                var coupon = new Coupon();
+                coupon.CouponCode = coupon.GenerateCode(8);
+                coupon.Redeemed = false;
                 return coupon;
             }
             return null;
         }
+
+
+
+
+        public bool PromotionInstanceForUserPromotion(int promotionInstanceId, out PromotionInstance pi)
+        {
+            pi = null;
+            // see if we can find the instance
+            var x = this.dataService.Invitation.Find(promotionInstanceId);
+            if (x != null)
+            {
+                pi = x;
+                if (x.Recipient.FacebookLogon.FacebookId == this.Account.FacebookLogon.FacebookId)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+
+        public IList<PromotionInstance> GetAvailableInvitationsForUser()
+        {
+            // see if we can find the instance
+            var y = this.dataService.PromotionInstance.Where(x => x.Recipient.FacebookLogon.FacebookId == this.Account.FacebookLogon.FacebookId);
+
+            if (y != null)
+            {
+                return y.ToList<PromotionInstance>();
+            }
+            return null;
+        }
+
+
+        /// <summary>
+        /// Right now, this only returns the first created invitation, should be smarter using 
+        /// the business' rules in the future.
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        public IList<PromotionInstance> GetAvailableInvitationsForUser(Guid eventId)
+        {
+            // see if we can find the instance
+            var y = this.dataService.PromotionInstance.Where(x => x.Recipient.FacebookLogon.FacebookId == this.Account.FacebookLogon.FacebookId
+                                                                && x.Promotion.Event.Id == eventId).OrderBy(x => x.CreateDateTime);
+
+            if (y != null)
+            {
+                return y.ToList<PromotionInstance>();
+            }
+            return null;
+        }
+
     }
 }

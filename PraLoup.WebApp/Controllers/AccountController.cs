@@ -13,18 +13,15 @@ namespace ProjectSafari.Controllers
 {
     [HandleError]
     public class AccountController : Controller
-    {
-        private IDataService DataService { get; set; }        
-
+    {        
         private AccountBase AccountBase;
         private const string returnUrl = "http://localhost/praloup.webapp/Promotion/PromotionCreate";
         private const string logoffUrl = "http://localhost/praloup.webapp/";
         private const string redirectUrl = "http://localhost/praloup.webapp/account/OAuth";
 
-        public AccountController(AccountBase accountBase, IDataService dataService)
+        public AccountController(AccountBase accountBase)
         {
-            this.AccountBase = accountBase;
-            this.DataService = DataService;
+            this.AccountBase = accountBase;            
         }
 
         public ActionResult Login()

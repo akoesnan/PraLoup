@@ -24,9 +24,9 @@ namespace PraLoup.WebApp.Controllers
             this.AccountBase.SetupActionAccount();
             PromotionInstance pi = null;
 
-            bool isForUser = this.AccountBase.PromotionInstanceAction.PromotionInstanceForUserPromotion(promotionid, out pi);
+            bool isForUser = this.AccountBase.PromotionInstanceActions.PromotionInstanceForUserPromotion(promotionid, out pi);
 
-            this.AccountBase.PromotionInstanceAction.Forward(pi, null, message); 
+            this.AccountBase.PromotionInstanceActions.Forward(pi, null, message); 
 
             return View();
         }
@@ -42,7 +42,7 @@ namespace PraLoup.WebApp.Controllers
             this.AccountBase.SetupActionAccount();
             PromotionInstance pi = null;
 
-            bool isForUser = this.AccountBase.PromotionInstanceAction.PromotionInstanceForUserPromotion(promotionid, out pi);
+            bool isForUser = this.AccountBase.PromotionInstanceActions.PromotionInstanceForUserPromotion(promotionid, out pi);
             // the promotion id might not be for the user. In that case, we'll see if the user has other promotions for that event
             if (isForUser)
             {
@@ -62,7 +62,7 @@ namespace PraLoup.WebApp.Controllers
 
             if (pi == null)
             {
-                var otherInvites = this.AccountBase.PromotionInstanceAction.GetAvailableInvitationsForUser(pi.Promotion.Event.Id);
+                var otherInvites = this.AccountBase.PromotionInstanceActions.GetAvailableInvitationsForUser(pi.Promotion.Event.Id);
                 if (otherInvites != null)
                 {
                     //redirect to the page for the first invite

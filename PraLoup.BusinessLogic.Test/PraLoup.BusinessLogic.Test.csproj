@@ -74,8 +74,10 @@
   <ItemGroup>
     <Compile Include="AccountExtensionsTest.cs" />
     <Compile Include="BaseBusinessLogicTestFixture.cs" />
-    <Compile Include="CouponTest.cs" />
-    <Compile Include="InviteActionTest.cs" />
+    <Compile Include="CouponTest.cs" />  
+    <Compile Include="BusinessActionsTest.cs" />
+    <Compile Include="PromotionInstanceActionsTest.cs" />
+    <Compile Include="PromotionActionsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

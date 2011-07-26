@@ -139,14 +139,31 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BusinessController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PromotionController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PromotionInstanceController.cs" />
     <Compile Include="Areas\Admin\Models\AdminPageModel.cs" />
+    <Compile Include="Areas\Admin\Models\BaseAdminModel.cs" />
+    <Compile Include="Areas\Admin\Models\BusinessIndexModel.cs" />
+    <Compile Include="Areas\Admin\Models\BusinessCreateModel.cs" />
     <Compile Include="Areas\Admin\Resources\LocStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LocStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BootstrapperModules.cs" />
+    <Compile Include="Areas\Business\BusinessAreaRegistration.cs" />
+    <Compile Include="Areas\Business\Controllers\BusinessController.cs" />
+    <Compile Include="Areas\Business\Controllers\PromotionController.cs" />
+    <Compile Include="Areas\Business\Controllers\PromotionInstanceController.cs" />
+    <Compile Include="Areas\Admin\Models\BusinessModel.cs" />
+    <Compile Include="Areas\Admin\Models\PromoModel.cs" />
+    <Compile Include="Areas\Admin\Models\PromoIndexModel.cs" />
+    <Compile Include="Areas\Business\Models\BaseBusinessModel.cs" />
+    <Compile Include="Areas\Business\Models\BusinessModel.cs" />
+    <Compile Include="Areas\Business\Models\PromoIndexModel.cs" />
+    <Compile Include="Areas\Business\Models\PromoModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\PromotionController.cs" />
     <Compile Include="Models\AccountListJson.cs" />
@@ -167,6 +184,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LocStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\EnumExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\EntityRepository.sdf" />
@@ -308,6 +326,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_LocalResources\" />
+    <Folder Include="Areas\Business\Views\Shared\" />
     <Folder Include="Models\Services\" />
   </ItemGroup>
   <ItemGroup>
@@ -428,13 +447,62 @@
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Business\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Business\Views\Business\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\CreateAddress.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Calendar\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Business\Views\Business\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Business\Views\Business\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Business\Views\Business\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Business\Views\Promotion\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Business\Views\Promotion\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Business\Views\Promotion\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Business\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Business\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Business\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Promotion\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Promotion\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Promotion\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Business\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Promotion\PromotionCreate.cshtml" />
     <Content Include="Views\Promotion\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\EditorTemplates\DealList.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Promotion\PromotionCreate.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

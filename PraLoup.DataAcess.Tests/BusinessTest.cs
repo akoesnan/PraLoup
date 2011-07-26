@@ -10,7 +10,7 @@ using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Enums;
 using PraLoup.DataAccess.Mapping;
 
-namespace PraLoup.DataAcess.Tests
+namespace PraLoup.DataAccess.Tests
 {
     [TestFixture]
     public class BusinessTest : BaseDataTestFixture
