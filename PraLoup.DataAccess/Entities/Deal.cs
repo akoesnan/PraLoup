@@ -16,6 +16,8 @@ namespace PraLoup.DataAccess.Entities
 
         public virtual string Description { get; set; }
 
+        public virtual string RedemptionInstructions { get; set; }
+
         public virtual string FinePrint { get; set; }
 
         public virtual int Available { get; set; }

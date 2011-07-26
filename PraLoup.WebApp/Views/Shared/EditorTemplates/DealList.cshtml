@@ -1,0 +1,132 @@
+﻿@inherits System.Web.Mvc.WebViewPage<PraLoup.WebApp.Models.DealList>
+
+@using System.Web;
+@using System.Collections.Generic;
+@{
+    string name = ViewData.TemplateInfo.HtmlFieldPrefix;
+    // id of the hidden input where we store the data for forms submit
+    string id =  name.Replace(".", "_");
+    // name of the "global" javascript variable we are going to keep track of the items in
+    // we use this to recreate the hidden input when an item is changed
+    string varname = id + "var";
+    // this is the id for the div on the page (not the popup) we put stuff here when we're finished.
+    string divid = "div" + id;
+    // this is the id of the dialog, the popup div
+    string dialogid = "dialog" + id;
+    // this is the id of the "control", the container for all of the forms
+    string controlid = "sf" + id;
+}
+<div id="@divid">
+</div>
+
+<div  class="jqmWindow" id="@dialogid">
+<a href="#" class="jqmClose">Cancel</a>
+<a href="#" class="jqmClose" onclick='javascript:CloseDealListEditor("@controlid", "@dialogid","@divid", $("#@id"), @varname )'>Save</a>
+<div id="@controlid">
+        <div class="editor-label">
+            <label for="DealListOriginalValue">Original Value</label>
+        </div>
+        <div class="editor-field">
+            <input class="text-box single-line" data-val="true" data-val-number="The field Original Value must be a number." 
+                data-val-required="The Current field is required." id="DealListOriginalValue" name="DealListOriginalValue"
+                type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="DealListOriginalValue" data-valmsg-replace="true"></span>
+        </div>
+
+        <div class="editor-label">
+            <label for="DealListCurrentValue">Current Value</label>
+        </div>
+        <div class="editor-field">
+            <input class="text-box single-line" data-val="true" data-val-number="The field Current Value must be a number." 
+                data-val-required="The Current Value field is required." id="DealListCurrentValue" name="DealListCurrentValue"
+                type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="DealListCurrentValue" data-valmsg-replace="true"></span>
+        </div>
+
+        <div class="editor-label">
+            <label for="DealListSaving">Saving</label>
+        </div>
+        <div class="editor-field">
+            <input class="text-box single-line" data-val="true" data-val-number="The field Saving must be a number." 
+                data-val-required="The Saving field is required." id="DealListSaving" name="DealListSaving"
+                type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="DealListSaving" data-valmsg-replace="true"></span>
+        </div>
+
+        <div class="editor-label">
+            <label for="DealListStartDateTime">Start Time</label>
+        </div>
+        <div class="editor-field">
+            <input class="datePicker" data-val="true" data-val-required="The Start Time field is required." id="DealListStartDateTime"
+             name="DealListStartDateTime" type="text" value="" />
+            <script type="text/javascript">
+                $('#DealListStartDateTime').datetimepicker();
+           </script>
+           <span class="field-validation-valid" data-valmsg-for="DealListStartDateTime" data-valmsg-replace="true"></span>
+        </div>
+        
+        <div class="editor-label">
+            <label for="DealListEndDateTime">End Time</label>
+        </div>
+        <div class="editor-field">
+            <input class="datePicker" data-val="true" data-val-required="The End Time field is required." id="DealListEndDateTime"
+             name="DealListEndDateTime" type="text" value="" />
+            <script type="text/javascript">
+                $('#DealListEndDateTime').datetimepicker();
+           </script>
+           <span class="field-validation-valid" data-valmsg-for="DealListEndDateTime" data-valmsg-replace="true"></span>
+        </div>
+        
+        <div class="editor-label">
+            <label for="DealListDescription">Description</label>
+        </div>
+        <div class="editor-field">
+            <input class="text-box multi-line" data-val="true" data-val-required="The Description field is required."
+             id="DealListDescription" name="DealListDescription" type="text" value="" />
+         
+           <span class="field-validation-valid" data-valmsg-for="DealListDescription" data-valmsg-replace="true"></span>
+        </div>
+
+        <div class="editor-label">
+            <label for="DealListFinePrint">Fine Print</label>
+        </div>
+        <div class="editor-field">
+            <input class="text-box multi-line" data-val="true" data-val-required="The Fine Print field is required."
+             id="DealListFinePrint" name="DealListFinePrint" type="text" value="" />
+           
+           <span class="field-validation-valid" data-valmsg-for="DealListFinePrint" data-valmsg-replace="true"></span>
+        </div>
+        
+        <div class="editor-label">
+            <label for="DealListRedemptionInstructions">Redemption Instructions</label>
+        </div>
+        <div class="editor-field">
+            <input class="text-box multi-line" data-val="true" data-val-required="The Redemption Instructions field is required."
+             id="DealListRedemptionInstructions" name="DealListRedemptionInstructions" type="text" value="" />
+           
+           <span class="field-validation-valid" data-valmsg-for="DealListRedemptionInstructions" data-valmsg-replace="true"></span>
+        </div>
+
+          <div class="editor-label">
+            <label for="DealListAvailable">Available Deals</label>
+        </div>
+        <div class="editor-field">
+            <input class="text-box single-line" data-val="true" data-val-number="The field Available Deals must be a number." 
+                data-val-required="The Available Deals field is required." id="DealListAvailable" name="DealListAvailable"
+                type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="DealListAvailable" data-valmsg-replace="true"></span>
+        </div>
+
+</div>
+</div>
+<input type="hidden" id="@id"  name="@id" />
+
+
+<script type="text/javascript">
+    var @varname = [];
+    $().ready(function () {
+        $('#@dialogid').jqm();
+    });
+    
+</script>
+<input type="button"  onclick='javascript:OpenDealListEditor("@controlid", "@dialogid", "@divid")' value="Add Deal"/>

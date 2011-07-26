@@ -31,6 +31,12 @@ namespace PraLoup.WebApp.Controllers
             return View();
         }
 
+        public ActionResult PromotionCreate()
+        {
+            PromotionCreateModel pcm = new PromotionCreateModel();
+            return View(pcm);
+        }
+
         public ActionResult View(int promotionid)
         {
             this.AccountBase.SetupActionAccount();
