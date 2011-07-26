@@ -11,8 +11,6 @@ namespace PraLoup.BusinessLogic
 {
     public class PromotionInstanceActions : ActionBase<IPromotionInstanceAction>
     {
-
-
         public PromotionInstanceActions(Account account, IDataService dataService, ILogger log, IEnumerable<IPromotionInstanceAction> inviteActionPlugins)
             : base(account, dataService, log, inviteActionPlugins)
         {
@@ -168,13 +166,11 @@ namespace PraLoup.BusinessLogic
         }
 
 
-
-
         public bool PromotionInstanceForUserPromotion(int promotionInstanceId, out PromotionInstance pi)
         {
             pi = null;
             // see if we can find the instance
-            var x = this.dataService.Invitation.Find(promotionInstanceId);
+            var x = this.dataService.PromotionInstance.Find(promotionInstanceId);
             if (x != null)
             {
                 pi = x;
@@ -185,8 +181,6 @@ namespace PraLoup.BusinessLogic
             }
             return false;
         }
-
-
 
         public IList<PromotionInstance> GetAvailableInvitationsForUser()
         {

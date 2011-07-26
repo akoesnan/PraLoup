@@ -11,6 +11,9 @@ namespace PraLoup.WebApp.Models
         public PromotionCreateModel()
         {
             this.Event = new Event();
+            this.Event.StartDateTime = DateTime.Now;
+            this.Event.EndDateTime = DateTime.Now;
+            
             this.Deals = new DealList();
         }
         public PromotionCreateModel(Promotion p)

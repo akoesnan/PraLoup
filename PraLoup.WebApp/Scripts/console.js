@@ -53,12 +53,7 @@ function displaywindow(name) {
 
 function CloseDealListEditor(controlid, dialogid, divid,  hiddenInput, storagevar) {
     var json = GetJsonForDealControl($('#' + controlid));
-    if (hiddenInput.value != undefined) {
-        hiddenInput.value += json;
-    }
-    else {
-        hiddenInput.value = json;
-    }
+    
     // add new deal row
     AddDisplayRow(controlid, json, divid, dialogid,storagevar, hiddenInput, true, true);
  }
@@ -75,7 +70,7 @@ function CloseDealListEditor(controlid, dialogid, divid,  hiddenInput, storageva
              RemoveListEditor(controlid, divid, hiddenInput, dialogid, storagevar, json);
              OpenDealListEditor(controlid, dialogid, divid, json);
             });
-      link2.appendTo(div);
+      link1.appendTo(div);
      
   
       var link2  = $("<a> Remove </a>").click(
@@ -83,10 +78,17 @@ function CloseDealListEditor(controlid, dialogid, divid,  hiddenInput, storageva
              RemoveListEditor(controlid, divid, hiddenInput, dialogid, storagevar, json);
                     });
         link2.appendTo(div);
-    }
+   
 
     div.appendTo($('#' + divid));
     storagevar[storagevar.length] = json;
+
+    if (hiddenInput.val() == "") {
+        hiddenInput.val(json);
+    }
+    else {
+        hiddenInput.val(hiddenInput.val() + "," + json);
+    }
  }
 
  function RemoveListEditor(controlid, divid, hiddenInput, dialogid, storagevar, json) {

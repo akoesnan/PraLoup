@@ -5,7 +5,8 @@ using PraLoup.DataAccess.Entities;
 using PraLoup.Infrastructure.Logging;
 using PraLoup.WebApp.Models;
 using System.Linq;
-
+using System.Web.Script.Serialization;
+using PraLoup.Utilities;
 
 namespace PraLoup.WebApp.Controllers
 {
@@ -34,6 +35,55 @@ namespace PraLoup.WebApp.Controllers
         public ActionResult PromotionCreate()
         {
             PromotionCreateModel pcm = new PromotionCreateModel();
+            return View(pcm);
+        }
+
+        private static Deal ConvertDynamicToDeal(dynamic deal)
+        {
+            Deal d = new Deal();
+            d.Available = deal.DealListAvailable;
+            d.OriginalValue = deal.DealListOriginalValue;
+            d.DealValue = deal.DealListCurrentValue;
+            d.Saving = deal.DealListSaving;
+            d.StartDateTime = deal.DealListStartDateTime;
+            d.EndDateTime = deal.DealListEndDateTime;
+            d.Description = deal.DealListDescription;
+            d.FinePrint = deal.DealListFinePrint;
+            d.RedemptionInstructions = deal.DealListRedemptionInstructions;
+            return d;
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult PromotionCreate(PromotionCreateModel pcm)
+        {
+            // Because of the weird control, we fetch deals from a json param:
+            string jsonDeal = Request.Form["Deals"];
+            // first try to serialize it as a single thing, then try as an array;
+            dynamic deal = jsonDeal.GetJson();
+            pcm.Deals = new DealList();
+            if (deal != null)
+            {
+                Deal d = ConvertDynamicToDeal(deal);
+                pcm.Deals.Add(d);
+            }
+            else
+            {
+                jsonDeal = "[" + jsonDeal + "]";
+                deal = jsonDeal.GetJson();
+                if (deal != null)
+                {
+                    foreach (dynamic foo in deal)
+                    {
+                        Deal d = ConvertDynamicToDeal(deal);
+                        pcm.Deals.Add(d);
+                    }
+                }
+                else
+                {
+                    //error
+                }
+            }
+
             return View(pcm);
         }
 
