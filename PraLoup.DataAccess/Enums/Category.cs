@@ -9,6 +9,8 @@ namespace PraLoup.DataAccess.Enums
         ArtsAndEntertainment = 4,
         ActiveLife = 5,
         Education = 6,
-        Business = 7
+        Business = 7,
+        Restaurant = 8,
+        Karaoke = 9
     }
 }

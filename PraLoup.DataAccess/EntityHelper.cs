@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using PraLoup.DataAccess.Entities;
+using PraLoup.DataAccess.Enums;
 
 namespace PraLoup.DataAccess
 {
@@ -32,7 +33,7 @@ namespace PraLoup.DataAccess
             {
                 Available = available,
                 Taken = 0,
-                CurrentValue = 5,
+                DealValue = 5,
                 Description = "description",
                 EndDateTime = DateTime.Now.AddDays(5),
                 StartDateTime = DateTime.Now,
@@ -54,6 +55,18 @@ namespace PraLoup.DataAccess
             return v;
         }
 
+        public static Business GetBusiness(string businessName, Category businessCategory)
+        {
+            var b = new Business()
+            {
+                Name = businessName,
+                Category = businessCategory,
+                Phone = "1231231234",
+                Url = "http://abc.abc.com",
+                Address = GetRandomAddress()
+            };
+            return b;
+        }
 
         public static Account GetAccount(string firstName, string lastName)
         {
@@ -94,6 +107,11 @@ namespace PraLoup.DataAccess
                 State = "WA",
                 Country = "United States"
             };
+        }
+
+        public static Promotion GetPromo(Business b, Event ev, Deal d)
+        {
+            return new Promotion(b, ev, d, 100, 5);
         }
     }
 }

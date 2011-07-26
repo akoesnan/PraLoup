@@ -11,6 +11,8 @@ namespace PraLoup.DataAccess.Entities
             var other = obj as BaseEntity;
             if (other == null)
                 return false;
+            if (this.GetType() != obj.GetType())
+                return false;
             return Id.Equals(other.Id) && !Id.Equals(Guid.Empty);
         }
     }

@@ -2,9 +2,9 @@
 
 namespace PraLoup.BusinessLogic.Plugins
 {
-    public interface IEventAction
+    public interface IPromotionAction
     {
-        Event SendUpdate(Event ev);
-        Event SendReminder(Event ev);
+        Event SendUpdate(Promotion ev);
+        Event SendReminder(Promotion ev);
     }
 }
