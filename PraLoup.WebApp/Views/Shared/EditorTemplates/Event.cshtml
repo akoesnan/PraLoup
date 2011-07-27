@@ -2,9 +2,7 @@
 
 
     @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>Event</legend>
-
+    
         @Html.HiddenFor(model => model.Id)
 
         <div class="editor-label">
@@ -46,5 +44,3 @@
             @Html.EditorFor(model => model.Price)
             @Html.ValidationMessageFor(model => model.Price)
         </div>
-   
-    </fieldset>

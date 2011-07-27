@@ -1,348 +1,286 @@
-﻿/*----------------------------------------------------------
-The base color for this template is #5c87b2. If you'd like
-to use a different color start by replacing all instances of
-#5c87b2 with your new color.
-----------------------------------------------------------*/
-body
-{
-    background-color: #ffffff;
-    font-size: 75%;
-    font-family: Verdana, Tahoma, Arial, "Helvetica Neue", Helvetica, Sans-Serif;
-    margin: 0;
-    padding: 0;
-    color: #000000;
+﻿body {
+	background: #FFFFFF;
+	padding-top: 5px;
+	font-family:  Verdana, Arial, Helvetica, sans-serif;
+	font-size:75%;
 }
-
-.lightbackground 
-{
-	background-color:rgb(220,230,242);
+a:hover {
+	text-decoration: none;
 }
-
-.darktbackground 
-{
-	background-color:rgb(79,129,189);
+a img {
+	border: 0;
 }
-.orange
-{
-	background-color:rgb(228,108,10);
+img {
+	vertical-align: top;
 }
-
-#container {
-   margin: 1%;
-   padding: 0;
-   width: 100%;
-   min-height:300px;
-   text-align:left;
-   margin-left: auto;
-   margin-right : auto;
-
-   
+ul {
+	list-style: none;
 }
-#left {
-   float: left;
-   width: 46.5%;
-   margin: 1% 0 1% 1%;
-   padding: 1%;
-   background-color: #ffffff;
-   height:100%;
-   color: #000;
+.left {
+	float: left;
 }
-#right {
-   float: right;
-   width: 46.5%;
-   margin: 1% 0 1% 1%;
-   padding: 1%;
-   background-color: #ffffff;
-   color: #000;
-   height:100%;
+.right {
+	float: right;
 }
 .clear {
-   height: 0;
-   font-size: 1px;
-   margin: 0;
-   padding: 0;
-   line-height: 0;
-   clear: both;
+	clear: both;
+}
+input, select {
+	vertical-align: middle;
+	font-weight: normal;
+}
+strong {
+	font-size: 12px;
+	color: #000;
+}
+a {
+	color: #3d6f92;
+	font-size: 12px;
+}
+/*main layout */
+
+#main {
+	width: 800px;
+}
+#header_tall {
+	min-height: 92px;
+	max-height: 92px;
+}
+#header-short{	
+	min-height:45px;
+	max-height:45px;
 }
 
 
-a:link
-{
-    color: #034af3;
-    text-decoration: underline;
+#image {
+	min-height: 150px;
+	max-height: 150px;
 }
-a:visited
-{
-    color: #505abc;
+#footer {
+	height: 61px;
 }
-a:hover
-{
-    color: #1d60ff;
-    text-decoration: none;
+.column1, .column2, .column3, .column4, .column5, .column6, .indent_column, .col1, .col2, .col3, .ind_col {
+	float: left;
 }
-a:active
-{
-    color: #12eb87;
+/* index */
+#index .columns1 .column1 {
+	width: 52px;
 }
-
+#index .columns1 .column2 {
+	width: 208px;
+}
+#index .columns1 .column3 {
+	width: 52px;
+}
+#index .columns1 .column4 {
+	width: 208px;
+}
+#index .columns1 .column5 {
+	width: 52px;
+}
+#index .columns1 .column6 {
+	width: 208px;
+}
+#index .columns1 .indent_column {
+	width: 7px;
+}
+#index .columns2 .column1 {
+	width: 400px;
+}
+#index .columns2 .column2 {
+	width: 400px;
+}
 p, ul
 {
     margin-bottom: 20px;
     line-height: 1.6em;
 }
 
-/* HEADINGS   
-----------------------------------------------------------*/
-h1, h2, h3, h4, h5, h6
-{
-    font-size: 1.5em;
-    color: #000;
+.h_logo {
+	min-height: 92px;
+	width: 100%;
+	background-color: rgb(220,230,242);
+	padding-bottom: 10px;
+}
+/*main layout */
+.hs_logo {
+	min-height: 40px;
+	width: 100%;
+	background-color: rgb(220,230,242);
+	padding-bottom: 1px;
 }
 
-h1
-{
-    font-size: 2em;
-    padding-bottom: 0;
-    margin-bottom: 0;
+#header_tall {
 }
-h2
-{
-    padding: 0 0 10px 0;
+#main {
+	margin: 0 auto;
 }
-h3
-{
-    font-size: 1.2em;
+#header_tall .left {
+	padding-left: 280px;
+
 }
-h4
-{
-    font-size: 1.1em;
+#header_tall .right {
+	padding: 46px 11px 0 0;
 }
-h5, h6
-{
-    font-size: 1em;
+#header .right a {
+	color: #868686;
+	font-family: arial;
+	font-size: 12px;
+
+	padding: 0 29px 2px 0;
+}
+.content {
+	background: url(/Praloup.Webapp/Content/span.png) top left no-repeat;
+	position: relative;
+	color: #ffffff;
+	min-height: 150px;
+	vertical-align: bottom;
+}
+.content .text {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 0 2px 0 0;
+}
+.content a img {
+	float: right;
+}
+#middle {
+	width: 100%;
+}
+#footer .indent {
+	padding: 23px 0 0 17px;
+	color: #000000;
+	font-size: 12px;
+}
+#footer a {
+	color: #000000;
+	font-weight: bold;
+}
+.columns1 {
+	background-color: rgb(220,230,242);
+}
+.border {
+	background:  top repeat-x;
+}
+.border .ind {
+	padding: 4px 4px 15px 2px;
+}
+.border a img {
+	float: right;
+}
+li {
+	color: #3d6f92;
+}
+li a {
+	color: #3d6f92;
+	font-size: 11px;
+}
+.b_text {
+	color: #3d6f92;
+}
+/* index */
+#index #middle .indent {
+	padding: 17px 0 19px 0;
+}
+#index #middle .columns2 {
+	padding: 21px 0 0 0;
+}
+#index #middle .columns2 .column1 .padding {
+	padding: 14px 21px 0 17px;
+}
+#index #middle .columns2 .column2 .padding {
+	padding: 14px 18px 0 21px;
+}
+#index #middle .columns2 .column1 .p1 {
+	padding: 7px 0 15px 0;
+}
+#index #middle .columns2 .column2 .content {
+	padding: 10px 0 15px 0;
+}
+#index #middle .columns2 .column2 .p1 {
+	padding: 2px 0 1px 0;
+}
+.auto-style1 {
+	font-family: Verdana;
+	font-size: 12pt;
+	color: #000000;
+}
+.auto-style2 {
+	font-size: xx-large;
+	font-weight: bold;
+	color: #FFF;
 }
 
-/* this rule styles <h2> tags that are the 
-first child of the left and right table columns */
-.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+input[class=text-box]
 {
-    margin-top: 0;
+    width: 300px;
+    border: 1px solid #CCC;
 }
 
-/* PRIMARY LAYOUT ELEMENTS   
-----------------------------------------------------------*/
-
-/* you can specify a greater or lesser percentage for the 
-page width. Or, you can specify an exact pixel width. */
-.page
-{
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#header
-{
-    position: relative;
-    margin-bottom: 0px;
-    color: #000;
-    padding: 0;
-    height:80px;
-}
-
-#header h1
-{
-    font-weight: bold;
-    padding: 5px 0;
-    margin: 0;
-    color: #000000;
-    border: none;
-    line-height: 2em;
-    font-size: 32px !important;
-}
-
-#main
-{
-    padding: 30px 30px 15px 30px;
-    background-color: #fff;
-    margin: 30px;
-    _height: 1px; /* only IE6 applies CSS properties starting with an underscore */
-}
-
-#footer
-{
-    color: #999;
-    padding: 10px 0;
-    text-align: center;
-    line-height: normal;
-    margin: 0;
-    font-size: .9em;
-}
-
-/* TAB MENU   
-----------------------------------------------------------*/
-ul#menu
-{
-    border-bottom: 1px #5C87B2 solid;
-    padding: 0 0 2px;
-    position: relative;
-    margin: 0;
-    text-align: right;
-}
-
-ul#menu li
-{
-    display: inline;
-    list-style: none;
-}
-
-ul#menu li#greeting
-{
-    padding: 10px 20px;
-    font-weight: bold;
-    text-decoration: none;
-    line-height: 2.8em;
-    color: #fff;
-}
-
-ul#menu li a
-{
-    padding: 10px 20px;
-    font-weight: bold;
-    text-decoration: none;
-    line-height: 2.8em;
-    background-color: #e8eef4;
-    color: #034af3;
-}
-
-ul#menu li a:hover
-{
-    background-color: #fff;
-    text-decoration: none;
-}
-
-ul#menu li a:active
-{
-    background-color: #a6e2a6;
-    text-decoration: none;
-}
-
-ul#menu li.selected a
-{
-    background-color: #fff;
-    color: #000;
-}
-
-/* FORM LAYOUT ELEMENTS   
-----------------------------------------------------------*/
-
-fieldset 
-{
-    border:1px solid #ddd;
-    padding:0 1.4em 1.4em 1.4em;
-    margin:0 0 1.5em 0;
-}
-
-legend 
-{
-    font-size:1.2em;
-    font-weight: bold;
-}
-
-textarea 
-{
-    min-height: 75px;
-}
-
-input[type="text"] 
+input[type=password] 
 {
     width: 200px;
     border: 1px solid #CCC;
 }
 
-input[type="password"] 
+input[class=datePicker]
 {
-    width: 200px;
-    border: 1px solid #CCC;
+	width:150px;
 }
 
-/* TABLE
-----------------------------------------------------------*/
-
-table 
+input[class=numberField]
 {
-  border: solid 1px #e8eef4;
-  border-collapse: collapse;
+	width:50px;
 }
 
-table td 
-{
-  padding: 5px;   
-  border: solid 1px #e8eef4;
+
+
+input[type=button] {
+  border: 1px solid #dcdcdc;
+  background-color:#f5f5f5;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  color:#767676;
+  cursor:pointer;
+  min-width:100px;
+  min-height:30px;
+  text-align:center;
+}
+input[type=button]:hover {
+  border: 1px solid #898989;
+  background-color:#f6f6f6;
+  color:#212121;
+ }
+
+
+input[type=submit] {
+  border: 1px solid rgb(71,116,170);
+  background-color:rgb(79,129,189);
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  color:#f5f5f5;
+  cursor:pointer;
+  min-width:100px;
+  min-height:30px;
+  text-align:center;
+}
+input[type=submit]:hover {
+  border: 1px solid rgb(26,43,63);
+  background-color:rgb(71,116,170);
+  color:#f6f6f6;
+ }
+ 
+ 
+input:focus { 
+    outline:none;
+    border-color:rgb(228,108,10);
+    box-shadow:0 0 13px rgb(228,108,10);
 }
 
-table th
-{
-  padding: 6px 5px;
-  text-align: left;
-  background-color: #e8eef4; 
-  border: solid 1px #e8eef4;   
-}
-
-/* MISC  
-----------------------------------------------------------*/
-.clear
-{
-    clear: both;
-}
-
-.error
-{
-    color:Red;
-}
-
-#menucontainer
-{
-    margin-top:40px;
-}
-
-div#title
-{
-    float:left;
-    text-align:left;
-}
-
-#logindisplay
-{
-    font-size:1.1em;
-    display:block;
-    float:right;
-    margin:10px;
-    color:Black;
-    background-color:White;
-}
-
-#logindisplay a:link
-{
-    color: white;
-    text-decoration: underline;
-}
-
-#logindisplay a:visited
-{
-    color: white;
-    text-decoration: underline;
-}
-
-#logindisplay a:hover
-{
-    color: white;
-    text-decoration: none;
-}
-
-/* Styles for validation helpers
------------------------------------------------------------*/
-.field-validation-error
+ .field-validation-error
 {
     color: #ff0000;
 }
@@ -397,3 +335,109 @@ div#title
 {
     width: 6em;
 }
+
+
+.image
+{
+	width: 70px;
+	float: left;
+}
+.name
+{
+	width: 70px;
+	float: right;
+	font-size: 1em;
+	font-family: "lucida grande" ,tahoma,verdana,arial,sans-serif;
+	color: #3b5998;
+	font-weight: bold;
+}
+.userlabel
+{
+	width: 144px;
+	padding: 2px;
+}
+.ui-datetimepicker-with-clock
+{
+	width:41em;
+}
+
+.ui-datetimepicker-calendar-side
+{
+	width:17em;
+	float:left;
+}
+
+.ui-datetimepicker-clock 
+{
+	width: 392px;
+	height: 392px;
+	background: url(jquery.ui.datetimepicker.png) no-repeat;
+	float:left;
+}
+
+.ui-datetimepicker-clock-minute-overlay 
+{
+	width: 392px;
+	height: 392px;
+	top:-535px;
+	left:0px;
+	position: relative;
+	background: url(jquery.ui.datetimepicker.png) no-repeat;
+	background-position: left -393px;
+}
+
+.ui-datetimepicker-clock-hour-overlay 
+{
+	width: 392px;
+	height: 392px;
+	top:-535px;
+	left:5px;
+	position: relative;
+	background: url(jquery.ui.datetimepicker.png) no-repeat;
+	background-position: left -786px;
+}
+
+.ui-datetimepicker-clock-minute-hand 
+ {
+	width: 269px;
+	height: 269px;
+	position: relative;
+	top: 62px;
+	left: 0px;
+	margin: 0 auto;
+	background: url(jquery.ui.datetimepicker.minutes.png) no-repeat;
+	background-position: left -0px;
+	}
+	
+.ui-datetimepicker-clock-hour-hand 
+	{
+	width: 269px;
+	height: 269px;
+	position: relative;
+	top: -205px;
+	left: 0px;
+	margin: 0 auto;
+	background: url(jquery.ui.datetimepicker.hours.png) no-repeat;
+	background-position: left -0px;
+	z-index:999;
+	}
+	
+
+
+.jqmWindow {
+    display: none;
+    
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    
+    margin-left: -300px;
+    width: 600px;
+    padding: 12px;
+    border: 1px;
+	border-color:#ddd;
+	border-style:solid;
+	background-color:#FFFFFF;
+}
+
+.jqmOverlay { background-color: #000; }

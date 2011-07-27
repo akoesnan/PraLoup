@@ -1,0 +1,4 @@
+﻿@inherits System.Web.Mvc.WebViewPage<decimal?>
+
+@Html.TextBox("", (Model.HasValue ? Model.Value.ToString() : String.Empty), new { @class = "numberField" })
+ 

@@ -1,10 +1,10 @@
-﻿
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
- <title>@ViewBag.Title</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <title>@ViewBag.Title</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js"></script>
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/themes/base/ui.all.css" rel="stylesheet" type="text/css" />
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/redmond/jquery-ui.css" rel="Stylesheet" type="text/css" />
@@ -14,33 +14,37 @@
     <script src="@Url.Content("~/Scripts/console.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jquery.facebook.multifriend.select.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jqModal.js")" type="text/javascript"></script>
-    
+<style type="text/css">
+</style>
 </head>
 
 <body id="index" >
-   
-            <div id="logindisplay">
-                 @{ Html.RenderPartial("FacebookInit"); }
-            </div>
-<div id="header">
+
+<div id="header_tall">
 	<div id="main">
 		<!--header -->
-		<div id="header_short" class="hs_logo">
-			<div class="hs_logo">
+		<div id="header" class="h_logo">
+			<div class="h_logo">
 				<div class="left">
-					<img alt="" src="@Url.Content("~/Content/smalllogo.png")" /></div>
+					<img alt="" src="@Url.Content("~/Content/logo.png")" /></div>
 				<div class="right">
 					Login</div>
 				<div class="clear">
 				</div>
 			</div>
 		</div>
+		<div id="image" class="content">
+			<div class="text">
+				<span class="auto-style2">START A CHAIN REACTION
+				</strong>
+			</div>
+		</div>
+
 		<!--header end-->
 		<div id="middle">
-    
-            @RenderBody()
-            </div>
-          <!--footer -->
+        @RenderBody()
+        </div>
+        <!--footer -->
 		<div id="footer">
 			<div class="indent">
 				©2011 Poprly </div>
@@ -51,3 +55,4 @@
 </body>
 
 </html>
+

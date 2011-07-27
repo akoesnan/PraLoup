@@ -16,6 +16,8 @@ namespace PraLoup.WebApp
 
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.IgnoreRoute("{resource}.css/{*pathInfo}");
+            routes.IgnoreRoute("{resource}.png/{*pathInfo}");
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(

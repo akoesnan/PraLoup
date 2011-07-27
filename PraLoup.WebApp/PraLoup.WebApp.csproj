@@ -192,7 +192,13 @@
     <Content Include="Areas\Admin\Content\Admin.css" />
     <Content Include="Content\jquery.facebook.multifriend.select-list.css" />
     <Content Include="Content\jquery.facebook.multifriend.select.css" />
-    <Content Include="Content\Praloup.css" />
+    <Content Include="Content\learn.png" />
+    <Content Include="Content\logo.png" />
+    <Content Include="Content\love.png" />
+    <Content Include="Content\screen.png" />
+    <Content Include="Content\smalllogo.png" />
+    <Content Include="Content\span.png" />
+    <Content Include="Content\word.png" />
     <Content Include="Global.asax" />
     <Content Include="PraLoup.WebApp.Publish.xml" />
     <Content Include="Scripts\datetime.js" />
@@ -504,6 +510,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\EditorTemplates\DealList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_TallHeaderLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\byte.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
