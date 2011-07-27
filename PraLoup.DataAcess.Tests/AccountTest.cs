@@ -5,7 +5,6 @@ using System.Linq;
 using FluentNHibernate.Testing;
 using NHibernate;
 using NUnit.Framework;
-using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Mapping;
 using PraLoup.DataAccess.Query;

@@ -48,8 +48,7 @@ namespace PraLoup.BusinessLogic
             IEnumerable<string> brokenRules;
             var success = this.dataService.Business.SaveOrUpdate(business, out brokenRules);
             if (success)
-            {
-                this.dataService.Commit();
+            {                
                 this.log.Info("Succesfully created business {0}", business);
                 return business;
             }

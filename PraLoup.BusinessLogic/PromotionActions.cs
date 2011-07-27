@@ -20,8 +20,7 @@ namespace PraLoup.BusinessLogic
             IEnumerable<string> brokenRules;
             var success = this.dataService.Promotion.SaveOrUpdate(p, out brokenRules);
             if (success)
-            {
-                this.dataService.Commit();
+            {                
                 this.log.Info("Succesfully created event {0}", p);
                 return p;
             }

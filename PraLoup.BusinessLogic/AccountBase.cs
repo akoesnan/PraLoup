@@ -72,8 +72,7 @@ namespace PraLoup.BusinessLogic
             IEnumerable<string> brokenRules;
             var success = this.DataService.Account.SaveOrUpdate(this.FacebookAccount.Account, out brokenRules);
             if (success)
-            {
-                this.DataService.Commit();
+            {                
                 this.Log.Info("Saved facebook login information");
             }
             else

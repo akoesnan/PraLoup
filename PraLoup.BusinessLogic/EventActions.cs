@@ -24,7 +24,6 @@ namespace PraLoup.BusinessLogic
             var success = this.dataService.Event.SaveOrUpdate(ev, out brokenRules);
             if (success)
             {
-                this.dataService.Commit();
                 this.log.Info("Succesfully created event {0}", ev);
                 return ev;
             }

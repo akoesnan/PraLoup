@@ -1,26 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NHibernate;
-using System.Data;
 using PraLoup.Infrastructure.Data;
 
 namespace PraLoup.DataAccess
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly ISessionFactory _sessionFactory;
-        private readonly ITransaction _transaction;
         public ISession Session { get; private set; }
-
-        public UnitOfWork(ISessionFactory sessionFactory)
+        public UnitOfWork(ISession session)
         {
-            _sessionFactory = sessionFactory;
-            Session = _sessionFactory.OpenSession();
-            Session.FlushMode = FlushMode.Auto;
-            _transaction = Session.BeginTransaction(IsolationLevel.ReadCommitted);
+            this.Session = session;
         }
+
         ~UnitOfWork()
         {
             Dispose();
@@ -38,20 +29,43 @@ namespace PraLoup.DataAccess
             GC.SuppressFinalize(this);
         }
 
+        public void Begin()
+        {
+            Session.BeginTransaction();
+        }
+
+        public void End()
+        {
+            if (Session.IsOpen)
+            {
+                Commit();
+                Session.Close();
+            }
+            Session.Dispose();
+        }
+
         public void Commit()
         {
-            if (!_transaction.IsActive)
+            if (Session.Transaction != null && !Session.Transaction.IsActive)
             {
                 throw new InvalidOperationException("No active transation");
             }
-            _transaction.Commit();
+
+            try
+            {
+                Session.Transaction.Commit();
+            }
+            catch (Exception)
+            {
+                Session.Transaction.Rollback();
+            }
         }
 
         public void Rollback()
         {
-            if (_transaction.IsActive)
+            if (Session.Transaction != null && !Session.Transaction.IsActive)
             {
-                _transaction.Rollback();
+                Session.Transaction.Rollback();
             }
         }
     }

@@ -13,6 +13,5 @@ namespace PraLoup.WebApp.Utilities
 
             return new SelectList(values, "Id", "Name", enumObj);
         }
-
     }
 }

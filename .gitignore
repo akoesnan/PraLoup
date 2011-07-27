@@ -1,7 +1,5 @@
 # Compiled source #
 ###################
-*.dll
-*.exe
 *.pdb
 *.suo
 *.sdf

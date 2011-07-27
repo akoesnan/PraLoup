@@ -24,9 +24,7 @@ namespace PraLoup.DataAccess
             SetupBusinessData();
             SetupPromotionData();
             SetupPromotionInstanceData();
-            //SetupEventData();
-
-            this.DataService.Commit();
+            //SetupEventData();            
         }
 
         private void SetupPromotionInstanceData()

@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using PraLoup.BusinessLogic;
 using PraLoup.DataAccess.Entities;
 using PraLoup.WebApp.Areas.Admin.Models;
+using PraLoup.WebApp.Utilities;
 namespace PraLoup.WebApp.Areas.Admin.Controllers
 {
     public class PromotionController : Controller
@@ -45,6 +46,7 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
         // POST: /Business/Promotion/Create
 
         [HttpPost]
+        [UnitOfWork]
         public ActionResult Create(Promotion p)
         {
             try
@@ -70,6 +72,7 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
         // POST: /Business/Promotion/Edit/5
 
         [HttpPost]
+        [UnitOfWork]
         public ActionResult Edit(Guid id, Promotion p)
         {
             try
