@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using PraLoup.WebApp.Utilities;
 
 namespace PraLoup.WebApp.Areas.Admin.Controllers
 {
@@ -28,8 +29,8 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
 
         //
         // POST: /Business/PromotionInstance/Create
-
         [HttpPost]
+        [UnitOfWork]
         public ActionResult Create(FormCollection collection)
         {
             try
@@ -56,6 +57,7 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
         // POST: /Business/PromotionInstance/Edit/5
 
         [HttpPost]
+        [UnitOfWork]
         public ActionResult Edit(int id, FormCollection collection)
         {
             try
@@ -82,6 +84,7 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
         // POST: /Business/PromotionInstance/Delete/5
 
         [HttpPost]
+        [UnitOfWork]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try

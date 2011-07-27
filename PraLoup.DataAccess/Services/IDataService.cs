@@ -11,8 +11,6 @@ namespace PraLoup.DataAccess.Services
         EntityDataService<Deal, PraLoup.DataAccess.Validators.OfferValidator> Offer { get; }
         EntityDataService<BusinessUser, PraLoup.DataAccess.Validators.BusinessUserValidator> BusinessUsers { get; }
 
-        EntityDataService<Connection, PraLoup.DataAccess.Validators.ConnectionValidator> Connection { get; }
-        void Commit();
-        void Rollback();
+        EntityDataService<Connection, PraLoup.DataAccess.Validators.ConnectionValidator> Connection { get; }        
     }
 }

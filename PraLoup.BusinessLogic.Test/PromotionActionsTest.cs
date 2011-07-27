@@ -5,8 +5,8 @@ using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Enums;
 using PraLoup.DataAccess.Mapping;
 using PraLoup.DataAccess.Services;
-using PraLoup.DataAccess.Validators;
 using PraLoup.DataAccess.Tests;
+using PraLoup.DataAccess.Validators;
 using PraLoup.Infrastructure.Data;
 
 namespace PraLoup.BusinessLogic.Test
@@ -32,7 +32,7 @@ namespace PraLoup.BusinessLogic.Test
                     EntityDataService<Business, BusinessValidator> bds = new EntityDataService<Business, BusinessValidator>(r, new BusinessValidator());
                     EntityDataService<Promotion, PromotionValidator> pds = new EntityDataService<Promotion, PromotionValidator>(r, new PromotionValidator());
 
-                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory()));
+                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
                     BusinessActions ba = new BusinessActions(a, ds, Log, null);
                     PromotionActions pa = new PromotionActions(a, ds, Log, null);
 
@@ -48,7 +48,7 @@ namespace PraLoup.BusinessLogic.Test
                     EntityDataService<Business, BusinessValidator> bds = new EntityDataService<Business, BusinessValidator>(r, new BusinessValidator());
                     EntityDataService<Promotion, PromotionValidator> pds = new EntityDataService<Promotion, PromotionValidator>(r, new PromotionValidator());
 
-                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory()));
+                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
                     BusinessActions ba = new BusinessActions(a, ds, Log, null);
                     PromotionActions pa = new PromotionActions(a, ds, Log, null);
 

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using PraLoup.DataAccess;
 using PraLoup.DataAccess.Services;
 using PraLoup.Infrastructure.Logging;
-using PraLoup.DataAccess;
 using PraLoup.WebApp.Areas.Admin.Models;
+using PraLoup.WebApp.Utilities;
 
 namespace PraLoup.WebApp.Areas.Admin.Controllers
 {
@@ -28,8 +25,8 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
             return View();
         }
 
-        //
-        // GET: /Admin/Home/
+        [HttpPost]
+        [UnitOfWork]
         public ActionResult CreateTestData()
         {
             var g = new TestSeedDataGenerator(DataService, Log);

@@ -36,8 +36,7 @@ namespace PraLoup.BusinessLogic
             if (success)
             {
                 this.log.Info("Sucessfully {0} promotion instance for {1}", promoInstances.Count(), promotion);
-                ExecutePlugins(f => f.CreatePromoInstance(promotion, invites, message));
-                this.dataService.Commit();
+                ExecutePlugins(f => f.CreatePromoInstance(promotion, invites, message));                
                 return promoInstances;
             }
             else
@@ -68,8 +67,7 @@ namespace PraLoup.BusinessLogic
             if (success)
             {
                 this.log.Info("Sucessfully saving {0} promotion forwards for {1}", forwards.Count(), pi.Promotion);
-                ExecutePlugins(f => f.Forward(pi, invites, message));
-                this.dataService.Commit();
+                ExecutePlugins(f => f.Forward(pi, invites, message));                
                 return forwards;
             }
             else
@@ -138,16 +136,14 @@ namespace PraLoup.BusinessLogic
             var success = this.dataService.PromotionInstance.SaveOrUpdate(pi, out brokenRules);
 
             if (success)
-            {
-                this.dataService.Commit();
+            {                
                 this.log.Info("[] - {0} Succesfully saved invitation {1}", Account, pi);
                 // TODO: this should not be here, we should decouple facebook stuff
                 ExecutePlugins(t => t.Response(pi));
                 return pi;
             }
             else
-            {
-                this.dataService.Rollback();
+            {                
                 this.log.Debug("[] - {0} Unable to create activity {1}. Violated rules {2}", Account, pi, brokenRules.First());
                 return null;
             }

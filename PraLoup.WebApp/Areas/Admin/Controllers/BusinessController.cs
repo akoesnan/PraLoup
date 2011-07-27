@@ -5,6 +5,7 @@ using PraLoup.BusinessLogic;
 using PraLoup.DataAccess.Enums;
 using PraLoup.Infrastructure.Logging;
 using PraLoup.WebApp.Areas.Admin.Models;
+using PraLoup.WebApp.Utilities;
 using Entities = PraLoup.DataAccess.Entities;
 
 namespace PraLoup.WebApp.Areas.Admin.Controllers
@@ -51,6 +52,7 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
         // POST: /Business/Create
         [HttpPost]
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
+        [UnitOfWork]
         public ActionResult Create(Entities.Business b, Role role)
         {
             this.AccountBase.SetupActionAccount();
@@ -87,6 +89,7 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
 
         [HttpPost]
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
+        [UnitOfWork]
         public ActionResult Edit(Guid id, FormCollection collection)
         {
             try
@@ -113,6 +116,7 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
         // POST: /Business/Delete/5
 
         [HttpPost]
+        [UnitOfWork]
         public ActionResult Delete(Guid id, FormCollection collection)
         {
             try
@@ -126,7 +130,5 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
                 return View();
             }
         }
-
-
     }
 }

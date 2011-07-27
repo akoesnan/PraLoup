@@ -8,6 +8,7 @@ using PraLoup.WebApp.Models;
 using System.Linq;
 using System.Web.Script.Serialization;
 using PraLoup.Utilities;
+using PraLoup.WebApp.Utilities;
 
 namespace PraLoup.WebApp.Controllers
 {
@@ -55,6 +56,7 @@ namespace PraLoup.WebApp.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
+        [UnitOfWork]
         public ActionResult PromotionCreate(PromotionCreateModel pcm)
         {
             this.AccountBase.SetupActionAccount();

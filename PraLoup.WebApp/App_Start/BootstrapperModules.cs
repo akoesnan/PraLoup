@@ -58,8 +58,8 @@ namespace PraLoup.WebApp.App_Start
     {
         protected override ISession CreateInstance(IContext context)
         {
-            UnitOfWork unitOfWork = (UnitOfWork)context.Kernel.Get<IUnitOfWork>();
-            return unitOfWork.Session;
+            var unitOfWork = context.Kernel.Get<ISessionFactory>();
+            return unitOfWork.OpenSession();
         }
     }
 }
