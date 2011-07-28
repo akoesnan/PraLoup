@@ -280,6 +280,19 @@ input:focus {
     box-shadow:0 0 13px rgb(228,108,10);
 }
 
+textarea
+{
+     width: 300px;
+    border: 1px solid #CCC;
+}
+
+
+textarea:focus { 
+    outline:none;
+    border-color:rgb(228,108,10);
+    box-shadow:0 0 13px rgb(228,108,10);
+}
+
  .field-validation-error
 {
     color: #ff0000;
