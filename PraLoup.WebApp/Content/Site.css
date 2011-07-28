@@ -35,7 +35,7 @@ strong {
 }
 a {
 	color: #3d6f92;
-	font-size: 12px;
+
 }
 /*main layout */
 
@@ -65,21 +65,30 @@ a {
 /* index */
 #index .columns1 .column1 {
 	width: 52px;
+	padding-top:5px;
+	padding-bottom:5px;
 }
 #index .columns1 .column2 {
-	width: 208px;
+	width: 203px;
+	padding:5px;
 }
 #index .columns1 .column3 {
-	width: 52px;
+	width: 52px;	
+	padding-top:5px;
+	padding-bottom:5px;
 }
 #index .columns1 .column4 {
-	width: 208px;
+	width: 203px;
+	padding:5px;
 }
 #index .columns1 .column5 {
 	width: 52px;
+	padding-top:5px;
+	padding-bottom:5px;
 }
 #index .columns1 .column6 {
-	width: 208px;
+	width: 203px;
+	padding:5px;
 }
 #index .columns1 .indent_column {
 	width: 7px;
@@ -115,13 +124,6 @@ p, ul
 #main {
 	margin: 0 auto;
 }
-#header_tall .left {
-	padding-left: 280px;
-
-}
-#header_tall .right {
-	padding: 46px 11px 0 0;
-}
 .content {
 	background: url(/Praloup.Webapp/Content/span.png) top left no-repeat;
 	position: relative;
@@ -141,14 +143,9 @@ p, ul
 #middle {
 	width: 100%;
 }
-#footer .indent {
-	padding: 23px 0 0 17px;
-	color: #000000;
-	font-size: 12px;
-}
+
 #footer a {
-	color: #000000;
-	font-weight: bold;
+	color:rgb(79,129,189);
 }
 .columns1 {
 	background-color: rgb(220,230,242);
@@ -174,7 +171,7 @@ li a {
 }
 /* index */
 #index #middle .indent {
-	padding: 17px 0 19px 0;
+	padding: 17px 0 5px 0;
 }
 #index #middle .columns2 {
 	padding: 21px 0 0 0;
