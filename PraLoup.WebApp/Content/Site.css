@@ -1,5 +1,5 @@
 ﻿body {
-	background: #FFFFFF;
+	background: rgb(79, 129, 189);
 	padding-top: 5px;
 	font-family:  Verdana, Arial, Helvetica, sans-serif;
 	font-size:75%;
@@ -41,6 +41,9 @@ a {
 
 #main {
 	width: 800px;
+	background-color:#FFFFFF;
+	border: solid 1px rgb(255,255,255);
+	border-radius: 6px;
 }
 #header_tall {
 	min-height: 92px;
