@@ -1,5 +1,5 @@
 ﻿body {
-	background: rgb(79, 129, 189);
+	background: #FFFFFF;
 	padding-top: 5px;
 	font-family:  Verdana, Arial, Helvetica, sans-serif;
 	font-size:75%;
@@ -275,11 +275,6 @@ input[type=submit]:hover {
  }
  
  
-input:focus { 
-    outline:none;
-    border-color:rgb(228,108,10);
-    box-shadow:0 0 13px rgb(228,108,10);
-}
 
 a.button-link {
     text-decoration: none;
@@ -310,13 +305,6 @@ textarea
 {
      width: 300px;
     border: 1px solid #CCC;
-}
-
-
-textarea:focus { 
-    outline:none;
-    border-color:rgb(228,108,10);
-    box-shadow:0 0 13px rgb(228,108,10);
 }
 
  .field-validation-error
