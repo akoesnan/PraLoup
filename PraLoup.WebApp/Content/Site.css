@@ -119,10 +119,20 @@ p, ul
 	padding-bottom: 1px;
 }
 
-#header_tall {
+#tall {
 }
 #main {
 	margin: 0 auto;
+}
+#header_tall .left {
+	padding-left: 280px;
+
+}
+#header_tall .right {
+	padding: 46px 11px 0 0;
+}
+#header_short .right {
+	padding: 18px 11px 0 0;
 }
 .content {
 	background: url(/Praloup.Webapp/Content/span.png) top left no-repeat;
