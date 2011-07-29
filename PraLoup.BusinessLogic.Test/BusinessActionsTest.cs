@@ -28,7 +28,7 @@ namespace PraLoup.BusinessLogic.Test
                     IRepository r = new GenericRepository(Session);
                     EntityDataService<Business, BusinessValidator> bds = new EntityDataService<Business, BusinessValidator>(r, new BusinessValidator());
 
-                    IDataService ds = new DataService(null, bds, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
                     BusinessActions ba = new BusinessActions(a, ds, new PraLoup.Infrastructure.Logging.Log4NetLogger(), null);
                     ba.CreateBusiness(b, Role.BusinessAdmin);
                     Session.Transaction.Commit();
@@ -61,7 +61,7 @@ namespace PraLoup.BusinessLogic.Test
                     IRepository r = new GenericRepository(Session);
                     EntityDataService<Business, BusinessValidator> bds = new EntityDataService<Business, BusinessValidator>(r, new BusinessValidator());
 
-                    IDataService ds = new DataService(null, bds, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
                     BusinessActions ba = new BusinessActions(a, ds, new PraLoup.Infrastructure.Logging.Log4NetLogger(), null);
                     ba.CreateBusiness(b, Role.BusinessAdmin);
                     Session.Transaction.Commit();
@@ -71,7 +71,7 @@ namespace PraLoup.BusinessLogic.Test
                 {
                     IRepository r = new GenericRepository(Session);
                     EntityDataService<Business, BusinessValidator> bds = new EntityDataService<Business, BusinessValidator>(r, new BusinessValidator());
-                    IDataService ds = new DataService(null, bds, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
                     BusinessActions ba = new BusinessActions(a, ds, new PraLoup.Infrastructure.Logging.Log4NetLogger(), null);
 
                     var b1 = ba.GetBusiness(b.Id);
@@ -96,7 +96,7 @@ namespace PraLoup.BusinessLogic.Test
                     IRepository r = new GenericRepository(Session);
                     EntityDataService<Business, BusinessValidator> bds = new EntityDataService<Business, BusinessValidator>(r, new BusinessValidator());
 
-                    IDataService ds = new DataService(null, bds, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
                     BusinessActions ba = new BusinessActions(a, ds, new PraLoup.Infrastructure.Logging.Log4NetLogger(), null);
                     ba.CreateBusiness(b, Role.BusinessAdmin);
                     Session.Transaction.Commit();
@@ -106,7 +106,7 @@ namespace PraLoup.BusinessLogic.Test
                 {
                     IRepository r = new GenericRepository(Session);
                     EntityDataService<Business, BusinessValidator> bds = new EntityDataService<Business, BusinessValidator>(r, new BusinessValidator());
-                    IDataService ds = new DataService(null, bds, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
                     BusinessActions ba = new BusinessActions(a, ds, new PraLoup.Infrastructure.Logging.Log4NetLogger(), null);
 
                     Session.Transaction.Begin();
@@ -119,7 +119,7 @@ namespace PraLoup.BusinessLogic.Test
                 {
                     IRepository r = new GenericRepository(Session);
                     EntityDataService<Business, BusinessValidator> bds = new EntityDataService<Business, BusinessValidator>(r, new BusinessValidator());
-                    IDataService ds = new DataService(null, bds, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
                     BusinessActions ba = new BusinessActions(a, ds, new PraLoup.Infrastructure.Logging.Log4NetLogger(), null);
                     Session.Transaction.Begin();
                     var b1 = ba.GetBusiness(b.Id);

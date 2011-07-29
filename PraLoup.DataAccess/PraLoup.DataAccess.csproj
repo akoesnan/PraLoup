@@ -80,6 +80,7 @@
     <Compile Include="Entities\FacebookLogon.cs" />
     <Compile Include="Entities\Promotion.cs" />
     <Compile Include="Entities\Review.cs" />
+    <Compile Include="Entities\UserGroup.cs" />
     <Compile Include="Entities\UserRating.cs" />
     <Compile Include="Enums\ConnectionType.cs" />
     <Compile Include="Enums\Role.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Validators\PromotionValidator.cs" />
     <Compile Include="Validators\OfferValidator.cs" />
     <Compile Include="Validators\EventValidator.cs" />
+    <Compile Include="Validators\UserGroupValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

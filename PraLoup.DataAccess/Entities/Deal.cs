@@ -25,5 +25,7 @@ namespace PraLoup.DataAccess.Entities
         public virtual int Taken { get; set; }
 
         public virtual int Score { get; set; }
+
+        public virtual UserGroup UserGroup { get; set; }
     }
 }

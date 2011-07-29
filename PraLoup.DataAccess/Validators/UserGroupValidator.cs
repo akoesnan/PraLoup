@@ -5,21 +5,26 @@ using System.Text;
 using PraLoup.DataAccess.Entities;
 using PraLoup.Infrastructure.Validation;
 
+
 namespace PraLoup.DataAccess.Validators
 {
-    public class BusinessUserValidator : IValidator<BusinessUser>
+    public class UserGroupValidator : IValidator<UserGroup>
     {
-        public bool IsValid(BusinessUser entity)
+        public bool IsValid(UserGroup entity)
         {
             return BrokenRules(entity).Count() == 0;
         }
-        
-        public IEnumerable<string> BrokenRules(BusinessUser entity)
+
+        public IEnumerable<string> BrokenRules(UserGroup entity)
         {
             List<string> errors = new List<string>();
-            if (entity.User == null)
+            if (String.IsNullOrEmpty(entity.Name ))
             {
-                yield return "User cannot be null";
+                yield return "name cannot be null or empty";
+            }
+            if (entity.Business == null)
+            {
+                yield return "business cannot be null";
             }
             yield break;
         }

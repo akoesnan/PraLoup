@@ -1,14 +1,9 @@
-﻿using System.Web.Mvc;
-using System;
-using Facebook.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using PraLoup.BusinessLogic;
 using PraLoup.DataAccess.Entities;
 using PraLoup.Infrastructure.Logging;
 using PraLoup.WebApp.Models;
-using System.Linq;
-using System.Web.Script.Serialization;
-using PraLoup.Utilities;
-using PraLoup.WebApp.Utilities;
 
 namespace PraLoup.WebApp.Controllers
 {
@@ -32,72 +27,6 @@ namespace PraLoup.WebApp.Controllers
             this.AccountBase.PromotionInstanceActions.Forward(pi, null, message); 
 
             return View();
-        }
-
-        public ActionResult PromotionCreate()
-        {
-            PromotionCreateModel pcm = new PromotionCreateModel();
-            return View(pcm);
-        }
-
-        private static Deal ConvertDynamicToDeal(dynamic deal)
-        {
-            Deal d = new Deal();
-            d.Available = int.Parse(deal.DealListAvailable);
-            d.OriginalValue = int.Parse(deal.DealListOriginalValue);
-            d.DealValue = int.Parse(deal.DealListCurrentValue);
-            d.Saving = int.Parse(deal.DealListSaving);
-            d.StartDateTime = DateTime.Parse(deal.DealListStartDateTime);
-            d.EndDateTime = DateTime.Parse(deal.DealListEndDateTime);
-            d.Description = deal.DealListDescription;
-            d.FinePrint = deal.DealListFinePrint;
-            d.RedemptionInstructions = deal.DealListRedemptionInstructions;
-            return d;
-        }
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        [UnitOfWork]
-        public ActionResult PromotionCreate(PromotionCreateModel pcm)
-        {
-            this.AccountBase.SetupActionAccount();
-          
-            // Because of the weird control, we fetch deals from a json param:
-            string jsonDeal = Request.Form["Deals"];
-            // first try to serialize it as a single thing, then try as an array;
-            dynamic deal = null;
-            pcm.Deals = new DealList();
-            try
-            {
-                deal = jsonDeal.GetJson();
-                Deal d = ConvertDynamicToDeal(deal);
-                pcm.Deals.Add(d);            
-            }
-            catch(Exception)
-            {
-            }
-            if (deal == null)
-            {
-                jsonDeal = "[" + jsonDeal + "]";
-                deal = jsonDeal.GetJson();
-                if (deal != null)
-                {
-                    foreach (dynamic foo in deal)
-                    {
-                        Deal d = ConvertDynamicToDeal(foo);
-                        pcm.Deals.Add(d);
-                    }
-                }
-                else
-                {
-                    //error
-                }
-            } 
-
-            Promotion p = pcm.ToPromotion();
-            var userbusinesses = AccountBase.BusinessActions.GetBusinessForUser(AccountBase.Account);
-            p.Business = userbusinesses != null && userbusinesses.Count() > 0 ? userbusinesses.First() : new Business();
-            this.AccountBase.PromotionActions.SavePromotion(p);
-            return View(pcm);
         }
 
         public ActionResult View(int promotionid)

@@ -13,8 +13,8 @@ namespace PraLoup.DataAccess.Services
         public EntityDataService<Event, EventValidator> Event { get; private set; }
         public EntityDataService<Deal, OfferValidator> Offer { get; private set; }
         public EntityDataService<Connection, ConnectionValidator> Connection { get; private set; }
-        public EntityDataService<Promotion, PromotionValidator> Promotions { get; private set; }
-        public EntityDataService<BusinessUser, BusinessUserValidator> BusinessUsers { get; private set; }
+        public EntityDataService<BusinessUser, BusinessUserValidator> BusinessUser { get; private set; }
+        public EntityDataService<UserGroup, UserGroupValidator> UserGroup { get; private set; }
         public IUnitOfWork UnitOfWork { get; private set; }
 
         public DataService(EntityDataService<Account, AccountValidator> accountDataService,
@@ -24,6 +24,7 @@ namespace PraLoup.DataAccess.Services
             EntityDataService<PromotionInstance, PromotionInstanceValidator> promoInstanceDataService,
             EntityDataService<Connection, ConnectionValidator> connectionDataService,
             EntityDataService<BusinessUser, BusinessUserValidator> businessUserDataService,
+            EntityDataService<UserGroup, UserGroupValidator> userGroupDataService,
             IUnitOfWork unitOfWork)
         {
             this.Account = accountDataService;
@@ -33,7 +34,8 @@ namespace PraLoup.DataAccess.Services
             this.Event = eventDataService;
             this.Connection = connectionDataService;
             this.UnitOfWork = unitOfWork;
-            this.BusinessUsers = businessUserDataService;
+            this.BusinessUser = businessUserDataService;
+            this.UserGroup = userGroupDataService;
         }
     }
 }
