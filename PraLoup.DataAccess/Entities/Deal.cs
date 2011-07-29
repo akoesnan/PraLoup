@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PraLoup.DataAccess.Entities
 {
@@ -26,6 +27,6 @@ namespace PraLoup.DataAccess.Entities
 
         public virtual int Score { get; set; }
 
-        public virtual UserGroup UserGroup { get; set; }
+        public virtual IList<UserGroup> UserGroup { get; set; }
     }
 }

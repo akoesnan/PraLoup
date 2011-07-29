@@ -117,6 +117,14 @@
             <span class="field-validation-valid" data-valmsg-for="DealListAvailable" data-valmsg-replace="true"></span>
             
         </div>
+         <div class="editor-label">
+            <label for="DealListAvailable">User Groups</label>
+        </div>
+        <div class="editor-field">
+            @Html.ListBox(name:"DealListGroups",selectList:new MultiSelectList(Model.UserGroups))
+            <span class="field-validation-valid" data-valmsg-for="DealListGroups" data-valmsg-replace="true"></span>
+            
+        </div>
 
 </div>
 </div>
