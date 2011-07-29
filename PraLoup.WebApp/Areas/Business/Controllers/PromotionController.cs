@@ -102,6 +102,7 @@ namespace PraLoup.WebApp.Areas.Business.Controllers
         public ActionResult PromotionCreate()
         {
             PromotionCreateModel pcm = new PromotionCreateModel();
+            pcm.Deals.AddUserGroups(new List<UserGroup>());
             return View(pcm);
         }
 

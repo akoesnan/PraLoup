@@ -48,7 +48,7 @@ namespace ProjectSafari.Controllers
                     {
                         url = returnUrl;
                     }
-                    return Redirect(url);
+                    return RedirectToAction("Create", "Promotion", new { area = "Business" });
                 }
                 return View();
             }

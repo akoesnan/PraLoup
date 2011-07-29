@@ -167,7 +167,7 @@
     <Compile Include="Areas\Business\Models\PromoModel.cs" />
     <Compile Include="Areas\Business\Models\PromotionList.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\PromotionController.cs" />
+    <Compile Include="Controllers\InvitationController.cs" />
     <Compile Include="Models\AccountListJson.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -540,10 +540,7 @@
     <Content Include="Areas\Business\Views\Promotion\Close.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Business\Views\Home\MyUsers.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Business\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Business\Views\Business\MyUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Business\Views\Shared\EditorTemplates\PromotionList.cshtml" />

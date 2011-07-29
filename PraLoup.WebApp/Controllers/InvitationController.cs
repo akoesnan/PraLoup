@@ -7,12 +7,12 @@ using PraLoup.WebApp.Models;
 
 namespace PraLoup.WebApp.Controllers
 {
-    public class PromotionController : Controller
+    public class InvitationController : Controller
     {
         
         public AccountBase AccountBase { get; private set; }
 
-        public PromotionController(AccountBase accountBase, ILogger logger)
+        public InvitationController(AccountBase accountBase, ILogger logger)
         {
             this.AccountBase = accountBase;
         }
