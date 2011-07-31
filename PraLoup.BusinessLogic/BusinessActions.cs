@@ -73,5 +73,6 @@ namespace PraLoup.BusinessLogic
             }
             return this.SaveOrUpdateBusiness(business);
         }
+
     }
 }

@@ -123,6 +123,7 @@
     <Compile Include="Validators\OfferValidator.cs" />
     <Compile Include="Validators\EventValidator.cs" />
     <Compile Include="Validators\UserGroupValidator.cs" />
+    <Compile Include="Validators\UserRatingValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

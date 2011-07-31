@@ -83,7 +83,16 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
             var bm = new BusinessModel(this.AccountBase, id);
             return View(bm);
         }
-
+        /*
+        public ActionResult ManageUsers(Guid id)
+        {
+            var b = this.AccountBase.BusinessActions.GetBusiness(id);
+            foreach (Entities.BusinessUser bu in b.BusinessUsers)
+            {
+                
+            }
+        }
+        */
         //
         // POST: /Business/Edit/5
 

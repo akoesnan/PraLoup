@@ -15,6 +15,7 @@ namespace PraLoup.DataAccess.Services
         public EntityDataService<Connection, ConnectionValidator> Connection { get; private set; }
         public EntityDataService<BusinessUser, BusinessUserValidator> BusinessUser { get; private set; }
         public EntityDataService<UserGroup, UserGroupValidator> UserGroup { get; private set; }
+        public EntityDataService<UserRating, UserRatingValidator> UserRating { get; private set; }
         public IUnitOfWork UnitOfWork { get; private set; }
 
         public DataService(EntityDataService<Account, AccountValidator> accountDataService,
@@ -25,6 +26,7 @@ namespace PraLoup.DataAccess.Services
             EntityDataService<Connection, ConnectionValidator> connectionDataService,
             EntityDataService<BusinessUser, BusinessUserValidator> businessUserDataService,
             EntityDataService<UserGroup, UserGroupValidator> userGroupDataService,
+            EntityDataService<UserRating, UserRatingValidator> userRatingDataService,
             IUnitOfWork unitOfWork)
         {
             this.Account = accountDataService;
@@ -36,6 +38,7 @@ namespace PraLoup.DataAccess.Services
             this.UnitOfWork = unitOfWork;
             this.BusinessUser = businessUserDataService;
             this.UserGroup = userGroupDataService;
+            this.UserRating = userRatingDataService;
         }
     }
 }

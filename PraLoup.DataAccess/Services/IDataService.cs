@@ -12,6 +12,7 @@ namespace PraLoup.DataAccess.Services
         EntityDataService<Deal, OfferValidator> Offer { get; }
         EntityDataService<BusinessUser, BusinessUserValidator> BusinessUser { get; }
         EntityDataService<UserGroup, UserGroupValidator> UserGroup { get; }
+        EntityDataService<UserRating, UserRatingValidator> UserRating { get; }
        
         EntityDataService<Connection, ConnectionValidator> Connection { get; }        
     }

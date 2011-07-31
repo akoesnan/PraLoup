@@ -1,0 +1,32 @@
+﻿@inherits System.Web.Mvc.WebViewPage<PraLoup.WebApp.Areas.Business.Models.StarModel>
+              
+@{
+    string name = ViewData.TemplateInfo.HtmlFieldPrefix;
+    // id of the hidden input where we store the data for forms submit
+    string radioname = name + "radio";
+}
+
+@for (int i = 0; i < Model.Max; ++i)
+{
+    if (Model.Value.HasValue && Model.Value == i)
+    {
+            <input name="@radioname" type="radio" class="@name {half:true}"/>
+    }
+    else
+    {
+            <input name="@radioname" type="radio" class="@name {half:true}"/>
+    }
+    
+}
+<input type="hidden" name="@name" />
+
+<script type="text/javascript">
+    $(function () { // wait for document to load
+        $('@name').rating();
+    });
+
+    $("#@radioname").click(function () {
+        var newRating = $(this).attr("value");
+        $('#@name').val(newRating);
+    });
+</script>

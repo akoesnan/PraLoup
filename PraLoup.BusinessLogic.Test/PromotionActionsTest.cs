@@ -32,7 +32,7 @@ namespace PraLoup.BusinessLogic.Test
                     EntityDataService<Business, BusinessValidator> bds = new EntityDataService<Business, BusinessValidator>(r, new BusinessValidator());
                     EntityDataService<Promotion, PromotionValidator> pds = new EntityDataService<Promotion, PromotionValidator>(r, new PromotionValidator());
 
-                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
                     BusinessActions ba = new BusinessActions(a, ds, Log, null);
                     PromotionActions pa = new PromotionActions(a, ds, Log, null);
 
@@ -48,7 +48,7 @@ namespace PraLoup.BusinessLogic.Test
                     EntityDataService<Business, BusinessValidator> bds = new EntityDataService<Business, BusinessValidator>(r, new BusinessValidator());
                     EntityDataService<Promotion, PromotionValidator> pds = new EntityDataService<Promotion, PromotionValidator>(r, new PromotionValidator());
 
-                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
                     BusinessActions ba = new BusinessActions(a, ds, Log, null);
                     PromotionActions pa = new PromotionActions(a, ds, Log, null);
 

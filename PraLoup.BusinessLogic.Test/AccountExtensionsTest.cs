@@ -43,7 +43,7 @@ namespace PraLoup.BusinessLogic.Test
                     IRepository r = new GenericRepository(Session);
                     EntityDataService<Account, AccountValidator> ads = new EntityDataService<Account, AccountValidator>(r, new AccountValidator());
                     EntityDataService<Connection, ConnectionValidator> cds = new EntityDataService<Connection, ConnectionValidator>(r, new ConnectionValidator());
-                    DataService ds = new DataService(ads, null, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    DataService ds = new DataService(ads, null, null, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
 
                     IEnumerable<string> s;
                     ds.Account.SaveOrUpdateAll(new Account[] { myself, friend, friend2, friend3, friend4 }, out s);
@@ -68,7 +68,7 @@ namespace PraLoup.BusinessLogic.Test
                     IRepository r = new GenericRepository(Session);
                     EntityDataService<Account, AccountValidator> ads = new EntityDataService<Account, AccountValidator>(r, new AccountValidator());
 
-                    DataService ds = new DataService(ads, null, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    DataService ds = new DataService(ads, null, null, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
 
                     IEnumerable<string> s;
                     ds.Account.SaveOrUpdateAll(new Account[] { myself, friend, friend2, friend3, friend4 }, out s);
@@ -91,7 +91,7 @@ namespace PraLoup.BusinessLogic.Test
                     IRepository r = new GenericRepository(Session);
                     EntityDataService<Account, AccountValidator> ads = new EntityDataService<Account, AccountValidator>(r, new AccountValidator());
                     var cds = new EntityDataService<Connection, ConnectionValidator>(r, new ConnectionValidator());
-                    DataService ds = new DataService(ads, null, null, null, null, cds, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    DataService ds = new DataService(ads, null, null, null, null, cds, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
 
                     IEnumerable<string> s;
                     ds.Account.SaveOrUpdateAll(new Account[] { myself, friend, friend2, friend3, friend4 }, out s);

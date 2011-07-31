@@ -210,5 +210,14 @@ namespace PraLoup.BusinessLogic
             return null;
         }
 
+        public IList<PromotionInstance> GetUserInvitesForPromotion(Promotion promo)
+        {
+            var y = this.dataService.PromotionInstance.Where(x => x.Promotion.Id == promo.Id);
+            if (y != null)
+            {
+                return y.ToList<PromotionInstance>();
+            }
+            return null;
+        }
     }
 }

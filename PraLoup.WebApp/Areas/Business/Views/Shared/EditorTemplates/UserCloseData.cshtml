@@ -1,0 +1,11 @@
+﻿@inherits System.Web.Mvc.WebViewPage<PraLoup.WebApp.Areas.Business.Models.UserCloseData>
+
+  <tr>
+    <td>@Html.DisplayFor(model => model.Account.UserName)</td>
+    <td>@Html.DisplayFor(model => model.UserGroups)</td>
+    <td>@Html.DisplayFor(model=>model.Invite.Deal.Description)</td>
+    <td>@Html.DisplayFor(model=>model.Invite.Coupons[0].CouponCode)</td>
+    <td>@Html.EditorFor(model => model.Rating)</td>
+    <td>@Html.EditorFor(model => model.AmountSpent)</td>
+    <td>@Html.EditorFor(model => model.Redeemed)</td>
+  </tr>

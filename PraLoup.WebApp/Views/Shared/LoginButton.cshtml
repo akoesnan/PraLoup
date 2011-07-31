@@ -1,5 +1,5 @@
 ﻿@using PraLoup.WebApp.Resources
-@if(Facebook.Web.FacebookWebContext.Current.IsAuthenticated()){
+@if(!Facebook.Web.FacebookWebContext.Current.IsAuthenticated()){
      @Html.ActionLink(LocStrings.LogIn, "Login", "Account", null, new { @class = "button-link" })
 }
 else

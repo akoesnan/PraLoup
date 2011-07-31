@@ -44,6 +44,7 @@
     <Compile Include="IBusinessAction.cs" />
     <Compile Include="IPromotionInstanceAction.cs" />
     <Compile Include="IEventAction.cs" />
+    <Compile Include="IUserGroupAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -73,6 +73,7 @@
     <Reference Include="Ninject.Web.Mvc">
       <HintPath>..\packages\Ninject.MVC3.2.2.2.0\lib\net40-Full\Ninject.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="System.Runtime.Serialization" />
@@ -165,7 +166,11 @@
     <Compile Include="Areas\Business\Models\DashboardModel.cs" />
     <Compile Include="Areas\Business\Models\PromoIndexModel.cs" />
     <Compile Include="Areas\Business\Models\PromoModel.cs" />
+    <Compile Include="Areas\Business\Models\PromotionCloseModel.cs" />
     <Compile Include="Areas\Business\Models\PromotionList.cs" />
+    <Compile Include="Areas\Business\Models\StarModel.cs" />
+    <Compile Include="Areas\Business\Models\UserCloseData.cs" />
+    <None Include="Areas\Business\Views\Shared\EditorTemplates\StarModel.cshtml" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\InvitationController.cs" />
     <Compile Include="Models\AccountListJson.cs" />
@@ -188,6 +193,7 @@
     </Compile>
     <Compile Include="Utilities\EnumExtensions.cs" />
     <Compile Include="Utilities\UnitOfWorkAttribute.cs" />
+    <Content Include="Areas\Business\Views\Shared\EditorTemplates\UserCloseData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\EntityRepository.sdf" />
@@ -207,6 +213,9 @@
     <Content Include="Scripts\jqModal.js" />
     <Content Include="Scripts\jquery.facebook.multifriend.select.js" />
     <Content Include="Scripts\jquery.facebook.multifriend.select.min.js" />
+    <Content Include="Scripts\jquery.MetaData.js" />
+    <Content Include="Scripts\jquery.rating.js" />
+    <Content Include="Scripts\jquery.rating.pack.js" />
     <Content Include="System.Web.WebPages.Administration.dll" />
     <Content Include="System.Web.WebPages.Deployment.dll" />
     <Content Include="Views\Account\Register.cshtml">

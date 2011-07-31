@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PraLoup.DataAccess.Entities;
 
 namespace PraLoup.BusinessLogic.Plugins
@@ -15,6 +16,10 @@ namespace PraLoup.BusinessLogic.Plugins
 
         PromotionInstance Response(PromotionInstance promotionInstance);
 
-
+        
+        IList<PromotionInstance> GetAvailableInvitationsForUser();
+        IList<PromotionInstance> GetAvailableInvitationsForUser(Guid eventId);
+        IList<PromotionInstance> GetUserInvitesForPromotion(Promotion promo);
+      
     }
 }
