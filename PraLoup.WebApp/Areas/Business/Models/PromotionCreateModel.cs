@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using PraLoup.DataAccess.Entities;
+using PraLoup.WebApp.Models.Entities;
 
 namespace PraLoup.WebApp.Areas.Business.Models
 {
@@ -21,8 +21,7 @@ namespace PraLoup.WebApp.Areas.Business.Models
             this.Available = p.Available;
             this.Deals = p.Deals.ToList();
             this.MaxReferal = p.MaxReferal;
-            this.Taken = p.Taken;
-
+            //this.Taken = p.Taken;
         }
 
         public Promotion ToPromotion()

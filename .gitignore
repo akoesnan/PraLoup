@@ -41,6 +41,11 @@ Logs/
 ######################
 *.hbm.xml
 
+
+# user generated contents #
+###########################
+UserContents/
+
 # OS generated files #
 ######################
 .DS_Store?

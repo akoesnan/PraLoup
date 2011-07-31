@@ -179,7 +179,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Areas\Business\Models\DealList.cs" />
     <Compile Include="Models\Entities\Account.cs" />
-    <Compile Include="Models\Entities\Address.cs" />   
+    <Compile Include="Models\Entities\Address.cs" />
     <Compile Include="Models\Entities\Business.cs" />
     <Compile Include="Models\Entities\BusinessUser.cs" />
     <Compile Include="Models\Entities\Coupon.cs" />
@@ -188,6 +188,7 @@
     <Compile Include="Models\Entities\Promotion.cs" />
     <Compile Include="Models\Entities\PromotionInstance.cs" />
     <Compile Include="Models\Entities\PromotionInstanceStatus.cs" />
+    <Compile Include="Models\Entities\UserGroup.cs" />
     <Compile Include="Models\Entities\Venue.cs" />
     <Compile Include="Models\EventDiscoveryModel.cs" />
     <Compile Include="Areas\Business\Models\PromotionCreateModel.cs" />
@@ -360,7 +361,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_LocalResources\" />
-    <Folder Include="Areas\Business\Views\Promotion\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Event\Create.cshtml" />
@@ -530,7 +530,7 @@
   <ItemGroup>
     <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
   </ItemGroup>
-   <ItemGroup>
+  <ItemGroup>
     <Content Include="Views\Shared\EditorTemplates\Business.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -551,7 +551,7 @@
   <ItemGroup>
     <Content Include="Views\Shared\PromotionItem.cshtml" />
   </ItemGroup>
- <ItemGroup>
+  <ItemGroup>
     <Content Include="Views\Shared\LoginButton.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -571,7 +571,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Business\Views\Shared\EditorTemplates\PromotionList.cshtml" />
-  </ItemGroup>1
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\PromotionList.cshtml" />
   </ItemGroup>
