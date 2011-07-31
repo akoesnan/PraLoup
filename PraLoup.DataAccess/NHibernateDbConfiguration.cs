@@ -10,6 +10,7 @@ using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Mapping;
+using System;
 
 namespace PraLoup.DataAccess
 {

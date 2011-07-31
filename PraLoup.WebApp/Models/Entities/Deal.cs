@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using PraLoup.WebApp.Resources;
 
@@ -10,6 +11,7 @@ namespace PraLoup.WebApp.Models.Entities
         {
             this.StartDateTime = DateTime.Now;
             this.EndDateTime = DateTime.Now.AddDays(1);
+            this.UserGroups = new List<UserGroup>() { new UserGroup() };
         }
 
         [Required(ErrorMessageResourceType = typeof(LocStrings), ErrorMessageResourceName = "DealNameReq")]
@@ -50,5 +52,7 @@ namespace PraLoup.WebApp.Models.Entities
         [Required(ErrorMessageResourceType = typeof(LocStrings), ErrorMessageResourceName = "DealAvailableReq")]
         [Display(ResourceType = typeof(LocStrings), Name = "DealAvailable", Description = "DealAvailableDesc")]
         public int Available { get; set; }
+
+        public IList<UserGroup> UserGroups { get; set; }
     }
 }

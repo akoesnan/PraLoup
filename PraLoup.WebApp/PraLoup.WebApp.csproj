@@ -191,6 +191,7 @@
     <Compile Include="Models\Entities\Promotion.cs" />
     <Compile Include="Models\Entities\PromotionInstance.cs" />
     <Compile Include="Models\Entities\PromotionInstanceStatus.cs" />
+    <Compile Include="Models\Entities\UserGroup.cs" />
     <Compile Include="Models\Entities\Venue.cs" />
     <Compile Include="Models\EventDiscoveryModel.cs" />
     <Compile Include="Areas\Business\Models\PromotionCreateModel.cs" />

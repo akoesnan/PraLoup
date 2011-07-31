@@ -1,4 +1,4 @@
-﻿@inherits System.Web.Mvc.WebViewPage<PraLoup.WebApp.Areas.Business.Models.DealList>
+﻿@inherits System.Web.Mvc.WebViewPage<IList<PraLoup.WebApp.Models.Entities.Deal>>
 
 @using System.Web;
 @using System.Collections.Generic;
@@ -121,7 +121,7 @@
             <label for="DealListAvailable">User Groups</label>
         </div>
         <div class="editor-field">
-            @Html.ListBox(name:"DealListGroups",selectList:new MultiSelectList(Model.UserGroups))
+            @Html.ListBox(name:"DealListGroups",selectList:new MultiSelectList(Model[0].UserGroups))
             <span class="field-validation-valid" data-valmsg-for="DealListGroups" data-valmsg-replace="true"></span>
             
         </div>
