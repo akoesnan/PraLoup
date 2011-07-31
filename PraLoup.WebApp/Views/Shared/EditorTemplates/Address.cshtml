@@ -1,0 +1,67 @@
+﻿@using PraLoup.WebApp.Utilities
+@using PraLoup.DataAccess.Entities
+@model PraLoup.WebApp.Models.Entities.Address
+
+@{
+    string name = ViewData.TemplateInfo.HtmlFieldPrefix;
+    string id = name.Replace(".", "_");
+    }
+           
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.StreetLine1)
+</div>
+<div class="editor-field">
+    @Html.ValidatedEditorFor(model => model.StreetLine1)    
+</div>
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.StreetLine2)
+</div>
+<div class="editor-field">
+    @Html.ValidatedEditorFor(model => model.StreetLine2)    
+</div>
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.PostalCode)
+</div>
+<div class="editor-field">
+    @Html.ValidatedEditorFor(model => model.PostalCode)    
+</div>
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.City)
+</div>
+<div class="editor-field">
+    @Html.ValidatedEditorFor(model => model.City)    
+</div>
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.State)
+</div>
+<div class="editor-field">    
+    <span id="usState">
+        @Html.DropDownListFor(model => model.UsState, Model.UsState.ToSelectList())    
+    </span>
+
+    <span id="nonUsState" style="display:none">
+        @Html.EditorFor(model => model.NonUsState)
+    </span>
+</div>
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.Country)
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.Country, Model.Country.ToSelectList())    
+</div>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+<script language="javascript">
+@{
+    var countryId = "#" + id + "_Country";
+}
+$('@countryId').change(function(){
+    if($('@countryId option:selected').val() == 'US'){
+        $('#usState').show();
+        $('#nonUsState').hide();
+    } else { 
+        $('#usState').hide();
+        $('#nonUsState').show();
+    }});
+</script>

@@ -1,4 +1,5 @@
-﻿@model PraLoup.WebApp.Models.PromotionCreateModel
+﻿@using PraLoup.WebApp.Utilities
+@model PraLoup.WebApp.Models.PromotionCreateModel
 
 
 <h2>Create a Promotion</h2>
@@ -12,7 +13,7 @@
     @Html.ValidationSummary(true)
     
         <div class="editor-label">
-            @Html.LabelFor(model => model.Event)
+            @Html.RequiredLabelFor(model => model.Event)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Event)
@@ -20,7 +21,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Available)
+            @Html.RequiredLabelFor(model => model.Available)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Available)
@@ -28,7 +29,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.MaxReferal)
+            @Html.RequiredLabelFor(model => model.MaxReferal)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.MaxReferal)
@@ -36,11 +37,10 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Deals)
+            @Html.RequiredLabelFor(model => model.Deals)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Deals)
-            
         </div>
         
         <p>

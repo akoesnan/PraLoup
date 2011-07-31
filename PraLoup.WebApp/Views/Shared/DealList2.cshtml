@@ -1,0 +1,38 @@
+﻿@using PraLoup.WebApp.Models.Entities
+@inherits System.Web.Mvc.WebViewPage<IList<Deal>>
+@using System.Web;
+@using System.Collections.Generic;
+@{
+    string name = ViewBag.Name;
+    // id of the hidden input where we store the data for forms submit
+    string id = name.Replace(".", "_");
+    // name of the "global" javascript variable we are going to keep track of the items in
+    // we use this to recreate the hidden input when an item is changed
+    string varname = id + "var";
+    // this is the id for the div on the page (not the popup) we put stuff here when we're finished.
+    string divid = "div" + id;
+    // this is the id of the dialog, the popup div
+    string dialogid = "dialog" + id;
+    // this is the id of the "control", the container for all of the forms
+    string controlid = "sf" + id;
+}
+<div id="@divid">
+</div>
+<div  class="jqmWindow" id="@dialogid">    
+    <div id="@controlid">
+        @{var l = new List<Deal>() {new Deal()};}
+        @Html.Partial("Deal", new Deal())
+    </div>
+    <input type="button" class="jqmClose" value="Cancel"/>
+    <input type="button" class="jqmClose" onclick='javascript:CloseDealListEditor("@controlid", "@dialogid","@divid", $("#@id"), @varname )' value="Save"/>
+    
+</div>
+<input type="hidden" id="@id"  name="@id" />
+<script type="text/javascript">
+    var @varname = [];
+    $().ready(function () {
+        $('#@dialogid').jqm();
+    });
+    
+</script>
+<input type="button" onclick='javascript:OpenDealListEditor("@controlid", "@dialogid", "@divid")' value="Add Deal"/>

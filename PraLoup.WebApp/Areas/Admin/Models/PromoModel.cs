@@ -4,11 +4,11 @@ namespace PraLoup.WebApp.Areas.Admin.Models
 {
     public class PromoModel : BaseAdminModel
     {
-        private Guid PromoId;
+        private Guid? PromoId;
         private BusinessLogic.AccountBase AccountBase;
         public Entities.Promotion Promotion { get; private set; }
 
-        public PromoModel(BusinessLogic.AccountBase accountBase, Guid promoId)
+        public PromoModel(BusinessLogic.AccountBase accountBase, Guid? promoId)
         {
             // TODO: Complete member initialization
             this.AccountBase = accountBase;
@@ -19,9 +19,15 @@ namespace PraLoup.WebApp.Areas.Admin.Models
 
         public void Setup()
         {
-            var promo = this.AccountBase.PromotionActions.GetPromotion(PromoId);
-            if (promo != null)
-                this.Promotion = promo;
+            if (this.AccountBase != null && PromoId.HasValue)
+            {
+                var promo = this.AccountBase.PromotionActions.GetPromotion(PromoId);
+                if (promo != null)
+                {
+                    this.Promotion = promo;
+                    this.IsValid = true;
+                }
+            }
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Data.SQLite;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
@@ -47,8 +46,8 @@ namespace PraLoup.DataAccess
             // and exports a database schema from it
 
             SchemaExport SE = new SchemaExport(config);
-            SE.Execute(true, true, true, GetDbConnection(), Console.Out);
-            SE.Create(true, true);
+            //SE.Execute(true, true, true, GetDbConnection(), Console.Out);
+            //SE.Create(true, true);
         }
 
         private static DbConnection GetDbConnection()

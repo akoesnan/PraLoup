@@ -78,10 +78,13 @@
     <Compile Include="Entities\Business.cs" />
     <Compile Include="Entities\Coupon.cs" />
     <Compile Include="Entities\FacebookLogon.cs" />
+    <Compile Include="Entities\HoursOfOperation.cs" />
     <Compile Include="Entities\Promotion.cs" />
     <Compile Include="Entities\Review.cs" />
     <Compile Include="Entities\UserRating.cs" />
+    <Compile Include="Enums\Country.cs" />
     <Compile Include="Enums\ConnectionType.cs" />
+    <Compile Include="Enums\PaymentMethod.cs" />
     <Compile Include="Enums\Role.cs" />
     <Compile Include="Entities\Tag.cs" />
     <Compile Include="EntityHelper.cs" />
@@ -89,6 +92,7 @@
     <Compile Include="Entities\Event.cs" />
     <Compile Include="Enums\FacebookEnum.cs" />
     <Compile Include="Enums\Permissions.cs" />
+    <Compile Include="Enums\State.cs" />
     <Compile Include="GenericRepository.cs" />
     <Compile Include="Entities\PromotionInstance.cs" />
     <Compile Include="Enums\InvitationReponseType.cs" />

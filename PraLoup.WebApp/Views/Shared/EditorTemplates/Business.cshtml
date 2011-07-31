@@ -1,0 +1,52 @@
+﻿@using PraLoup.WebApp.Utilities
+@inherits System.Web.Mvc.WebViewPage<PraLoup.WebApp.Models.Entities.Business>
+@if (Model.Id != default(Guid))
+{
+    @Html.HiddenFor(model => model.Id);
+}
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.Name)
+</div>
+<div class="editor-field">
+    @Html.ValidatedEditorFor(model => model.Name)
+</div>
+@Html.EditorFor(model => model.Address)
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.Description)
+</div>
+<div class="editor-field">
+    @Html.TextAreaFor(model => model.Description)
+    @Html.DescriptionFor(model => model.Description)
+    @Html.ValidationMessageFor(model => model.Description)
+</div>
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.Category)
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.Category, Model.Category.ToSelectList())
+</div>
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.Email)
+</div>
+<div class="editor-field">
+    @Html.ValidatedEditorFor(model => model.Email)
+</div>
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.Url)
+</div>
+<div class="editor-field">
+    @Html.ValidatedEditorFor(model => model.Url)
+</div>
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.ImageUrl)
+</div>
+<div class="editor-field">
+    @Html.HiddenFor(model => model.ImageUrl)
+    @Html.Partial("FileUploadControl", new ViewDataDictionary() { { "ElmId", "ImageUrl" }, { "GuidId", "Business_ImageUrl" } })
+</div>
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.TwitterId)
+</div>
+<div class="editor-field">
+    @Html.ValidatedEditorFor(model => model.TwitterId)
+</div>

@@ -1,4 +1,5 @@
-﻿@model PraLoup.DataAccess.Entities.Event
+﻿@using PraLoup.WebApp.Utilities
+@model PraLoup.DataAccess.Entities.Event
 
 @{
     ViewBag.Title = "Edit";
@@ -17,7 +18,7 @@
         @Html.HiddenFor(model => model.Id)
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.StartDateTime)
+            @Html.RequiredLabelFor(model => model.StartDateTime)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.StartDateTime)
@@ -25,7 +26,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.EndDateTime)
+            @Html.RequiredLabelFor(model => model.EndDateTime)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.EndDateTime)
@@ -33,7 +34,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
+            @Html.RequiredLabelFor(model => model.Name)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Name)
@@ -41,7 +42,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
+            @Html.RequiredLabelFor(model => model.Description)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Description)
@@ -49,7 +50,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Price)
+            @Html.RequiredLabelFor(model => model.Price)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Price)

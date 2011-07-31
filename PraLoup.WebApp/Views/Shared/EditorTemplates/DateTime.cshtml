@@ -1,11 +1,10 @@
-﻿@inherits System.Web.Mvc.WebViewPage<DateTime?>
+﻿@inherits System.Web.Mvc.WebViewPage<DateTime>
 
- @Html.TextBox("", (Model.HasValue ? Model.Value.ToShortDateString() : string.Empty), new { @class = "datePicker" })
+ @Html.TextBox("", (Model != default(DateTime) ? Model.ToShortDateString() : string.Empty), new { @class = "datePicker" })
  @{
 string name = ViewData.TemplateInfo.HtmlFieldPrefix;
 string id = name.Replace( ".", "_" );
 }
  <script type="text/javascript">
      $('#@id').datetimepicker();
-
  </script>

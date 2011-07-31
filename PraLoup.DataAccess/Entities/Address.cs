@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using PraLoup.DataAccess.Enums;
 
 namespace PraLoup.DataAccess.Entities
 {
@@ -19,7 +16,7 @@ namespace PraLoup.DataAccess.Entities
 
         public virtual string State { get; set; }
 
-        public virtual string Country { get; set; }
+        public virtual Country Country { get; set; }
 
         public virtual float Lat { get; set; }
 

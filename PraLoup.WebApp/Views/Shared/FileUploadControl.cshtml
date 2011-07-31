@@ -1,0 +1,18 @@
+﻿@{
+    string elmId = ViewBag.ElmId;
+    string guidId = ViewBag.GuidId;
+}
+
+<input type="file" id="@elmId" name="@elmId" />
+
+<script type="text/javascript">
+    $(function () {
+        $("#@elmId").makeAsyncUploader({
+            upload_url: '@Url.Action("AsyncUpload", "Utility", new {Area =""})',
+            flash_url: '@Url.Content("~/Scripts/swfupload/swfupload.swf")',
+            button_image_url: '@Url.Content("~/Content/blankButton.png")',
+            disableDuringUpload: 'INPUT[type="submit"]',
+            guidId : '@guidId'
+        });
+    });        
+</script>

@@ -70,6 +70,105 @@ namespace PraLoup.WebApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to City.
+        /// </summary>
+        public static string AddressCity {
+            get {
+                return ResourceManager.GetString("AddressCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City is required.
+        /// </summary>
+        public static string AddressCityReq {
+            get {
+                return ResourceManager.GetString("AddressCityReq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Country.
+        /// </summary>
+        public static string AddressCountry {
+            get {
+                return ResourceManager.GetString("AddressCountry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Country is required.
+        /// </summary>
+        public static string AddressCountryReq {
+            get {
+                return ResourceManager.GetString("AddressCountryReq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zip Code.
+        /// </summary>
+        public static string AddressPostalCode {
+            get {
+                return ResourceManager.GetString("AddressPostalCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State.
+        /// </summary>
+        public static string AddressState {
+            get {
+                return ResourceManager.GetString("AddressState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State is required.
+        /// </summary>
+        public static string AddressStateReq {
+            get {
+                return ResourceManager.GetString("AddressStateReq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street Line 1.
+        /// </summary>
+        public static string AddressStreet1 {
+            get {
+                return ResourceManager.GetString("AddressStreet1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street Line 1 is Required.
+        /// </summary>
+        public static string AddressStreet1Req {
+            get {
+                return ResourceManager.GetString("AddressStreet1Req", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street Line 2.
+        /// </summary>
+        public static string AddressStreet2 {
+            get {
+                return ResourceManager.GetString("AddressStreet2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ex: suite#.
+        /// </summary>
+        public static string AddressStreet2Desc {
+            get {
+                return ResourceManager.GetString("AddressStreet2Desc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manage Supported Metro.
         /// </summary>
         public static string Admin_ManageMetro {
@@ -88,6 +187,213 @@ namespace PraLoup.WebApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Claim your business.
+        /// </summary>
+        public static string Business_ClaimYourBusiness {
+            get {
+                return ResourceManager.GetString("Business_ClaimYourBusiness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a new businees.
+        /// </summary>
+        public static string Business_CreateNewBusiness {
+            get {
+                return ResourceManager.GetString("Business_CreateNewBusiness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string BusinessCategory {
+            get {
+                return ResourceManager.GetString("BusinessCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the cateogy that fit your business.
+        /// </summary>
+        public static string BusinessCategoryDesc {
+            get {
+                return ResourceManager.GetString("BusinessCategoryDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Business Category is required.
+        /// </summary>
+        public static string BusinessCategoryReq {
+            get {
+                return ResourceManager.GetString("BusinessCategoryReq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your business is created. Explore what you can do with popr.ly.
+        /// </summary>
+        public static string BusinessCreated {
+            get {
+                return ResourceManager.GetString("BusinessCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string BusinessDesc {
+            get {
+                return ResourceManager.GetString("BusinessDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Short description of your business. Max. 200 characters.
+        /// </summary>
+        public static string BusinessDescDesc {
+            get {
+                return ResourceManager.GetString("BusinessDescDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email address.
+        /// </summary>
+        public static string BusinessEmail {
+            get {
+                return ResourceManager.GetString("BusinessEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string BusinessEmailDesc {
+            get {
+                return ResourceManager.GetString("BusinessEmailDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Business logo or photo.
+        /// </summary>
+        public static string BusinessImageUrl {
+            get {
+                return ResourceManager.GetString("BusinessImageUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string BusinessImageUrlDesc {
+            get {
+                return ResourceManager.GetString("BusinessImageUrlDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string BusinessName {
+            get {
+                return ResourceManager.GetString("BusinessName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name of your business.
+        /// </summary>
+        public static string BusinessNameDesc {
+            get {
+                return ResourceManager.GetString("BusinessNameDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Business name is required.
+        /// </summary>
+        public static string BusinessNameReq {
+            get {
+                return ResourceManager.GetString("BusinessNameReq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone Number.
+        /// </summary>
+        public static string BusinessPhone {
+            get {
+                return ResourceManager.GetString("BusinessPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ex: (425) 444-0000.
+        /// </summary>
+        public static string BusinessPhoneDesc {
+            get {
+                return ResourceManager.GetString("BusinessPhoneDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twitter Id.
+        /// </summary>
+        public static string BusinessTwitterId {
+            get {
+                return ResourceManager.GetString("BusinessTwitterId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string BusinessTwitterIdDesc {
+            get {
+                return ResourceManager.GetString("BusinessTwitterIdDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Website Url.
+        /// </summary>
+        public static string BusinessUrl {
+            get {
+                return ResourceManager.GetString("BusinessUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string BusinessUrlDesc {
+            get {
+                return ResourceManager.GetString("BusinessUrlDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your role in your business.
+        /// </summary>
+        public static string BusinessUserRole {
+            get {
+                return ResourceManager.GetString("BusinessUserRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string BusinessUserRoleDesc {
+            get {
+                return ResourceManager.GetString("BusinessUserRoleDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Click Here.
         /// </summary>
         public static string ClickHere {
@@ -97,11 +403,389 @@ namespace PraLoup.WebApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to # Available .
+        /// </summary>
+        public static string DealAvailable {
+            get {
+                return ResourceManager.GetString("DealAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DealAvailableDesc {
+            get {
+                return ResourceManager.GetString("DealAvailableDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to # Available is required.
+        /// </summary>
+        public static string DealAvailableReq {
+            get {
+                return ResourceManager.GetString("DealAvailableReq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string DealDescription {
+            get {
+                return ResourceManager.GetString("DealDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description .
+        /// </summary>
+        public static string DealDescriptionDesc {
+            get {
+                return ResourceManager.GetString("DealDescriptionDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description is required.
+        /// </summary>
+        public static string DealDescriptionReq {
+            get {
+                return ResourceManager.GetString("DealDescriptionReq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End date time.
+        /// </summary>
+        public static string DealEndDateTime {
+            get {
+                return ResourceManager.GetString("DealEndDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The end date time for this deal.
+        /// </summary>
+        public static string DealEndDateTimeDesc {
+            get {
+                return ResourceManager.GetString("DealEndDateTimeDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End date time is required.
+        /// </summary>
+        public static string DealEndDateTimeReq {
+            get {
+                return ResourceManager.GetString("DealEndDateTimeReq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fine print.
+        /// </summary>
+        public static string DealFinePrint {
+            get {
+                return ResourceManager.GetString("DealFinePrint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fine print for this deal.
+        /// </summary>
+        public static string DealFinePrintDesc {
+            get {
+                return ResourceManager.GetString("DealFinePrintDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string DealName {
+            get {
+                return ResourceManager.GetString("DealName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ex: buy one get one beer.
+        /// </summary>
+        public static string DealNameDesc {
+            get {
+                return ResourceManager.GetString("DealNameDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deal name must be specified.
+        /// </summary>
+        public static string DealNameReq {
+            get {
+                return ResourceManager.GetString("DealNameReq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MSRP value.
+        /// </summary>
+        public static string DealOriginalValue {
+            get {
+                return ResourceManager.GetString("DealOriginalValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MSRP for this offer.
+        /// </summary>
+        public static string DealOriginalValueDesc {
+            get {
+                return ResourceManager.GetString("DealOriginalValueDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MSRP value is required.
+        /// </summary>
+        public static string DealOriginalValueReq {
+            get {
+                return ResourceManager.GetString("DealOriginalValueReq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instructions to redeem this deal.
+        /// </summary>
+        public static string DealRedemptionInstructionsDesc {
+            get {
+                return ResourceManager.GetString("DealRedemptionInstructionsDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Redemtion instruction is required.
+        /// </summary>
+        public static string DealRedemptionInstructionsReq {
+            get {
+                return ResourceManager.GetString("DealRedemptionInstructionsReq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Redemtion instruction.
+        /// </summary>
+        public static string DealRedemptionInstructionsValue {
+            get {
+                return ResourceManager.GetString("DealRedemptionInstructionsValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deals.
         /// </summary>
         public static string Deals {
             get {
                 return ResourceManager.GetString("Deals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving.
+        /// </summary>
+        public static string DealSaving {
+            get {
+                return ResourceManager.GetString("DealSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DealSavingDesc {
+            get {
+                return ResourceManager.GetString("DealSavingDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start date / time.
+        /// </summary>
+        public static string DealStartDateTime {
+            get {
+                return ResourceManager.GetString("DealStartDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DealStartDateTimeDesc {
+            get {
+                return ResourceManager.GetString("DealStartDateTimeDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start date is required.
+        /// </summary>
+        public static string DealStartDateTimeReq {
+            get {
+                return ResourceManager.GetString("DealStartDateTimeReq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value.
+        /// </summary>
+        public static string DealValue {
+            get {
+                return ResourceManager.GetString("DealValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value is required.
+        /// </summary>
+        public static string DealValueReq {
+            get {
+                return ResourceManager.GetString("DealValueReq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string EventDesc {
+            get {
+                return ResourceManager.GetString("EventDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EventDescDesc.
+        /// </summary>
+        public static string EventDescDesc {
+            get {
+                return ResourceManager.GetString("EventDescDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EventEndTime.
+        /// </summary>
+        public static string EventEndTime {
+            get {
+                return ResourceManager.GetString("EventEndTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EventEndTimeDesc.
+        /// </summary>
+        public static string EventEndTimeDesc {
+            get {
+                return ResourceManager.GetString("EventEndTimeDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EventImageUrlDesc.
+        /// </summary>
+        public static string EventImageUrl {
+            get {
+                return ResourceManager.GetString("EventImageUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EventImageUrlDesc.
+        /// </summary>
+        public static string EventImageUrlDesc {
+            get {
+                return ResourceManager.GetString("EventImageUrlDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EventName.
+        /// </summary>
+        public static string EventName {
+            get {
+                return ResourceManager.GetString("EventName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EventNameDesc.
+        /// </summary>
+        public static string EventNameDesc {
+            get {
+                return ResourceManager.GetString("EventNameDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EventNameReq.
+        /// </summary>
+        public static string EventNameReq {
+            get {
+                return ResourceManager.GetString("EventNameReq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EventPrivacy.
+        /// </summary>
+        public static string EventPrivacy {
+            get {
+                return ResourceManager.GetString("EventPrivacy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EventPrivacyDesc.
+        /// </summary>
+        public static string EventPrivacyDesc {
+            get {
+                return ResourceManager.GetString("EventPrivacyDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EventStartTime.
+        /// </summary>
+        public static string EventStartTime {
+            get {
+                return ResourceManager.GetString("EventStartTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EventStartTimeReq.
+        /// </summary>
+        public static string EventStartTimeReq {
+            get {
+                return ResourceManager.GetString("EventStartTimeReq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EventUrl.
+        /// </summary>
+        public static string EventUrl {
+            get {
+                return ResourceManager.GetString("EventUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EventUrlDesc.
+        /// </summary>
+        public static string EventUrlDesc {
+            get {
+                return ResourceManager.GetString("EventUrlDesc", resourceCulture);
             }
         }
         
@@ -142,6 +826,15 @@ namespace PraLoup.WebApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manage Supported Metro Area.
+        /// </summary>
+        public static string ManageMetro {
+            get {
+                return ResourceManager.GetString("ManageMetro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Administrator.
         /// </summary>
         public static string Menu_Admin {
@@ -165,6 +858,114 @@ namespace PraLoup.WebApp.Resources {
         public static string Oops {
             get {
                 return ResourceManager.GetString("Oops", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PraLoup Admin Area.
+        /// </summary>
+        public static string PageHeader {
+            get {
+                return ResourceManager.GetString("PageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PromoAvailable.
+        /// </summary>
+        public static string PromoAvailable {
+            get {
+                return ResourceManager.GetString("PromoAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PromoAvailableDesc.
+        /// </summary>
+        public static string PromoAvailableDesc {
+            get {
+                return ResourceManager.GetString("PromoAvailableDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PromoAvailableReq.
+        /// </summary>
+        public static string PromoAvailableReq {
+            get {
+                return ResourceManager.GetString("PromoAvailableReq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deals.
+        /// </summary>
+        public static string PromoDeal {
+            get {
+                return ResourceManager.GetString("PromoDeal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add one or more deals for your promotion.
+        /// </summary>
+        public static string PromoDealDesc {
+            get {
+                return ResourceManager.GetString("PromoDealDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Event for your promotion.
+        /// </summary>
+        public static string PromoEvent {
+            get {
+                return ResourceManager.GetString("PromoEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create an event for a promotion.
+        /// </summary>
+        public static string PromoEventDesc {
+            get {
+                return ResourceManager.GetString("PromoEventDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Promotion maximum referal.
+        /// </summary>
+        public static string PromoMaxReferal {
+            get {
+                return ResourceManager.GetString("PromoMaxReferal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The maximum number referal for  each user .
+        /// </summary>
+        public static string PromoMaxReferalDesc {
+            get {
+                return ResourceManager.GetString("PromoMaxReferalDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Promotion maximum referal is required.
+        /// </summary>
+        public static string PromoMaxReferalReq {
+            get {
+                return ResourceManager.GetString("PromoMaxReferalReq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aministrative Tasks.
+        /// </summary>
+        public static string Tasks {
+            get {
+                return ResourceManager.GetString("Tasks", resourceCulture);
             }
         }
         

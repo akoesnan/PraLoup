@@ -16,7 +16,6 @@
     }, { perms: 'publish_stream, user_about_me, read_friendlists,user_photos,friends_photos' });
 }
 
-
 function RenderAccountList(cont, events, selectedFriends) {
     cont.empty();
     for (var y in events) {
@@ -62,10 +61,10 @@ function AddDisplayRow(controlid, json, divid, dialogid, storagevar, hiddenInput
     // add new deal row
     var x = jQuery.parseJSON(json);
     var html = "<div>" +
-            x.DealListDescription;
+            x.Name;
     html += "</div>";
-    var div = $(html);
-    var link1 = $("<a> Edit </a>").click(
+    var div = $(html);y
+    var link1 = $("<a> Edit </a>").click(   
          function () {
              RemoveListEditor(controlid, divid, hiddenInput, dialogid, storagevar, json);
              OpenDealListEditor(controlid, dialogid, divid, json);
@@ -108,19 +107,19 @@ function RemoveListEditor(controlid, divid, hiddenInput, dialogid, storagevar, j
 
 function GetJsonForDealControl(cont) {
     var array = [
-                    "DealListOriginalValue",
-                    "DealListCurrentValue",
-                    "DealListSaving",
-                    "DealListStartDateTime",
-                    "DealListEndDateTime",
-                    "DealListDescription",
-                    "DealListFinePrint",
-                    "DealListRedemptionInstructions",
-                    "DealListAvailable"
+                    "OriginalValue",
+                    "CurrentValue",
+                    "Saving",
+                    "StartDateTime",
+                    "EndDateTime",
+                    "Description",
+                    "FinePrint",
+                    "RedemptionInstructions",
+                    "Available"
                  ];
     var dealjson = "{";
     var found = 0;
-    cont.children().each(function () {
+    cont.find("*").each(function () {
         $(this).children().each(
             function () {
                 var current = this.name;

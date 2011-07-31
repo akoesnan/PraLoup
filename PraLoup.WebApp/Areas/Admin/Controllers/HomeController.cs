@@ -24,8 +24,7 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
         {
             return View();
         }
-
-        [HttpPost]
+        
         [UnitOfWork]
         public ActionResult CreateTestData()
         {

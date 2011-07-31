@@ -46,9 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DiskFileStore.cs" />
+    <Compile Include="FileUpload.cs" />
     <Compile Include="HtmlExtensions.cs" />
     <Compile Include="EnumExtensions.cs" />
     <Compile Include="HttpRequestHelper.cs" />
+    <Compile Include="IFileStore.cs" />
     <Compile Include="Json\JsonArray.cs" />
     <Compile Include="Json\JsonObject.cs" />
     <Compile Include="OAuthBase.cs" />

@@ -21,10 +21,18 @@ namespace PraLoup.WebApp.Areas.Business
             );
 
             context.MapRoute(
+                "BusinessPromotion_default",
+                "Business/Promotion/{action}/{businessId}",
+                new { controller = "Promotion", action = "Index", businessId = UrlParameter.Optional }
+            );
+
+            context.MapRoute(
                 "Business_default",
                 "Business/{controller}/{action}/{id}",
                 new { controller = "Business", action = "Index", id = UrlParameter.Optional }
             );
+
+
         }
     }
 }

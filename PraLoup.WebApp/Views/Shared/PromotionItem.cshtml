@@ -1,0 +1,32 @@
+﻿@{
+    var promo = ViewBag.Promotion as PraLoup.WebApp.Models.Entities.Promotion;
+ }
+
+<div class="promo_row"> 
+    <div class="ttd_img">
+        @if (!String.IsNullOrEmpty(promo.Event.ImageUrl))
+        { 
+            <img src="@promo.Event.ImageUrl" title="@promo.Event.Name" class="evt_img"/>
+        }
+    </div>
+    <div class="promo_info">
+        <div class="promo_name">
+            <a href="@promo.Event.Url">
+                @promo.Event.Name
+            </a>- <span class="promo_loc">
+                @if (promo.Event.Venue != null)
+                { 
+                    @promo.Event.Venue.DisplayedName
+                }
+            </span>
+        </div>
+        <div class="promo_desc">
+            @promo.Event.Description
+        </div>
+        <div class="promo_datetime">
+            @promo.Event.StartDateTime.Value.ToShortDateString()
+            at
+            @promo.Event.StartDateTime.Value.ToShortTimeString()
+        </div>        
+    </div>
+</div>

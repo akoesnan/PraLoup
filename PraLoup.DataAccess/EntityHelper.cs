@@ -50,7 +50,7 @@ namespace PraLoup.DataAccess
                 StreetLine2 = "",
                 City = "Seattle",
                 State = "WA",
-                Country = "United States"
+                Country = Country.US
             };
             return v;
         }
@@ -104,8 +104,8 @@ namespace PraLoup.DataAccess
                 StreetLine1 = "",
                 StreetLine2 = "",
                 City = "Seattle",
-                State = "WA",
-                Country = "United States"
+                State = State.WA.ToString(),
+                Country = Country.US
             };
         }
 

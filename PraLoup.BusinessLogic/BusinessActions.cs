@@ -37,7 +37,6 @@ namespace PraLoup.BusinessLogic
 
         public Business CreateBusiness(Business business, Role role)
         {
-
             business.BusinessUsers = business.BusinessUsers ?? new List<BusinessUser>();
             business.BusinessUsers.Add(new BusinessUser(this.Account, role));
             return SaveOrUpdateBusiness(business);
@@ -48,7 +47,7 @@ namespace PraLoup.BusinessLogic
             IEnumerable<string> brokenRules;
             var success = this.dataService.Business.SaveOrUpdate(business, out brokenRules);
             if (success)
-            {                
+            {
                 this.log.Info("Succesfully created business {0}", business);
                 return business;
             }

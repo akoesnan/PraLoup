@@ -2,11 +2,10 @@
 using System.Web.Mvc;
 using Facebook.Web.Mvc;
 using PraLoup.BusinessLogic;
-using PraLoup.DataAccess.Enums;
 using PraLoup.Infrastructure.Logging;
 using PraLoup.WebApp.Areas.Admin.Models;
+using PraLoup.WebApp.Resources;
 using PraLoup.WebApp.Utilities;
-using Entities = PraLoup.DataAccess.Entities;
 
 namespace PraLoup.WebApp.Areas.Business.Controllers
 {
@@ -33,10 +32,19 @@ namespace PraLoup.WebApp.Areas.Business.Controllers
         //
         // GET: /Business/Details/5
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
-        public ActionResult Details(Guid id, String businessName)
+        public ActionResult Details(Guid businessId, String businessName, String message)
         {
-            this.AccountBase.SetupActionAccount();
-            return View();
+            BusinessModel businessModel = new BusinessModel(this.AccountBase, businessId);
+            if (businessModel.IsValid)
+            {
+                this.AccountBase.SetupActionAccount();
+                return View(businessModel);
+            }
+            else
+            {
+                this.AccountBase.SetupActionAccount();
+                return View();
+            }
         }
 
         //
@@ -45,7 +53,7 @@ namespace PraLoup.WebApp.Areas.Business.Controllers
         public ActionResult Create()
         {
             this.AccountBase.SetupActionAccount();
-            return View();
+            return View(new BusinessCreateEditModel());
         }
 
         //
@@ -53,20 +61,27 @@ namespace PraLoup.WebApp.Areas.Business.Controllers
         [HttpPost]
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         [UnitOfWork]
-        public ActionResult Create(Entities.Business b, Role role)
+        public ActionResult Create(BusinessCreateEditModel bcm)
         {
             this.AccountBase.SetupActionAccount();
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var bcm = new BusinessCreateModel(this.AccountBase, new Entities.Business(), Role.BusinessAdmin);
-                    return RedirectToAction("Index");
+                    bcm.AccountBase = this.AccountBase;
+                    if (bcm.SaveOrUpdate())
+                    {
+                        return RedirectToAction("Details", "Business",
+                            new { businessId = bcm.Business.Id, message = LocStrings.BusinessCreated });
+                    }
+                    else
+                    {
+                        return View(bcm);
+                    }
                 }
                 else
                 {
-                    // TODO: create a page that says events is added succesfully
-                    return RedirectToAction("Index");
+                    return View(bcm);
                 }
             }
             catch
@@ -78,9 +93,11 @@ namespace PraLoup.WebApp.Areas.Business.Controllers
         //
         // GET: /Business/Edit/5 
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            this.AccountBase.SetupActionAccount();
+            BusinessModel businessModel = new BusinessModel(this.AccountBase, id);
+            return View(businessModel);
         }
 
         //
@@ -89,13 +106,28 @@ namespace PraLoup.WebApp.Areas.Business.Controllers
         [HttpPost]
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         [UnitOfWork]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(BusinessCreateEditModel bcm)
         {
+            this.AccountBase.SetupActionAccount();
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    bcm.AccountBase = this.AccountBase;
+                    if (bcm.SaveOrUpdate())
+                    {
+                        return RedirectToAction("Details", "Business",
+                            new { businessId = bcm.Business.Id, message = LocStrings.BusinessCreated });
+                    }
+                    else
+                    {
+                        return View(bcm);
+                    }
+                }
+                else
+                {
+                    return View(bcm);
+                }
             }
             catch
             {

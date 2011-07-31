@@ -2,11 +2,11 @@
 using System.Web.Mvc;
 using Facebook.Web.Mvc;
 using PraLoup.BusinessLogic;
-using PraLoup.DataAccess.Enums;
 using PraLoup.Infrastructure.Logging;
 using PraLoup.WebApp.Areas.Admin.Models;
 using PraLoup.WebApp.Utilities;
-using Entities = PraLoup.DataAccess.Entities;
+using DataEntities = PraLoup.DataAccess.Entities;
+using ModelEntities = PraLoup.WebApp.Models.Entities;
 
 namespace PraLoup.WebApp.Areas.Admin.Controllers
 {
@@ -36,7 +36,8 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
         public ActionResult Details(Guid id, String businessName)
         {
             this.AccountBase.SetupActionAccount();
-            return View();
+            var bm = new BusinessModel(this.AccountBase, id);
+            return View(bm);
         }
 
         //
@@ -45,7 +46,7 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
         public ActionResult Create()
         {
             this.AccountBase.SetupActionAccount();
-            return View(new BusinessModel());
+            return View(new BusinessCreateEditModel());
         }
 
         //
@@ -53,20 +54,26 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
         [HttpPost]
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         [UnitOfWork]
-        public ActionResult Create(Entities.Business b, Role role)
+        public ActionResult Create(BusinessCreateEditModel bcm)
         {
             this.AccountBase.SetupActionAccount();
             try
             {
                 if (ModelState.IsValid)
                 {
-                    this.AccountBase.BusinessActions.CreateBusiness(b, role);
-                    return RedirectToAction("Index");
+                    bcm.AccountBase = this.AccountBase;
+                    if (bcm.SaveOrUpdate())
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View(bcm);
+                    }
                 }
                 else
                 {
-                    // TODO: create a page that says events is added succesfully
-                    return RedirectToAction("Index");
+                    return View(bcm);
                 }
             }
             catch
@@ -90,40 +97,19 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
         [HttpPost]
         [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         [UnitOfWork]
-        public ActionResult Edit(Guid id, FormCollection collection)
+        public ActionResult Edit(Guid id, BusinessModel businessModel)
         {
+            this.AccountBase.SetupActionAccount();
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    var b = AutoMapper.Mapper.Map<ModelEntities.Business, DataEntities.Business>(businessModel.Business);
+                    this.AccountBase.BusinessActions.SaveOrUpdateBusiness(b);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /Business/Delete/5
-
-        public ActionResult Delete(Guid id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Business/Delete/5
-
-        [HttpPost]
-        [UnitOfWork]
-        public ActionResult Delete(Guid id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                return View(businessModel);
             }
             catch
             {

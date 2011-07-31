@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
 using PraLoup.BusinessLogic;
-using PraLoup.DataAccess.Entities;
 using PraLoup.WebApp.Areas.Admin.Models;
 using PraLoup.WebApp.Utilities;
+using Entities = PraLoup.WebApp.Models.Entities;
+
 namespace PraLoup.WebApp.Areas.Admin.Controllers
 {
     public class PromotionController : Controller
@@ -17,48 +18,73 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
         //
         // GET: /Business/Promotion/
         // business can only look at the promotion for its own business
-        public ActionResult Index(Guid businessId, string businessName)
+        public ActionResult Index(Guid? businessId, string businessName)
         {
-            this.AccountBase.SetupActionAccount();
-            var pim = new PromoIndexModel(this.AccountBase, businessId, businessName);
-            return View(pim);
+            if (businessId.HasValue || !string.IsNullOrEmpty(businessName))
+            {
+                this.AccountBase.SetupActionAccount();
+                var pim = new PromoIndexModel(this.AccountBase, businessId, businessName);
+                return View(pim);
+            }
+            return View("Error");
         }
 
         //
         // GET: /Business/Promotion/Details/5
 
-        public ActionResult Details(Guid promotionId)
+        public ActionResult Details(Guid? promotionId)
         {
-            this.AccountBase.SetupActionAccount();
-            var pm = new PromoModel(this.AccountBase, promotionId);
-            return View(pm);
+            if (promotionId.HasValue)
+            {
+                this.AccountBase.SetupActionAccount();
+                var pm = new PromoModel(this.AccountBase, promotionId);
+                return View(pm);
+            }
+            else
+            {
+                return View("Error");
+            }
         }
 
         //
         // GET: /Business/Promotion/Create
-
-        public ActionResult Create()
+        public ActionResult Create(Guid businessId)
         {
-            return View();
+            var pcm = new PromoCreateModel(this.AccountBase, businessId, new Entities.Promotion());
+            pcm.Setup();
+            return View(pcm);
         }
 
-        //
-        // POST: /Business/Promotion/Create
-
-        [HttpPost]
+        [AcceptVerbs(HttpVerbs.Post)]
         [UnitOfWork]
-        public ActionResult Create(Promotion p)
+        public ActionResult Create(PromoCreateModel pcm)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            this.AccountBase.SetupActionAccount();
 
-                return RedirectToAction("Index");
-            }
-            catch
+            //if (ModelState.IsValid)
+            //{
+            //try
+            //{
+            pcm.AccountBase = this.AccountBase;
+            var success = pcm.CreatePromotion();
+            if (success)
             {
-                return View();
+                return View("Index");
             }
+            else
+            {
+                return View(pcm);
+            }
+            //}
+            //catch
+            //{
+            //    return View(pcm);
+            //}
+            //}
+            //else
+            //{
+            //    return View(pcm);
+            //}
         }
 
         //
@@ -73,7 +99,7 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
 
         [HttpPost]
         [UnitOfWork]
-        public ActionResult Edit(Guid id, Promotion p)
+        public ActionResult Edit(Guid id, Entities.Promotion p)
         {
             try
             {

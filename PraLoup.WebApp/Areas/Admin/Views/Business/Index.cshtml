@@ -13,17 +13,17 @@
 <table>
     <tr>
         <th>
+            Image
+        </th>
+        <th>
             Name
         </th>
         <th>
-            Phone
+            Description
         </th>
         <th>
             Url
-        </th>
-        <th>
-            ImageUrl
-        </th>
+        </th>        
         <th>
             TwitterId
         </th>
@@ -36,17 +36,18 @@
 @foreach (var item in Model.Businesses) {
     <tr>
         <td>
+            @*@Html.ima(modelItem => item.ImageUrl)*@
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Phone)
+            @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Url)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageUrl)
-        </td>
+        
         <td>
             @Html.DisplayFor(modelItem => item.TwitterId)
         </td>

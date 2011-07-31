@@ -1,0 +1,15 @@
+﻿@using PraLoup.WebApp.Utilities
+@inherits System.Web.Mvc.WebViewPage<PraLoup.WebApp.Models.Entities.Promotion>
+
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.Available)
+</div>
+<div class="editor-field">
+    @Html.ValidatedEditorFor(model => model.Available)    
+</div>
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.MaxReferal)
+</div>
+<div class="editor-field">
+    @Html.ValidatedEditorFor(model => model.MaxReferal)    
+</div>

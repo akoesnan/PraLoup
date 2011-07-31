@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using PraLoup.WebApp.Models.Entities;
 using PraLoup.WebApp.Utilities;
 
 namespace PraLoup.WebApp.Areas.Admin.Controllers
@@ -31,12 +32,10 @@ namespace PraLoup.WebApp.Areas.Admin.Controllers
         // POST: /Business/PromotionInstance/Create
         [HttpPost]
         [UnitOfWork]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Promotion promotion)
         {
             try
             {
-                // TODO: Add insert logic here
-
                 return RedirectToAction("Index");
             }
             catch

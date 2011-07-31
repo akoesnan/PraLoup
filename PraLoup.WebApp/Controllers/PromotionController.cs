@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web.Script.Serialization;
 using PraLoup.Utilities;
 using PraLoup.WebApp.Utilities;
+using System.Collections.Generic;
 
 namespace PraLoup.WebApp.Controllers
 {
@@ -46,7 +47,7 @@ namespace PraLoup.WebApp.Controllers
             d.Available = int.Parse(deal.DealListAvailable);
             d.OriginalValue = int.Parse(deal.DealListOriginalValue);
             d.DealValue = int.Parse(deal.DealListCurrentValue);
-            d.Saving = int.Parse(deal.DealListSaving);
+            //d.Saving = int.Parse(deal.DealListSaving);
             d.StartDateTime = DateTime.Parse(deal.DealListStartDateTime);
             d.EndDateTime = DateTime.Parse(deal.DealListEndDateTime);
             d.Description = deal.DealListDescription;
@@ -65,7 +66,7 @@ namespace PraLoup.WebApp.Controllers
             string jsonDeal = Request.Form["Deals"];
             // first try to serialize it as a single thing, then try as an array;
             dynamic deal = null;
-            pcm.Deals = new DealList();
+            pcm.Deals = new List<Deal>();
             try
             {
                 deal = jsonDeal.GetJson();

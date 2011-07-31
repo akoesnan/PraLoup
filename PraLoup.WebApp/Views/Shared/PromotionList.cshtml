@@ -1,0 +1,14 @@
+﻿@using System
+@model IEnumerable<PraLoup.WebApp.Models.Entities.Promotion>
+@{
+    var listName = ViewBag.ListName as string;
+    }
+
+<div class="list_ttl">
+@listName
+</div>
+<div class="list_body">
+@foreach(var p in Model){
+    @Html.Partial("EventItem", new ViewDataDictionary() { { "Promotion", p } });         
+}
+</div>

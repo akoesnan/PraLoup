@@ -1,4 +1,5 @@
-﻿@model PraLoup.WebApp.Models.RegisterModel
+﻿@using PraLoup.WebApp.Utilities
+@model PraLoup.WebApp.Models.RegisterModel
            
 @{
     ViewBag.Title = "Register";
@@ -18,35 +19,35 @@
         <fieldset>
             <legend>Account Information</legend>
             <div class="editor-label">
-                @Html.LabelFor(m => m.first_name)
+                @Html.RequiredLabelFor(m => m.first_name)
             </div>
             <div class="editor-field">
                 @Html.TextBoxFor(m => m.first_name)
                 @Html.ValidationMessageFor(m => m.first_name)
             </div>
             <div class="editor-label">
-                @Html.LabelFor(m => m.last_name)
+                @Html.RequiredLabelFor(m => m.last_name)
             </div>
             <div class="editor-field">
                 @Html.TextBoxFor(m => m.last_name)
                 @Html.ValidationMessageFor(m => m.last_name)
             </div>
             <div class="editor-label">
-                @Html.LabelFor(m => m.middle_name)
+                @Html.RequiredLabelFor(m => m.middle_name)
             </div>
             <div class="editor-field">
                 @Html.PasswordFor(m => m.middle_name)
                 @Html.ValidationMessageFor(m => m.middle_name)
             </div>
             <div class="editor-label">
-                @Html.LabelFor(m => m.name)
+                @Html.RequiredLabelFor(m => m.name)
             </div>
             <div class="editor-field">
                 @Html.PasswordFor(m => m.name)
                 @Html.ValidationMessageFor(m => m.name)
             </div>
             <div class="editor-label">
-                @Html.LabelFor(m => m.id)
+                @Html.RequiredLabelFor(m => m.id)
             </div>
             <div class="editor-field">
                 @Html.PasswordFor(m => m.id)

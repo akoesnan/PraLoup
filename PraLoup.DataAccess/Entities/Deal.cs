@@ -4,11 +4,11 @@ namespace PraLoup.DataAccess.Entities
 {
     public class Deal : BaseEntity
     {
+        public virtual string Name { get; set; }
+
         public virtual decimal OriginalValue { get; set; }
 
         public virtual decimal DealValue { get; set; }
-
-        public virtual decimal Saving { get; set; }
 
         public virtual DateTime StartDateTime { get; set; }
 
