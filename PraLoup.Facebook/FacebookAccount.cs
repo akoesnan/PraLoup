@@ -62,25 +62,40 @@ namespace PraLoup.FacebookObjects
             dynamic parameters = PopulateParametersForEvent(e);
             parameters.actions = new
             {
-                name = "View on Wildfire",
-                link = "http://www.projectsafari.com/"
+                name = "View on Popr.ly",
+                link = "http://popr.ly/Event/View/?event="+e.Id
             };
             SetPrivacy(parameters, e.Privacy);
             dynamic result = fc.Post("me/feed", parameters);
         }
 
-        public static void PostToWall(PromotionInstance a)
+
+        public static void PostPromotionInstanceToRecipientsWall(PromotionInstance a)
         {
             FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
             dynamic parameters = PopulateParametersForEvent(a.Promotion.Event);
             parameters.actions = new
             {
-                name = "View on Wildfire",
-                link = "http://www.projectsafari.com/"
+                name = "View on Popr.ly",
+                link = "http://popr.ly/Promotion/Invitation/?id=" + a.Id.ToString()
+            };
+            SetPrivacy(parameters, a.Promotion.Event.Privacy);
+            dynamic result = fc.Post(a.Recipient.FacebookLogon.FacebookId.ToString() + "/feed", parameters);
+        }
+
+        public static void PostToOwnWall(PromotionInstance a)
+        {
+            FacebookClient fc = new FacebookClient(FacebookWebContext.Current.AccessToken);
+            dynamic parameters = PopulateParametersForEvent(a.Promotion.Event);
+            parameters.actions = new
+            {
+                name = "View on Popr.ly",
+                link = "http://popr.ly/Promotion/Invitation/?id=" + a.Id.ToString()
             };
             SetPrivacy(parameters, a.Promotion.Event.Privacy);
             dynamic result = fc.Post("me/feed", parameters);
         }
+
 
         public void SetPrivacy(dynamic obj, Privacy p)
         {

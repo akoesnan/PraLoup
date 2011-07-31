@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using PraLoup.BusinessLogic;
 using PraLoup.DataAccess.Entities;
@@ -9,7 +10,6 @@ namespace PraLoup.WebApp.Controllers
 {
     public class InvitationController : Controller
     {
-        
         public AccountBase AccountBase { get; private set; }
 
         public InvitationController(AccountBase accountBase, ILogger logger)
@@ -17,7 +17,7 @@ namespace PraLoup.WebApp.Controllers
             this.AccountBase = accountBase;
         }
 
-        public ActionResult Forward(int promotionid, string ids, string message)
+        public ActionResult Forward(Guid promotionid, string ids, string message)
         {
             this.AccountBase.SetupActionAccount();
             PromotionInstance pi = null;
@@ -29,7 +29,7 @@ namespace PraLoup.WebApp.Controllers
             return View();
         }
 
-        public ActionResult View(int promotionid)
+        public ActionResult View(Guid promotionid)
         {
             this.AccountBase.SetupActionAccount();
             PromotionInstance pi = null;

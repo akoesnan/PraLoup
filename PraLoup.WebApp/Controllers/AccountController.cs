@@ -30,13 +30,20 @@ namespace ProjectSafari.Controllers
             }
             else
             {
+                try
+                {
+                    Register();
+                }
+                catch (Exception)
+                {
+                    return View();
+                }
                 FacebookWebAuthorizer fwa = new FacebookWebAuthorizer(new PraLoupFacebookApplication(), HttpContext);
                 fwa.Permissions = new string[] { "publish_stream", "user_about_me", "read_friendlists","user_photos","friends_photos" };
                 fwa.ReturnUrlPath = returnUrl;
                 fwa.CancelUrlPath = returnUrl;
                 if (fwa.Authorize())
                 {
-                    Register();
                     string url = null;
                     if (FacebookWebContext.Current.HttpContext.Request.UrlReferrer != null)
                     {

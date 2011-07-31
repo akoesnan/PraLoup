@@ -162,7 +162,7 @@ namespace PraLoup.BusinessLogic
         }
 
 
-        public bool PromotionInstanceForUserPromotion(int promotionInstanceId, out PromotionInstance pi)
+        public bool PromotionInstanceForUserPromotion(Guid promotionInstanceId, out PromotionInstance pi)
         {
             pi = null;
             // see if we can find the instance
