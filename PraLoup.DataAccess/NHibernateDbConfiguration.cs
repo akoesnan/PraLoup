@@ -1,5 +1,6 @@
 ﻿using System.Data.Common;
 using System.Data.SQLite;
+using System;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;

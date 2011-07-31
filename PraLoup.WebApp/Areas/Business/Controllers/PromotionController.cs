@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Facebook.Web.Mvc;
 using PraLoup.BusinessLogic;
-using PraLoup.WebApp.Areas.Admin.Models;
+using PraLoup.WebApp.Areas.Business.Models;
 using PraLoup.Utilities;
 using PraLoup.WebApp.Utilities;
 using Entities = PraLoup.WebApp.Models.Entities;
@@ -174,9 +174,9 @@ namespace PraLoup.WebApp.Areas.Business.Controllers
         }
 
 
-        private static Deal ConvertDynamicToDeal(dynamic deal)
+        private static Entities.Deal ConvertDynamicToDeal(dynamic deal)
         {
-            Deal d = new Deal();
+            Entities.Deal d = new Entities.Deal();
             d.Available = int.Parse(deal.DealListAvailable);
             d.OriginalValue = int.Parse(deal.DealListOriginalValue);
             d.DealValue = int.Parse(deal.DealListCurrentValue);
@@ -204,7 +204,7 @@ namespace PraLoup.WebApp.Areas.Business.Controllers
             try
             {
                 deal = jsonDeal.GetJson();
-                Deal d = ConvertDynamicToDeal(deal);
+                Entities.Deal d = ConvertDynamicToDeal(deal);
                 pcm.Deals.Add(d);
             }
             catch (Exception)
@@ -228,7 +228,7 @@ namespace PraLoup.WebApp.Areas.Business.Controllers
                 }
             }
 
-            Promotion p = pcm.ToPromotion();
+            Entities.Promotion p = pcm.ToPromotion();
             List<PraLoup.DataAccess.Entities.Business> userbusinesses = new List<PraLoup.DataAccess.Entities.Business>(AccountBase.BusinessActions.GetBusinessForUser(AccountBase.Account));
             p.Business = userbusinesses != null && userbusinesses.Count > 0 ? userbusinesses[0] : new PraLoup.DataAccess.Entities.Business();
             this.AccountBase.PromotionActions.SavePromotion(p);

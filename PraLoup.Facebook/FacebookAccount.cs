@@ -68,7 +68,7 @@ namespace PraLoup.FacebookObjects
             SetPrivacy(parameters, e.Privacy);
             dynamic result = fc.Post("me/feed", parameters);
         }
-
+           
 
         public static void PostPromotionInstanceToRecipientsWall(PromotionInstance a)
         {
