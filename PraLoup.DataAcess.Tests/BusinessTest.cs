@@ -27,12 +27,15 @@ namespace PraLoup.DataAccess.Tests
                 {
                     var account = EntityHelper.GetAccount("business", "owner");
                     var bu = new BusinessUser(account, Role.BusinessAdmin);
+                    var op = new List<HoursOfOperation>() { new HoursOfOperation(0, DateTime.Now.TimeOfDay, DateTime.Now.TimeOfDay) };
                     new PersistenceSpecification<Business>(Session, new BusinessUsersEqualityComparer())
                    .CheckProperty(c => c.Name, "businessname")
                    .CheckProperty(c => c.Category, Category.Nightlife)
                    .CheckProperty(c => c.BusinessUsers, new List<BusinessUser>() { bu })
                    .CheckProperty(c => c.Url, "http://www.hello.com")
                    .CheckProperty(c => c.ImageUrl, "http://www.example.com/image/i.png")
+                   .CheckProperty(c => c.ImageUrl, "http://www.example.com/image/i.png")
+                   .CheckComponentList(c => c.HoursOfOperations, op)
                    .VerifyTheMappings();
                 }
             }

@@ -1,46 +1,30 @@
-﻿@model PraLoup.DataAccess.Entities.Business
-
+﻿@using PraLoup.WebApp.Utilities
+@model PraLoup.WebApp.Areas.Admin.Models.BusinessModel
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Details</h2>
-
-<fieldset>
-    <legend>Business</legend>
-
-    <div class="display-label">Name</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
-
-    <div class="display-label">Phone</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Phone)
-    </div>
-
-    <div class="display-label">Url</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Url)
-    </div>
-
-    <div class="display-label">ImageUrl</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ImageUrl)
-    </div>
-
-    <div class="display-label">TwitterId</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TwitterId)
-    </div>
-
-    <div class="display-label">Rating</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Rating)
-    </div>
-</fieldset>
+<h2>
+    Details</h2>
+@Html.DisplayFor(model => model.Business);
+@Html.DisplayFor(model => model.CurrentPromos);
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BusinessId }) |
+    @Html.ActionLink("Create Promotion", "Create",  "Promotion", new { businessId = Model.BusinessId }, null) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@if (Model.CurrentPromos != null && Model.CurrentPromos.Count() > 0)
+{  
+    @Html.Partial("PromotionList", Model.CurrentPromos, new ViewDataDictionary() { { "ListName", @Html.RequiredLabelFor(model => model.CurrentPromos).ToHtmlString() } })
+}
+
+@if (Model.UpcomingPromos != null && Model.UpcomingPromos.Count() > 0)
+{  
+    @Html.Partial("PromotionList", Model.UpcomingPromos, new ViewDataDictionary() { { "ListName", @Html.RequiredLabelFor(model => model.UpcomingPromos).ToHtmlString() } })
+}
+
+@if (Model.PastPromos != null && Model.PastPromos.Count() > 0)
+{  
+    @Html.Partial("PromotionList", Model.PastPromos, new ViewDataDictionary() { { "ListName", @Html.RequiredLabelFor(model => model.PastPromos).ToHtmlString() } })
+}

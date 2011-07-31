@@ -1,0 +1,11 @@
+﻿@using PraLoup.WebApp.Utilities
+@using PraLoup.DataAccess.Entities
+@model PraLoup.WebApp.Models.Entities.Venue
+           
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.Name)
+</div>
+<div class="editor-field">
+    @Html.ValidatedEditorFor(model => model.Name)    
+</div>
+@Html.DisplayFor(model => model, "Address")

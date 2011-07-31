@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.1.1.0.118\lib\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.2.5.2\lib\NET35\Castle.Core.dll</HintPath>
     </Reference>
@@ -147,11 +150,7 @@
     <Compile Include="Areas\Admin\Models\BaseAdminModel.cs" />
     <Compile Include="Areas\Admin\Models\BusinessIndexModel.cs" />
     <Compile Include="Areas\Admin\Models\BusinessCreateModel.cs" />
-    <Compile Include="Areas\Admin\Resources\LocStrings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LocStrings.resx</DependentUpon>
-    </Compile>
+    <Compile Include="Areas\Admin\Models\PromoCreateModel.cs" />
     <Compile Include="App_Start\BootstrapperModules.cs" />
     <Compile Include="Areas\Business\BusinessAreaRegistration.cs" />
     <Compile Include="Areas\Business\Controllers\BusinessController.cs" />
@@ -161,10 +160,7 @@
     <Compile Include="Areas\Admin\Models\BusinessModel.cs" />
     <Compile Include="Areas\Admin\Models\PromoModel.cs" />
     <Compile Include="Areas\Admin\Models\PromoIndexModel.cs" />
-    <Compile Include="Areas\Business\Models\BaseBusinessModel.cs" />
-    <Compile Include="Areas\Business\Models\BusinessModel.cs" />
     <Compile Include="Areas\Business\Models\DashboardModel.cs" />
-    <Compile Include="Areas\Business\Models\PromoIndexModel.cs" />
     <Compile Include="Areas\Business\Models\PromoModel.cs" />
     <Compile Include="Areas\Business\Models\PromotionCloseModel.cs" />
     <Compile Include="Areas\Business\Models\PromotionList.cs" />
@@ -173,6 +169,7 @@
     <None Include="Areas\Business\Views\Shared\EditorTemplates\StarModel.cshtml" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\InvitationController.cs" />
+    <Compile Include="Controllers\UtilityController.cs" />
     <Compile Include="Models\AccountListJson.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -180,8 +177,18 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Areas\Business\Models\DealList.cs" />
+    <Compile Include="Models\Entities\Account.cs" />
+    <Compile Include="Models\Entities\Address.cs" />   
+    <Compile Include="Models\Entities\Business.cs" />
+    <Compile Include="Models\Entities\BusinessUser.cs" />
+    <Compile Include="Models\Entities\Coupon.cs" />
+    <Compile Include="Models\Entities\Deal.cs" />
+    <Compile Include="Models\Entities\Event.cs" />
+    <Compile Include="Models\Entities\Promotion.cs" />
+    <Compile Include="Models\Entities\PromotionInstance.cs" />
+    <Compile Include="Models\Entities\PromotionInstanceStatus.cs" />
+    <Compile Include="Models\Entities\Venue.cs" />
     <Compile Include="Models\EventDiscoveryModel.cs" />
     <Compile Include="Areas\Business\Models\PromotionCreateModel.cs" />
     <Compile Include="Models\PromotionViewModel.cs" />
@@ -191,7 +198,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LocStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\FileUploadInfoModelBinder.cs" />
+    <Compile Include="Utilities\ValidatedEditorExtensions.cs" />
     <Compile Include="Utilities\EnumExtensions.cs" />
+    <Compile Include="Utilities\LabelExtensions.cs" />
+    <Compile Include="Utilities\LocValidationAttributes.cs" />
     <Compile Include="Utilities\UnitOfWorkAttribute.cs" />
     <Content Include="Areas\Business\Views\Shared\EditorTemplates\UserCloseData.cshtml" />
   </ItemGroup>
@@ -216,6 +227,11 @@
     <Content Include="Scripts\jquery.MetaData.js" />
     <Content Include="Scripts\jquery.rating.js" />
     <Content Include="Scripts\jquery.rating.pack.js" />
+    <Content Include="Content\blankButton.png" />
+    <Content Include="Scripts\swfupload\jquery-asyncUpload-0.1.js" />
+    <Content Include="Scripts\swfupload\swfupload license.txt" />
+    <Content Include="Scripts\swfupload\swfupload.js" />
+    <Content Include="Scripts\swfupload\swfupload.swf" />
     <Content Include="System.Web.WebPages.Administration.dll" />
     <Content Include="System.Web.WebPages.Deployment.dll" />
     <Content Include="Views\Account\Register.cshtml">
@@ -344,7 +360,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_LocalResources\" />
-    <Folder Include="Models\Services\" />
+    <Folder Include="Areas\Business\Views\Promotion\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Event\Create.cshtml" />
@@ -395,10 +411,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Admin\Resources\LocStrings.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>LocStrings.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\LocStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LocStrings.Designer.cs</LastGenOutput>
@@ -467,31 +479,16 @@
     <Content Include="Areas\Business\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Business\Views\Business\Create.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Address.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\CreateAddress.cshtml" />
+    <Content Include="Areas\Business\Views\Business\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Calendar\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Business\Views\Business\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Business\Views\Business\Edit.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Business\Views\Business\Details.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Business\Views\Promotion\Create.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Business\Views\Promotion\Details.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Business\Views\Promotion\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Business\Create.cshtml" />
@@ -533,7 +530,28 @@
   <ItemGroup>
     <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
   </ItemGroup>
+   <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\Business.cshtml" />
+  </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Shared\DisplayTemplates\Business.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\DisplayTemplates\Address.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\Promotion.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Deal.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\FileUploadControl.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\PromotionItem.cshtml" />
+  </ItemGroup>
+ <ItemGroup>
     <Content Include="Views\Shared\LoginButton.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -553,6 +571,39 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Business\Views\Shared\EditorTemplates\PromotionList.cshtml" />
+  </ItemGroup>1
+  <ItemGroup>
+    <Content Include="Views\Shared\PromotionList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\Venue.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\DealList2.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Promotion\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Business\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Business\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Business\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Promotion\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Promotion\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Promotion\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Promotion\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

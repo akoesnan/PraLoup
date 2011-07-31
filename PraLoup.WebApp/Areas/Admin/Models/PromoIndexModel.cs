@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using PraLoup.BusinessLogic;
-using Entities = PraLoup.DataAccess.Entities;
+using DataEntities = PraLoup.DataAccess.Entities;
+using ModelEntities = PraLoup.WebApp.Models.Entities;
 namespace PraLoup.WebApp.Areas.Admin.Models
 {
     public class PromoIndexModel : BaseAdminModel
     {
-        private Guid BusinessId;
+        private Guid? BusinessId;
         private AccountBase AccountBase;
         private string BusinessName;
-        public IEnumerable<Entities.Promotion> Promotions { get; private set; }
-
+        public IEnumerable<ModelEntities.Promotion> Promotions { get; private set; }
 
         public PromoIndexModel(AccountBase accountBase, Guid businessId)
         {
@@ -20,7 +20,7 @@ namespace PraLoup.WebApp.Areas.Admin.Models
             Setup();
         }
 
-        public PromoIndexModel(BusinessLogic.AccountBase accountBase, Guid businessId, string businessName)
+        public PromoIndexModel(BusinessLogic.AccountBase accountBase, Guid? businessId, string businessName)
         {
             // TODO: Complete member initialization
             this.AccountBase = accountBase;
@@ -32,7 +32,23 @@ namespace PraLoup.WebApp.Areas.Admin.Models
 
         public void Setup()
         {
-            this.Promotions = this.AccountBase.PromotionActions.GetAllPromotionsForBusiness(BusinessId);
+            // lookup using business guid, if its not empty
+            if (this.AccountBase == null)
+                throw new Exception("AccountBase should be populated");
+
+            if (BusinessId != null && BusinessId != default(Guid))
+            {
+                var promos = this.AccountBase.PromotionActions.GetAllPromotionsForBusiness(BusinessId.Value);
+                this.Promotions = AutoMapper.Mapper.Map<IEnumerable<DataEntities.Promotion>, IEnumerable<ModelEntities.Promotion>>(promos);
+            }
+            // lookup using business name if it's not null
+            else if (!string.IsNullOrEmpty(this.BusinessName))
+            {
+
+            }
+            else
+            {
+            }
         }
     }
 }

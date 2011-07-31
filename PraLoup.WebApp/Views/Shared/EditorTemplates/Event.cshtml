@@ -1,46 +1,59 @@
-﻿@inherits System.Web.Mvc.WebViewPage<PraLoup.DataAccess.Entities.Event>
+﻿@using PraLoup.WebApp.Utilities
+@inherits System.Web.Mvc.WebViewPage<PraLoup.WebApp.Models.Entities.Event>
+              
+@Html.HiddenFor(model => model.Id)
 
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.StartDateTime)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.StartDateTime, "DateTime")
+    @Html.ValidationMessageFor(model => model.StartDateTime)
+</div>
 
-    @Html.ValidationSummary(true)
-    
-        @Html.HiddenFor(model => model.Id)
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.EndDateTime)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.EndDateTime, "DateTime")
+    @Html.ValidationMessageFor(model => model.EndDateTime)
+</div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.StartDateTime)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.StartDateTime)
-            @Html.ValidationMessageFor(model => model.StartDateTime)
-        </div>
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.Name)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Name)
+    @Html.ValidationMessageFor(model => model.Name)
+</div>
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.Description)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Description)
+    @Html.ValidationMessageFor(model => model.Description)
+</div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.EndDateTime)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.EndDateTime)
-            @Html.ValidationMessageFor(model => model.EndDateTime)
-        </div>
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.ImageUrl)
+</div>
+<div class="editor-field">
+    @Html.HiddenFor(model => model.ImageUrl)
+    @Html.Partial("FileUploadControl", new ViewDataDictionary() { { "elmId", "ImageUrl" }, { "GuidId", "Promotion_Event_ImageUrl" } })
+</div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.Venue)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Venue)
+    @Html.ValidationMessageFor(model => model.Venue)
+</div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Description)
-            @Html.ValidationMessageFor(model => model.Description)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Price)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Price)
-            @Html.ValidationMessageFor(model => model.Price)
-        </div>
+<div class="editor-label">
+    @Html.RequiredLabelFor(model => model.Privacy)
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.Privacy, Model.Privacy.ToSelectList())
+    @Html.DescriptionFor(model => model.Privacy)
+</div>

@@ -1,0 +1,79 @@
+﻿@using PraLoup.WebApp.Utilities
+@model PraLoup.WebApp.Models.Entities.Deal
+<fieldset>
+    @{
+        string name = ViewData.TemplateInfo.HtmlFieldPrefix;
+        string idPrefix = name.Replace(".", "_");
+        string oValueId =  idPrefix + ((String.IsNullOrEmpty(idPrefix) == false) ? "_" : string.Empty) + "OriginalValue";
+        string dValueId =  idPrefix + ((String.IsNullOrEmpty(idPrefix) == false) ? "_" : string.Empty) + "DealValue";
+        string sValueId = idPrefix + ((String.IsNullOrEmpty(idPrefix) == false) ? "_" : string.Empty) + "Saving";
+    }
+    <legend>Deal</legend>
+    <div class="editor-label">
+        @Html.RequiredLabelFor(model => model.Name)
+    </div>
+    <div class="editor-field">
+        @Html.ValidatedEditorFor(model => model.Name)
+    </div>
+    <div class="editor-label">
+        @Html.RequiredLabelFor(model => model.OriginalValue)
+    </div>
+    <div class="editor-field">
+        @Html.ValidatedEditorFor(model => model.OriginalValue)
+    </div>
+    <div class="editor-label">
+        @Html.RequiredLabelFor(model => model.DealValue)
+    </div>
+    <div class="editor-field">
+        @Html.ValidatedEditorFor(model => model.DealValue)
+    </div>
+    <div class="editor-label">
+        @Html.RequiredLabelFor(model => model.Saving)
+    </div>
+    <div class="editor-field">
+        <span id="@sValueId" class="deal_sv_pct">@Html.DisplayFor(model => model.Saving) %</span>
+    </div>
+    <script type="text/javascript">
+
+        $('#@dValueId').change(function () {
+            var saving = ($('#@oValueId').val() - $('#@dValueId').val()) / $('#@oValueId').val() * 100;
+            $('#@sValueId').html(saving+'%');
+        });
+    </script>
+    <div class="editor-label">
+        @Html.RequiredLabelFor(model => model.StartDateTime)
+    </div>
+    <div class="editor-field">
+        @Html.ValidatedEditorFor(model => model.StartDateTime)
+    </div>
+    <div class="editor-label">
+        @Html.RequiredLabelFor(model => model.EndDateTime)
+    </div>
+    <div class="editor-field">
+        @Html.ValidatedEditorFor(model => model.EndDateTime)
+    </div>
+    <div class="editor-label">
+        @Html.RequiredLabelFor(model => model.Description)
+    </div>
+    <div class="editor-field">
+        @Html.ValidatedEditorFor(model => model.Description)
+    </div>
+    <div class="editor-label">
+        @Html.RequiredLabelFor(model => model.RedemptionInstructions)
+    </div>
+    <div class="editor-field">
+        @Html.ValidatedEditorFor(model => model.RedemptionInstructions)
+    </div>
+    <div class="editor-label">
+        @Html.RequiredLabelFor(model => model.FinePrint)
+    </div>
+    <div class="editor-field">
+        @Html.ValidatedEditorFor(model => model.FinePrint)
+    </div>
+    <div class="editor-label">
+        @Html.RequiredLabelFor(model => model.Available)
+    </div>
+    <div class="editor-field">
+        @Html.ValidatedEditorFor(model => model.Available)
+    </div>
+</fieldset>

@@ -1,6 +1,8 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using PraLoup.Utilities;
+using PraLoup.WebApp.Utilities;
 
 namespace PraLoup.WebApp
 {
@@ -36,6 +38,7 @@ namespace PraLoup.WebApp
             AreaRegistration.RegisterAllAreas();
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+            ModelBinders.Binders.Add(typeof(FileUploadInfo[]), new UploadedFileInfoArrayBinder());
         }
     }
 }

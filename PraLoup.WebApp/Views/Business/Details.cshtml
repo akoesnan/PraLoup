@@ -1,0 +1,34 @@
+﻿@using PraLoup.WebApp.Utilities
+@model PraLoup.WebApp.Areas.Admin.Models.BusinessModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>My Business</h2>
+
+<div class="business_msg">
+    @Model.Message
+</div>
+
+@Html.DisplayFor(model => model.Business)
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BusinessId }) |
+    @Html.ActionLink("Create Promotion", "Create",  "Promotion", new { businessId = Model.BusinessId }, null) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@if (Model.CurrentPromos != null && Model.CurrentPromos.Count() > 0)
+{  
+    @Html.Partial("PromotionList", Model.CurrentPromos, new ViewDataDictionary() { { "ListName", @Html.RequiredLabelFor(model => model.CurrentPromos).ToHtmlString() } })
+}
+
+@if (Model.UpcomingPromos != null && Model.UpcomingPromos.Count() > 0)
+{  
+    @Html.Partial("PromotionList", Model.UpcomingPromos, new ViewDataDictionary() { { "ListName", @Html.RequiredLabelFor(model => model.UpcomingPromos).ToHtmlString() } })
+}
+
+@if (Model.PastPromos != null && Model.PastPromos.Count() > 0)
+{  
+    @Html.Partial("PromotionList", Model.PastPromos, new ViewDataDictionary() { { "ListName", @Html.RequiredLabelFor(model => model.PastPromos).ToHtmlString() } })
+}

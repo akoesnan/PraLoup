@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using PraLoup.BusinessLogic;
-using Entities = PraLoup.DataAccess.Entities;
+using DataEntities = PraLoup.DataAccess.Entities;
+using ModelEntities = PraLoup.DataAccess.Entities;
 
 namespace PraLoup.WebApp.Areas.Admin.Models
 {
@@ -10,7 +11,7 @@ namespace PraLoup.WebApp.Areas.Admin.Models
         private int pageCount;
         private int currentPage;
         private AccountBase AccountBase;
-        public IEnumerable<Entities.Business> Businesses { get; private set; }
+        public IEnumerable<ModelEntities.Business> Businesses { get; private set; }
 
         public BusinessIndexModel(AccountBase accountBase, int pageCount, int currentPage)
         {
@@ -23,7 +24,8 @@ namespace PraLoup.WebApp.Areas.Admin.Models
         public void Setup()
         {
             int skipCount = pageCount * currentPage;
-            Businesses = this.AccountBase.BusinessActions.GetBusinesses(pageCount, skipCount).ToList();
+            var b = this.AccountBase.BusinessActions.GetBusinesses(pageCount, skipCount).ToList();
+            this.Businesses = AutoMapper.Mapper.Map<IEnumerable<DataEntities.Business>, IEnumerable<ModelEntities.Business>>(b);
         }
     }
 }

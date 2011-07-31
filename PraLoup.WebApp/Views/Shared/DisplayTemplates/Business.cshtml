@@ -1,0 +1,13 @@
+﻿@using PraLoup.WebApp.Utilities
+@using PraLoup.WebApp.Resources
+@inherits System.Web.Mvc.WebViewPage<PraLoup.WebApp.Models.Entities.Business>
+<div class="business_name">
+    <h1>@Html.DisplayFor(model => model.Name)</h1>
+</div>
+<div>
+    @LocStrings.BusinessCategory: @Html.DisplayFor(model => model.Category)
+</div>
+@Html.DisplayFor(model => model.Address)
+<div>
+    @Html.DisplayFor(model => model.Phone)
+</div>

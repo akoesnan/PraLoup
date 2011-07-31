@@ -1,0 +1,16 @@
+﻿@inherits System.Web.Mvc.WebViewPage<PraLoup.WebApp.Models.Entities.Address>
+<div>
+    @Model.StreetLine1
+</div>
+@if (!String.IsNullOrEmpty(Model.StreetLine2))
+{ 
+    <div>
+        @Model.StreetLine2
+    </div>
+}
+<div>
+    @Model.City, @Model.State @Model.PostalCode
+</div>
+<div>
+    @Model.Country
+</div>

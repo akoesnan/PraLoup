@@ -28,7 +28,7 @@ namespace PraLoup.Facebook.Test
                     StreetLine2 = string.Empty,
                     City = "Seattle",
                     State = "Washington",
-                    Country = "United States",
+                    Country = Country.US,
                     Lat = 1.123f,
                     Lon = 12.123f
                 }

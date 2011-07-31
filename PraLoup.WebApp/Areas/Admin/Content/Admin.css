@@ -36,3 +36,10 @@ div.ttd_info
     width:500px;
     overflow:hidden;    
 }
+
+
+/*swfupload start*/
+div.ProgressBar { width: 100px; padding: 0; border: 1px solid black; margin-right: 1em; height:.75em; margin-left:1em; display:-moz-inline-stack; display:inline-block; zoom:1; *display:inline; }
+div.ProgressBar DIV { background-color: Green; font-size: 1pt; height:100%; float:left; }
+div.asyncUploader OBJECT { position: relative; top: 5px; left: 10px; }
+/*swfupload end*/

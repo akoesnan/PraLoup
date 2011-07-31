@@ -20,7 +20,7 @@ namespace PraLoup.BusinessLogic
             IEnumerable<string> brokenRules;
             var success = this.dataService.Promotion.SaveOrUpdate(p, out brokenRules);
             if (success)
-            {                
+            {
                 this.log.Info("Succesfully created event {0}", p);
                 return p;
             }
@@ -49,6 +49,31 @@ namespace PraLoup.BusinessLogic
             return this.dataService.Promotion.GetAll();
         }
 
+        public IEnumerable<Promotion> GetCurrentPromos(Guid businessId, DateTime now)
+        {
+            return this.dataService.Promotion.Where(
+                p => p.Business.Id == businessId
+                && p.Event.StartDateTime <= now
+                && p.Event.EndDateTime > now);
+        }
+
+        public IEnumerable<Promotion> GetUpcomingPromos(Guid businessId, DateTime now)
+        {
+            return this.dataService.Promotion.Where(
+                p => p.Business.Id == businessId
+                && p.Event.StartDateTime > now
+                && p.Event.EndDateTime > now
+                );
+        }
+
+        public IEnumerable<Promotion> GetPastPromos(Guid businessId, DateTime now)
+        {
+            return this.dataService.Promotion.Where(
+                p => p.Business.Id == businessId
+                && p.Event.StartDateTime > now
+                && p.Event.EndDateTime > now);
+        }
+
         public IEnumerable<Promotion> GetPromotions(Expression<Func<Promotion, bool>> predicate)
         {
             return this.dataService.Promotion.Where(predicate);
@@ -58,8 +83,6 @@ namespace PraLoup.BusinessLogic
         {
             var e = this.dataService.Promotion.Find(key);
             return e;
-
         }
-
     }
 }

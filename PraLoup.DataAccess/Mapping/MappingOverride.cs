@@ -18,6 +18,12 @@ namespace PraLoup.DataAccess.Mapping
         {
             mapping.IgnoreProperty(x => x.FacebookFriendIds);            
             mapping.HasMany(x => x.Connections);
+            mapping.HasMany(x => x.HoursOfOperations).Component(x =>
+            {
+                x.Map(c => c.Day);
+                x.Map(c => c.OpenTime);
+                x.Map(c => c.CloseTime);
+            });
         }
     }
 

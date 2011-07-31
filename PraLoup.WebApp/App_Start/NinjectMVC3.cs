@@ -7,8 +7,6 @@ namespace PraLoup.WebApp.App_Start
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject;
     using Ninject.Web.Mvc;
-    using PraLoup.WebApp;
-    using PraLoup.DataAccess;
 
     public static class NinjectMVC3
     {
@@ -22,9 +20,6 @@ namespace PraLoup.WebApp.App_Start
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestModule));
             DynamicModuleUtility.RegisterModule(typeof(HttpApplicationInitializationModule));
             bootstrapper.Initialize(CreateKernel);
-
-            //var dataGenerator = bootstrapper.Kernel.Get<TestSeedDataGenerator>();
-            //dataGenerator.Seed();
         }
 
         /// <summary>
