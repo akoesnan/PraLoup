@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
+using Facebook.Web.Mvc;
 using PraLoup.BusinessLogic;
 using PraLoup.WebApp.Areas.Admin.Models;
+using PraLoup.Utilities;
 using PraLoup.WebApp.Utilities;
 using Entities = PraLoup.WebApp.Models.Entities;
+
 
 namespace PraLoup.WebApp.Areas.Business.Controllers
 {
@@ -18,6 +22,7 @@ namespace PraLoup.WebApp.Areas.Business.Controllers
         //
         // GET: /Business/Promotion/
         // business can only look at the promotion for its own business
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Index(Guid? businessId, string businessName)
         {
             if (businessId.HasValue || !string.IsNullOrEmpty(businessName))
@@ -31,7 +36,7 @@ namespace PraLoup.WebApp.Areas.Business.Controllers
 
         //
         // GET: /Business/Promotion/Details/5
-
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Details(Guid? promotionId)
         {
             if (promotionId.HasValue)
@@ -48,7 +53,8 @@ namespace PraLoup.WebApp.Areas.Business.Controllers
 
         //
         // GET: /Business/Promotion/Create
-        public ActionResult Create(Guid businessId)
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
+        public ActionResult Create(Guid businessId)        
         {
             var pcm = new PromoCreateModel(this.AccountBase, businessId, new Entities.Promotion());
             pcm.Setup();
@@ -89,6 +95,7 @@ namespace PraLoup.WebApp.Areas.Business.Controllers
 
         //
         // GET: /Business/Promotion/Edit/5
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Edit(Guid promoId)
         {
             return View();
@@ -99,7 +106,9 @@ namespace PraLoup.WebApp.Areas.Business.Controllers
 
         [HttpPost]
         [UnitOfWork]
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult Edit(Guid id, Entities.Promotion p)
+
         {
             try
             {
@@ -115,9 +124,115 @@ namespace PraLoup.WebApp.Areas.Business.Controllers
 
         //
         // GET: /Business/Promotion/Edit/5
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
         public ActionResult CreatePromoInstance(Guid id)
         {
             return View();
+        }
+
+
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
+        public ActionResult PromotionCreate()
+        {
+            PromotionCreateModel pcm = new PromotionCreateModel();
+            pcm.Deals.AddUserGroups(new List<UserGroup>());
+            return View(pcm);
+        }
+
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
+        public ActionResult Close(Guid promoid)
+        {
+            AccountBase.SetupActionAccount();
+            var busy = AccountBase.BusinessActions.GetBusinessForUser(this.AccountBase.Account);
+            List<PraLoup.DataAccess.Entities.Business> busies = new List<DataAccess.Entities.Business>(busy);
+            //
+            // we should have some ui and state that tells which business the user is working on.
+            //
+            PraLoup.DataAccess.Entities.Business business = busies[0];
+
+            PromotionCloseModel pcm = new PromotionCloseModel();
+            pcm.Promotion = AccountBase.PromotionActions.GetPromotion(promoid);
+            var invites = AccountBase.PromotionInstanceActions.GetUserInvitesForPromotion(pcm.Promotion);
+            pcm.UserCloseData = new List<UserCloseData>();
+            foreach (var invite in invites)
+            {
+                UserCloseData ucd = new UserCloseData();
+                ucd.Invite = invite;
+                ucd.Rating = new StarModel();
+                ucd.Rating.Max = 10;
+                if (ucd.Invite.UserRatings.Count > 0)
+                {
+                    ucd.Rating.Value = ucd.Invite.UserRatings[0].Rate;
+                    ucd.AmountSpent = ucd.Invite.UserRatings[0].AmountSpent.Value;
+                }
+                ucd.Redeemed = ucd.Invite.IsAttended;
+                ucd.UserGroups = AccountBase.UserGroupActions.GetUserGroupsForBusinessAndUser(ucd.Invite.Recipient, business);
+                pcm.UserCloseData.Add(ucd);
+            }
+
+            return View(pcm);
+        }
+
+
+        private static Deal ConvertDynamicToDeal(dynamic deal)
+        {
+            Deal d = new Deal();
+            d.Available = int.Parse(deal.DealListAvailable);
+            d.OriginalValue = int.Parse(deal.DealListOriginalValue);
+            d.DealValue = int.Parse(deal.DealListCurrentValue);
+            d.Saving = int.Parse(deal.DealListSaving);
+            d.StartDateTime = DateTime.Parse(deal.DealListStartDateTime);
+            d.EndDateTime = DateTime.Parse(deal.DealListEndDateTime);
+            d.Description = deal.DealListDescription;
+            d.FinePrint = deal.DealListFinePrint;
+            d.RedemptionInstructions = deal.DealListRedemptionInstructions;
+            return d;
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [UnitOfWork]
+        [FacebookAuthorize(LoginUrl = "/PraLoup.WebApp/Account/Login")]
+        public ActionResult PromotionCreate(PromotionCreateModel pcm)
+        {
+            this.AccountBase.SetupActionAccount();
+
+            // Because of the weird control, we fetch deals from a json param:
+            string jsonDeal = Request.Form["Deals"];
+            // first try to serialize it as a single thing, then try as an array;
+            dynamic deal = null;
+            pcm.Deals = new DealList();
+            try
+            {
+                deal = jsonDeal.GetJson();
+                Deal d = ConvertDynamicToDeal(deal);
+                pcm.Deals.Add(d);
+            }
+            catch (Exception)
+            {
+            }
+            if (deal == null)
+            {
+                jsonDeal = "[" + jsonDeal + "]";
+                deal = jsonDeal.GetJson();
+                if (deal != null)
+                {
+                    foreach (dynamic foo in deal)
+                    {
+                        Deal d = ConvertDynamicToDeal(foo);
+                        pcm.Deals.Add(d);
+                    }
+                }
+                else
+                {
+                    //error
+                }
+            }
+
+            Promotion p = pcm.ToPromotion();
+            List<PraLoup.DataAccess.Entities.Business> userbusinesses = new List<PraLoup.DataAccess.Entities.Business>(AccountBase.BusinessActions.GetBusinessForUser(AccountBase.Account));
+            p.Business = userbusinesses != null && userbusinesses.Count > 0 ? userbusinesses[0] : new PraLoup.DataAccess.Entities.Business();
+            this.AccountBase.PromotionActions.SavePromotion(p);
+            return View(pcm);
         }
     }
 }

@@ -26,7 +26,7 @@
             <div id="logindisplay">
                  @{ Html.RenderPartial("FacebookInit"); }
             </div>
-<div id="header">
+<div id="short">
 	<div id="main">
 		<!--header -->
 		<div id="header_short" class="hs_logo">
@@ -34,7 +34,8 @@
 				<div class="left">
 					<img alt="" src="@Url.Content("~/Content/smalllogo.png")" /></div>
 				<div class="right">
-					Login</div>
+					@{Html.RenderPartial("LoginButton");}
+                </div>
 				<div class="clear">
 				</div>
 			</div>
@@ -44,12 +45,8 @@
     
             @RenderBody()
             </div>
-          <!--footer -->
-		<div id="footer">
-			<div class="indent">
-				©2011 Poprly </div>
-		</div>
-		<!--footer end--></div>
+            @{Html.RenderPartial("Footer");}
+</div>
 </div>
 
 </body>

@@ -35,12 +35,15 @@ strong {
 }
 a {
 	color: #3d6f92;
-	font-size: 12px;
+
 }
 /*main layout */
 
 #main {
 	width: 800px;
+	background-color:#FFFFFF;
+	border: solid 1px rgb(255,255,255);
+	border-radius: 6px;
 }
 #header_tall {
 	min-height: 92px;
@@ -65,21 +68,30 @@ a {
 /* index */
 #index .columns1 .column1 {
 	width: 52px;
+	padding-top:5px;
+	padding-bottom:5px;
 }
 #index .columns1 .column2 {
-	width: 208px;
+	width: 203px;
+	padding:5px;
 }
 #index .columns1 .column3 {
-	width: 52px;
+	width: 52px;	
+	padding-top:5px;
+	padding-bottom:5px;
 }
 #index .columns1 .column4 {
-	width: 208px;
+	width: 203px;
+	padding:5px;
 }
 #index .columns1 .column5 {
 	width: 52px;
+	padding-top:5px;
+	padding-bottom:5px;
 }
 #index .columns1 .column6 {
-	width: 208px;
+	width: 203px;
+	padding:5px;
 }
 #index .columns1 .indent_column {
 	width: 7px;
@@ -110,7 +122,7 @@ p, ul
 	padding-bottom: 1px;
 }
 
-#header_tall {
+#tall {
 }
 #main {
 	margin: 0 auto;
@@ -122,12 +134,8 @@ p, ul
 #header_tall .right {
 	padding: 46px 11px 0 0;
 }
-#header .right a {
-	color: #868686;
-	font-family: arial;
-	font-size: 12px;
-
-	padding: 0 29px 2px 0;
+#header_short .right {
+	padding: 18px 11px 0 0;
 }
 .content {
 	background: url(/Praloup.Webapp/Content/span.png) top left no-repeat;
@@ -148,14 +156,9 @@ p, ul
 #middle {
 	width: 100%;
 }
-#footer .indent {
-	padding: 23px 0 0 17px;
-	color: #000000;
-	font-size: 12px;
-}
+
 #footer a {
-	color: #000000;
-	font-weight: bold;
+	color:rgb(79,129,189);
 }
 .columns1 {
 	background-color: rgb(220,230,242);
@@ -181,7 +184,7 @@ li a {
 }
 /* index */
 #index #middle .indent {
-	padding: 17px 0 19px 0;
+	padding: 17px 0 5px 0;
 }
 #index #middle .columns2 {
 	padding: 21px 0 0 0;
@@ -234,8 +237,6 @@ input[class=numberField]
 	width:50px;
 }
 
-
-
 input[type=button] {
   border: 1px solid #dcdcdc;
   background-color:#f5f5f5;
@@ -274,23 +275,36 @@ input[type=submit]:hover {
  }
  
  
-input:focus { 
-    outline:none;
-    border-color:rgb(228,108,10);
-    box-shadow:0 0 13px rgb(228,108,10);
-}
+
+a.button-link {
+    text-decoration: none;
+    background-color:rgb(79,129,189);
+    color: #f5f5f5;
+    padding: 2px 6px 2px 6px;
+    border: 1px solid rgb(71,116,170);
+    text-align:center;
+    min-width:80px;
+    min-height:30px;
+   border-radius: 2px;
+  
+   }
+a.button-link:hover {
+    text-decoration: none;
+	border: 1px solid rgb(26,43,63);
+	background-color:rgb(71,116,170);
+	border-radius: 2px;
+	color:#f6f6f6;
+    padding: 2px 6px 2px 6px;
+    text-align:center;
+    min-width:80px;
+    min-height:30px;
+   }
+
 
 textarea
 {
      width: 300px;
     border: 1px solid #CCC;
-}
-
-
-textarea:focus { 
-    outline:none;
-    border-color:rgb(228,108,10);
-    box-shadow:0 0 13px rgb(228,108,10);
 }
 
  .field-validation-error

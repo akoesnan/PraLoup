@@ -1,4 +1,4 @@
-﻿@inherits System.Web.Mvc.WebViewPage<IList<PraLoup.WebApp.Models.Entities.Deal>>
+﻿@inherits System.Web.Mvc.WebViewPage<PraLoup.WebApp.Areas.Business.Models.DealList>
 
 @using System.Web;
 @using System.Collections.Generic;
@@ -26,7 +26,6 @@
         <div class="editor-label">
             <label for="DealListOriginalValue">Original Value</label>
         </div>
-
         <div class="editor-field">
             <input class="text-box single-line" data-val="true" data-val-number="The field Original Value must be a number." 
                 data-val-required="The Current field is required." id="DealListOriginalValue" name="DealListOriginalValue"
@@ -116,6 +115,14 @@
                 data-val-required="The Available Deals field is required." id="DealListAvailable" name="DealListAvailable"
                 type="text" value="" />
             <span class="field-validation-valid" data-valmsg-for="DealListAvailable" data-valmsg-replace="true"></span>
+            
+        </div>
+         <div class="editor-label">
+            <label for="DealListAvailable">User Groups</label>
+        </div>
+        <div class="editor-field">
+            @Html.ListBox(name:"DealListGroups",selectList:new MultiSelectList(Model.UserGroups))
+            <span class="field-validation-valid" data-valmsg-for="DealListGroups" data-valmsg-replace="true"></span>
             
         </div>
 

@@ -1,13 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Security;
 using Facebook;
 using Facebook.Web;
 using PraLoup.BusinessLogic;
-using PraLoup.BusinessLogic.Plugins;
-using PraLoup.DataAccess.Services;
 using PraLoup.FacebookObjects;
+using PraLoup.WebApp.Utilities;
 
 namespace ProjectSafari.Controllers
 {
@@ -15,7 +13,7 @@ namespace ProjectSafari.Controllers
     public class AccountController : Controller
     {        
         private AccountBase AccountBase;
-        private const string returnUrl = "http://localhost/praloup.webapp/Promotion/PromotionCreate";
+        private const string returnUrl = "http://localhost/praloup.webapp/";
         private const string logoffUrl = "http://localhost/praloup.webapp/";
         private const string redirectUrl = "http://localhost/praloup.webapp/account/OAuth";
 
@@ -23,7 +21,7 @@ namespace ProjectSafari.Controllers
         {
             this.AccountBase = accountBase;            
         }
-
+        [UnitOfWork]
         public ActionResult Login()
         {
             if (!FacebookWebContext.Current.IsAuthenticated())
@@ -39,16 +37,20 @@ namespace ProjectSafari.Controllers
                 if (fwa.Authorize())
                 {
                     Register();
-                    string url;
+                    string url = null;
                     if (FacebookWebContext.Current.HttpContext.Request.UrlReferrer != null)
                     {
                         url = FacebookWebContext.Current.HttpContext.Request.UrlReferrer.ToString();
                     }
+                    
+                    if (string.IsNullOrEmpty(url))
+                    {
+                        return RedirectToAction("Create", "Promotion", new { area = "Business" });
+                    }
                     else
                     {
-                        url = returnUrl;
+                        return Redirect(url);
                     }
-                    return Redirect(url);
                 }
                 return View();
             }

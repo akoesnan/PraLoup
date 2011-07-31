@@ -1,0 +1,40 @@
+﻿@model PraLoup.WebApp.Areas.Business.Models.PromotionCloseModel
+@using PraLoup.WebApp.Areas.Business.Models;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Promotion)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.Promotion)
+            
+        </div>
+<table>
+<thead>
+  <tr>
+    <th>User</th>
+    <th>Groups</th>
+    <th>Promotion</th>
+    <th>Code</th>
+    <th>Rating</th>
+    <th>Amount Spent</th>
+    <th>Redeemed</th>
+  </tr>
+ </thead>
+ <tbody>
+    @foreach (UserCloseData ucd in Model.UserCloseData)
+    {
+        @Html.EditorFor(x => ucd);
+    }
+    </tbody>
+</table>
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+}

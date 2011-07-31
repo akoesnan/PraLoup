@@ -30,6 +30,7 @@ namespace PraLoup.WebApp.Areas.Business
                 "Business_default",
                 "Business/{controller}/{action}/{id}",
                 new { controller = "Business", action = "Index", id = UrlParameter.Optional }
+                , new string[]{"Praloup.WebApp.Areas.Business.Controllers"}
             );
 
 

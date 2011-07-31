@@ -80,9 +80,7 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -156,14 +154,21 @@
     <Compile Include="App_Start\BootstrapperModules.cs" />
     <Compile Include="Areas\Business\BusinessAreaRegistration.cs" />
     <Compile Include="Areas\Business\Controllers\BusinessController.cs" />
+    <Compile Include="Areas\Business\Controllers\HomeController.cs" />
     <Compile Include="Areas\Business\Controllers\PromotionController.cs" />
     <Compile Include="Areas\Business\Controllers\PromotionInstanceController.cs" />
     <Compile Include="Areas\Admin\Models\BusinessModel.cs" />
     <Compile Include="Areas\Admin\Models\PromoModel.cs" />
     <Compile Include="Areas\Admin\Models\PromoIndexModel.cs" />
+    <Compile Include="Areas\Business\Models\DashboardModel.cs" />
     <Compile Include="Areas\Business\Models\PromoModel.cs" />
+    <Compile Include="Areas\Business\Models\PromotionCloseModel.cs" />
+    <Compile Include="Areas\Business\Models\PromotionList.cs" />
+    <Compile Include="Areas\Business\Models\StarModel.cs" />
+    <Compile Include="Areas\Business\Models\UserCloseData.cs" />
+    <None Include="Areas\Business\Views\Shared\EditorTemplates\StarModel.cshtml" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\PromotionController.cs" />
+    <Compile Include="Controllers\InvitationController.cs" />
     <Compile Include="Controllers\UtilityController.cs" />
     <Compile Include="Models\AccountListJson.cs" />
     <Compile Include="Controllers\EventController.cs" />
@@ -172,8 +177,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Areas\Business\Models\DealList.cs" />
     <Compile Include="Models\Entities\Account.cs" />
-    <Compile Include="Models\Entities\Address.cs" />
+    <Compile Include="Models\Entities\Address.cs" />   
     <Compile Include="Models\Entities\Business.cs" />
     <Compile Include="Models\Entities\BusinessUser.cs" />
     <Compile Include="Models\Entities\Coupon.cs" />
@@ -184,7 +190,7 @@
     <Compile Include="Models\Entities\PromotionInstanceStatus.cs" />
     <Compile Include="Models\Entities\Venue.cs" />
     <Compile Include="Models\EventDiscoveryModel.cs" />
-    <Compile Include="Models\PromotionCreateModel.cs" />
+    <Compile Include="Areas\Business\Models\PromotionCreateModel.cs" />
     <Compile Include="Models\PromotionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\LocStrings.Designer.cs">
@@ -198,6 +204,7 @@
     <Compile Include="Utilities\LabelExtensions.cs" />
     <Compile Include="Utilities\LocValidationAttributes.cs" />
     <Compile Include="Utilities\UnitOfWorkAttribute.cs" />
+    <Content Include="Areas\Business\Views\Shared\EditorTemplates\UserCloseData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\EntityRepository.sdf" />
@@ -217,6 +224,9 @@
     <Content Include="Scripts\jqModal.js" />
     <Content Include="Scripts\jquery.facebook.multifriend.select.js" />
     <Content Include="Scripts\jquery.facebook.multifriend.select.min.js" />
+    <Content Include="Scripts\jquery.MetaData.js" />
+    <Content Include="Scripts\jquery.rating.js" />
+    <Content Include="Scripts\jquery.rating.pack.js" />
     <Content Include="Content\blankButton.png" />
     <Content Include="Scripts\swfupload\jquery-asyncUpload-0.1.js" />
     <Content Include="Scripts\swfupload\swfupload license.txt" />
@@ -351,7 +361,6 @@
   <ItemGroup>
     <Folder Include="App_Start\App_LocalResources\" />
     <Folder Include="Areas\Business\Views\Promotion\" />
-    <Folder Include="Areas\Business\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Event\Create.cshtml" />
@@ -473,6 +482,9 @@
     <Content Include="Views\Shared\EditorTemplates\Address.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Business\Views\Business\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Views\Calendar\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -500,11 +512,11 @@
     <Content Include="Areas\Admin\Views\Business\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Promotion\PromotionCreate.cshtml" />
+    <Content Include="Areas\Business\Views\Promotion\PromotionCreate.cshtml" />
     <Content Include="Views\Promotion\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\EditorTemplates\DealList.cshtml" />
+    <Content Include="Areas\Business\Views\Shared\EditorTemplates\DealList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_TallHeaderLayout.cshtml" />
@@ -518,7 +530,7 @@
   <ItemGroup>
     <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
   </ItemGroup>
-  <ItemGroup>
+   <ItemGroup>
     <Content Include="Views\Shared\EditorTemplates\Business.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -539,6 +551,27 @@
   <ItemGroup>
     <Content Include="Views\Shared\PromotionItem.cshtml" />
   </ItemGroup>
+ <ItemGroup>
+    <Content Include="Views\Shared\LoginButton.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Footer.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Home\GenerateTestData.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Business\Views\Promotion\Print.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Business\Views\Promotion\Close.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Business\Views\Business\MyUsers.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Business\Views\Shared\EditorTemplates\PromotionList.cshtml" />
+  </ItemGroup>1
   <ItemGroup>
     <Content Include="Views\Shared\PromotionList.cshtml" />
   </ItemGroup>

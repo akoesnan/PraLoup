@@ -27,7 +27,7 @@ namespace PraLoup.BusinessLogic
 
         public IEnumerable<Business> GetBusinessForUser(Account user)
         {
-            IEnumerable<BusinessUser> f = this.dataService.BusinessUsers.Where(b => b.User.Id == user.Id);
+            IEnumerable<BusinessUser> f = this.dataService.BusinessUser.Where(b => b.User.Id == user.Id);
             if (f == null || f.Count() == 0)
             {
                 return new List<Business>();
@@ -72,5 +72,6 @@ namespace PraLoup.BusinessLogic
             }
             return this.SaveOrUpdateBusiness(business);
         }
+
     }
 }

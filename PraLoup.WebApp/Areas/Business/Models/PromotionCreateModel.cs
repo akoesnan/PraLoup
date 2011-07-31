@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PraLoup.DataAccess.Entities;
 
-namespace PraLoup.WebApp.Models
+namespace PraLoup.WebApp.Areas.Business.Models
 {
     public class PromotionCreateModel
     {

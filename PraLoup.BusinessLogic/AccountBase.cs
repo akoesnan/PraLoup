@@ -20,6 +20,7 @@ namespace PraLoup.BusinessLogic
         public PromotionActions PromotionActions { get; private set; }
         public PromotionInstanceActions PromotionInstanceActions { get; private set; }
         public BusinessActions BusinessActions { get; private set; }
+        public UserGroupActions UserGroupActions { get; private set; }
         public EventActions EventActions { get; private set; }
 
         

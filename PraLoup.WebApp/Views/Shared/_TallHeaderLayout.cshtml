@@ -20,15 +20,15 @@
 
 <body id="index" >
 
-<div id="header_tall">
+<div id="tall">
 	<div id="main">
 		<!--header -->
-		<div id="header" class="h_logo">
+		<div id="header_tall" class="h_logo">
 			<div class="h_logo">
 				<div class="left">
 					<img alt="" src="@Url.Content("~/Content/logo.png")" /></div>
 				<div class="right">
-					Login</div>
+						@{Html.RenderPartial("LoginButton");}</div>
 				<div class="clear">
 				</div>
 			</div>
@@ -44,12 +44,7 @@
 		<div id="middle">
         @RenderBody()
         </div>
-        <!--footer -->
-		<div id="footer">
-			<div class="indent">
-				©2011 Poprly </div>
-		</div>
-		<!--footer end--></div>
+        	@{Html.RenderPartial("Footer");}
 </div>
 
 </body>
