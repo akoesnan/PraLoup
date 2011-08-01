@@ -77,6 +77,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+		<Link>Properties\SharedAssemblyInfo.cs</Link>
+	</Compile>
     <Compile Include="App_Start\NinjectMVC3.cs" />
     <Compile Include="Controllers\RoutingTest.cs" />
     <Compile Include="Controllers\EventControllerTest.cs" />

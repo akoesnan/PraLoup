@@ -68,8 +68,11 @@
     <Compile Include="EventActions.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PromotionInstanceActions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PromotionInstanceActions.cs" />    
+	<Compile Include="Properties\AssemblyInfo.cs" />
+	<Compile Include="..\SharedAssemblyInfo.cs">
+		<Link>Properties\SharedAssemblyInfo.cs</Link>
+	</Compile>
     <Compile Include="UserGroupActions.cs" />
   </ItemGroup>
   <ItemGroup>
