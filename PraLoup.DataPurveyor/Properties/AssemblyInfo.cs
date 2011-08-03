@@ -5,7 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PraLoup.Integration.Test")]
+[assembly: AssemblyTitle("Praloup.DataPurveyor")]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a7216dca-3750-4931-94a0-d1e773dda46d")]
+[assembly: Guid("1CE74374-6A41-41BD-9555-BA441640830B")]
+                 
