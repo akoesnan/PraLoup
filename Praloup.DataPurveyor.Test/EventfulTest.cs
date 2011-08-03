@@ -1,13 +1,13 @@
 ﻿using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using PraLoup.DataPurveyor.Client;
 
 namespace Praloup.DataPurveyor.Test
 {
-    [TestClass]
+    [TestFixture]
     public class EventfulTest
     {
-        [TestMethod]
+        //[Test]
         public void EventfulFetchData_Success()
         {
             var eventful = new EventfulClient();

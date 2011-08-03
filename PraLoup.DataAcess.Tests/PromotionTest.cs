@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using FluentNHibernate.Testing;
 using NHibernate;
 using NUnit.Framework;
-using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Mapping;
 
@@ -25,16 +26,42 @@ namespace PraLoup.DataAccess.Tests
                     var updatedTime = DateTime.Now.Date;
                     var ev = EntityHelper.GetEvent("my test event", "my test venue name");
                     var d = EntityHelper.GetDeal("buy one get one beer", 100);
-
-                    new PersistenceSpecification<Promotion>(Session)
-                   .CheckReference(c => c.Event, ev)
-                   .CheckProperty(c => c.Deals, new List<Deal>() { d })
+                    IList<Deal> deals = new List<Deal>() { d };
+                    new PersistenceSpecification<Promotion>(Session, new PromotionEqualityComparer())
+                   .CheckProperty(c => c.Event, ev)
+                   .CheckProperty(c => c.Deals, deals)
                    .VerifyTheMappings();
                 }
             }
         }
 
+        public class PromotionEqualityComparer : IEqualityComparer
+        {
+            public bool Equals(object x, object y)
+            {
+                if (x == null || y == null)
+                {
+                    return false;
+                }
+                if (x is Promotion && y is Promotion)
+                {
+                    var t1 = (Event)x;
+                    var t2 = (Event)y;
+                    var tc = new EventEqualityComparer();
+                    return t1.Equals(t2);
+                }
+                else if (x is IList<Deal> && y is IList<Deal>)
+                {
+                    return ((IList<Deal>)x).All(z => ((IList<Deal>)y).Contains(z));
+                }
+                return x.Equals(y);
+            }
 
+            public int GetHashCode(object obj)
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         [Test]
         public void CreatePromotionAndQuery()

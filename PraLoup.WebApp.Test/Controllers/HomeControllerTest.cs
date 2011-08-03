@@ -18,19 +18,6 @@ namespace Events.Tests.Controllers
 
             // Assert
             Assert.AreEqual("Welcome to ASP.NET MVC!", result.ViewBag.Message);
-        }
-
-        [Test]
-        public void About()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.About() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
+        }    
     }
 }

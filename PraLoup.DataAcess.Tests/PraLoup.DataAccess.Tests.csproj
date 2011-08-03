@@ -78,6 +78,8 @@
     <Compile Include="AccountTest.cs" />
     <Compile Include="BaseDataTestFixture.cs" />
     <Compile Include="BusinessTest.cs" />
+    <Compile Include="DealEqualityComparer.cs" />
+    <Compile Include="EventEqualityComparer.cs" />
     <Compile Include="PromotionTest.cs" />
     <Compile Include="EventTest.cs" />
     <Compile Include="PromotionInstanceTest.cs" />

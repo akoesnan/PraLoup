@@ -7,13 +7,14 @@ using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Enums;
 using Moq;
 using PraLoup.FacebookObjects;
+using NUnit.Framework;
 
 namespace PraLoup.Facebook.Test
 {
-    [TestClass]
+    [TestFixture]
     public class EventActionTest
     {
-        [TestMethod]
+        [Test]
         public void CreateFacebookEvent()
         {
             var e = new Event()
