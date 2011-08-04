@@ -5,7 +5,7 @@ require 'albacore'
 #--------------------------------------
 # Debug
 #--------------------------------------
-#ENV.each {|key, value| puts "#{key} = #{value}" }
+ENV.each {|key, value| puts "#{key} = #{value}" }
 #--------------------------------------
 # My environment vars
 #--------------------------------------
@@ -20,13 +20,15 @@ require 'albacore'
 # Albacore flow controlling tasks
 #--------------------------------------
 desc "Fixes version, compiles the solution, executes tests and TODO:deploys."
-task :default => [:buildIt, :testIt]
+#task :default => [:buildIt, :testIt]
+task :default => [:buildIt]
 
 desc "Fixes version and compiles."
 task :buildIt => [:versionIt, :compileIt, :copyBinaries]
+#task :buildIt => [:versionIt, :compileIt]
 
 desc "Executes all tests."
-task :testIt => [:runUnitTests]
+#task :testIt => [:runUnitTests]
 
 #--------------------------------------
 # Albacore tasks
@@ -56,12 +58,27 @@ end
 
 desc "Copy binaries to output."
 task :copyBinaries do
-  FileUtils.cp_r(FileList["#{@env_solutionfolderpath}Source/#{@env_projectname}/bin/#{@env_buildconfigname}/*.*"], "#{@env_buildfolderpath}Binaries/")
+	excludedDirectories = "obj"
+	logPath = "Robocopy.log"
+
+    robocopy = "robocopy " \
+               "\"#{@env_solutionfolderpath}\" " \
+               "\"#{@env_buildfolderpath}\" " \
+               "/MIR " \
+               "/XD #{excludedDirectories} " \
+               "/LOG+:\"#{logPath}\" " \
+               "/TEE"
+
+	 sh robocopy do |ok,res|
+                     raise "Robocopy failed with exit " \
+                           "code #{res.exitstatus}." \
+                     if res.exitstatus > 8
+                end
 end
 
 desc "Run unit tests."
 nunit :runUnitTests do |nunit|
   nunit.command = "#{@env_solutionfolderpath}packages/NUnit.2.5.10.11092/tools/nunit-console.exe"
   nunit.options "/framework=v4.0.30319","/xml=#{@env_unitTestXmlResultsPath}"
-  nunit.assemblies = FileList["#{@env_solutionfolderpath}Tests/**/#{@env_buildconfigname}/*.UnitTests.dll"].exclude(/obj\//)
+  nunit.assemblies = FileList["#{@env_solutionfolderpath}*Test*/bin/#{@env_buildconfigname}/*.Test*.dll"].exclude(/obj\//)
 end
