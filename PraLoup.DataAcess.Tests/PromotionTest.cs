@@ -47,7 +47,6 @@ namespace PraLoup.DataAccess.Tests
                 {
                     var t1 = (Event)x;
                     var t2 = (Event)y;
-                    var tc = new EventEqualityComparer();
                     return t1.Equals(t2);
                 }
                 else if (x is IList<Deal> && y is IList<Deal>)
