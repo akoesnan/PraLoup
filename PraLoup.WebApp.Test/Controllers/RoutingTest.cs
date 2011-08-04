@@ -19,12 +19,6 @@ namespace PraLoup.WebApp.Tests.Controllers
         }
 
         [Test]
-        public void ThingsToDoCityRouteTest()
-        {
-            TestIncomingRoute("~/ThingsToDo/Seattle", new Dictionary<string, string> { { "controller", "ThingsToDo" }, { "action", "City" }, { "city", "Seattle" } });
-        }
-
-        [Test]
         public void AdminHomeRouteTest()
         {
             TestIncomingRoute("~/Admin", new Dictionary<string, string> { { "controller", "Home" }, { "action", "Index" } });
@@ -45,7 +39,7 @@ namespace PraLoup.WebApp.Tests.Controllers
         [Test]
         public void BusinessCreatePromotionRouteTest()
         {
-            TestIncomingRoute("~/Business/Promotion/Create", new Dictionary<string, string> { { "controller", "Promotion" }, { "action", "Create" } });
+            TestIncomingRoute("~/Business/Promotion/Create/1", new Dictionary<string, string> { { "controller", "Promotion" }, { "action", "Create" } });
         }
 
         [Test]
@@ -54,18 +48,13 @@ namespace PraLoup.WebApp.Tests.Controllers
             TestIncomingRoute("~/Admin/Business/Index", new Dictionary<string, string> { { "controller", "Business" }, { "action", "Index" } });
         }
 
-        [Test]
-        public void ThingsToDoUrlGenerationTest()
-        {
-            var url = GenerateUrlFromMock(new { controller = "ThingsToDo", action = "City", city = "Seattle" });
-            Assert.AreEqual("/ThingsToDo/Seattle", url);
-        }
-
         private void TestIncomingRoute(string url, Dictionary<string, string> route)
         {
             RouteCollection routes = new RouteCollection();
             var adminArea = new AdminAreaRegistration();
+            var businessArea = new BusinessAreaRegistration();
             adminArea.RegisterArea(new AreaRegistrationContext(adminArea.AreaName, routes));
+            businessArea.RegisterArea(new AreaRegistrationContext(businessArea.AreaName, routes));
             MvcApplication.RegisterRoutes(routes);
 
             var httpContext = GetMockHttpContext(url);
@@ -109,8 +98,10 @@ namespace PraLoup.WebApp.Tests.Controllers
             var routes = new RouteCollection();
             var adminArea = new AdminAreaRegistration();
             var businessArea = new BusinessAreaRegistration();
+
             adminArea.RegisterArea(new AreaRegistrationContext(adminArea.AreaName, routes));
             businessArea.RegisterArea(new AreaRegistrationContext(businessArea.AreaName, routes));
+
             MvcApplication.RegisterRoutes(routes);
 
             var context = GetMockHttpContext(null);

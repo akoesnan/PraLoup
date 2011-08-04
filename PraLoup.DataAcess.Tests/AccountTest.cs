@@ -24,7 +24,6 @@ namespace PraLoup.DataAccess.Tests
             {
                 using (ISession Session = Scope.OpenSession())
                 {
-
                     var now = DateTime.Now;
                     new PersistenceSpecification<Account>(Session, new CustomEqualityComparer())
                    .CheckProperty(c => c.FirstName, "John")

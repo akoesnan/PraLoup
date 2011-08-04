@@ -1,5 +1,6 @@
 
 ﻿using System.Collections.Generic;
+using System.Linq;
 using NHibernate;
 using NUnit.Framework;
 using PraLoup.DataAccess;
@@ -41,12 +42,14 @@ namespace PraLoup.BusinessLogic.Test
                 using (ISession Session = Scope.OpenSession())
                 {
                     IRepository r = new GenericRepository(Session);
+
                     EntityDataService<Account, AccountValidator> ads = new EntityDataService<Account, AccountValidator>(r, new AccountValidator());
                     EntityDataService<Connection, ConnectionValidator> cds = new EntityDataService<Connection, ConnectionValidator>(r, new ConnectionValidator());
-                    DataService ds = new DataService(ads, null, null, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
-
+                    DataService ds = new DataService(ads, null, null, null, null, cds, null, null, null, new UnitOfWork(Session));
+                    Session.BeginTransaction();
                     IEnumerable<string> s;
                     ds.Account.SaveOrUpdateAll(new Account[] { myself, friend, friend2, friend3, friend4 }, out s);
+                    Session.Transaction.Commit();
 
                     Assert.IsTrue(myself.IsFriend(friend, ds));
                     Assert.IsTrue(myself.IsFriend(friend2, ds));
@@ -67,12 +70,12 @@ namespace PraLoup.BusinessLogic.Test
                 {
                     IRepository r = new GenericRepository(Session);
                     EntityDataService<Account, AccountValidator> ads = new EntityDataService<Account, AccountValidator>(r, new AccountValidator());
-
-                    DataService ds = new DataService(ads, null, null, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
-
+                    EntityDataService<Connection, ConnectionValidator> cds = new EntityDataService<Connection, ConnectionValidator>(r, new ConnectionValidator());
+                    DataService ds = new DataService(ads, null, null, null, null, cds, null, null, null, new UnitOfWork(Session));
+                    ds.UnitOfWork.Begin();
                     IEnumerable<string> s;
                     ds.Account.SaveOrUpdateAll(new Account[] { myself, friend, friend2, friend3, friend4 }, out s);
-
+                    ds.UnitOfWork.Commit();
                     Assert.IsTrue(myself.IsFriendOfFriend(friend3, ds));
                     Assert.IsTrue(friend3.IsFriendOfFriend(myself, ds));
                     Assert.IsFalse(myself.IsFriendOfFriend(friend4, ds));
@@ -91,11 +94,20 @@ namespace PraLoup.BusinessLogic.Test
                     IRepository r = new GenericRepository(Session);
                     EntityDataService<Account, AccountValidator> ads = new EntityDataService<Account, AccountValidator>(r, new AccountValidator());
                     var cds = new EntityDataService<Connection, ConnectionValidator>(r, new ConnectionValidator());
-                    DataService ds = new DataService(ads, null, null, null, null, cds, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
-
+                    DataService ds = new DataService(ads, null, null, null, null, cds, null, null, null, new UnitOfWork(Session));
+                    ds.UnitOfWork.Begin();
                     IEnumerable<string> s;
                     ds.Account.SaveOrUpdateAll(new Account[] { myself, friend, friend2, friend3, friend4 }, out s);
-
+                    ds.UnitOfWork.End();
+                }
+                using (ISession Session = Scope.OpenSession())
+                {
+                    IRepository r = new GenericRepository(Session);
+                    EntityDataService<Account, AccountValidator> ads = new EntityDataService<Account, AccountValidator>(r, new AccountValidator());
+                    var cds = new EntityDataService<Connection, ConnectionValidator>(r, new ConnectionValidator());
+                    DataService ds = new DataService(ads, null, null, null, null, cds, null, null, null, new UnitOfWork(Session));
+                    ds.UnitOfWork.Begin();
+                    var c = ads.GetAll().ToList();
                     var m = ads.Find(myself.Id);
                     var f = ads.Find(friend.Id);
                     var f3 = ads.Find(friend3.Id);
@@ -105,6 +117,7 @@ namespace PraLoup.BusinessLogic.Test
 
                     Log.Debug("executing isfriendoffriend");
                     Assert.IsTrue(m.IsFriendOfFriend(f3, ds));
+                    ds.UnitOfWork.End();
                 }
             }
         }

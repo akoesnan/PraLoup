@@ -50,7 +50,7 @@ namespace PraLoup.DataAccess.Tests
         private void BuildSchema(NHibernate.Cfg.Configuration Cfg)
         {
             SchemaExport SE = new SchemaExport(Cfg);
-            SE.Execute(false, true, false, GetConnection(), Console.Out);
+            SE.Execute(true, true, false, GetConnection(), Console.Out);
         }
 
         private System.Data.SQLite.SQLiteConnection GetConnection()
