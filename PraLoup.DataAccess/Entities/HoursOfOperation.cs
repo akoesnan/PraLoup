@@ -16,5 +16,7 @@ namespace PraLoup.DataAccess.Entities
         public virtual int Day { get; set; }
         public virtual TimeSpan OpenTime { get; set; }
         public virtual TimeSpan CloseTime { get; set; }
+
+        
     }
 }

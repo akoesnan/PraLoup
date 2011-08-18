@@ -53,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="ActivityExtensions.cs" />
     <Compile Include="FacebookAccount.cs" />
     <Compile Include="FacebookAccount.EventActions.cs" />
@@ -61,9 +64,7 @@
     <Compile Include="PraLoupFacebookApplication.cs" />
     <Compile Include="Wall.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\PraLoup.BusinessLogic.Plugins\PraLoup.BusinessLogic.Plugins.csproj">
       <Project>{75EF3F94-D922-45D2-8864-74D7242402BA}</Project>

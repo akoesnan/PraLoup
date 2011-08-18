@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NHibernate;
+﻿using NHibernate;
+using NUnit.Framework;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Enums;
@@ -11,10 +11,10 @@ using PraLoup.Infrastructure.Data;
 
 namespace PraLoup.BusinessLogic.Test
 {
-    [TestClass]
+    [TestFixture]
     public class PromotionActionsTest : BaseBusinessLogicTestFixture
     {
-        [TestMethod]
+        [Test]
         public void TestCreatePromotion()
         {
             var a = EntityHelper.GetAccount("first", "lastName");

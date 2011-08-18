@@ -5,7 +5,6 @@ using System.Linq;
 using FluentNHibernate.Testing;
 using NHibernate;
 using NUnit.Framework;
-using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
 using PraLoup.DataAccess.Enums;
 using PraLoup.DataAccess.Mapping;
@@ -34,8 +33,7 @@ namespace PraLoup.DataAccess.Tests
                    .CheckProperty(c => c.BusinessUsers, new List<BusinessUser>() { bu })
                    .CheckProperty(c => c.Url, "http://www.hello.com")
                    .CheckProperty(c => c.ImageUrl, "http://www.example.com/image/i.png")
-                   .CheckProperty(c => c.ImageUrl, "http://www.example.com/image/i.png")
-                   .CheckComponentList(c => c.HoursOfOperations, op)
+                   .CheckProperty(c => c.HoursOfOperations, op)
                    .VerifyTheMappings();
                 }
             }
@@ -57,12 +55,55 @@ namespace PraLoup.DataAccess.Tests
                 var tc = new BusinessUserEqualityComparer();
                 return t1.All(t => t2.Contains(t, tc));
             }
+            if (x is IList<HoursOfOperation> && y is IList<HoursOfOperation>)
+            {
+                var t1 = (IList<HoursOfOperation>)x;
+                var t2 = (IList<HoursOfOperation>)y;
+                var tc = new HoursEqualityComparer();
+                return t1.All(t => t2.Contains(t, tc));
+            }
             return x.Equals(y);
         }
 
         public int GetHashCode(object obj)
         {
             throw new NotImplementedException();
+        }
+    }
+
+    public class HoursEqualityComparer : IEqualityComparer, IEqualityComparer<HoursOfOperation>
+    {
+        public bool Equals(object x, object y)
+        {
+            if (x == null || y == null)
+            {
+                return false;
+            }
+            if (x is HoursOfOperation && y is HoursOfOperation)
+            {
+                return Equals((HoursOfOperation)x, (HoursOfOperation)y);
+            }
+            return x.Equals(y);
+        }
+
+        public int GetHashCode(object obj)
+        {
+            if (obj is HoursOfOperation)
+            {
+                return GetHashCode((HoursOfOperation)obj);
+            }
+            return obj.GetHashCode();
+        }
+        public bool Equals(HoursOfOperation h1, HoursOfOperation h2)
+        {
+            return h1.Day == h2.Day
+            && h1.OpenTime.Equals(h2.OpenTime)
+            && h1.CloseTime.Equals(h2.CloseTime);
+        }
+
+        public int GetHashCode(HoursOfOperation obj)
+        {
+            return base.GetHashCode();
         }
     }
 
@@ -92,12 +133,12 @@ namespace PraLoup.DataAccess.Tests
 
         public bool Equals(BusinessUser x, BusinessUser y)
         {
-            return x.User.Id == y.User.Id ;
+            return x.User.Id == y.User.Id;
         }
 
         public int GetHashCode(BusinessUser obj)
         {
-            throw new NotImplementedException();
+            return base.GetHashCode();
         }
     }
 }

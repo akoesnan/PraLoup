@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
 using PraLoup.DataAccess;
 using PraLoup.DataAccess.Entities;
@@ -10,13 +9,14 @@ using PraLoup.DataAccess.Services;
 using PraLoup.DataAccess.Validators;
 using PraLoup.DataAccess.Tests;
 using PraLoup.Infrastructure.Data;
+using NUnit.Framework;
 
 namespace PraLoup.BusinessLogic.Test
 {
-    [TestClass]
+    [TestFixture]
     public class PromotionInstanceActionsTest : BaseBusinessLogicTestFixture
     {
-        [TestMethod]
+        [Test]
         public void TestCreatePromotionInstance()
         {
             var a = EntityHelper.GetAccount("first", "lastName");
@@ -35,7 +35,7 @@ namespace PraLoup.BusinessLogic.Test
                     EntityDataService<Business, BusinessValidator> bds = new EntityDataService<Business, BusinessValidator>(r, new BusinessValidator());
                     EntityDataService<Promotion, PromotionValidator> pds = new EntityDataService<Promotion, PromotionValidator>(r, new PromotionValidator());
 
-                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, null, null, new UnitOfWork(Session));
                     BusinessActions ba = new BusinessActions(a, ds, Log, null);
                     PromotionActions pa = new PromotionActions(a, ds, Log, null);
 
@@ -51,7 +51,7 @@ namespace PraLoup.BusinessLogic.Test
                     EntityDataService<Business, BusinessValidator> bds = new EntityDataService<Business, BusinessValidator>(r, new BusinessValidator());
                     EntityDataService<Promotion, PromotionValidator> pds = new EntityDataService<Promotion, PromotionValidator>(r, new PromotionValidator());
 
-                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, null, null, new UnitOfWork(Session));
                     BusinessActions ba = new BusinessActions(a, ds, Log, null);
                     PromotionActions pa = new PromotionActions(a, ds, Log, null);
 
@@ -69,7 +69,7 @@ namespace PraLoup.BusinessLogic.Test
                     var pds = new EntityDataService<Promotion, PromotionValidator>(r, new PromotionValidator());
                     var pids = new EntityDataService<PromotionInstance, PromotionInstanceValidator>(r, new PromotionInstanceValidator());
 
-                    IDataService ds = new DataService(null, bds, pds, null, pids, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, pds, null, pids, null, null, null, null, new UnitOfWork(Session));
                     BusinessActions ba = new BusinessActions(a, ds, Log, null);
                     PromotionActions pa = new PromotionActions(a, ds, Log, null);
                     PromotionInstanceActions pia = new PromotionInstanceActions(a, ds, Log, null);
@@ -84,7 +84,7 @@ namespace PraLoup.BusinessLogic.Test
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TestAcceptDeclinePromotionInstance()
         {
             var a = EntityHelper.GetAccount("first", "lastName");
@@ -104,7 +104,7 @@ namespace PraLoup.BusinessLogic.Test
                     EntityDataService<Business, BusinessValidator> bds = new EntityDataService<Business, BusinessValidator>(r, new BusinessValidator());
                     EntityDataService<Promotion, PromotionValidator> pds = new EntityDataService<Promotion, PromotionValidator>(r, new PromotionValidator());
 
-                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, null, null, new UnitOfWork(Session));
                     BusinessActions ba = new BusinessActions(a, ds, Log, null);
                     PromotionActions pa = new PromotionActions(a, ds, Log, null);
 
@@ -120,7 +120,7 @@ namespace PraLoup.BusinessLogic.Test
                     EntityDataService<Business, BusinessValidator> bds = new EntityDataService<Business, BusinessValidator>(r, new BusinessValidator());
                     EntityDataService<Promotion, PromotionValidator> pds = new EntityDataService<Promotion, PromotionValidator>(r, new PromotionValidator());
 
-                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, null, null, new UnitOfWork(Session));
                     BusinessActions ba = new BusinessActions(a, ds, Log, null);
                     PromotionActions pa = new PromotionActions(a, ds, Log, null);
 
@@ -138,7 +138,7 @@ namespace PraLoup.BusinessLogic.Test
                     var pds = new EntityDataService<Promotion, PromotionValidator>(r, new PromotionValidator());
                     var pids = new EntityDataService<PromotionInstance, PromotionInstanceValidator>(r, new PromotionInstanceValidator());
 
-                    IDataService ds = new DataService(null, bds, pds, null, pids, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, pds, null, pids, null, null, null, null, new UnitOfWork(Session));
                     BusinessActions ba = new BusinessActions(a, ds, Log, null);
                     PromotionActions pa = new PromotionActions(a, ds, Log, null);
                     PromotionInstanceActions pia = new PromotionInstanceActions(a, ds, Log, null);
@@ -158,7 +158,7 @@ namespace PraLoup.BusinessLogic.Test
                     var pds = new EntityDataService<Promotion, PromotionValidator>(r, new PromotionValidator());
                     var pids = new EntityDataService<PromotionInstance, PromotionInstanceValidator>(r, new PromotionInstanceValidator());
 
-                    IDataService ds = new DataService(null, bds, pds, null, pids, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, pds, null, pids, null, null, null, null, new UnitOfWork(Session));
                     PromotionInstanceActions pia = new PromotionInstanceActions(i1, ds, Log, null);
 
                     Session.Transaction.Begin();
@@ -178,7 +178,7 @@ namespace PraLoup.BusinessLogic.Test
                     var pds = new EntityDataService<Promotion, PromotionValidator>(r, new PromotionValidator());
                     var pids = new EntityDataService<PromotionInstance, PromotionInstanceValidator>(r, new PromotionInstanceValidator());
 
-                    IDataService ds = new DataService(null, bds, pds, null, pids, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, pds, null, pids, null, null, null, null, new UnitOfWork(Session));
                     PromotionInstanceActions pia = new PromotionInstanceActions(i2, ds, Log, null);
 
                     Session.Transaction.Begin();
@@ -192,7 +192,7 @@ namespace PraLoup.BusinessLogic.Test
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TestForwardPromotionInstance()
         {
             var a = EntityHelper.GetAccount("first", "lastName");
@@ -217,7 +217,7 @@ namespace PraLoup.BusinessLogic.Test
                     EntityDataService<Business, BusinessValidator> bds = new EntityDataService<Business, BusinessValidator>(r, new BusinessValidator());
                     EntityDataService<Promotion, PromotionValidator> pds = new EntityDataService<Promotion, PromotionValidator>(r, new PromotionValidator());
 
-                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, null, null, new UnitOfWork(Session));
                     BusinessActions ba = new BusinessActions(a, ds, Log, null);
                     PromotionActions pa = new PromotionActions(a, ds, Log, null);
 
@@ -233,7 +233,7 @@ namespace PraLoup.BusinessLogic.Test
                     EntityDataService<Business, BusinessValidator> bds = new EntityDataService<Business, BusinessValidator>(r, new BusinessValidator());
                     EntityDataService<Promotion, PromotionValidator> pds = new EntityDataService<Promotion, PromotionValidator>(r, new PromotionValidator());
 
-                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, pds, null, null, null, null, null, null, new UnitOfWork(Session));
                     BusinessActions ba = new BusinessActions(a, ds, Log, null);
                     PromotionActions pa = new PromotionActions(a, ds, Log, null);
 
@@ -251,7 +251,7 @@ namespace PraLoup.BusinessLogic.Test
                     var pds = new EntityDataService<Promotion, PromotionValidator>(r, new PromotionValidator());
                     var pids = new EntityDataService<PromotionInstance, PromotionInstanceValidator>(r, new PromotionInstanceValidator());
 
-                    IDataService ds = new DataService(null, bds, pds, null, pids, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, pds, null, pids, null, null, null, null, new UnitOfWork(Session));
                     BusinessActions ba = new BusinessActions(a, ds, Log, null);
                     PromotionActions pa = new PromotionActions(a, ds, Log, null);
                     PromotionInstanceActions pia = new PromotionInstanceActions(a, ds, Log, null);
@@ -271,7 +271,7 @@ namespace PraLoup.BusinessLogic.Test
                     var pds = new EntityDataService<Promotion, PromotionValidator>(r, new PromotionValidator());
                     var pids = new EntityDataService<PromotionInstance, PromotionInstanceValidator>(r, new PromotionInstanceValidator());
 
-                    IDataService ds = new DataService(null, bds, pds, null, pids, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, pds, null, pids, null, null, null, null, new UnitOfWork(Session));
                     PromotionInstanceActions pia = new PromotionInstanceActions(i1, ds, Log, null);
 
                     Session.Transaction.Begin();
@@ -291,7 +291,7 @@ namespace PraLoup.BusinessLogic.Test
                     var pds = new EntityDataService<Promotion, PromotionValidator>(r, new PromotionValidator());
                     var pids = new EntityDataService<PromotionInstance, PromotionInstanceValidator>(r, new PromotionInstanceValidator());
 
-                    IDataService ds = new  DataService(null, bds, pds, null, pids, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new  DataService(null, bds, pds, null, pids, null, null, null, null, new UnitOfWork(Session));
                     PromotionInstanceActions pia = new PromotionInstanceActions(i2, ds, Log, null);
 
                     Session.Transaction.Begin();
@@ -311,7 +311,7 @@ namespace PraLoup.BusinessLogic.Test
                     var pids = new EntityDataService<PromotionInstance, PromotionInstanceValidator>(r, new PromotionInstanceValidator());
 
 
-                    IDataService ds = new DataService(null, bds, pds, null, pids, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
+                    IDataService ds = new DataService(null, bds, pds, null, pids, null, null, null, null, new UnitOfWork(Session));
                     PromotionInstanceActions pia = new PromotionInstanceActions(i2, ds, Log, null);
                     Session.Transaction.Begin();
 

@@ -5,7 +5,7 @@ using PraLoup.DataAccess.Enums;
 namespace PraLoup.DataAccess.Entities
 {
     public class Event : BaseEntity
-    {        
+    {
         // The event start time
         public virtual DateTime StartDateTime { get; set; }
 
@@ -66,5 +66,13 @@ namespace PraLoup.DataAccess.Entities
         public virtual Permission Permission { get; set; }
 
         public virtual ConnectionType ConnectionType { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Event)
+                return this.Id == ((Event)obj).Id;
+            else
+                return false;
+        }
     }
 }
