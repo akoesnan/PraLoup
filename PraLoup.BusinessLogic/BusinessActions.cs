@@ -35,10 +35,10 @@ namespace PraLoup.BusinessLogic
             return this.dataService.Business.Where(t => f.Any(c => t.BusinessUsers.Contains(c)));
         }
 
-        public Business CreateBusiness(Business business, Role role)
+        public Business CreateBusiness(Business business, Account a, Role role)
         {
             business.BusinessUsers = business.BusinessUsers ?? new List<BusinessUser>();
-            business.BusinessUsers.Add(new BusinessUser(this.Account, role));
+            business.BusinessUsers.Add(new BusinessUser(a, role));
             return SaveOrUpdateBusiness(business);
         }
 

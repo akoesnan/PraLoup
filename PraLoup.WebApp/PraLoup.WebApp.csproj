@@ -160,15 +160,14 @@
     <Compile Include="Areas\Admin\Models\BusinessModel.cs" />
     <Compile Include="Areas\Admin\Models\PromoModel.cs" />
     <Compile Include="Areas\Admin\Models\PromoIndexModel.cs" />
-    <Compile Include="Areas\Business\Models\BaseBusinessModel.cs" />
-    <Compile Include="Areas\Business\Models\BusinessModel.cs" />
     <Compile Include="Areas\Business\Models\DashboardModel.cs" />
-    <Compile Include="Areas\Business\Models\PromoIndexModel.cs" />
     <Compile Include="Areas\Business\Models\PromoModel.cs" />
     <Compile Include="Areas\Business\Models\PromotionCloseModel.cs" />
     <Compile Include="Areas\Business\Models\PromotionList.cs" />
     <Compile Include="Areas\Business\Models\StarModel.cs" />
     <Compile Include="Areas\Business\Models\UserCloseData.cs" />
+    <Content Include="Areas\Business\Views\Business\Businesses.cshtml" />
+    <Content Include="Areas\Business\Views\Business\Create.cshtml" />
     <None Include="Areas\Business\Views\Shared\EditorTemplates\StarModel.cshtml" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\InvitationController.cs" />
@@ -417,6 +416,7 @@
     <EmbeddedResource Include="Resources\LocStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LocStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -485,16 +485,10 @@
     <Content Include="Views\Shared\EditorTemplates\Address.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Business\Views\Business\Create.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Calendar\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Business\Views\Business\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Admin\Views\Business\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Business\Details.cshtml" />

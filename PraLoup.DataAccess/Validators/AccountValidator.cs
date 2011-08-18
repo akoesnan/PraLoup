@@ -6,24 +6,34 @@ using PraLoup.Infrastructure.Validation;
 
 namespace PraLoup.DataAccess.Validators
 {
-    public class UserRatingValidator : IValidator<UserRating>
+    public class AccountValidator : IValidator<Account>
     {
-        public bool IsValid(UserRating entity)
+        public bool IsValid(Account entity)
         {
             return BrokenRules(entity).Count() == 0;
         }
 
-        public IEnumerable<string> BrokenRules(UserRating entity)
+        public IEnumerable<string> BrokenRules(Account entity)
         {
-            if (entity.RatedBy == null)
+            if (entity.UserName == null)
             {
-                yield return "Rated by cannot be null";
+                yield return "Username should not be null";
             }
-            else if (entity.User == null)
+            if (entity.FacebookLogon == null)
             {
-                yield return "User by cannot be null";
+                yield return "Facebook Logon should not be null";
             }
-
+            else
+            {
+                if (entity.FacebookLogon.FacebookId == default(long))
+                {
+                    yield return "Facebook Logon should not be null and the facebook id should be valid ";
+                }
+                if (String.IsNullOrEmpty(entity.FacebookLogon.AccessToken))
+                {
+                    yield return "Facebook access tokens should be populated";
+                }
+            }
             yield break;
         }
     }

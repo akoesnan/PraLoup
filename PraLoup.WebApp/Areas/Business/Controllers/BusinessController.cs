@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Facebook.Web.Mvc;
 using PraLoup.BusinessLogic;
@@ -6,6 +7,8 @@ using PraLoup.Infrastructure.Logging;
 using PraLoup.WebApp.Areas.Admin.Models;
 using PraLoup.WebApp.Resources;
 using PraLoup.WebApp.Utilities;
+using DataEntities = PraLoup.DataAccess.Entities;
+using ModelEntities = PraLoup.WebApp.Models.Entities;
 
 namespace PraLoup.WebApp.Areas.Business.Controllers
 {
@@ -161,6 +164,19 @@ namespace PraLoup.WebApp.Areas.Business.Controllers
             }
         }
 
+        public ActionResult Businesses()
+        {
+
+            this.AccountBase.SetupActionAccount();
+            var x = AccountBase.BusinessActions.GetBusinessForUser(AccountBase.Account);
+            List<ModelEntities.Business> businessList = new List<ModelEntities.Business>();
+            foreach (var t in x)
+            {
+                businessList.Add(AutoMapper.Mapper.Map<DataEntities.Business,ModelEntities.Business>(t));
+            }
+
+            return View(businessList);
+        }
 
     }
 }

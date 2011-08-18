@@ -30,7 +30,7 @@ namespace PraLoup.BusinessLogic.Test
 
                     IDataService ds = new DataService(null, bds, null, null, null, null, null, null,null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
                     BusinessActions ba = new BusinessActions(a, ds, new PraLoup.Infrastructure.Logging.Log4NetLogger(), null);
-                    ba.CreateBusiness(b, Role.BusinessAdmin);
+                    ba.CreateBusiness(b, a, Role.BusinessAdmin);
                     Session.Transaction.Commit();
                 }
 
@@ -63,7 +63,7 @@ namespace PraLoup.BusinessLogic.Test
 
                     IDataService ds = new DataService(null, bds, null, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
                     BusinessActions ba = new BusinessActions(a, ds, new PraLoup.Infrastructure.Logging.Log4NetLogger(), null);
-                    ba.CreateBusiness(b, Role.BusinessAdmin);
+                    ba.CreateBusiness(b, a, Role.BusinessAdmin);
                     Session.Transaction.Commit();
                 }
 
@@ -98,7 +98,7 @@ namespace PraLoup.BusinessLogic.Test
 
                     IDataService ds = new DataService(null, bds, null, null, null, null, null, null, null, new UnitOfWork(Scope.GetSessionFactory().OpenSession()));
                     BusinessActions ba = new BusinessActions(a, ds, new PraLoup.Infrastructure.Logging.Log4NetLogger(), null);
-                    ba.CreateBusiness(b, Role.BusinessAdmin);
+                    ba.CreateBusiness(b, a, Role.BusinessAdmin);
                     Session.Transaction.Commit();
                 }
 

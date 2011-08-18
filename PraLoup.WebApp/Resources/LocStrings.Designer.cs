@@ -986,5 +986,14 @@ namespace PraLoup.WebApp.Resources {
                 return ResourceManager.GetString("ToSignInWith", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View your businesses.
+        /// </summary>
+        public static string ViewBusinesses {
+            get {
+                return ResourceManager.GetString("ViewBusinesses", resourceCulture);
+            }
+        }
     }
 }

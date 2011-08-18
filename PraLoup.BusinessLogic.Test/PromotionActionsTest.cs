@@ -37,7 +37,7 @@ namespace PraLoup.BusinessLogic.Test
                     PromotionActions pa = new PromotionActions(a, ds, Log, null);
 
                     Session.Transaction.Begin();
-                    b = ba.CreateBusiness(b, Role.BusinessAdmin);
+                    b = ba.CreateBusiness(b, a, Role.BusinessAdmin);
                     Assert.IsNotNull(b, "business should be saved succesfully");
                     Session.Transaction.Commit();
                 }
