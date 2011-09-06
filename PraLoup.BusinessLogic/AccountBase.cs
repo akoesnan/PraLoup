@@ -69,9 +69,9 @@ namespace PraLoup.BusinessLogic
             this.FacebookAccount = new FacebookAccount();
             var acct = this.GetAccountByFacebookId(this.FacebookAccount.Account.FacebookLogon.FacebookId);
             acct = acct ?? this.FacebookAccount.Account;
-
+            
             IEnumerable<string> brokenRules;
-            var success = this.DataService.Account.SaveOrUpdate(this.FacebookAccount.Account, out brokenRules);
+            var success = this.DataService.Account.SaveOrUpdate(acct, out brokenRules);
             if (success)
             {                
                 this.Log.Info("Saved facebook login information");

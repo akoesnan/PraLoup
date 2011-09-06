@@ -1,5 +1,5 @@
 ﻿@using PraLoup.WebApp.Utilities
-@model PraLoup.WebApp.Areas.Admin.Models.BusinessModel
+@model PraLoup.WebApp.Areas.Admin.Models.BusinessCreateEditModel
 
 @{
     ViewBag.Title = "Create";
@@ -32,7 +32,15 @@
             @Html.ValidationMessageFor(model => model.Business.Phone)
         </div>
 
-        @Html.Partial("~/Views/Shared/CreateAddress.cshtml", Model.Business.Address);
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Business.Address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Business.Address)
+            @Html.ValidationMessageFor(model => model.Business.Address)
+        </div>
+        
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Business.Url)
@@ -58,6 +66,14 @@
             @Html.ValidationMessageFor(model => model.Role)
         </div>        
 
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Business.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Business.Description)
+            @Html.ValidationMessageFor(model => model.Business.Description)
+        </div>        
         <p>
             <input type="submit" value="Create" />
         </p>
